@@ -1,0 +1,72 @@
+<!-- WIDGETS -->
+
+<style type="text/css">
+    html,body {
+        @import url('https://fonts.googleapis.com/css?family=Montserrat');
+        height: 100%;
+        background: -webkit-linear-gradient(#2196F3, white);
+    }
+</style>
+
+<div class="center-vertical" ng-init="refresh_the_page()">
+    <div class="center-content row">
+
+        <div class="col-md-6 center-margin">
+
+            <div class="content-box border-top border-red clearfix">
+               
+                <div class="content-box-wrapper row">
+                    <div class="col-sm-1">&nbsp;</div>
+                    <form id="login-validation" class="col-md-10" ng-submit="doLogin()">
+                        <h3> Log in to your iDiscover.me account</h3>
+                        <div id="login-form">
+                            <div class="pad20A">
+
+                                <div class="form-group">
+                                    
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon addon-inside bg-white font-primary">
+                                            <i class="glyph-icon icon-envelope-o"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Username" ng-model="loginData.username" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon addon-inside bg-white font-primary">
+                                            <i class="glyph-icon icon-unlock-alt"></i>
+                                        </span>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password" ng-model="loginData.password" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-sm-6">
+                                    <input ng-disabled="!login_button" type="submit" class="btn btn-block btn-blue-alt" value="Login">
+                                </div>
+                                   
+                                <div class="col-sm-6">
+									<a class="btn btn-block bg-google">
+                                    
+										<span class="glyph-icon icon-separator">
+											<i class="glyph-icon icon-google-plus"></i>
+										</span>
+										<span class="button-content">
+											Connect with Google+
+										</span>
+                                	</a>
+								</div>
+                            </div>
+                        </div>
+
+                    </form>
+                   <a ui-sref="register">Register Here!</a>
+
+                </div>
+            </div>
+
+        </div>
+       
+    </div>
+</div>
+{{message}}<br>
