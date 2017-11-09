@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('idiscover.me')
-.constant("baseURL", "http://localhost:3000/")
+.constant("baseURL", "")
 
 .factory('$localStorage', ['$window', function ($window) {
     return {
