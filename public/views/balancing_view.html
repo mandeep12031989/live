@@ -1,0 +1,114 @@
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading">
+        <div id="page-wrapper">
+            
+            
+            <div id="page-content-wrapper">
+                <div id="page-content">
+                
+                    <div class="container">
+                
+                        <div id="page-title">
+                            <h2>My Balanced Profile</h2>
+                        </div>
+<!--                                                    SECTION START                                                          -->
+                        
+                            <style>
+								.range {
+								  -webkit-appearance: none;
+								  -moz-appearance: none;
+								  width: 100%
+								}
+
+								input[type=range]::-webkit-slider-runnable-track {
+								  -webkit-appearance: none;
+								  background: rgba(139,195,74,1);
+								  background: -moz-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
+								  background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(244,67,54,1)), color-stop(20%, rgba(255,238,88,1)), color-stop(50%, rgba(139,195,74,1)), color-stop(80%, rgba(255,238,88,1)), color-stop(100%, rgba(244,67,54,1)));
+								  background: -webkit-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
+								  background: -o-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
+								  background: -ms-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
+								  background: linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
+								  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
+								  height: 10px;
+								}
+								
+								input[type=range]::-webkit-slider-thumb {
+								  -webkit-appearance: none;
+								  width: 0; 
+								  height: 0; 
+								  border-left: 10px solid transparent;
+								  border-right: 10px solid transparent;
+								  border-bottom: 15px solid 	#1E88E5;
+								  margin-top: 10px;
+								  -webkit-transition: border 1000ms ease;
+								  transition: border 1000ms ease;
+								}
+							</style>
+						
+						<div class="panel panel-body row" style="color: red;">
+							<div class="col-md-1"></div>
+							<div class="col-md-2" style="text-align: right;">
+								<b>REACTIVE</b>
+							</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-2" style="text-align: center;">
+								<b>RESPONSIVE</b>
+							</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-2">
+								<b>REACTIVE</b>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+						
+						<div class="panel" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.linked_keyword.length != 0">
+                            <div class="panel-body">
+								
+								<div class="col-md-12 row" style="margin: 40px 0px;">
+									<div class="col-md-12">
+										<div class="col-md-1"></div>
+										<div class="col-md-2" style="text-align: right;">
+											<b>{{keys.dummy_keyword}}</b>
+										</div>
+										<div class="col-md-2"></div>
+										<div class="col-md-2" style="text-align: center;">
+											<b>{{keys.keyword}}</b>
+										</div>
+										<div class="col-md-2"></div>
+										<div class="col-md-2">
+											<b>{{temp_content[$index].keyword}}</b>
+										</div>
+										<div class="col-md-1"></div>
+									</div><br><br>
+									<div class="col-md-12">
+										<div class="col-md-2"></div>
+										<div class="col-md-8">
+											<input type="range" min="-2" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating">
+										</div>
+										<div class="col-md-2"></div>
+									</div><br><br>
+									<div class="col-md-12 list-group list-group-icons">
+										<a href="" class="list-group-item">
+											<i class="glyph-icon font-red icon-comment"></i>
+											<span ng-if="temp_content[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
+											<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1">{{keys.balancing_description[1].desc}}</span>
+											<span ng-if="temp_content[$index].key_rating >= 1">{{keys.balancing_description[2].desc}}</span>
+										</a>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success" ui-sref="dashboard" style="float:right;">Back to Dashboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

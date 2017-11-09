@@ -1,0 +1,282 @@
+    <style>
+    
+        .left_border_green{
+            border-left:10px solid green;
+        }
+        .left_border_yellow{
+            border-left:10px solid yellow;
+        }
+        .left_border_red{
+            border-left:10px solid red;
+        }
+
+    </style>
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading">
+        <div id="page-wrapper">
+            
+            
+            <div id="page-content-wrapper">
+                <div id="page-content">
+                
+                    <div class="container">
+                
+                        <div id="page-title">
+                            <h2>My Detailed Profile</h2>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-offset-2 col-sm-2">
+
+                                <div class="panel">
+                                    <div class="panel-heading" ng-class="'left_border_green'">
+                                        Relate Fully
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                            <div class="col-md-offset-1 col-sm-2">
+
+                                <div class="panel">
+                                    <div class="panel-heading" ng-class="'left_border_yellow'">
+                                        Relate Partially
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                            <div class="col-md-offset-1 col-sm-2">
+
+                                <div class="panel">
+                                    <div class="panel-heading" ng-class="'left_border_red'">
+                                        Do not Relate at all
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+<!--                                                    SECTION 1                                                          -->
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h2 style="text-align:center" id="page-title">
+                                    <b>Professional Values and Work<br>Culture Preference</b>
+                                </h2>
+                                <div class="example-box-wrapper">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                                <div class="panel-heading image-box">
+                                                    <div class="image-content">                        
+                                                        <div class="meta-box meta-box-bottom">
+                                                            <h3 class="meta-heading">{{keys.keyword}} - {{keys.keyword_id}} - {{keys.key_rating}}</h3>
+                                                        </div>                            
+                                                    </div>
+                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+                                                </div>
+                         
+                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
+                                  
+                                                    <div class="row" style="margin: 0 auto;">
+                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions">{{mini.mini_description}}</button>
+                                                        
+                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
+                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
+                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
+                                                                            <br><br>
+                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
+                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
+                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
+                                                    </div><br>
+                                
+                                                    <li class="">
+                              
+                                                        <a href="" class="list-group-item">
+                                                            <i class="glyph-icon font-red icon-comment"></i>
+                                                            {{keys.comment}}
+                                                        </a>
+                                                    </li>
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                
+                                    </div>
+                                    <hr style=" border-width: 6px;">
+                                </div>
+                            </div>
+                        </div>
+<!--                                                    SECTION 2                                                          -->
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h2 style="text-align:center" id="page-title">
+                                    <b>Strengths</b>
+                                </h2>
+                                <div class="example-box-wrapper">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                                <div class="panel-heading image-box">
+                                                    <div class="image-content">                        
+                                                        <div class="meta-box meta-box-bottom">
+                                                            <h3 class="meta-heading">{{keys.keyword}} - {{keys.keyword_id}} - {{keys.key_rating}}</h3>
+                                                        </div>                            
+                                                    </div>
+                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+                                                </div>
+                         
+                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
+                                  
+                                                    <div class="row" style="margin: 0 auto;">
+                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions">{{mini.mini_description}}</button>
+                                                        
+                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
+                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
+                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
+                                                                            <br><br>
+                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
+                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
+                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
+                                                    </div><br>
+                                
+                                                    <li class="">
+                              
+                                                        <a href="" class="list-group-item">
+                                                            <i class="glyph-icon font-red icon-comment"></i>
+                                                            {{keys.comment}}
+                                                        </a>
+                                                    </li>
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                
+                                    </div>
+                                    <hr style=" border-width: 6px;">
+                                </div>
+                            </div>
+                        </div>
+<!--                                                    SECTION 3                                                          -->
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h2 style="text-align:center" id="page-title">
+                                    <b>Learning Needs</b>
+                                </h2>
+                                <div class="example-box-wrapper">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                                <div class="panel-heading image-box">
+                                                    <div class="image-content">                        
+                                                        <div class="meta-box meta-box-bottom">
+                                                            <h3 class="meta-heading">{{keys.keyword}} - {{keys.keyword_id}} - {{keys.key_rating}}</h3>
+                                                        </div>                            
+                                                    </div>
+                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+                                                </div>
+                         
+                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
+                                  
+                                                    <div class="row" style="margin: 0 auto;">
+                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions">{{mini.mini_description}}</button>
+                                                        
+                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
+                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
+                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
+                                                                            <br><br>
+                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
+                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
+                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
+                                                    </div><br>
+                                
+                                                    <li class="">
+                              
+                                                        <a href="" class="list-group-item">
+                                                            <i class="glyph-icon font-red icon-comment"></i>
+                                                            {{keys.comment}}
+                                                        </a>
+                                                    </li>
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                
+                                    </div>
+                                    <hr style=" border-width: 6px;">
+                                </div>
+                            </div>
+                        </div>
+<!--                                                    SECTION 4                                                          -->
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h2 style="text-align:center" id="page-title">
+                                    <b>Communication Style</b>
+                                </h2>
+                                <div class="example-box-wrapper">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                                <div class="panel-heading image-box">
+                                                    <div class="image-content">                        
+                                                        <div class="meta-box meta-box-bottom">
+                                                            <h3 class="meta-heading">{{keys.keyword}} - {{keys.keyword_id}} - {{keys.key_rating}}</h3>
+                                                        </div>                            
+                                                    </div>
+                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+                                                </div>
+                         
+                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
+                                  
+                                                    <div class="row" style="margin: 0 auto;">
+                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions">{{mini.mini_description}}</button>
+                                                        
+                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
+                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
+                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
+                                                                            <br><br>
+                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
+                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
+                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
+                                                    </div><br>
+                                
+                                                    <li class="">
+                              
+                                                        <a href="" class="list-group-item">
+                                                            <i class="glyph-icon font-red icon-comment"></i>
+                                                            {{keys.comment}}
+                                                        </a>
+                                                    </li>
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                
+                                    </div>
+                                    
+                                </div>
+                            </div>
+							
+                        </div>
+                        <button class="btn btn-success" ui-sref="dashboard" style="float:right;">Back to Dashboard</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
