@@ -60,12 +60,6 @@
                 <!--                        TAB 1                           -->
                 <div class="container" ng-show="tab_num == 1">
 					
-					<link href="styles/material-dashboard.css" rel="stylesheet" />	<!-- USED IN SADBMS ONLY, FOR ALERT -->
-					<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">	<!-- USED IN SADBMS ONLY, FOR ALERT -->
-					
-                    <style>
-                        .row-bg{background-color:#f9f9f9;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;margin:0 -20px!important;margin-bottom:25px!important;padding-left:5px;padding-right:5px;padding-top:25px;-webkit-box-shadow:0 0 1px rgba(0,0,0,0.15) inset;-moz-box-shadow:0 0 1px rgba(0,0,0,0.15) inset;box-shadow:0 0 1px rgba(0,0,0,0.15) inset}
-                    </style>
                     <div class="row row-bg">
                         <div class="col-sm-6 col-md-4">
 							<div class="card card-stats">
@@ -184,7 +178,9 @@
 											<i class="glyph-icon icon-search"></i>
 										</div>
 										<input type="search" class="form-control col-md-11" placeholder="Search" ng-model="search">
-										<div class="input-group-addon"><b>Found {{(userList | filter:search).length}} of {{userList.length}}</b></div>
+										<div class="input-group-addon">
+											<b>Found {{(userList | filter:search).length}} of {{userList.length}}</b>
+										</div>
 									</div><br><br>
 									<!-- Search End -->
                                     <table class="table">
@@ -447,7 +443,7 @@
                 <!--                        TAB 5                           -->
                 <div class="container" ng-show="tab_num == 5">
                     
-					<div class="alert alert-danger alert-with-icon w3-container w3-animate-left" ng-repeat="n in noti">
+					<div class="alert alert-danger alert-with-icon w3-animate-left" ng-repeat="n in noti">
 						<i data-notify="icon" class="material-icons">add_alert</i>
 						<span data-notify="message">
 							{{n.date | date: 'medium'}} | {{n.statement}}

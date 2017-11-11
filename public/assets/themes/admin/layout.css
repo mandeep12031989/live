@@ -14,12 +14,12 @@
 }
 #header-logo .logo-content-big,
 .logo-content-small {
-    background: url('../../image-resources/logo%20white%20usable.png') left 50% no-repeat;
+    background: url('../../image-resources/logo%20white%20usable.png') no-repeat;
     text-indent: -999em;
     position: absolute;
     height: 50px;
     width: 190px;
-    left: 10px;
+    left: 50px;
     top: 50%;
     margin-top: -17px;
 }
@@ -83,7 +83,7 @@
 #page-header .user-account-btn > a.user-profile span {
     margin-right: 10px;
     float: left;
-    width: 96px;
+    width: auto;
 }
 #page-header .user-account-btn > a.user-profile .glyph-icon {
     width: 28px;

@@ -48,8 +48,6 @@ exports.verifyFacilitator = function (req, res, next){
         return next(err);
     }
     else{
-        var id = req.decoded._id;
-        
         if(!req.decoded.facilitator) {
             var err = new Error('You are not authorised to do so!');
             err.status = 403;
@@ -67,8 +65,6 @@ exports.verifyAdmin = function (req, res, next){
         return next(err);
     }
     else{
-        var id = req.decoded._id;
-        
         if(!req.decoded.admin) {
             var err = new Error('You are not authorised to do so!');
             err.status = 403;

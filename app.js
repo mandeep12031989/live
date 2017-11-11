@@ -79,12 +79,14 @@ var routes = require('./routes/index');
 var keyword = require('./routes/keyword');
 var user = require('./routes/user');
 var noti = require('./routes/noti');
+var ques = require('./routes/ques');
 
 // linking callback function to route
 app.use('/', routes);
 app.use('/keyword', keyword);
 app.use('/user', user);
 app.use('/noti', noti);
+app.use('/ques', ques);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

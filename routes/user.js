@@ -11,8 +11,7 @@ var Keyword = require('../models/keyword.js');
 var Verify = require('./verify');
 
 router.route('/list')
-.get(function(req, res, next){
-    
+.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     User.find({}).sort('-important_date.registration')
     .exec(function(err, user){
         if(err)
@@ -83,7 +82,7 @@ router.route('/questions')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'question': true, 'work_details': true})
+    User.findOne({_id: id}, {'question': true})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -93,7 +92,7 @@ router.route('/questions')
 
 //FACILITATOR NAME OR ID
 router.route('/candidate/:fac_name')
-.get(function(req, res, next){
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
     var fac_name = sanitize(req.params.fac_name);
     
     User.find({'facilitator_name': fac_name}, {'firstname': true, 'lastname': true, 'facilitator_name': true})
@@ -249,9 +248,9 @@ router.route('/profile/getProfile')
 });
 
 //FINDING ON THE BASIS OF _id
-router.route('/profile/:id/getKeyword/:key_id')                         // will use req.decoded._id later
-.get(function(req, res, next){
-    var id = sanitize(req.params.id);
+router.route('/profile/getKeyword/:key_id')                         // will use req.decoded._id later
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
+    var id = req.decoded._id;
     var key_id = sanitize(req.params.key_id);
     
     User.findOne({_id: id},{'profile': true}).sort({'profile.profile_content.keyword_id': 1})
@@ -264,9 +263,9 @@ router.route('/profile/:id/getKeyword/:key_id')                         // will 
     });
 });
 
-router.route('/profile/:id/getKeyword/:key_id/getMini/:mini_id')                         // will use req.decoded._id later
-.get(function(req, res, next){
-    var id = sanitize(req.params.id);
+router.route('/profile/getKeyword/:key_id/getMini/:mini_id')                         // will use req.decoded._id later
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
+    var id = req.decoded._id;
     var key_id = sanitize(req.params.key_id);
     var mini_id = sanitize(req.params.mini_id);
     
@@ -280,9 +279,9 @@ router.route('/profile/:id/getKeyword/:key_id/getMini/:mini_id')                
 });
 
 //FINDING ON THE BASIS OF Section, Keyword or Mini-Description Number
-router.route('/profile/:id/:whole_id')                         // will use req.decoded._id later
-.get(function(req, res, next){
-    var id = sanitize(req.params.id);
+router.route('/profile/:whole_id')                         // will use req.decoded._id later
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
+    var id = req.decoded._id;
     var whole_id = sanitize(req.params.whole_id);
     
     if(whole_id.length != 6 && whole_id.length != 9 && whole_id.length != 12)
@@ -335,7 +334,7 @@ router.route('/profile/:id/:whole_id')                         // will use req.d
 });
 
 router.route('/analysis')
-.get(function(req, res, next){
+.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var to_send = { dates: [],
                     user: [],
                     variant_profile_num: []
@@ -442,6 +441,8 @@ router.route('/completion')
             if(sec4)
                 per += 15;
         }
+		
+		//questionnaire left
         
         var final_obj = {
             percentage: per,
@@ -581,7 +582,7 @@ router.route('/auth/login')
     });    
 });
 
-router.get('/auth/logout', function(req, res) {
+router.get('/auth/logout', Verify.verifyOrdinaryUser, function(req, res) {
     req.logout();
     res.status(200).send({"message": 'Bye !', "success": true});
 });

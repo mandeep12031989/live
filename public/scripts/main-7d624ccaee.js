@@ -11845,7 +11845,7 @@ angular.module('idiscover.me', ['ui.router', 'ngResource', 'ng.deviceDetector', 
             },
             'content': {
                 templateUrl: './views/questionnaire.html',
-                controller: 'questController'
+                controller: 'questionnaireController'
             }
         }
     })
@@ -11954,7 +11954,16 @@ angular.module('idiscover.me', ['ui.router', 'ngResource', 'ng.deviceDetector', 
 angular.module('idiscover.me')
 
 .controller('headerController', ['$scope', '$state', 'userFactory', 'authFactory', function ($scope, $state, userFactory, authFactory) {
+	$scope.user = {};
+	$scope.show = false;
+	
 	$scope.user = userFactory.getName();
+	
+	$scope.$watch('user', function(n, o){
+        if(n!=o){
+            $scope.show = true;
+        }
+    }, true);   //true for deep comparison
 	
 	$scope.doLogout = function(){
         authFactory.logout();
@@ -11962,13 +11971,13 @@ angular.module('idiscover.me')
     };
 }])
 
-.controller('loginController', ['$scope', '$rootScope', '$state', 'deviceDetector', 'userFactory', 'authFactory', function ($scope, $rootScope, $state, deviceDetector, userFactory, authFactory) {
+.controller('loginController', ['$scope', '$rootScope', '$state', 'deviceDetector', 'userFactory', 'authFactory', '$timeout', function ($scope, $rootScope, $state, deviceDetector, userFactory, authFactory, $timeout) {
     $scope.loginData = {};
     $scope.login_button = true;
     
     $scope.doLogin = function() {
         $scope.login_button = false;
-        authFactory.login($scope.loginData);
+        authFactory.login($scope.loginData, 0);
     };
     
     $scope.percent = {};
@@ -11988,24 +11997,29 @@ angular.module('idiscover.me')
     }, true);   //true for deep comparison
     
     $rootScope.$on('login:Successful', function (events, args) {
-		if(args.whatDoing == 0)
+		if(args.whatDoing == 0){
 			$scope.browse = {   device_details: deviceDetector,
 								important_date: {
 									last_login: new Date
 								}
 							};
-		else if(args.whatDoing == 1)
+			$scope.percent = userFactory.getPercentage($scope.percent);
+		}
+		else if(args.whatDoing == 1){
 			$scope.browse = {   device_details: deviceDetector,
 								important_date: {
 									last_login: new Date,
 									registration: new Date
 								}
 							};
+			userFactory.saveDetails($scope.browse);     //when succefully logged-in
+			$timeout(function(){
+				$rootScope.$broadcast('registration:Successful');
+			}, 1000);
+		}
 
-        userFactory.saveDetails($scope.browse);     //when succefully logged-in
         
-        $scope.percent = userFactory.getPercentage($scope.percent);
-        
+		
         //$state.go('details', {});
     });
     $rootScope.$on('error:Failure', function (event, data) {
@@ -12014,16 +12028,13 @@ angular.module('idiscover.me')
     });
 }])
 
-.controller('registerController', ['$scope', '$rootScope', '$state', 'deviceDetector', 'authFactory', function ($scope, $rootScope, $state, deviceDetector, authFactory) {
+.controller('registerController', ['$scope', '$rootScope', '$state', 'authFactory', function ($scope, $rootScope, $state, authFactory) {
     $scope.registration = {};
     $scope.register_button = true;
     
     $scope.match = true;
     
     $scope.doRegister = function() {
-        $scope.registration.important_date = { registration: new Date, last_login: new Date};
-        $scope.registration.device_details = deviceDetector;
-        
         if($scope.registration.password == $scope.registration.password2)
             $scope.match = true;
         else
@@ -12085,7 +12096,9 @@ angular.module('idiscover.me')
 }])
 
 .controller('processController', ['$scope', '$state', 'userFactory', function ($scope, $state, userFactory) {
-    $scope.RQ_num = 1;
+    $('html,body').scrollTop(0);
+	
+	$scope.RQ_num = 1;
     $scope.loading = true;
     
     $scope.next_RQ = function(){
@@ -12099,7 +12112,10 @@ angular.module('idiscover.me')
     };
     
     $scope.quesDetails = {};
-    $scope.quesDetails = userFactory.getQuestions($scope.quesDetails);
+	$scope.load_questions = function(){
+		$scope.quesDetails = userFactory.getQuestions($scope.quesDetails);
+	};
+    
     $scope.$watch('quesDetails', function(n, o){
         if(n!=o)
             $scope.loading = false;
@@ -12118,8 +12134,34 @@ angular.module('idiscover.me')
     };
 }])
 
-.controller('questController', ['$scope', '$state', 'userFactory', function ($scope, $state, userFactory) {
-    
+.controller('questionnaireController', ['$scope', '$state', 'userFactory', 'questionnaireFactory', function ($scope, $state, userFactory, questionnaireFactory) {
+	$scope.questions = {};
+	$scope.answers = Array(36).fill(0);
+	$scope.loading = true;
+	
+	$scope.$watch('questions', function(n, o){
+        if(n!=o)
+            $scope.loading = false;
+    }, true);   //true for deep comparison
+	
+	$scope.quesDetails = userFactory.getQuestions($scope.quesDetails);
+	
+	$scope.$watch('quesDetails', function(n, o){
+        if(n!=o){
+            if(n.question.questionnaire.length > 0) 
+				$scope.answers = n.question.questionnaire;
+			
+			questionnaireFactory.query(function(success){
+				$scope.questions = success;
+			}, function(err){});
+		}
+    }, true);   //true for deep comparison
+	
+	$scope.saveQues = function(){
+        $scope.success = 0;
+		$scope.quesDetails.question.questionnaire = $scope.answers;
+        $scope.success = userFactory.saveDetails($scope.quesDetails);
+    };
 }])
 
 .controller('dashboardController', ['$scope', '$state', 'userFactory', function ($scope, $state, userFactory) {
@@ -12254,7 +12296,7 @@ angular.module('idiscover.me')
             //else if(n==3 && !$scope.master){    // Tab 3
                 //$scope.master = keywordFactory.getAllProfiles($scope.master);
             //}
-            else if(n==5 && !$scope.master){    // Tab 5
+            else if(n==5){    // Tab 5
                 $scope.noti = notiFactory.getNoti($scope.noti);
             }
         }
@@ -12430,7 +12472,7 @@ angular.module('idiscover.me')
 'use strict';
 
 angular.module('idiscover.me')
-.constant("baseURL", "")
+.constant("baseURL", "http://localhost:3000/")
 
 .factory('$localStorage', ['$window', function ($window) {
     return {
@@ -12522,7 +12564,6 @@ angular.module('idiscover.me')
         $resource(baseURL + "user/auth/register").save(registerData,
                                                        function(response) {            
                                                           authFac.login({username:registerData.username, password:registerData.password}, 1);
-                                                          $rootScope.$broadcast('registration:Successful');
                                                        },
                                                        function(response){
                                                           $rootScope.$broadcast('error:Failure', response.data.message);
@@ -12655,6 +12696,16 @@ angular.module('idiscover.me')
     };
     
     return notiD;
+}])
+
+.factory('questionnaireFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "ques", null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
 }])
 
 /*.factory('notiFactory', ['$resource', 'baseURL', function ($resource, baseURL) {

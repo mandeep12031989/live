@@ -5,9 +5,10 @@ var express = require('express');
 var router = express.Router();
 var sanitize = require('mongo-sanitize');       // To stop NoSQL injections - any req starts with $ will be emitted
 var Keyword = require('../models/keyword');     // Profile Model
+var Verify = require('./verify');
 
 router.route('/')
-.get(function(req, res, next){                  // Give all keywords in ascending order
+.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                  // Give all keywords in ascending order
     
     Keyword.find().sort({"keyword_id":1})
     .exec(function(err, keyword){
@@ -17,7 +18,7 @@ router.route('/')
     });
 })
 
-.post(function(req, res, next){                 // Store keyword with extra-ordinary conditions
+.post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                 // Store keyword with extra-ordinary conditions
         //checking 3 things: 1=>checking respective length(s), 2=>checking whether keyword_id and section_id representing same profile number-section number pair or not, 3=> keyword_id with 7th index 'K'
     
         var body = sanitize(req.body);      // NoSQL injection prevention
@@ -43,7 +44,7 @@ router.route('/')
     
 })
 
-.delete(function(req, res, next){               // Drop Whole Collection
+.delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){               // Drop Whole Collection
     
     Keyword.find()
     .exec(function(err, keyword){
@@ -59,7 +60,7 @@ router.route('/')
 });
 
 router.route('/tag')
-.put(function(req, res, next){                  // Sending information in BODY and then comparing tags
+.put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                  // Sending information in BODY and then comparing tags
         
     Keyword.find().sort({"keyword_id":1})
     .exec(function(err, keyword){
@@ -80,7 +81,7 @@ router.route('/tag')
 });
 
 router.route('/:profile_num')
-.get(function(req, res, next){
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
     var profile_num = 'P'+sanitize(req.params.profile_num);     // NoSQL injection prevention
     
     Keyword.find({ keyword_id: { $regex: profile_num } }, {'_id': false, 'mini_descriptions.relate': false}).sort('keyword_id')
@@ -91,7 +92,7 @@ router.route('/:profile_num')
     });    
 })
 
-.delete(function(req, res, next){
+.delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var profile_num = 'P'+sanitize(req.params.profile_num);     // NoSQL injection prevention
     
     Keyword.findOneAndRemove({ keyword_id: { $regex: profile_num } })
@@ -104,7 +105,7 @@ router.route('/:profile_num')
 });
 
 router.route('/:profile_num/:section_num')
-.get(function(req, res, next){
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num);     // NoSQL injection prevention
     
     Keyword.find({ keyword_id: { $regex: num } })
@@ -115,7 +116,7 @@ router.route('/:profile_num/:section_num')
     });    
 })
 
-.delete(function(req, res, next){
+.delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num);     // NoSQL injection prevention
     
     Keyword.findOneAndRemove({ keyword_id: { $regex: num } })
@@ -128,7 +129,7 @@ router.route('/:profile_num/:section_num')
 });
 
 router.route('/:profile_num/:section_num/:keyword_num')
-.get(function(req, res, next){
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num)+'K'+sanitize(req.params.keyword_num);       // NoSQL injection prevention
     
     Keyword.find({ keyword_id: { $regex: num } })
@@ -139,7 +140,7 @@ router.route('/:profile_num/:section_num/:keyword_num')
     });    
 })
 
-.put(function(req, res, next){
+.put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num)+'K'+sanitize(req.params.keyword_num);       // NoSQL injection prevention
     
     Keyword.findOneAndUpdate({ keyword_id: { $regex: num }}, {$set: sanitize(req.body)}, {new: true})
@@ -150,7 +151,7 @@ router.route('/:profile_num/:section_num/:keyword_num')
     });
 })
 
-.post(function(req, res, next){
+.post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num)+'K'+sanitize(req.params.keyword_num);       // NoSQL injection prevention
     
     if(num.length==9 && num[0]=='P' && num[3]=='S' && num[6]=='K')
@@ -177,7 +178,7 @@ router.route('/:profile_num/:section_num/:keyword_num')
             res.status(501).send({"message": "Please Enter Valid Section ID-Keyword ID Pair !"});
 })
 
-.delete(function(req, res, next){
+.delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num)+'K'+sanitize(req.params.keyword_num);     // NoSQL injection prevention
     
     Keyword.findOneAndRemove({ keyword_id: { $regex: num } })
@@ -190,7 +191,7 @@ router.route('/:profile_num/:section_num/:keyword_num')
 });
 
 router.route('/:profile_num/:section_num/:keyword_num/mini')
-.get(function(req, res, next){
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num)+'K'+sanitize(req.params.keyword_num);       // NoSQL injection prevention
     
     Keyword.find({ keyword_id: { $regex: num } }, {'mini_descriptions': true})
@@ -202,7 +203,7 @@ router.route('/:profile_num/:section_num/:keyword_num/mini')
 });
 
 router.route('/:profile_num/:section_num/:keyword_num/mini/:mini_id')
-.get(function(req, res, next){
+.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var num = 'P'+sanitize(req.params.profile_num)+'S'+sanitize(req.params.section_num)+'K'+sanitize(req.params.keyword_num);       // NoSQL injection prevention
     
     Keyword.findOne({ keyword_id: { $regex: num } }, {'mini_descriptions': true})

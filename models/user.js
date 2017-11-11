@@ -158,7 +158,7 @@ var userSchema = new Schema({
         RQ1: String,
         RQ2: String,
         RQ3: String,
-        questionnaire: String
+        questionnaire: Array
     },
     device_details: Object,
     feedback: {

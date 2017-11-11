@@ -36,7 +36,7 @@
 															<!--<span class="add-on input-group-addon">
 																<i class="glyph-icon icon-calendar"></i>
 															</span>-->
-															<input type="number" class="form-control" placeholder="Age" required ng-model="userDetails.age">
+															<input type="number" class="form-control" placeholder="Age" required ng-model="userDetails.age" min="5" max="80">
 														</div>
 													</div>
 												</div>
@@ -44,9 +44,9 @@
 													<label for="" class="col-sm-4 control-label">Gender</label>
 													<div class="col-sm-8">
 														<select class="form-control" required ng-model="userDetails.sex">
-															<option value="Gender" default>Gender</option>
+															<option value="Gender" default disabled>Gender</option>
 															<option value="Male">Male</option>
-															<option value="Female" default>Female</option>
+															<option value="Female">Female</option>
 														</select>
 													</div>
 												</div>
@@ -55,7 +55,7 @@
 													<div class="col-sm-8">
 														<div class="input-prepend input-group">
 														   <select class="form-control" required ng-model="userDetails.work_details.experience">
-																<option value="Work Experience">Work Experience</option>
+																<option value="Work Experience" disabled>Work Experience</option>
 																<option value="Less than 2 years">Less than 2 years</option>
 																<option value="2 years - 5 years">2 years - 5 years</option>
 																<option value="6 years - 10 years">6 years - 10 years</option>

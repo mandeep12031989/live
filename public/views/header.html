@@ -1,31 +1,26 @@
-		<div id="page-header" class="bg-gradient-9">
+		<div id="page-header" class="bg-gradient-9" ng-show="show">
             <div id="mobile-navigation">
                 <button id="nav-toggle" class="collapsed" data-toggle="collapse" data-target="#page-sidebar"><span></span></button>
                 <a href="index.html" class="logo-content-small" title="MonarchUI"></a>
             </div>
-            <div id="header-logo" class="logo-bg">
-                <a href="" class="logo-content-big" title="iDiscover.me">
-                    Monarch <i>UI</i>
-                    <span>The perfect solution for user interfaces</span>
-                </a>
-                <a href="" class="logo-content-small" title="iDiscover.me">
-                    Monarch <i>UI</i>
-                    <span>The perfect solution for user interfaces</span>
-                </a>
+            <div id="header-logo" class="logo-bg" style="margin: 0 auto;">
+                <a href="" class="logo-content-big" title="iDiscover.me"></a>
             </div>
             <div id="header-nav-left">
                 <div class="user-account-btn dropdown">
-                    <a title="My Account" class="user-profile clearfix" data-toggle="dropdown">
-                        <img width="28" src="./assets/image-resources/man_2.svg" alt="Profile image">
-                        <span>{{user.firstname}}</span>
+                    <a title="My Account" class="user-profile" data-toggle="dropdown">
+						<span class="avatar-circle avatar-small">
+							<span class="initials ini-small">{{user.firstname[0] + user.lastname[0]}}</span>
+						</span>
+                        <span>{{user.firstname + ' ' + user.lastname}}</span>
                         <i class="glyph-icon icon-angle-down"></i>
                     </a>
                     <div class="dropdown-menu float-left">
                         <div class="box-sm">
-                            <div class="login-box clearfix">
+                            <div class="login-box">
                                 <div class="user-img">
-                                    <div class="avatar-circle">
-                                        <span class="initials">{{user.firstname[0] + user.lastname[0]}}</span>
+                                    <div class="avatar-circle avatar-big">
+                                        <span class="initials ini-big">{{user.firstname[0] + user.lastname[0]}}</span>
                                     </div>
                                 </div>
                                 <div class="user-info">

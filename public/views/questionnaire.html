@@ -7,7 +7,6 @@
 </span>
 
 <div id="sb-site" ng-show="!loading">
-   
 
     <div id="page-wrapper">
         
@@ -19,39 +18,27 @@
                         <div class="panel">
                             <div class="panel-body">
                                 <h1 style="text-align:center; font-weight:bold;" class="title-hero">
-                                   Reflective Questions
+                                   Questionnaire
                                 </h1>
                                 <div class="example-box-wrapper">
                                     <div id="form-wizard-3" class="form-wizard">
                                         
                                         <div class="tab-content">
-
-                                                <div class="content-box">
-                                                    <h4 class="content-box-header bg-red">
-                                                       1. What kind of people you like? What qualities you like in them?
-                                                    </h4>
-                                                    <div class="content-box-wrapper">
-                                                        o yob 9 8ny hnb 7n8 y9mh n8yng9hmj ni mj
-                                                    </div>
-                                                    <div class="content-box-wrapper">
-                                                        o yo2bvhhu gy n h g0b9y h8j 0  ohu98h uboh 0n
-                                                    </div>
-                                                </div>
-                                                <div class="content-box">
+{{quesDetails.question.questionnaire}}{{answers}}
+                                                <div class="content-box" ng-repeat="q in questions">
                                                     <h4 class="content-box-header bg-blue">
-                                                       1. What kind of people you like? What qualities you like in them?
+                                                       {{q.num + '. ' + q.desc}}
                                                     </h4>
-                                                    <div class="content-box-wrapper">
-                                                        o yob 9 8ny hnb 7n8 y9mh n8yng9hmj ni mj
-                                                    </div>
-                                                    <div class="content-box-wrapper">
-                                                        o yo2bvhhu gy n h g0b9y h8j 0  ohu98h uboh 0n
-                                                    </div>
+													<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
+                                                    <input type="radio" ng-model="answers[$index]" value="1"> {{q.keywords[0].keyword}}<br>
+													<input type="radio" ng-model="answers[$index]" value="2"> {{q.keywords[1].keyword}}
+													</div>
                                                 </div>
                                             
-                                                <a class="btn btn-primary pull-right" ng-click="" style="color: white;">Submit</a>
+                                                <a class="btn btn-primary pull-right" ng-click="saveQues()" style="color: white;">Submit</a>
 
                                         </div>
+										
                                     </div>
                                 </div>
                             </div>
