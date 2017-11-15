@@ -26,7 +26,9 @@
 								  -moz-appearance: none;
 								  width: 100%
 								}
-
+								input[disabled]{
+									opacity: 1
+								}
 								input[type=range]::-webkit-slider-runnable-track {
 								  -webkit-appearance: none;
 								  background: rgba(139,195,74,1);
@@ -91,7 +93,7 @@
 									<div class="col-md-12">
 										<div class="col-md-2"></div>
 										<div class="col-md-8">
-											<input type="range" min="-2" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating">
+											<input type="range" min="-2" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating" disabled>
 										</div>
 										<div class="col-md-2"></div>
 									</div><br><br><br>

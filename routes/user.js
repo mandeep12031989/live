@@ -523,6 +523,15 @@ router.route('/resetpsw2/:token')                            // Client Side Need
 		});
 });
 
+/*router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), function(err, res){
+    var authe = require('../authenticate.js');
+	var tkn = authe.makeToken();
+    console.log(tkn);
+    res.status(200).send(tkn);
+});*/
+
 router.route('/auth/register')
 .post(function(req, res, next) {
     var body = sanitize(req.body);

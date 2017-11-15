@@ -21,7 +21,7 @@
 		font-family: 'Material Icons';
 		color: #B3CEFB;
 		border-radius: 50%;
-		padding: 12px;
+		padding: 7px;
 		transition: all 0.4s;
 		-webkit-transition: all 0.4s;
 	}
@@ -39,7 +39,7 @@
 	  font-family: 'Material Icons';
 	  font-weight: normal;
 	  font-style: normal;
-	  font-size: 36px;  /* Preferred icon size */
+	  font-size: 24px;  /* Preferred icon size */
 	  display: inline-block;
 	  line-height: 1;
 	  text-transform: none;
@@ -71,14 +71,30 @@
 </span>
 
 <div id="sb-site" ng-show="!loading">
-   
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="waitingQueue == true" class="w3-animate-top">
+		<div class="alert alert-info alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">cached</i>
+			<span data-notify="message">Saving Your Progress !</span>
+		</div>
+	</div>
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.message == 'Done'" class="w3-animate-top">
+		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">check_circle</i>
+			<span data-notify="message">Progress Saved !</span>
+		</div>
+	</div>
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-if="!online" class="w3-animate-top">
+		<div class="alert alert-danger alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">info</i>
+			<span data-notify="message">Connection Error !</span>
+		</div>
+	</div>
     <div id="page-wrapper">
         
         <div id="page-content-wrapper">
             <div>
                 
                 <div class="container">
-                    
 
 					<!-- Boostrap Tabs -->
 
@@ -140,35 +156,35 @@
 											</div>
 											<div class="row" style="width: 95%; margin: auto;">
 
-												 <div class="col-sm-6" ng-repeat="keys in profile_content.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="">
+												 <div class="col-sm-6" ng-repeat="keys in profile_content.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
 													<div class="panel panel-primary">
 														<div class="panel-heading">
 															<h4 class="panel-title">{{keys.keyword + ' - ' + keys.keyword_id}}</h4>
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
-															   <div class="row" ng-repeat="mini in keys.mini_descriptions">
-																	<div class="col-sm-3">
+															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
+																	<div class="col-sm-6">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
 																	</div>
-																	<div class="col-sm-9">
+																	<div class="col-sm-6">
 																		<div id="radios">
 																				<label for="{{mini.mini_description_id}}sad" class="material-icons">
-																					 <input type="radio" name="collection" id="{{mini.mini_description_id}}sad" value="sad" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
+																					 <input type="radio" name="{{mini.mini_description_id}}sad" id="{{mini.mini_description_id}}sad" value="sad" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
 																					 <span>&#xE612;</span>
 																				</label>
 																				<label for="{{mini.mini_description_id}}normal" class="material-icons">
-																					<input type="radio" name="collection" id="{{mini.mini_description_id}}normal" value="normal" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
+																					<input type="radio" name="{{mini.mini_description_id}}normal" id="{{mini.mini_description_id}}normal" value="normal" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
 																					<span>&#xE40C;</span>
 																				</label>
 																				<label for="{{mini.mini_description_id}}smile" class="material-icons">
-																					<input type="radio" name="collection" id="{{mini.mini_description_id}}smile" value="smile" ng-model="mini.relate" ng-change="mini.mini_rating = 2"/>
+																					<input type="radio" name="{{mini.mini_description_id}}smile" id="{{mini.mini_description_id}}smile" value="smile" ng-model="mini.relate" ng-change="mini.mini_rating = 2"/>
 																					<span>&#xE3A6;</span>
 																				</label>                           
 																		</div>
-																	</div><span style="color: red;">{{mini.relate}} - {{mini.mini_rating}}</span>
+																	</div>
 																</div>
-																<span style="color: red;">{{keys.key_rating}}</span>
+																
 															<br>   
 															   <textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Comment">Comment</textarea>
 															</div>
@@ -178,287 +194,24 @@
 												 </div>
 											</div>
 										</div><br>
-										<span style="color: red;" ng-show="success.message == 'Done'">Progress Saved!</span>
-										<button type="button" class="btn btn-warning" style="float: right;" ng-click="saveProfile()" ng-show="section_num != 4">Save</button>
-										<button type="button" class="btn btn-danger" style="float: right;" ng-click="submitProfile()" ng-show="section_num == 4">Submit</button><br><br>
+										
+										<button type="button" class="btn btn-info" ng-click="section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
+										<button type="button" class="btn btn-success" style="float: right;" ng-click="section_num = section_num+1" ng-disabled="section_num == 4">Next</button>
+										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
+											<button type="button" class="btn btn-warning" ng-click="saveProfile()" ng-show="section_num != 4">Save</button>
+											<button type="button" class="btn btn-danger" ng-click="submitProfile()" ng-show="section_num == 4">Submit</button><br><br>
+										</span>
 									</div>
 
 								</div>
-								<!--
-								<div class="tab-pane fade active in pad0A" id="faq-tab-2" ng-show="section_num == 2">
-									<div class="panel-group" id="accordion5">
-										<div class="panel ">
-											<div class="panel-heading">
-												<h2 class="panel-title" style="text-align:center; font-size:1.8em">
-													<a data-toggle="collapse" data-parent="#accordion5"  href="#collapseOne">
-														<b>Professional Learning Needs</b>
-													</a>
-												</h2>
-											</div>
-											<div class="row" style="width:96%; margin-left:auto; margin-right:auto;">
-
-										 <div class="col-sm-6">
-												<div class="panel panel-primary">
-											<div class="panel-heading">
-												<h4 class="panel-title">Lack follow through</h4>
-											</div>
-											<div id="collapseOne" class="panel-collapse collapse in">
-												<div class="panel-body pad0B">
-													<div class="row">
-													<div class="col-sm-3">
-													   <h5><b>Want others to implement</b></h5> 
-													</div>
-
-													<div class="col-sm-9">
-													   <div id="radios">
-															<label for="donot" class="material-icons">
-																<input type="radio" name="mode" id="donot" value="donot" />
-																<span>&#xE612;</span>
-															</label>
-															<label for="partial" class="material-icons">
-																<input type="radio" name="mode" id="partial" value="partial" />
-																<span>&#xE40C;</span>
-															</label> 
-																					   <label for="fully" class="material-icons">
-																<input type="radio" name="mode" id="fully" value="fully" />
-																<span>&#xE3A6;</span>
-															</label>                           
-													   </div>
-
-													</div>    
-													</div>   <br>   
-
-													<div class="row">
-													<div class="col-sm-3">
-													<h5><b>Initiate too much change</b></h5>  
-													</div>
-													<div class="col-sm-9">
-														<div id="radios">      
-																	<label for="smile" class="material-icons">
-																		<input type="radio" name="collection" id="smile" value="smile" />
-																		<span>&#xE814;</span>
-																	</label>
-																	<label for="sad" class="material-icons">
-																		<input type="radio" name="collection" id="sad" value="sad" />
-																		<span>&#xE812;</span>
-																	</label>
-																	<label for="normal" class="material-icons">
-																		<input type="radio" name="collection" id="normal" value="normal"/>
-																		<span>&#xE815;</span>
-																	</label>                                                   
-													   </div>
-
-													</div>    
-													</div>  <br> 
-
-													<div class="row">
-													<div class="col-sm-3">
-													 <h5><b> Get disinterested after planning stage</b></h5>
-													</div>
-													<div class="col-sm-9">
-														<div id="radios">
-															<label for="donot" class="material-icons">
-																<input type="radio" name="mode" id="donot" value="donot" />
-																<span>&#xE612;</span>
-															</label>
-															<label for="partial" class="material-icons">
-																<input type="radio" name="mode" id="partial" value="partial" />
-																<span>&#xE40C;</span>
-															</label> 
-																					   <label for="fully" class="material-icons">
-																<input type="radio" name="mode" id="fully" value="fully" />
-																<span>&#xE3A6;</span>
-															</label> 
-													   </div>
-													</div>    
-													</div>
-													<textarea contenteditable="true" rows="2" class="form-control">Comment</textarea> 
-												</div>
-												<br>
-											</div>
-										</div>
-										</div>  
-										 <div class="col-sm-6">
-												<div class="panel panel-primary">
-											<div class="panel-heading">
-												<h4 class="panel-title">Planner
-												</h4>
-											</div>
-											<div id="collapseOne" class="panel-collapse collapse in">
-												<div class="panel-body pad0B">
-													<div class="row">
-													<div class="col-sm-3">
-													   <h5><b>Plans changes too quickly</b></h5> 
-													</div>
-
-													<div class="col-sm-9">
-													   <div id="radios">
-															<label for="donot" class="material-icons">
-																<input type="radio" name="mode" id="donot" value="donot" />
-																<span>&#xE612;</span>
-															</label>
-															<label for="partial" class="material-icons">
-																<input type="radio" name="mode" id="partial" value="partial" />
-																<span>&#xE40C;</span>
-															</label> 
-														   <label for="fully" class="material-icons">
-																<input type="radio" name="mode" id="fully" value="fully" />
-																<span>&#xE3A6;</span>
-															</label> 
-													   </div>
-
-													</div>    
-													</div>   
-												  <br>
-													<div class="row">
-													<div class="col-sm-3">
-													<h5><b> keep options open</b></h5>  
-													</div>
-													<div class="col-sm-9">
-
-														<div id="radios">                                   
-															<label for="smile" class="material-icons">
-																<input type="radio" name="collection" id="smile" value="smile" />
-																<span>&#xE814;</span>
-															</label>
-															<label for="sad" class="material-icons">
-																<input type="radio" name="collection" id="sad" value="sad" />
-																<span>&#xE812;</span>
-															</label>
-															<label for="normal" class="material-icons">
-																<input type="radio" name="collection" id="normal" value="normal"/>
-																<span>&#xE815;</span>
-															</label>                          
-													   </div>
-
-													</div>    
-													</div>   
-													<br>
-													<div class="row">
-													<div class="col-sm-3">
-													 <h5><b> Do not commit </b></h5>
-
-													</div>
-													<div class="col-sm-9">
-
-														<div id="radios">
-															<label for="donot" class="material-icons">
-																<input type="radio" name="mode" id="donot" value="donot" />
-																<span>&#xE612;</span>
-															</label>
-															<label for="partial" class="material-icons">
-																<input type="radio" name="mode" id="partial" value="partial" />
-																<span>&#xE40C;</span>
-															</label> 
-																					   <label for="fully" class="material-icons">
-																<input type="radio" name="mode" id="fully" value="fully" />
-																<span>&#xE3A6;</span>
-															</label>                        
-													   </div>
-													</div>    
-													</div>
-
-												 <br>
-
-												   <textarea contenteditable="true" rows="2" class="form-control">Comment</textarea> 
-												</div>
-												<br>
-											</div>
-										</div>
-										</div>  
-											 </div>
-										</div>
-
-
-									</div>
-
-								</div>-->
 
 							</div>
 						</div>
 						</div>
                     </div>
 
-                
-
             </div>
         </div>
         
     </div>
-
-
-    <!-- WIDGETS -->
-
-<script type="text/javascript" src="./assets/bootstrap/js/bootstrap.js"></script>
-
-<!-- Bootstrap Dropdown -->
-
-<!-- <script type="text/javascript" src="./assets/widgets/dropdown/dropdown.js"></script> -->
-
-<!-- Bootstrap Tooltip -->
-
-<!-- <script type="text/javascript" src="./assets/widgets/tooltip/tooltip.js"></script> -->
-
-<!-- Bootstrap Popover -->
-
-<!-- <script type="text/javascript" src="./assets/widgets/popover/popover.js"></script> -->
-
-<!-- Bootstrap Progress Bar -->
-
-<script type="text/javascript" src="./assets/widgets/progressbar/progressbar.js"></script>
-
-<!-- Bootstrap Buttons -->
-
-<!-- <script type="text/javascript" src="./assets/widgets/button/button.js"></script> -->
-
-<!-- Bootstrap Collapse -->
-
-<!-- <script type="text/javascript" src="./assets/widgets/collapse/collapse.js"></script> -->
-
-<!-- Superclick -->
-
-<script type="text/javascript" src="./assets/widgets/superclick/superclick.js"></script>
-
-<!-- Input switch alternate -->
-
-<script type="text/javascript" src="./assets/widgets/input-switch/inputswitch-alt.js"></script>
-
-<!-- Slim scroll -->
-
-<script type="text/javascript" src="./assets/widgets/slimscroll/slimscroll.js"></script>
-
-<!-- Slidebars -->
-
-<script type="text/javascript" src="./assets/widgets/slidebars/slidebars.js"></script>
-<script type="text/javascript" src="./assets/widgets/slidebars/slidebars-demo.js"></script>
-
-<!-- PieGage -->
-
-<script type="text/javascript" src="./assets/widgets/charts/piegage/piegage.js"></script>
-<script type="text/javascript" src="./assets/widgets/charts/piegage/piegage-demo.js"></script>
-
-<!-- Screenfull -->
-
-<script type="text/javascript" src="./assets/widgets/screenfull/screenfull.js"></script>
-
-<!-- Content box -->
-
-<script type="text/javascript" src="./assets/widgets/content-box/contentbox.js"></script>
-
-<!-- Overlay -->
-
-<script type="text/javascript" src="./assets/widgets/overlay/overlay.js"></script>
-
-<!-- Widgets init for demo -->
-
-<script type="text/javascript" src="./assets/js-init/widgets-init.js"></script>
-
-<!-- Theme layout -->
-
-<script type="text/javascript" src="./assets/themes/admin/layout.js"></script>
-
-<!-- Theme switcher -->
-
-<script type="text/javascript" src="./assets/widgets/theme-switcher/themeswitcher.js"></script>
-
 </div>

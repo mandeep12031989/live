@@ -29,17 +29,17 @@
                         </a>
                     </li>
                     
-                    <li class="header"><span>View / Edit / Update</span></li>
+                    <li class="header"><span>Master Parent Keywords</span></li>
                     <li ng-click="tab_num = 3">
                         <a href="">
                             <i class="glyph-icon icon-cog"></i>
-                            <span>View/Edit Parent Keywords</span>
+                            <span>View / Edit</span>
                         </a>
                     </li>
                     <li ng-click="tab_num = 4">
                         <a href="">
                             <i class="glyph-icon icon-upload"></i>
-                            <span>Add NEW Parent Keywords</span>
+                            <span>Add NEW</span>
                         </a>
                     </li>
                     
@@ -190,8 +190,8 @@
 											<th ng-click="sort('firstname')">Name <span class="glyph-icon icon-sort" ng-show="sortKey=='firstname'"></span></th>
 											<th ng-click="sort('login')">Last Logged-In <span class="glyph-icon icon-sort" ng-show="sortKey=='login'"></span></th>
 											<th ng-click="sort('register')">Registered <span class="glyph-icon icon-sort" ng-show="sortKey=='register'"></span></th>
-											<th>Facilitator</th>
 											<th>Admin</th>
+											<th>Facilitator</th>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">  
@@ -212,7 +212,7 @@
                 <div class="container" ng-show="tab_num == 3">
                         <div>
                             Profile: <input type="number" ng-model="profile_num" min="1" max="9"><br><br>
-                            Section: <input type="number" ng-model="section_num" min="1" max="5"><br><br>
+                            Section: <input type="number" ng-model="section_num" min="1" max="4"><br><br>
                             <button type="button" class="btn btn-danger" ng-click="getThatProfile(profile_num)" ng-disabled="!(profile_num && section_num)">GET</button>
                         </div>
                         <br>
@@ -353,7 +353,8 @@
 					</div>
 					
 					<br><br><br>
-					<button type="button" class="btn btn-warning" ng-click="push_mini()">Push Mini</button><br><br>
+					<button type="button" class="btn btn-warning" ng-click="push_mini()">Push Mini</button> 
+					<button type="button" class="btn btn-warning" ng-click="structure.mini_descriptions.pop()" ng-disabled="!structure.mini_descriptions.length" style="float:right;">Pop Mini</button><br><br>
 					<button type="button" class="btn btn-danger" ng-click="push_keyword()" ng-disabled="structure_statement.desc.length != 0 || structure_mini.mini_description_id.length != 0 || structure_mini.mini_description.length != 0">Push Keyword</button><br><br>
 					<button type="button" class="btn btn-default" ng-click="undoData()" ng-show="add_array">Undo</button> 
 					<button type="button" class="btn btn-success" ng-click="submitData()" ng-show="add_array">Submit Keyword</button>

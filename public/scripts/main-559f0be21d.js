@@ -11807,7 +11807,7 @@ angular.module('idiscover.me', ['ui.router', 'ngResource', 'ng.deviceDetector', 
             },
 			'left_panel': {
                 templateUrl: './views/left_panel.html',
-                controller: ''
+                controller: 'leftController'
             },
             'content': {
                 templateUrl: './views/process_step.html',
@@ -11824,7 +11824,7 @@ angular.module('idiscover.me', ['ui.router', 'ngResource', 'ng.deviceDetector', 
             },
 			'left_panel': {
                 templateUrl: './views/left_panel.html',
-                controller: ''
+                controller: 'leftController'
             },
             'content': {
                 templateUrl: './views/reflective.html',
@@ -11841,7 +11841,7 @@ angular.module('idiscover.me', ['ui.router', 'ngResource', 'ng.deviceDetector', 
             },
 			'left_panel': {
                 templateUrl: './views/left_panel.html',
-                controller: ''
+                controller: 'leftController'
             },
             'content': {
                 templateUrl: './views/questionnaire.html',
@@ -11858,7 +11858,7 @@ angular.module('idiscover.me', ['ui.router', 'ngResource', 'ng.deviceDetector', 
             },
 			'left_panel': {
                 templateUrl: './views/left_panel.html',
-                controller: ''
+                controller: 'leftController'
             },
             'content': {
                 templateUrl: './views/dashboard.html',
@@ -11953,6 +11953,20 @@ angular.module('idiscover.me', ['ui.router', 'ngResource', 'ng.deviceDetector', 
 
 angular.module('idiscover.me')
 
+.run(["$window", "$rootScope", function($window, $rootScope) {
+    $rootScope.online = navigator.onLine;
+      $window.addEventListener("offline", function () {
+        $rootScope.$apply(function() {
+          $rootScope.online = false;
+        });
+      }, false);
+      $window.addEventListener("online", function () {
+        $rootScope.$apply(function() {
+          $rootScope.online = true;
+        });
+      }, false);
+}])
+
 .controller('headerController', ['$scope', '$state', 'userFactory', 'authFactory', function ($scope, $state, userFactory, authFactory) {
 	$scope.user = {};
 	$scope.show = false;
@@ -11971,6 +11985,10 @@ angular.module('idiscover.me')
     };
 }])
 
+.controller('leftController', ['$scope', '$state', 'userFactory', function ($scope, $state, userFactory) {
+	$scope.current_state = $state.current.name;
+}])
+
 .controller('loginController', ['$scope', '$rootScope', '$state', 'deviceDetector', 'userFactory', 'authFactory', '$timeout', function ($scope, $rootScope, $state, deviceDetector, userFactory, authFactory, $timeout) {
     $scope.loginData = {};
     $scope.login_button = true;
@@ -11978,6 +11996,9 @@ angular.module('idiscover.me')
     $scope.doLogin = function() {
         $scope.login_button = false;
         authFactory.login($scope.loginData, 0);
+		$timeout(function(){
+			$scope.login_button = true;
+		}, 5000);
     };
     
     $scope.percent = {};
@@ -12161,6 +12182,12 @@ angular.module('idiscover.me')
         $scope.success = 0;
 		$scope.quesDetails.question.questionnaire = $scope.answers;
         $scope.success = userFactory.saveDetails($scope.quesDetails);
+		$scope.$watch('success', function(n, o){
+			if(n!=o){
+				if(n.message == 'Done')
+					$state.go('dashboard', {});
+			}
+		}, true);   //true for deep comparison
     };
 }])
 
@@ -12210,8 +12237,10 @@ angular.module('idiscover.me')
     $scope.profile_content = userFactory.getProfile($scope.profile_content);
     
     $scope.$watch('section_num', (n, o)=>{
-        if(n!=o)
+        if(n!=o){
             $scope.saveProfile();
+			$('html,body').scrollTop(0);
+		}
     });
     
     $scope.calculate_avg = function(){
@@ -12230,20 +12259,25 @@ angular.module('idiscover.me')
     
     $scope.saveProfile = function(){
         $scope.calculate_avg();
+		$scope.waitingQueue = true;
         $scope.success = 0;
         $scope.success = userFactory.saveDetails($scope.profile_content);
         $timeout(function(){
             $scope.success = "";
+			$scope.waitingQueue = false;
         },5000);
     };
     
     $scope.submitProfile = function(){
         $scope.calculate_avg();
+		$scope.waitingQueue = true;
         $scope.success = 0;
         $scope.success = userFactory.saveDetails($scope.profile_content);
         $scope.$watch('success', function(n, o){
-            if(n!=o)
-                $state.go('dashboard', {});
+            if(n!=o){
+				if(n.message == 'Done')
+                	$state.go('dashboard', {});
+			}
         }, true);   //true for deep comparison
     };
     
@@ -12269,7 +12303,7 @@ angular.module('idiscover.me')
                 else
                     $scope.temp_content[k] = {};
                 
-                console.log("here: "+$scope.temp_content[k]);
+                //console.log("here: "+$scope.temp_content[k]);
             }
             
         }
@@ -12415,6 +12449,9 @@ angular.module('idiscover.me')
     $scope.add_array = false;
     
     $scope.push_mini = function(){
+		if(!$scope.structure_mini.mini_description || !$scope.structure_mini.mini_description_id){
+		   return;
+		}
         $scope.structure.mini_descriptions.push($scope.structure_mini);
         $scope.structure_mini = {
             mini_description_id: '',
@@ -12472,7 +12509,7 @@ angular.module('idiscover.me')
 'use strict';
 
 angular.module('idiscover.me')
-.constant("baseURL", "")
+.constant("baseURL", "http://localhost:3000/")
 
 .factory('$localStorage', ['$window', function ($window) {
     return {

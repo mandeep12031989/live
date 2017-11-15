@@ -5,8 +5,7 @@ var router = express.Router();
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-//var FacebookStrategy = require('passport-facebook').Strategy;
-//var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+//var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;		//	This causing repeating requests to server
 
 var User = require('./models/user');
 var config = require('./config');
@@ -17,10 +16,11 @@ var jwt = require('jsonwebtoken');
 const _ENV_NAME = process.env.NAME || 'development';
 config = config[_ENV_NAME];
 
-exports.local = passport.use(new LocalStrategy(User.authenticate()));
+//exports = passport.use(new LocalStrategy(User.authenticate()));
 
-//passport.serializeUser(User.serializeUser());
-//passport.deserializeUser(User.deserializeUser());
+/*passport.serializeUser(User.serializeUser());				//	This causing repeating requests to server
+passport.deserializeUser(User.deserializeUser());*/
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -35,7 +35,7 @@ var getDetails = {
     admin: false
 };
 
-module.exports = passport.use(new GoogleStrategy({  
+exports = passport.use(new GoogleStrategy({  
     clientID: config.googleAuth.clientID,
     clientSecret: config.googleAuth.clientSecret,
     callbackURL: config.googleAuth.callbackURL,
@@ -82,10 +82,7 @@ module.exports = passport.use(new GoogleStrategy({
       });
     }));
 
-module.exports = { 
-    makeToken: function() {
-        console.log("in fn: " +getDetails._id);
-        return Verify.getToken(getDetails);
-    }
-}*/
-
+exports.makeToken = function() {
+	console.log("in fn: " +getDetails._id);
+	return Verify.getToken(getDetails);
+};*/
