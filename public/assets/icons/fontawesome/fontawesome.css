@@ -781,10 +781,7 @@
 .icon-spinner:before {
     content: "\f110";
 }
-#page-sidebar li ul li a:before,
-.icon-circle:before {
-    content: "\f111";
-}
+
 .icon-mail-reply:before,
 .icon-reply:before {
     content: "\f112";
