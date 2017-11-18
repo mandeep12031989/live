@@ -86,6 +86,10 @@ var userSchema = new Schema({
         required: true,
         unique: true
     },
+    username_verified: {
+        type: Boolean,
+        default: false
+    },
     password: String,
 	password_reset_token: String,
     firstname: {

@@ -4,11 +4,13 @@ var express = require('express');
 var router = express.Router();
 var sanitize = require('mongo-sanitize');
 var jwt = require('jsonwebtoken');
+var passport = require('passport');
 var child_process = require('child_process');
 
 var User = require('../models/user.js');
 var Keyword = require('../models/keyword.js');
 var Verify = require('./verify');
+var authe = require('../authenticate.js');
 
 router.route('/list')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
@@ -403,7 +405,18 @@ router.route('/completion')
             per += 14;
         //console.log(user.question.RQ1 + ' | ' + user.question.RQ2 + ' | ' + user.question.RQ3 + ' | ' + user.feedback.submitted + ' = ' + per);
         
-        // 14 % for questionnaire left
+        // 14 % for questionnaire
+		var que_filled = false;
+		if(user.question.questionnaire.length != 0){
+			for(var q = 0; q < 36; q++){
+				//console.log(q);
+				if(parseInt(user.question.questionnaire[q]) != 0){
+					per += 14;
+					que_filled = true;
+					break;
+				}
+			}
+		}
         
         if(user.profile.profile_content.length){
             var sec1 = true, sec2 = true, sec3 = true, sec4 = true;
@@ -447,7 +460,7 @@ router.route('/completion')
         var final_obj = {
             percentage: per,
             reflective_filled: user.question.RQ1!='' && user.question.RQ1 != undefined && user.question.RQ2!='' && user.question.RQ2 != undefined && user.question.RQ3!='' && user.question.RQ3 != undefined,
-            questionnaire_filled: false,
+            questionnaire_filled: que_filled,
             profile_filled: sec1 && sec2 && sec3 && sec4
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);
@@ -523,14 +536,15 @@ router.route('/resetpsw2/:token')                            // Client Side Need
 		});
 });
 
-/*router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), function(err, res){
-    var authe = require('../authenticate.js');
+    //console.log(res);
+	
 	var tkn = authe.makeToken();
-    console.log(tkn);
-    res.status(200).send(tkn);
-});*/
+    //console.log("THIS IS TOKEN: "+tkn);
+    res.redirect('http://127.0.0.1:51609/client/app/index.html#/oauth/google/'+tkn);
+});
 
 router.route('/auth/register')
 .post(function(req, res, next) {
@@ -564,7 +578,6 @@ router.route('/auth/register')
 router.route('/auth/login')
 .post(function(req, res, next) {  
     var body = sanitize(req.body);
-    var authe = require('../authenticate.js');
     
     User.findOne({ username: body.username }, function(err, user) {      
         if(err)

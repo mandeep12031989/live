@@ -4,8 +4,8 @@ var express = require('express');
 var router = express.Router();
 
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-//var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;		//	This causing repeating requests to server
+//var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var User = require('./models/user');
 var config = require('./config');
@@ -18,21 +18,22 @@ config = config[_ENV_NAME];
 
 //exports = passport.use(new LocalStrategy(User.authenticate()));
 
-/*passport.serializeUser(User.serializeUser());				//	This causing repeating requests to server
-passport.deserializeUser(User.deserializeUser());*/
-
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+/*
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
   done(null, user);
-});
-/*
+});*/
+
 var getDetails = {
-    user: null,
+    username: null,
     _id: null,
-    admin: false
+    admin: false,
+    facilitator: false
 };
 
 exports = passport.use(new GoogleStrategy({  
@@ -41,42 +42,44 @@ exports = passport.use(new GoogleStrategy({
     callbackURL: config.googleAuth.callbackURL,
   },
     function(token, refreshToken, profile, done) {
-    console.log("\nHERE USER");
+    console.log(profile);
       process.nextTick(function() {
         User.findOne({$or: [{'OauthId': profile.id}, {'username': profile.emails[0].value}]}, function(err, user) {
             console.log("\nFINDING USER");
           if (err)
             return done(err);        
           if (user) {
-              console.log("\nFOUND USER");              
+			  	console.log("\nFOUND USER");              
             
-            getDetails.user = profile.emails[0].value;
-            getDetails._id = user._id;
-            getDetails.admin = false;
-            console.log(getDetails);
-              
-            return done(null, user);
+				getDetails.user = profile.emails[0].value;
+				getDetails._id = user._id;
+				getDetails.admin = false;
+				console.log(getDetails);
+
+				return done(null, user);
           } else {
-              console.log("\nREGISTERING USER");
-            var newUser = new User();
-              
-            newUser.OauthId = profile.id;
-            newUser.OauthToken = token;
-            newUser.firstname = profile.displayName;
-            newUser.username = profile.emails[0].value;
-            newUser.verified = true;
-              
-            newUser.save(function(err) {
-                if (err)
-                    throw err;
-                
-                getDetails.user = profile.emails[0].value;
-                getDetails._id = newUser._id;
-                getDetails.admin = false;
-                console.log(getDetails);
-                
-                return done(null, newUser);
-            });
+			  	console.log("\nREGISTERING USER");
+				var newUser = new User();
+				newUser.OauthId = profile.id;
+				newUser.OauthToken = token;
+				var name = profile.displayName.split(' ');
+				newUser.firstname = name[0];
+			    name.splice(0,1);
+			    newUser.lastname = name.join(' ');
+				newUser.username = profile.emails[0].value;
+				newUser.username_verified = true;
+
+				newUser.save(function(err) {
+					if (err)
+						throw err;
+
+					getDetails.user = profile.emails[0].value;
+					getDetails._id = newUser._id;
+					getDetails.admin = false;
+					console.log(getDetails);
+
+					return done(null, newUser);
+				});
           }
         });
       });
@@ -85,4 +88,6 @@ exports = passport.use(new GoogleStrategy({
 exports.makeToken = function() {
 	console.log("in fn: " +getDetails._id);
 	return Verify.getToken(getDetails);
-};*/
+};
+
+module.exports = exports;
