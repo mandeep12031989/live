@@ -543,7 +543,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
 	
 	var tkn = authe.makeToken();
     //console.log("THIS IS TOKEN: "+tkn);
-    res.redirect('http://127.0.0.1:51609/client/app/index.html#/oauth/google/'+tkn);
+    res.redirect('http://portal-idiscover.herokuapp.com/#/oauth/google/'+tkn);
 });
 
 router.route('/auth/register')

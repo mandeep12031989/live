@@ -42,23 +42,23 @@ exports = passport.use(new GoogleStrategy({
     callbackURL: config.googleAuth.callbackURL,
   },
     function(token, refreshToken, profile, done) {
-    console.log(profile);
+    //console.log(profile);
       process.nextTick(function() {
         User.findOne({$or: [{'OauthId': profile.id}, {'username': profile.emails[0].value}]}, function(err, user) {
-            console.log("\nFINDING USER");
+            //console.log("\nFINDING USER");
           if (err)
             return done(err);        
           if (user) {
-			  	console.log("\nFOUND USER");              
+			  	//console.log("\nFOUND USER");              
             
 				getDetails.user = profile.emails[0].value;
 				getDetails._id = user._id;
 				getDetails.admin = false;
-				console.log(getDetails);
+				//console.log(getDetails);
 
 				return done(null, user);
           } else {
-			  	console.log("\nREGISTERING USER");
+			  	//console.log("\nREGISTERING USER");
 				var newUser = new User();
 				newUser.OauthId = profile.id;
 				newUser.OauthToken = token;
@@ -76,7 +76,7 @@ exports = passport.use(new GoogleStrategy({
 					getDetails.user = profile.emails[0].value;
 					getDetails._id = newUser._id;
 					getDetails.admin = false;
-					console.log(getDetails);
+					//console.log(getDetails);
 
 					return done(null, newUser);
 				});
