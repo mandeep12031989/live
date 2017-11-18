@@ -7,7 +7,7 @@ module.exports = {
         'googleAuth' : {
             'clientID'      : '437438716282-4s1rmctjev4njem80m4a12j5fg47u850.apps.googleusercontent.com',
             'clientSecret'  : 'tPkCriCx-Q7hvS8DwauyutOT',
-            'callbackURL'   : 'http://localhost:3000/user/auth/google/callback'
+            'callbackURL'   : 'user/auth/google/callback'
         }
     },
     "production":{
@@ -16,7 +16,7 @@ module.exports = {
         'googleAuth' : {
             'clientID'      : '437438716282-4s1rmctjev4njem80m4a12j5fg47u850.apps.googleusercontent.com',
             'clientSecret'  : 'tPkCriCx-Q7hvS8DwauyutOT',
-            'callbackURL'   : 'http://localhost:3000/user/auth/google/callback'
+            'callbackURL'   : 'user/auth/google/callback'
         }
     }
 };
