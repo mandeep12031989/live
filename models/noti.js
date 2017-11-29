@@ -15,7 +15,14 @@ var notiSchema = new Schema({
     who: {
         type: String,
         required: true
-    }
+    },
+	facilitator_name: {
+		type: String
+	},
+	seen: {
+		type: Boolean,
+		default: false
+	}
 });
 
 module.exports = mongoose.model('notiSchema', notiSchema);

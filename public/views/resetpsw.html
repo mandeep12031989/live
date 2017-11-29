@@ -1,0 +1,42 @@
+<!-- WIDGETS -->
+
+<style type="text/css">
+    html,body {
+        @import url('https://fonts.googleapis.com/css?family=Montserrat');
+        height: 100%;
+        background: -webkit-linear-gradient(#2196F3, white);
+    }
+</style>
+
+<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" class="w3-animate-top" ng-show="show_noti">
+		<div class="alert alert-warning alert-with-icon" data-notify="container" style="position: fixed; margin-top: 100px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">info_outline</i>
+			<span data-notify="message">{{success.message}}</span>
+		</div>
+</div>
+
+<div class="center-vertical" ng-init="which_one = 1">
+    <div class="center-content row">
+
+        <div class="col-md-6 center-margin">
+			<div class="content-box border-top border-red clearfix" style="margin-top:30%;">
+               
+                <div class="content-box-wrapper row">
+                    <div class="col-sm-1">&nbsp;</div>
+                    <form class="col-md-10" ng-submit="submitPSW()">
+						<h3> Enter Your New Password</h3>
+                        <div id="login-form">
+							<div class="pad20A">
+								
+								<input type="password" class="form-control" placeholder="Password" ng-model="password" required/><br>
+								<input type="password" class="form-control" placeholder="Confirm Password" ng-model="password2" required/><br>
+								<input type="submit" class="btn btn-block btn-blue-alt" value="Submit" ng-disabled="password != password2">
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

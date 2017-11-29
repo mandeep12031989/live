@@ -1,13 +1,13 @@
-var express = require('express')
-var bodyParser = require('body-parser')
-var assert = require('assert')
+var express = require('express');
+var bodyParser = require('body-parser');
+var assert = require('assert');
 
-var Verify = require('./verify')
-var Types = require('../models/ques')
+var Verify = require('./verify');
+var Types = require('../models/ques');
 
-var quesRouter = express.Router()
+var quesRouter = express.Router();
 
-quesRouter.use(bodyParser.json())
+quesRouter.use(bodyParser.json());
 
 /* Route '/' */
 
@@ -16,7 +16,7 @@ quesRouter.route('/')
     Types.find()
         .exec(function (err, type) {
         if (err) next(err);
-        type.sort();
+		type.sort(function(a, b){return a.num-b.num;});
         res.json(type);
     });
 })
@@ -24,7 +24,7 @@ quesRouter.route('/')
 .post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
     Types.create(req.body, function (err, type) {
         if (err) throw err;
-        console.log('Heading created!');
+        //console.log('Heading created!');
         
         res.writeHead(200, {
             'Content-Type': 'text/plain'
@@ -51,12 +51,10 @@ quesRouter.route('/:typeId')
 })
 
 .put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-    Types.findByIdAndUpdate(req.params.typeId, {
-        $set: req.body
-    }, {
-        new: true
-    }, function (err, type) {
+	//console.log(req.body);
+    Types.findByIdAndUpdate(req.params.typeId, {$set: req.body}, {new: true}, function (err, type) {
         if (err) throw err;
+		//console.log(type);
         res.json(type);
     });
 })

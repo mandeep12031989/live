@@ -7,7 +7,8 @@ var keySchema = new Schema({
     key_bool:   {
         type: Boolean,
         default: false
-    }
+    },
+	linking: String
 });
 
 var question = new Schema({

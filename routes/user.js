@@ -9,24 +9,13 @@ var child_process = require('child_process');
 
 var User = require('../models/user.js');
 var Keyword = require('../models/keyword.js');
-var Verify = require('./verify');
+var Verify = require('./verify.js');
 var authe = require('../authenticate.js');
+var mailer = require('../mailer.js');
 
 router.route('/list')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
-    User.find({}).sort('-important_date.registration')
-    .exec(function(err, user){
-        if(err)
-            next(err);        
-        res.status(200).json(user);
-    });
-});
-
-router.route('/')
-.get(Verify.verifyOrdinaryUser, function(req, res, next){
-    var id = req.decoded._id;
-    
-    User.findOne({_id: id}).sort({'profile.profile_content.keyword_id': 1})
+    User.find({}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true}).sort('-important_date.registration')
     .exec(function(err, user){
         if(err)
             next(err);
@@ -38,7 +27,7 @@ router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'_id': false, 'firstname': true, 'lastname': true})
+    User.findOne({_id: id}, {'_id': false, 'firstname': true, 'lastname': true, 'facilitator_name': true})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -71,12 +60,12 @@ router.route('/details')
 })
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
-    
+    //console.log(req.body);
     User.findOneAndUpdate({_id: id}, {$set: req.body}, {new: true})
     .exec(function(err, user){
         if(err)
             return next(err);
-        return res.status(200).json({message: "Done"});
+        return res.status(200).json({success: true, message: "Done"});
     });
 });
 
@@ -89,6 +78,29 @@ router.route('/questions')
         if(err)
             next(err);
         res.status(200).json(user);
+    });
+});
+
+router.route('/specific/:id')
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
+    var id = sanitize(req.params.id);
+    
+    User.findOne({_id: id})
+    .exec(function(err, user){
+        if(err)
+            next(err);
+        res.status(200).json(user);
+    });
+})
+.put(Verify.verifyOrdinaryUser, function(req, res, next){
+    var id = sanitize(req.params.id);
+    
+    User.findOneAndUpdate({_id: id}, {$set: sanitize(req.body)}, {new: true})
+    .exec(function(err, user){
+        if(err)
+            return next(err);
+		
+        return res.status(200).json({message: "Done"});
     });
 });
 
@@ -470,69 +482,86 @@ router.route('/completion')
 ;
 
 router.route('/resetpsw/:email')                            // Client Side Needed
-.post(function(req, res, next) {
+.get(function(req, res, next) {
+	//console.log(req.params.email);
     User.findOne({ username: sanitize(req.params.email) })
         .exec(function(err, user) {
-		if (err) throw err; // Throw error if cannot connect
-		if (!user) {
-            return res.status(501).json({ success: false, message: 'Username was not found' }); // Return error if username is not found in database
-        }
+		if(err)
+            return next(err);
+
+        if(!user)
+            return res.status(501).json({ success: false, message: 'Incorrect Email-ID !' });
         
-        //MAIL CONTENT HERE
-					
-        user.save(function (err,user) {
+		var token = Verify.getHourToken({"username":user.username, "_id":user._id, "admin":user.are_you.admin, "facilitator":user.are_you.facilitator});
+        
+		user.password_reset_token = token;
+		
+		user.save(function (err, user) {
             if(err)
-                next(err)
-            console.log('Updated token!');
-            return res.status(200).json({ success: true, message: 'Token Created !' });
+                next(err);
+			mailer.lost_details({username: user.username, token: token}, function(ret){
+				var res_from_mailer = ret;
+				//console.log(res_from_mailer);
+			
+				if(res_from_mailer == false){
+					//console.log('Updated error!');
+					return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+				}
+				else if(res_from_mailer == true){
+					//console.log('Updated token!');
+					return res.status(200).json({ success: true, message: 'Mail Sent... Please Check Your Inbox !' });
+				}
+			});
         });
 			
     });
 });
 
-router.route('/resetpsw2/:token')                            // Client Side Needed
+router.route('/resetpsw/:email/:token')                            // Client Side Needed
 .post(function(req, res, next) {
-    User.findOne({ resettoken: req.params.token })
+	//console.log(req.body);
+	var body = sanitize(req.body);
+    User.findOne({ username: sanitize(req.params.email) })
         .exec(function(err, user) {
-        
-            if(err) throw err; // Throw err if cannot connect
-            
-            var token = sanitize(req.params.token); // Save user's token from parameters to variable
-			console.log('1 success');
-            // Function to verify token
-			jwt.verify(token, "56341-91236-01321-42316", function(err, decoded) {
-			     console.log('2 success');
-                if (err) {
-                    console.log(err);
-					res.json({ success: false, message: 'Password link has expired' }); // Token has expired or is invalid
-				}
-                else if (!user) {
-						res.json({ success: false, message: 'Password link has expired' }); // Token is valid but not no user has that token anymore
-                      console.log('3 success');
-                }
-                else {//PSW START
-                        //user.password = "123456"; 
-				        user.resettoken = false;  
-                    
-					console.log('password: ' + user.password + ' => ' + req.body.password + ' \nand the user is: ' + user.username);
-                    user.password = req.body.password;
-                    user.save(function (err,user) {
-                        if (err) {
-                            res.json({ success: false, message: err }); // Return error if cannot connect
-                        }
-                        else{console.log('4 success');
-                   //begin
-						//mail content
-                             //END
-                            
-                            console.log('Updated psw!');
-                            res.json(user);                            
-                        }
-                    });
-				}//PSW OVER
-              console.log('5 success');
-			
-            });
+            if(err)
+				next(err);	// Throw err if cannot connect
+			else if(!user){
+				//console.log("NONONO");
+				return res.status(200).send({ success: false, message: 'Error Occured !' });
+			}
+			else if(user.password_reset_token == false || user.password_reset_token == 'false'){
+				//console.log("Yes");
+				return res.status(200).send({ success: false, message: 'Password link has expired !' });
+			}
+            else{
+				//console.log(user.password_reset_token);
+				var token = body.tkn; // Save user's token from parameters to variable
+				
+				// Function to verify token
+				var config = require('../config.js');
+
+				jwt.verify(token, config.development.secretKey, function(err, decoded) {
+					//console.log('2 success');
+					if (err) {
+						//console.log(err);
+						res.status(501).send({ success: false, message: 'Password link has expired' }); // Token has expired or is invalid
+					}
+					else {//PSW START
+						user.password_reset_token = false;
+						user.password = body.password;
+						user.save(function (err,user) {
+							if (err) {
+								res.status(501).json({ success: false, message: err }); // Return error if cannot connect
+							}
+							else{//console.log('4 success');
+								//console.log('Updated psw!');
+								return res.status(200).json({ success: true, message: 'Password Changed !' });
+							}
+						});
+					}//PSW OVER
+				  //console.log('5 success');
+				});
+			}
 		});
 });
 
@@ -584,7 +613,7 @@ router.route('/auth/login')
             return next(err);
 
         if(!user)
-            return res.status(501).json({ message: 'Incorrect username !' });
+            return res.status(501).json({ message: 'Incorrect Email-ID !' });
 
         user.comparePassword(body.password, function(err, isMatch) {
             if (isMatch) {

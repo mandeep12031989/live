@@ -55,6 +55,7 @@ var keywordSchema = new Schema({
         }
     },
     balancing_description: [new Schema({desc: String})],
+    comment_placeholder: [new Schema({question: String})],
 	dummy_keyword: String,
 	profile_version: String
 });

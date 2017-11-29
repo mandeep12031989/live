@@ -29,6 +29,7 @@
     "mongoose": "^4.4.7",
     "morgan": "^1.8.2",
     "mpromise": "^0.5.5",
+    "nodemailer": "^4.4.0",
     "passport": "^0.4.0",
     "passport-google-oauth": "^1.0.0",
     "passport-local-mongoose": "^4.2.1",

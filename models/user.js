@@ -66,6 +66,7 @@ var profileSchema = new Schema({
         }
     },
     balancing_description: [new Schema({desc: String})],
+    comment_placeholder: [new Schema({question: String})],
 	dummy_keyword: String,
     profile_version: String,
     key_rating: {
@@ -164,6 +165,10 @@ var userSchema = new Schema({
         RQ3: String,
         questionnaire: Array
     },
+	last_modification: {
+		type: Date,
+		default: ''
+	},
     device_details: Object,
     feedback: {
         submitted: {
