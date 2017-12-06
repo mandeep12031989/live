@@ -26,18 +26,24 @@
 								  -moz-appearance: none;
 								  width: 100%
 								}
+								
 								input[disabled]{
 									opacity: 1
 								}
+								
 								input[type=range]::-webkit-slider-runnable-track {
 								  -webkit-appearance: none;
+									
 								  background: rgba(139,195,74,1);
-								  background: -moz-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
-								  background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(244,67,54,1)), color-stop(20%, rgba(255,238,88,1)), color-stop(50%, rgba(139,195,74,1)), color-stop(80%, rgba(255,238,88,1)), color-stop(100%, rgba(244,67,54,1)));
-								  background: -webkit-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
-								  background: -o-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
-								  background: -ms-linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
-								  background: linear-gradient(45deg, rgba(244,67,54,1) 0%, rgba(255,238,88,1) 20%, rgba(139,195,74,1) 50%, rgba(255,238,88,1) 80%, rgba(244,67,54,1) 100%);
+									
+								  background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+									
+								  background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+                                    
+								  background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+                                      
+								  background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+                                  
 								  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
 								  height: 10px;
 								}
@@ -74,10 +80,10 @@
 						<div class="panel" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.linked_keyword.length != 0">
                             <div class="panel-body">
 								
-								<div class="col-md-12 row" style="margin: 40px 0px;">
+								<div class="col-md-12 row" style="margin: 20px 0px;">
 									<div class="col-md-12">
 										<div class="col-md-1"></div>
-										<div class="col-md-2" style="text-align: right;">
+										<div class="col-md-2" style="text-align: right; color:lightgrey;">
 											<b>{{keys.dummy_keyword}}</b>
 										</div>
 										<div class="col-md-2"></div>
@@ -97,13 +103,13 @@
 										</div>
 										<div class="col-md-2"></div>
 									</div><br><br><br>
-									<div class="col-md-12 list-group list-group-icons">
-										<a href="" class="list-group-item">
-											<i class="glyph-icon font-red icon-comment"></i>
+									<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
+										
+											
 											<span ng-if="temp_content[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
 											<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1">{{keys.balancing_description[1].desc}}</span>
 											<span ng-if="temp_content[$index].key_rating >= 1">{{keys.balancing_description[2].desc}}</span>
-										</a>
+										
 									</div>
 								</div>
                             </div>

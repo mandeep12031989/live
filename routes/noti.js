@@ -4,8 +4,23 @@
 var express = require('express');
 var router = express.Router();
 var sanitize = require('mongo-sanitize');       // To stop NoSQL injections - any req starts with $ will be emitted
-var Noti = require('../models/noti');     // Profile Model
+var Noti = require('../models/noti.js');
+var User = require('../models/user.js');
 var Verify = require('./verify.js');
+
+router.route('/fac_noti')
+.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                  // Give all keywords in ascending order
+    
+	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true})
+		.exec(function(e, f){
+			Noti.find({facilitator_name: f.firstname + ' ' + f.lastname}).sort('-date').limit(50)
+				.exec(function(err, noti){
+					if(err)
+						next(err);
+					res.status(200).json(noti);
+				});
+		});
+});
 
 router.route('/')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                  // Give all keywords in ascending order

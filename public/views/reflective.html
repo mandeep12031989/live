@@ -79,8 +79,8 @@ Please also mention negatives qualities that you have improved in last few years
 													</div>
 												</div>
 
-												<a class="btn btn-primary" ng-click="prev_RQ()" ng-show="RQ_num != 1" style="color: white;">Prev</a>
-												<a class="btn btn-primary pull-right" ng-click="next_RQ()" ng-show="RQ_num != 3" style="color: white;">Next</a>
+												<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Prev</a>
+												<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 3" style="color: white;">Next</a>
 												<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 3" style="color: white;">Save</a>
 												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 3" style="color: white;">Submit</a>
 

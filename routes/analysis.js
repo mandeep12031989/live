@@ -4,15 +4,16 @@ process.on('message', message => {
     var f_len = 0;
     var a_len = 0;
     
-    while(len > 0 ){
-        
-        if(message.user[len-1].are_you.facilitator)
-            f_len++;
-        if(message.user[len-1].are_you.admin)
-            a_len++;
-        
-        len--;
-    }
+	if(message.analysis_for == 1)
+		while(len > 0 ){
+
+			if(message.user[len-1].are_you.facilitator)
+				f_len++;
+			if(message.user[len-1].are_you.admin)
+				a_len++;
+
+			len--;
+		}
     
     var sending = { f_len: f_len,
                     a_len: a_len,

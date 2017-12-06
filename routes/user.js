@@ -23,6 +23,19 @@ router.route('/list')
     });
 });
 
+router.route('/fac_list')
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
+	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true})
+		.exec(function(e, f){
+			User.find({facilitator_name: f.firstname + ' ' + f.lastname}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true}).sort('-important_date.registration')
+				.exec(function(err, user){
+					if(err)
+						next(err);
+					res.status(200).json(user);
+				});
+		});
+});
+
 router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
@@ -81,18 +94,183 @@ router.route('/questions')
     });
 });
 
+router.route('/reviewers')
+.post(Verify.verifyOrdinaryUser, function(req, res, next){
+    var body = sanitize(req.body);
+	
+    User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true, peer_reviewers: true})
+    .exec(function(err, user){
+        if(err)
+            next(err);
+		
+		var mailData = {to: []};
+		var curDate = new Date();
+		body.forEach(function(v, i){
+			body[i].date = curDate;
+			mailData.to.push(body[i].emailid);
+			user.peer_reviewers.push(body[i]);
+		});
+		
+		var link = "http://portal-idiscover.herokuapp.com/#/peer-review/"+user._id;
+		mailData.subject = "iDiscover.me | Request to Review "+user.firstname+' '+user.lastname+"'s Profile";
+		mailData.html = 'Hello,<br> Please click on the link below to start reviewing '+user.firstname+' '+user.lastname+'\'s Profile .<br><a href='+link+'>Start Reviewing</a>';
+		
+		user.save(function(e, u){
+			if(e)
+				return next(e);
+			else{
+				mailer.custom_mail(mailData, function(ret){
+					var res_from_mailer = ret;
+					//console.log(res_from_mailer);
+
+					if(res_from_mailer == false){
+						//console.log('Updated error!');
+						return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+					}
+					else if(res_from_mailer == true){
+						//console.log('Updated token!');
+						res.status(200).json({success: true, message: "Mail Sent to Reviewers Successfully !"});
+					}
+				});
+			}
+		});
+    });
+});
+
+router.route('/peer_check/:id')
+.post(function(req, res, next){
+    var id = sanitize(req.params.id);
+	var eid = sanitize(req.body.eid);
+    
+    User.findOne({_id: id}, {'peer_reviewers': true})
+    .exec(function(err, user){
+        if(err)
+            next(err);
+		
+		var found = true;
+		if(user.peer_reviewers.length != 0){
+			//console.log("sent:" + eid);
+			for(var i=0; i<user.peer_reviewers.length; i++){
+				//console.log(v.emailid);
+				if(user.peer_reviewers[i].emailid == eid){
+					found = true;
+					//console.log("popo ");
+					return res.status(200).json({success: true, message: "Successfully Verified !"});
+					break;
+				}
+				else if(((user.peer_reviewers.length-1) == i) && !found){
+					//console.log("LAST");
+					return res.status(200).json({success: false, message: "Email-ID Not Found !"});
+					break;
+				}
+				else
+					found = false;
+			}
+		}
+		else if(user.peer_reviewers.length == 0)
+        	return res.status(200).json({success: false, message: "Email-ID Not Found !"});
+    });
+});
+
+router.route('/peer/:id/:eid')
+.get(function(req, res, next){
+    var id = sanitize(req.params.id);
+    var eid = sanitize(req.params.eid);
+    
+    User.findOne({_id: id}, {'profile.profile_content': true, peer_reviews: true})
+    .exec(function(err, user){
+        if(err)
+            next(err);
+		else{
+			for(var k=0; k<user.peer_reviews.length; k++){
+				if(user.peer_reviews[k].emailid == eid){
+					//console.log("found at: "+k);
+					var to_send = {};
+					to_send.profile = user.profile;
+					to_send.peer_reviewer_number = k;
+					to_send.peer_reviewer_data = user.peer_reviews[to_send.peer_reviewer_number];
+					//console.log(to_send);
+					return res.status(200).json(to_send);
+					break;
+				}
+			}
+			//console.log("k: "+user.peer_reviews.length);
+			
+			var revs = [];
+			for(var s=0; s<user.profile.profile_content.length; s++){
+				var mini = [];
+				for(var m=0; m<user.profile.profile_content[s].mini_descriptions.length; m++){
+					mini.push({
+						mini_description_id: user.profile.profile_content[s].mini_descriptions[m].mini_description_id
+					});
+				}
+				revs.push({
+					keyword_id: user.profile.profile_content[s].keyword_id,
+					mini_descriptions: mini
+				});
+			}
+				
+			user.peer_reviews.push({
+				emailid: eid,
+				reviews: revs,
+				date: new Date()
+			});
+			//console.log("k: "+user.peer_reviews.length);
+			user.save(function(er, us){
+				if(er)
+					return next(er);
+				else{
+					var to_send = {};
+					to_send.profile = us.profile;
+					to_send.peer_reviewer_number = k;
+					to_send.peer_reviewer_data = us.peer_reviews[to_send.peer_reviewer_number];
+					
+					//console.log(to_send);
+					return res.status(200).json(to_send);
+				}
+			});
+			
+		}
+    });
+});
+
+router.route('/peer_submit/:id/:peer_index')
+.post(function(req, res, next){
+    var id = sanitize(req.params.id);
+	var pi = sanitize(req.params.peer_index);
+	var body = sanitize(req.body);
+	
+    User.findOne({_id: id}, {'peer_reviews': true})
+    .exec(function(err, user){
+        if(err)
+            next(err);
+		
+		user.peer_reviews[pi].reviews = body.reviews;
+		user.peer_reviews[pi].last_modified = new Date();
+		
+		user.save(function(e, u){
+			if(e)
+				return next(err);
+			else{
+				return res.status(200).json({success: true, message: "Review Submitted !"});
+			}
+		});
+    });
+});
+
 router.route('/specific/:id')
-.get(Verify.verifyOrdinaryUser, function(req, res, next){
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
     var id = sanitize(req.params.id);
     
     User.findOne({_id: id})
     .exec(function(err, user){
         if(err)
             next(err);
+		
         res.status(200).json(user);
     });
 })
-.put(Verify.verifyOrdinaryUser, function(req, res, next){
+.put(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
     var id = sanitize(req.params.id);
     
     User.findOneAndUpdate({_id: id}, {$set: sanitize(req.body)}, {new: true})
@@ -100,10 +278,10 @@ router.route('/specific/:id')
         if(err)
             return next(err);
 		
-        return res.status(200).json({message: "Done"});
+        return res.status(200).json({success: true, message: "Done"});
     });
 });
-
+/*
 //FACILITATOR NAME OR ID
 router.route('/candidate/:fac_name')
 .get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
@@ -116,7 +294,7 @@ router.route('/candidate/:fac_name')
         res.status(200).json(user);
     });
 });
-
+*/
 router.route('/profile/insertProfile')                          // will use req.decoded._id later
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
@@ -347,18 +525,60 @@ router.route('/profile/:whole_id')                         // will use req.decod
     });
 });
 
-router.route('/analysis')
-.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
+router.route('/fac_analysis')
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
     var to_send = { dates: [],
+				    analysis_for: 2,
                     user: [],
                     variant_profile_num: []
                   };
     var child = child_process.fork(__dirname + '/analysis.js', [], {});
-            
-    //child.send(user);
-    //child.on('message', message => {
-    //    res.status(200).json(message);
-    //});
+	
+	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true})
+		.exec(function(e, u){
+			if(e)
+				return next(e);
+			//console.log(u);
+			User.aggregate([{$match: {facilitator_name: u.firstname + ' ' + u.lastname}}, {$group : {_id : "$profile.profile_number", total : {$sum : 1}}}]).sort('_id')
+				.exec(function(e, r){
+					if(e)
+						return next(e);
+					//console.log(r);
+					to_send.variant_profile_num = r;
+					
+					var d = new Date();
+					d.setMonth(d.getMonth() - 12);
+					d.setDate(0);
+					d.setHours(23);
+					d.setMinutes(59);
+					d.setSeconds(59);
+					//console.log(d.toLocaleString());
+					User.find({facilitator_name: u.firstname + ' ' + u.lastname,'important_date.registration': {$gt: d}}, {'_id': false, 'important_date.registration': true}).sort('-important_date.registration')
+						.exec(function(err, dates){
+							if(err) return next(err);
+
+							to_send.user = dates;
+							to_send.dates = dates;
+
+							child.send(to_send);
+
+							child.on('message', message => {
+								res.status(200).json(message);
+							});
+						});
+					
+				});
+		});
+});
+
+router.route('/analysis')
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
+    var to_send = { dates: [],
+				    analysis_for: 1,
+                    user: [],
+                    variant_profile_num: []
+                  };
+    var child = child_process.fork(__dirname + '/analysis.js', [], {});
     
     User.aggregate([{$group : {_id : "$profile.profile_number", total : {$sum : 1}}}]).sort('_id')
         .exec(function(e, r){
@@ -367,34 +587,35 @@ router.route('/analysis')
             //console.log(r);
             to_send.variant_profile_num = r;
             //console.log(sending);
+			var d = new Date();
+			d.setMonth(d.getMonth() - 12);
+			d.setDate(0);
+			d.setHours(23);
+			d.setMinutes(59);
+			d.setSeconds(59);
+			//console.log(d.toLocaleString());
+			User.find({'important_date.registration': {$gt: d}}, {'_id': false, 'important_date.registration': true}).sort('-important_date.registration')
+				.exec(function(err, dates){
+					if(err) return next(err);
+
+					to_send.dates = dates;
+
+					User.find({}, {'_id': true, 'are_you': true})
+						.exec(function(err, user){
+							if(err) return next(err);
+
+							to_send.user = user;
+							//console.log(to_send);
+							child.send(to_send);
+
+							child.on('message', message => {
+								res.status(200).json(message);
+							});
+						});
+				});
         });
     
-    var d = new Date();
-    d.setMonth(d.getMonth() - 12);
-    d.setDate(0);
-    d.setHours(23);
-    d.setMinutes(59);
-    d.setSeconds(59);
-    //console.log(d.toLocaleString());
-    User.find({'important_date.registration': {$gt: d}}, {'_id': false, 'important_date.registration': true}).sort('-important_date.registration')
-        .exec(function(err, dates){
-            if(err) return next(err);
-            
-            to_send.dates = dates;
-        
-            User.find({}, {'_id': true, 'are_you': true})
-                .exec(function(err, user){
-                    if(err) return next(err);
-                    
-                    to_send.user = user;
-                    //console.log(to_send);
-                    child.send(to_send);
-
-                    child.on('message', message => {
-                        res.status(200).json(message);
-                    });
-                });
-    });
+    
 });
 
 router.route('/completion')
@@ -535,23 +756,24 @@ router.route('/resetpsw/:email/:token')                            // Client Sid
 			}
             else{
 				//console.log(user.password_reset_token);
-				var token = body.tkn; // Save user's token from parameters to variable
+				var token = sanitize(req.params.token); // Save user's token from parameters to variable
 				
 				// Function to verify token
 				var config = require('../config.js');
-
+				//console.log(config.development.secretKey+token);
 				jwt.verify(token, config.development.secretKey, function(err, decoded) {
 					//console.log('2 success');
 					if (err) {
 						//console.log(err);
-						res.status(501).send({ success: false, message: 'Password link has expired' }); // Token has expired or is invalid
+						return res.status(200).send({ success: false, message: 'Password link has expired !' });
+						next(err);
 					}
 					else {//PSW START
 						user.password_reset_token = false;
 						user.password = body.password;
 						user.save(function (err,user) {
 							if (err) {
-								res.status(501).json({ success: false, message: err }); // Return error if cannot connect
+								next(err);
 							}
 							else{//console.log('4 success');
 								//console.log('Updated psw!');

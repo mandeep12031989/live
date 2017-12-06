@@ -1,0 +1,171 @@
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading" style="background-color: #fff;">
+   
+    <div id="page-wrapper">
+        
+        <div id="page-sidebar">
+            <div class="scroll-sidebar">
+        
+                <ul id="sidebar-menu">
+                    <li class="header"><span>Analysis</span></li>
+                    <li ng-click="tab_num = 1">
+                        <a href="">
+                            <i class="glyph-icon icon-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    
+                    <li ng-click="tab_num = 2">
+                        <a href="">
+                            <i class="glyph-icon icon-th-list"></i>
+                            <span>List Users</span>
+                        </a>
+                    </li>
+                    
+                    <li class="header"><span>Notifications</span></li>
+                    <li ng-click="tab_num = 3">
+                        <a href="">
+                            <i class="glyph-icon icon-comments"></i>
+                            <span>Latest Updates</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <div id="page-content-margin">
+                <!--                        TAB 1                           -->
+                <div class="container" ng-show="tab_num == 1">
+					
+                    <div class="row row-bg">
+                        <div class="col-sm-6 col-md-4">
+							<div class="card card-stats">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">group</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Total Candidates</p>
+                                    <h3 class="title">{{analysis_content.u_len}}
+                                        <small>USER(S)</small>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+							<div class="card card-stats">
+                                <div class="card-header" data-background-color="green">
+                                    <i class="material-icons">person_add</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Total Facilitators</p>
+                                    <h3 class="title">{{analysis_content.f_len}}
+                                        <small>FACILITATOR(S)</small>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4">
+							<div class="card card-stats">
+                                <div class="card-header" data-background-color="orange">
+                                    <i class="material-icons">adb</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Total Admins</p>
+                                    <h3 class="title">{{analysis_content.a_len}}
+                                        <small>ADMIN(S)</small>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+					
+                    <div class="col-sm-12">
+                        <center><label for="profile_num" style="font-size: 20px; color: #6dadbd;">Numbers of Different Profiles</label></center>
+                        <div class="col-sm-6" style="background-color:#fcfcfc;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9; margin: 20px auto; padding: 20px 10px;">                            
+                            <canvas id="profile_num" class="chart chart-bar" chart-data="data_profile_num" chart-labels="label_profile_num"></canvas>
+                            <center>Bar Graph</center>
+                        </div>
+                        <div class="col-sm-6" style="background-color:#fcfcfc;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9; margin: 20px auto; padding: 20px 10px;">
+                            <canvas id="profile_num" class="chart chart-pie" chart-data="data_profile_num" chart-labels="label_profile_num"></canvas>
+                            <center>Pie Chart</center>
+                        </div>
+                        
+                        <center><label for="profile_num" style="font-size: 20px; color: #6dadbd;">Registrations in Last 12 Months</label></center>
+                        <div class="col-sm-6" style="background-color:#fcfcfc;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9; margin: 20px auto; padding: 20px 10px;">
+                            <canvas class="chart chart-line" chart-data="data_reg_final" chart-labels="label_reg"></canvas>
+                            <center>Line Graph</center>
+                        </div>
+                        <div class="col-sm-6" style="background-color:#fcfcfc;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9; margin: 20px auto; padding: 20px 10px;">
+                            <canvas id="profile_num" class="chart chart-bar" chart-data="data_reg_final" chart-labels="label_reg"></canvas>
+                            <center>Bar Graph</center>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <!--                        TAB 2                       -->
+                <div class="container" ng-show="tab_num == 2">
+					
+							<div class="card">
+                                <div class="card-header" data-background-color="purple">
+                                    <h4 class="title">List of Registered Users</h4>
+                                    <p class="category">Subtitle</p>
+                                </div><br>
+                                <div class="card-content table-responsive">
+									<!-- Search Here -->
+									<div class="input-group">
+										<div class="input-group-addon" style="background-color: #fafafa;">
+											<i class="glyph-icon icon-search"></i>
+										</div>
+										<input type="search" class="form-control col-md-11" placeholder="Search" ng-model="search">
+										<div class="input-group-addon">
+											<b>Found {{(userList | filter:search).length}} of {{userList.length}}</b>
+										</div>
+									</div><br><br>
+									<!-- Search End -->
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>#</th>
+											<th ng-click="sort('username')">Email-ID <span class="glyph-icon icon-sort" ng-show="sortKey=='username'" ng-class="{'glyph-icon-chevron-up':reverse,'glyph-icon-chevron-down':!reverse}"></span></th>
+											<th ng-click="sort('firstname')">Name <span class="glyph-icon icon-sort" ng-show="sortKey=='firstname'"></span></th>
+											<th ng-click="sort('login')">Last Logged-In <span class="glyph-icon icon-sort" ng-show="sortKey=='login'"></span></th>
+											<th ng-click="sort('register')">Registered <span class="glyph-icon icon-sort" ng-show="sortKey=='register'"></span></th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">  
+												<td>{{$index + 1}}.</td>
+												<td><a ui-sref="anyUser({id: user._id})">{{user.username}}</a></td>
+												<td><a ui-sref="anyUser({id: user._id})">{{user.firstname + ' ' + user.lastname}}</a></td> 
+												<td>{{user.important_date.last_login | date: 'medium'}}</td> 
+												<td>{{user.important_date.registration | date: 'medium'}}</td>
+											</tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                </div>
+                <!--                        TAB 3                           -->
+                <div class="container" ng-show="tab_num == 3">
+                    
+					<div ng-repeat="n in noti" class="alert alert-with-icon w3-animate-left" ng-class="n.seen ? 'alert-success' : 'alert-danger'">
+						<i data-notify="icon" class="material-icons">add_alert</i>
+						<span data-notify="message">
+							{{n.date | date: 'medium'}} | {{n.who + ' ' + n.statement}} <span style="float: right;">{{n.facilitator_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn close" ng-click="n.seen = !n.seen; notiRead(n);"><i class="material-icons" ng-show="!n.seen">done</i><i class="material-icons" ng-show="n.seen">clear</i></span></span>
+						</span>
+					</div>
+					
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

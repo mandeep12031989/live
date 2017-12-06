@@ -8,7 +8,11 @@ var keySchema = new Schema({
         type: Boolean,
         default: false
     },
-	linking: String
+	linking: String,
+	from_profile: {
+		type: Number,
+		default: 0
+	}
 });
 
 var question = new Schema({

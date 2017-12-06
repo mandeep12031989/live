@@ -12,8 +12,7 @@
         
         <div id="page-content-wrapper">
             <div id="page-content-margin">
-                
-                    <div class="container">
+                    <div class="container" ng-if="!to_review">
 
 						<div id="page-title">
 							<h2>Dashboard</h2>
@@ -187,12 +186,81 @@
 											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
 										</div>
 									</div>
+									<div class="col-md-6">
+										<div class="tile-box tile-box-alt mrg20B bg-grey">
+											<div class="tile-header">
+												Peer Review
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
+												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
+													<span style="font-size: 17px;">Fill Trueself Profile</span>
+												</div>
+											</div>
+											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
+												<i class="glyph-icon icon-share-alt"></i>
+												<div class="tile-content">
+													<span>Reviewed Yet?</span>
+												   
+												</div>
+												<br><br>
+											</div>
+											<a href="" class="tile-footer tooltip-button" data-placement="bottom" ng-if="percent.profile_filled" ng-click="changeView()">
+												Share
+												<i class="glyph-icon icon-arrow-right"></i>
+											</a>
+											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+										</div>
+									</div>
 								</div>
 
 							</div>
 						</div>
 
                     </div>
+					<div class="container" ng-if="to_review">
+						<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.success == true" class="w3-animate-top">
+							<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+								<i data-notify="icon" class="material-icons">info</i>
+								<span data-notify="message">{{success.message}}</span>
+							</div>
+						</div>
+						<div id="page-title" style="text-align: center;">
+							<a href="" ng-click="changeView()"><h6>Back to Dashboard</h6></a><br>
+							<h2>Enter Details of Peer Reviewer(s)</h2>
+						</div>
+
+                        <br>
+						<div class="row">
+							<div class="col-md-10" style="margin: 0 auto; text-align: center;">
+								<div class="col-md-5" style="text-align: right;">Name: </div>
+								<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.name"></div>
+								<br><br>
+								<div class="col-md-5" style="text-align: right;">Relationship: </div>
+								<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.relationship"></div>
+								<br><br>
+								<div class="col-md-5" style="text-align: right;">Email-ID: </div>
+								<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.emailid"></div>
+								<br><br>
+								<button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add</button>
+							</div>
+							<div class="col-md-12" style="margin: 0 auto; text-align: center;" ng-show="reviewers.length != 0">
+								<br><br><br><br><b>Recipients to Review Till Now:</b><br><br>
+								<span ng-repeat="rec in reviewers">
+									<hr>
+									<div class="col-md-5" style="text-align: right;">Name: </div>
+									<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="rec.name"></div>
+									<br><br>
+									<div class="col-md-5" style="text-align: right;">Relationship: </div>
+									<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="rec.relationship"></div>
+									<br><br>
+									<div class="col-md-5" style="text-align: right;">Email-ID: </div>
+									<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="rec.emailid"></div>
+									<br><br>
+								</span>
+								<button class="btn btn-danger" ng-click="submitReviewer()">Send</button>
+							</div>
+						</div>
+					</div>
             </div>
         </div>
     </div>

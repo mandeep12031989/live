@@ -76,7 +76,11 @@ var profileSchema = new Schema({
     comment: {                              //comment to specific parent keyword
         type: String,
         default: ""
-    }
+    },
+	assessor_checkbox: {
+		type: Boolean,
+		default: false
+	}
 });
 
 var userSchema = new Schema({
@@ -175,7 +179,20 @@ var userSchema = new Schema({
             type: Boolean,
             default: false
         }
-    }
+    },
+	peer_reviewers: [new Schema({name: String, emailid: String, relationship: String, date: Date})],
+	peer_reviews: [new Schema({emailid: String, reviews: [profileSchema], last_modified: Date})],
+	assessor: {
+		slf_aware: Number,
+		openness: Number,
+		per_mast: Number,
+		profile_content: [profileSchema],
+		description: {
+			type: String,
+			default: '<name>\'s enneagram assessment results are <positive/negative>. <He/She> is at Moderate moving to higher personal mastery levels. <He/She> is enneagram type <type>.'
+		},
+		recommend: String
+	}
 });
 
 // Methods

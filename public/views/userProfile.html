@@ -1,4 +1,8 @@
 <style>
+	.back_panel {
+		background-color: #CCFF90;
+		color: black;
+	}
 	#radios label {
 		cursor: pointer;
 		position: relative;
@@ -21,7 +25,7 @@
 		font-family: 'Material Icons';
 		color: #B3CEFB;
 		border-radius: 50%;
-		padding: 7px;
+		padding: 5px;
 		transition: all 0.4s;
 		-webkit-transition: all 0.4s;
 	}
@@ -39,7 +43,7 @@
 	  font-family: 'Material Icons';
 	  font-weight: normal;
 	  font-style: normal;
-	  font-size: 24px;  /* Preferred icon size */
+	  font-size: 20px;  /* Preferred icon size */
 	  display: inline-block;
 	  line-height: 1;
 	  text-transform: none;
@@ -112,25 +116,25 @@
 						<div>
 							<ul class="list-group">
 								<li class="mrg10B" ng-click="section_num = 1">
-									<a class="list-group-item bg-white" href="">
+									<a class="list-group-item" href="" ng-class="checkSectionFill(1) ? 'back_panel':'bg_white'">
 									  Professional Values and Work<br>Culture Preference
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>
 								<li class="mrg10B" ng-click="section_num = 2">
-									<a class="list-group-item bg-white" href="">
+									<a class="list-group-item" href="" ng-class="checkSectionFill(2) ? 'back_panel':'bg_white'">
 										Strengths
 										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
 									</a>
 								</li>
 								<li class="mrg10B" ng-click="section_num = 3">
-									<a class="list-group-item bg-white" href="">
+									<a class="list-group-item" href="" ng-class="checkSectionFill(3) ? 'back_panel':'bg_white'">
 										Learning Needs
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>
 								<li class="mrg10B" ng-click="section_num = 4">
-									<a class="list-group-item bg-white" href="">
+									<a class="list-group-item" href="" ng-class="checkSectionFill(4) ? 'back_panel':'bg_white'">
 										Communication Style
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
@@ -152,6 +156,7 @@
 														<b ng-show="section_num == 3">Learning Needs</b>
 														<b ng-show="section_num == 4">Communication Style</b>
 													</a>
+													<span style="float:right; font-size: 15px;">Page {{section_num}}/4</span>
 												</h2>
 											</div>
 											<div class="row" style="width: 95%; margin: auto;">
@@ -164,23 +169,46 @@
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
 															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
-																	<div class="col-sm-6">
+																	<div class="col-sm-6" ng-if="section_num != 3">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
 																	</div>
-																	<div class="col-sm-6">
+																	<div class="col-sm-4" ng-if="section_num == 3">
+																		<h5><b>{{mini.mini_description}}</b></h5>  
+																	</div>
+																   	<div class="col-sm-6" ng-if="section_num != 3">
 																		<div id="radios">
-																				<label for="{{mini.mini_description_id}}sad" class="material-icons">
-																					 <input type="radio" name="{{mini.mini_description_id}}sad" id="{{mini.mini_description_id}}sad" value="sad" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
+																					 <input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
 																					 <span>&#xE612;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}normal" class="material-icons">
-																					<input type="radio" name="{{mini.mini_description_id}}normal" id="{{mini.mini_description_id}}normal" value="normal" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
+																					<input type="radio" name="{{mini.mini_description_id}}relatepartially" id="{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
 																					<span>&#xE40C;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}smile" class="material-icons">
-																					<input type="radio" name="{{mini.mini_description_id}}smile" id="{{mini.mini_description_id}}smile" value="smile" ng-model="mini.relate" ng-change="mini.mini_rating = 2"/>
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
+																					<input type="radio" name="{{mini.mini_description_id}}relatestrongly" id="{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.relate" ng-change="mini.mini_rating = 2"/>
 																					<span>&#xE3A6;</span>
-																				</label>                           
+																				</label>
+																		</div>
+																	</div>
+																	<div class="col-sm-8" ng-if="section_num == 3">
+																		<div id="radios">
+																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore">
+																					 <input type="radio" name="{{mini.mini_description_id}}donotexhibitanymore" id="{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
+																					 <span>&#xE15D;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
+																					 <input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
+																					 <span>&#xE612;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
+																					<input type="radio" name="{{mini.mini_description_id}}relatepartially" id="{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
+																					<span>&#xE40C;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
+																					<input type="radio" name="{{mini.mini_description_id}}relatestrongly" id="{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.relate" ng-change="mini.mini_rating = 2"/>
+																					<span>&#xE3A6;</span>
+																				</label>                          
 																		</div>
 																	</div>
 																</div>

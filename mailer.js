@@ -22,6 +22,27 @@ var mailOptions, link, token;
 
 /*------------------Routing Started ------------------------*/
 
+exports.custom_mail = function(data, callback){
+    mailOptions = {
+        to : data.to,
+        subject : data.subject,
+        html : data.html
+    };
+    //console.log(mailOptions);
+	
+    smtpTransport.sendMail(mailOptions, function(error, response){
+		if(error){
+			//console.log(error);
+			callback(false);
+		}
+		else{
+			//console.log("Message sent: ");
+			//console.log(response);
+			callback(true);
+		}
+	});
+};
+
 exports.lost_details = function(data, callback){
 	//console.log(data);
     
@@ -31,7 +52,7 @@ exports.lost_details = function(data, callback){
     mailOptions = {
         to : data.username,
         subject : "iDiscover.me | Request for Password Change",
-        html : 'Hello,<br> Please Click on the link to change your password.<br><a href='+link+'>Click Here to Change Your Password</a>'
+        html : 'Hello,<br> Please click on the link to change your password.<br><a href='+link+'>Click Here to Change Your Password</a>'
     };
     //console.log(mailOptions);
 	

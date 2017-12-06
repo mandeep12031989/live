@@ -204,8 +204,8 @@
                                         <tbody>
                                             <tr ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">  
 												<td>{{$index + 1}}.</td>
-												<td>{{user.username}}</td>
-												<td>{{user.firstname + ' ' + user.lastname}}</td> 
+												<td><a ui-sref="anyUser({id: user._id})">{{user.username}}</a></td>
+												<td><a ui-sref="anyUser({id: user._id})">{{user.firstname + ' ' + user.lastname}}</a></td> 
 												<td>{{user.important_date.last_login | date: 'medium'}}</td> 
 												<td>{{user.important_date.registration | date: 'medium'}}</td>
 												<td><input type="checkbox" ng-model="user.are_you.admin" ng-click="save_admfac(user._id, user.are_you)"></td>
@@ -233,10 +233,12 @@
                                                        {{q.num}}. <input type="text" ng-model="q.desc" size="100%">
                                                     </h4><br>
 													<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
-                                                    1. <input type="text" ng-model="q.keywords[0].keyword" size="100%"><br>
-													Linking: <input type="text" ng-model="q.keywords[0].linking"><br><br>
-                                                    2. <input type="text" ng-model="q.keywords[1].keyword" size="100%"><br>
-													Linking: <input type="text" ng-model="q.keywords[1].linking">
+                                                    1. <input type="text" ng-model="q.keywords[0].keyword" size="100%"><br><br>
+													Linking: <input type="text" ng-model="q.keywords[0].linking">&nbsp;&nbsp;&nbsp;
+													Profile: <input type="text" ng-model="q.keywords[0].from_profile"><br><br>
+                                                    2. <input type="text" ng-model="q.keywords[1].keyword" size="100%"><br><br>
+													Linking: <input type="text" ng-model="q.keywords[1].linking">&nbsp;&nbsp;&nbsp;
+													Profile: <input type="text" ng-model="q.keywords[1].from_profile">
 													</div>
 													<button class="btn btn-success" ng-click="updateQues(q._id, q)" style="color: white; width: 100%;">Update</button>
                                                 </div>

@@ -1,4 +1,130 @@
-<div>    
+<script>
+	$(document).ready(function(){
+           
+		$("#submit").click(function(){
+			console.log("234234");
+			$("#myModal").modal('hide');
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();
+		});
+        
+	});
+    
+    $(document).ready(function() {
+        function disableBack() { window.history.forward() }
+
+        window.onload = disableBack();
+        window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+    });
+
+	$(document).ready(function(){
+    	$(this).scrollTop(0);
+	});
+</script>
+
+<style>
+	.doctors-marketing-top-div{
+		padding-top: 70px;
+	}
+
+	.doctors-marketing-top-div .container .row .circle-sect {
+		font-family: montserrat;
+		text-align: center;
+		font-size: 20px;
+		width: 100px;
+		height: 101px;
+		-webkit-transition: left .2s linear;
+		transition: left .2s linear;
+		-webkit-transition: right .2s linear;
+		transition: right .2s linear;
+		-webkit-transition: bottom .2s linear;
+		transition: bottom .2s linear;
+		z-index: 1;
+	}
+
+	.doctors-marketing-top-div .container .row .circle-sect:hover {
+		-webkit-transform: translate(1px,2px); 
+		opacity: 1;
+	}
+
+	.doctors-marketing-top-div .container .row .circle-sect a {
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		display: block
+	}
+
+	.doctors-marketing-top-div .container .row .premium-div {
+		background: url('./images/premium_bg.png') no-repeat center;
+	   	margin-top: 150px;
+		padding-top: 45px;
+	}
+
+	.doctors-marketing-top-div .container .row .acquisition-div {
+		background: url("./images/acquisition_bg.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+		padding-top: 45px
+	}
+
+	.doctors-marketing-top-div .container .row .hipaa-div {
+		background: url("./images/hipaa_bg.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+		margin-top: 150px;
+		padding-top: 45px
+	}
+
+	.doctors-marketing-top-div .container .row .smart-div {
+		background: url("./images/smart_bg.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+		padding-top: 45px;
+	}
+
+	.doctors-marketing-top-div .container .row .unlimited-div {
+		background: url('./images/unlimited_bg.png') no-repeat center;
+		margin-top: 150px;
+		padding-top: 45px;
+
+	}
+
+	.doctors-marketing-top-div .container .row .engagement-div {
+		background: url('./images/engagement_bg.png') no-repeat center;
+		margin-top: 150px;
+		padding-top: 45px
+	}
+
+	.doctors-marketing-top-div .container .row .social-div {
+		background: url('./images/social_bg.png') no-repeat center;
+		padding-top: 45px
+	}
+
+	.doctors-marketing-top-div .container .row .email-div {
+		background: url('./images/email_bg.png') no-repeat center;
+		margin-top: 150px;
+		padding-top: 45px
+	}
+
+	.doctors-marketing-top-div .container .row .cloud-div {
+		background: url('./images/cloud_bg.png') no-repeat center;
+		padding-top: 45px
+	}
+	
+	.input-circle { 
+		left: 50px;
+		position:absolute;
+		opacity: 0;
+		transform: scale(10, 10); 
+		-moz-transform: scale(, 3); 
+		-ms-transform: scale(3, 3); 
+		-webkit-transform: scale(9, 9); 
+		-o-transform: scale(3, 3); 
+		 cursor:pointer;
+	}
+	
+	.circle-sect {
+		margin-right: 10px;
+	}
+ 
+</style>
+
+<!--<div>    
     <input type="radio" ng-model="type_number" id="t" value="1">1
     <input type="radio" ng-model="type_number" id="t" value="2">2
     <input type="radio" ng-model="type_number" id="t" value="3">3
@@ -12,4 +138,88 @@
     {{type_number}}<br>
     {{profile_content}}<br>
     {{success.success}}<br>
+</div>-->
+
+<div style="margin-top: 50px;">
+	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="loading == true" class="w3-animate-top">
+		<div class="alert alert-info alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">cached</i>
+			<span data-notify="message">Profile Saving... Please Wait !</span>
+		</div>
+	</div>
+	
+	<div class="container">
+		<form name="selectType" novalidate>
+    
+			<h3 class="color">Choose your Leadership Profile as instructed by your facilitator</h3>                
+                
+			<div class="doctors-marketing-top-div">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-1">&nbsp;</div>
+
+						<div class="col-sm-1 circle-sect engagement-div">
+							<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal"  data-target="#myModal" autocomplete="off" ng-model="type_number" value="1" ng-click="select(1)">Profile 1
+						</div>
+    
+						<div class="col-sm-1 circle-sect social-div">
+							<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal"autocomplete="off" ng-model="type_number" value="2" ng-click="select(2)"> Profile 2
+						</div>
+
+						<div class="col-sm-1 circle-sect email-div">
+							 <input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal"autocomplete="off" ng-model="type_number" value="3" ng-click="select(3)">Profile 3
+						</div>
+
+						<div class="col-sm-1 circle-sect cloud-div">
+							 <input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="4" ng-click="select(4)"> Profile 4
+						</div>
+
+						<div class="col-sm-1 circle-sect premium-div">
+							<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal"data-target="#myModal" autocomplete="off" ng-model="type_number" value="5" ng-click="select(5)"> Profile 5
+						</div>
+
+						<div class="col-sm-1 circle-sect acquisition-div">
+							<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="6" ng-click="select(6)"> Profile 6 
+						</div>
+
+						<div class="col-sm-1 circle-sect hipaa-div">
+							<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="7" ng-click="select(7)"> Profile 7
+						</div>
+
+						<div class="col-sm-1 circle-sect smart-div">
+								<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="8" ng-click="select(8)">Profile 8
+						</div>
+
+						<div class="col-sm-1 circle-sect unlimited-div">
+							 <input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="9"  ng-click="select(9)">Profile 9
+						</div>
+    
+
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+							<div class="modal-content">
+							  <div class="modal-header">
+								<h4 class="modal-title modal-color" id="myModalLabel">Are you sure?</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							  </div>
+							  <div class="modal-body modal-color">
+							   <h2>You have choosen Profile number {{type_number}}.</h2>
+								<p> &#42;Cancel to choose different profile number</p>
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+								<button type="submit" id="submit" class="btn btn-danger" data-dismiss="modal" ng-click="submitType()">Proceed</button>
+							  </div>
+							</div>
+						  </div>
+						</div>
+        
+        
+					</div>
+				</div>
+			</div>
+             
+		</form>
+	</div>
 </div>

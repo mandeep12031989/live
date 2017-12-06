@@ -1,0 +1,743 @@
+<style>
+	.left_border_green{
+		border-left:10px solid green;
+	}
+	.left_border_yellow{
+		border-left:10px solid yellow;
+	}
+	.left_border_red{
+		border-left:10px solid red;
+	}
+	
+	.material-switch > input[type="checkbox"] {
+		display: none;
+	}
+
+	.material-switch > label {
+		cursor: pointer;
+		height: 0px;
+		position: relative; 
+		width: 20px;
+		margin-right: 25px;
+	}
+
+	.material-switch > label::before {
+		background: rgb(0, 0, 0);
+		box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+		border-radius: 8px;
+		content: '';
+		height: 14px;
+		margin-top: -8px;
+		position:absolute;
+		opacity: 0.3;
+		transition: all 0.4s ease-in-out;
+		width: 25px;
+	}
+	.material-switch > label::after {
+		background: rgb(255, 255, 255);
+		border-radius: 16px;
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+		content: '';
+		height: 22px;
+		left: 0px;
+		margin-top: -8px;
+		position: absolute;
+		top: -4px;
+		transition: all 0.3s ease-in-out;
+		width: 22px;
+	}
+	.material-switch > input[type="checkbox"]:checked + label::before {
+		background: inherit;
+		opacity: 0.5;
+	}
+	.material-switch > input[type="checkbox"]:checked + label::after {
+		background: inherit;
+		left: 20px;
+	}
+</style>
+
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div class="wrapper" ng-show="!loading">
+	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.message == 'Done'" class="w3-animate-top">
+		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">check_circle</i>
+			<span data-notify="message">Progress Saved !</span>
+		</div>
+	</div>
+        
+        <div class="main-panel">
+            
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3" style="margin: 0 auto;">
+                            <div class="card card-profile" style="margin-top: 60px;">
+								<br>
+                                <div class="card-avatar" style="margin: 0 auto;">
+                                    <div style="margin-top: -60px;">
+										<div class="avatar-circle avatar-big" style="margin: 0 auto; height: 120px; width: 120px; background: #FB8C00; top: -50px;">
+											<span class="initials ini-big" style="font-size:70px; top: 37px;">{{user.firstname[0] + user.lastname[0]}}</span>
+										</div>
+									</div>
+                                </div><br>
+                                <div class="content" style="text-align:center;">
+                                    <h6 class="category text-gray">{{user.work_details.department}}</h6>
+                                    <h6 class="category text-gray">{{user.work_details.current_company}}</h6>
+                                    <h4 class="card-title">{{user.firstname + ' ' + user.lastname}}</h4>
+									<hr>
+									<b>Personal Information</b><br>
+                                    <p>
+										<span class="col-md-4" style="text-align: right;"><b>Email-ID:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.username}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>Facilitator:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.facilitator_name}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>Profile:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.profile.profile_number}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>Modification:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.last_modification | date: 'medium'}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>Last Login:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.important_date.last_login | date: 'medium'}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>Registration:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.important_date.registration | date: 'medium'}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>Browser:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.device_details.browser + ' ' + user.device_details.browser_version}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>Platform:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.device_details.os}}</span>
+                                        <br>
+										<span class="col-md-4" style="text-align: right;"><b>OS:</b></span>
+										<span class="col-md-8" style="text-align: left;">{{user.device_details.os_version}}</span>
+                                        <br><br>
+                                    </p>
+                                </div>
+                            </div>
+							<div style="text-align: center;">
+								<button class="btn btn-danger" style="width: 100%;" ui-sref="facPanel"><i style="font-size: 16px;" class="material-icons">reply</i> Back to Panel</button>
+							</div>
+                        </div>
+						<div class="col-md-9" style="margin: 0 auto; margin-top: 20px;" ng-init="menu = 1">
+							<ul class="nav nav-pills">
+								<li ng-class="menu == 1 ? 'active' : '' "><a href="" ng-click="menu = 1">RQ | Questionnaire</a></li>
+								<li ng-class="menu == 2 ? 'active' : '' "><a href="" ng-click="menu = 2">Profile</a></li>
+								<!--<li ng-class="menu == 3 ? 'active' : '' "><a href="" ng-click="menu = 3">Balancing View</a></li>-->
+								<!--<li ng-class="menu == 4 ? 'active' : '' "><a href="" ng-click="menu = 4">Assessor Template</a></li>-->
+							</ul>
+							<hr>
+							<!--		TAB 1		-->
+							<div class="container" ng-show="menu == 1">
+								<div class="panel">
+									<div class="panel-body">
+										<h1 style="text-align:center; font-weight:bold;" class="title-hero">
+										   Reflective Questions
+										</h1>
+										<div class="example-box-wrapper">
+											<div id="form-wizard-3" class="form-wizard">
+												
+												<div class="tab-content">
+
+														<div class="content-box">
+															<h4 class="content-box-header bg-blue">
+															   What kind of people you like? What qualities you like in them?
+															</h4>
+															<div class="content-box-wrapper" ng-if="user.question.RQ1">
+																<span>{{user.question.RQ1}}</span>
+															</div>
+															<div class="content-box-wrapper" ng-if="!user.question.RQ1">
+																<span>Not Answered Yet !</span>
+															</div>
+														</div>
+
+														<div class="content-box">
+															<h4 class="content-box-header bg-blue">
+																How would a close friend of yours describe you? Please mention both positive and negative qualities.
+															</h4>
+															<div class="content-box-wrapper" ng-if="user.question.RQ2">
+															   <span>{{user.question.RQ2}}</span>
+															</div>
+															<div class="content-box-wrapper" ng-if="!user.question.RQ2">
+																<span>Not Answered Yet !</span>
+															</div>
+														</div>
+
+														<div class="content-box">
+															<h4 class="content-box-header bg-blue">
+																Mention positive and negative qualities about yourself that are not covered in question 2. <br>
+																Please also mention negatives qualities that you have improved in last few years.
+															</h4>
+															<div class="content-box-wrapper" ng-if="user.question.RQ3">
+																<span>{{user.question.RQ3}}</span>
+															</div>
+															<div class="content-box-wrapper" ng-if="!user.question.RQ3">
+																<span>Not Answered Yet !</span>
+															</div>
+														</div>
+
+												</div>
+											</div>
+										</div>
+										<hr style="border-width: 5px;">
+										<h1 style="text-align:center; font-weight:bold; margin-top: 25px;" class="title-hero">
+										   Personality Test | Questionnaire
+										</h1>
+										<div class="row" ng-if="!showQuesAnalysis">
+											<button class="btn btn-warning" ng-click="showQuestionnaire();">Show Questionnaire Analysis</button>
+										</div>
+										<div class="row" ng-if="showQuesAnalysis">
+											
+											<div class="col-md-offset-2 col-md-8" style="margin-bottom: 25px;">
+												<table width="50%">
+													<tr>
+														<th>Profile</th>
+														<td>1</td>
+														<td>2</td>
+														<td>3</td>
+														<td>4</td>
+														<td>5</td>
+														<td>6</td>
+														<td>7</td>
+														<td>8</td>
+														<td>9</td>
+													</tr>
+													<tr>
+														<th>Scores</th>
+														<td>{{sumQues[0]}}</td>
+														<td>{{sumQues[1]}}</td>
+														<td>{{sumQues[2]}}</td>
+														<td>{{sumQues[3]}}</td>
+														<td>{{sumQues[4]}}</td>
+														<td>{{sumQues[5]}}</td>
+														<td>{{sumQues[6]}}</td>
+														<td>{{sumQues[7]}}</td>
+														<td>{{sumQues[8]}}</td>
+													</tr>
+												</table>
+											</div>
+											<div class="col-sm-offset-2 col-sm-8">
+												<div class="progress">
+													<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="5" style="width: {{sumQues[0]*12.5}}%" title="{{sumQues[0]}}">
+														Profile 1
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[1]*12.5}}%" title="{{sumQues[1]}}">
+														Profile 2
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[2]*12.5}}%" title="{{sumQues[2]}}">
+														Profile 3
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[3]*12.5}}%" title="{{sumQues[3]}}">
+														Profile 4
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[4]*12.5}}%" title="{{sumQues[4]}}">
+														Profile 5
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[5]*12.5}}%" title="{{sumQues[5]}}">
+														Profile 6
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[6]*12.5}}%" title="{{sumQues[6]}}">
+														Profile 7
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[7]*12.5}}%" title="{{sumQues[7]}}">
+														Profile 8
+													</div>
+												</div>
+												<div class="progress">
+													<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{sumQues[8]*12.5}}%" title="{{sumQues[8]}}">
+														Profile 9
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row" ng-if="showQuesAnalysis">
+											<style>
+												.btn_back_false{
+													border: 3px solid #F44336;
+													font-weight: bold;
+												}
+												.btn_back_true{
+													border: 3px solid #5cb85c;
+													font-weight: bold;
+												}
+											</style>
+											<table style="width:100%; font-size: 10px; text-align: center;">
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 1</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="1 == checkQues($index+1, 1) || 1 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="1 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="1 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 2</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="2 == checkQues($index+1, 1) || 2 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="2 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="2 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 3</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="3 == checkQues($index+1, 1) || 3 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="3 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="3 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 4</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="4 == checkQues($index+1, 1) || 4 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="4 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="4 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 5</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="5 == checkQues($index+1, 1) || 5 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="5 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="5 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 6</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="6 == checkQues($index+1, 1) || 6 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="6 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="6 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 7</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="7 == checkQues($index+1, 1) || 7 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="7 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="7 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 8</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="8 == checkQues($index+1, 1) || 8 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="8 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="8 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+												<tr>
+													<td style="padding: 20px 0px;"><b>Profile 9</b></td>
+													<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="9 == checkQues($index+1, 1) || 9 == checkQues($index+1, 2)">
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'" ng-if="9 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+														<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'" ng-if="9 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--		TAB 2		-->
+							
+							<div class="container" ng-show="menu == 2 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
+								<b>Profile Not Selected Yet !</b>
+							</div>
+							<div class="container" ng-show="menu == 2 && user.profile.profile_number != 0">
+								
+								<div id="page-title">
+									<h2>Detailed Profile</h2>
+								</div>
+
+								<div class="row">
+									<div class="col-md-offset-2 col-sm-2">
+
+										<div class="panel">
+											<div class="panel-heading" ng-class="'left_border_green'">
+												Relate Fully
+											</div>
+										</div>
+
+									</div>
+
+									<div class="col-md-offset-1 col-sm-2">
+
+										<div class="panel">
+											<div class="panel-heading" ng-class="'left_border_yellow'">
+												Relate Partially
+											</div>
+										</div>
+
+									</div>
+
+									<div class="col-md-offset-1 col-sm-2">
+
+										<div class="panel">
+											<div class="panel-heading" ng-class="'left_border_red'">
+												Do not Relate at all
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+		<!--                                                    SECTION 1                                                          -->
+								<div class="panel">
+									<div class="panel-body">
+										<h2 style="text-align:center" id="page-title">
+											<b>Professional Values and Work<br>Culture Preference</b>
+										</h2>
+										<div class="example-box-wrapper">
+											<div class="row">
+
+												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
+													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+														<div class="panel-heading image-box">
+															<div class="image-content" style="margin-top: 22px;">                        
+																<div class="meta-box meta-box-bottom">
+																	<h3 class="meta-heading">
+																		{{keys.keyword}}
+																		<span class="material-switch pull-right">
+																			<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
+																			<label for="{{keys.keyword_id}}" class="label-success"></label>
+																		</span>
+																	</h3>
+																</div>                            
+															</div>
+															<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+														</div>
+
+														<ul class="list-group list-group-separator mrg0A row list-group-icons">
+
+															<div class="row" style="margin: 0 auto;">
+																<p class="ra-100" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</p>
+															</div><br>
+
+															<li class="">
+
+																<a href="" class="list-group-item">
+																	<i class="glyph-icon font-red icon-comment"></i>
+																	{{keys.comment}}
+																</a>
+															</li>
+
+														</ul>
+													</div>
+												</div>
+
+											</div>
+											
+										</div>
+									</div>
+								</div>
+		<!--                                                    SECTION 2                                                          -->
+								<div class="panel">
+									<div class="panel-body">
+										<h2 style="text-align:center" id="page-title">
+											<b>Strengths</b>
+										</h2>
+										<div class="example-box-wrapper">
+											<div class="row">
+
+												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
+													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+														<div class="panel-heading image-box">
+															<div class="image-content" style="margin-top: 22px;">                        
+																<div class="meta-box meta-box-bottom">
+																	<h3 class="meta-heading">
+																		{{keys.keyword}}
+																		<span class="material-switch pull-right">
+																			<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
+																			<label for="{{keys.keyword_id}}" class="label-success"></label>
+																		</span>
+																	</h3>
+																</div>                            
+															</div>
+															<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+														</div>
+
+														<ul class="list-group list-group-separator mrg0A row list-group-icons">
+
+															<div class="row" style="margin: 0 auto;">
+																<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+
+															</div><br>
+
+															<li class="">
+
+																<a href="" class="list-group-item">
+																	<i class="glyph-icon font-red icon-comment"></i>
+																	{{keys.comment}}
+																</a>
+															</li>
+
+														</ul>
+													</div>
+												</div>
+
+											</div>
+											
+										</div>
+									</div>
+								</div>
+		<!--                                                    SECTION 3                                                          -->
+								<div class="panel">
+									<div class="panel-body">
+										<h2 style="text-align:center" id="page-title">
+											<b>Learning Needs</b>
+										</h2>
+										<div class="example-box-wrapper">
+											<div class="row">
+
+												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
+													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+														<div class="panel-heading image-box">
+															<div class="image-content" style="margin-top: 22px;">                        
+																<div class="meta-box meta-box-bottom">
+																	<h3 class="meta-heading">
+																		{{keys.keyword}}
+																		<span class="material-switch pull-right">
+																			<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
+																			<label for="{{keys.keyword_id}}" class="label-success"></label>
+																		</span>
+																	</h3>
+																</div>                            
+															</div>
+															<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+														</div>
+
+														<ul class="list-group list-group-separator mrg0A row list-group-icons">
+
+															<div class="row" style="margin: 0 auto;">
+																<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+
+															</div><br>
+
+															<li class="">
+
+																<a href="" class="list-group-item">
+																	<i class="glyph-icon font-red icon-comment"></i>
+																	{{keys.comment}}
+																</a>
+															</li>
+
+														</ul>
+													</div>
+												</div>
+
+											</div>
+											
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
+							</div>
+							<!--		TAB 3		-->
+							<div class="container" ng-show="menu == 3">
+                
+								<div id="page-title">
+									<h2>Balanced Profile</h2>
+								</div>
+
+								<style>
+										.range {
+										  -webkit-appearance: none;
+										  -moz-appearance: none;
+										  width: 100%
+										}
+
+										input[disabled]{
+											opacity: 1
+										}
+
+										input[type=range]::-webkit-slider-runnable-track {
+										  -webkit-appearance: none;
+
+										  background: rgba(139,195,74,1);
+
+										  background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
+										  height: 10px;
+										}
+
+										input[type=range]::-webkit-slider-thumb {
+										  -webkit-appearance: none;
+										  width: 0; 
+										  height: 0; 
+										  border-left: 10px solid transparent;
+										  border-right: 10px solid transparent;
+										  border-bottom: 15px solid 	#1E88E5;
+										  margin-top: 10px;
+										  -webkit-transition: border 1000ms ease;
+										  transition: border 1000ms ease;
+										}
+								</style>
+
+								<div class="panel panel-body row" style="color: red;">
+									<div class="col-md-1"></div>
+									<div class="col-md-2" style="text-align: right;">
+										<b>REACTIVE</b>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-2" style="text-align: center;">
+										<b>RESPONSIVE</b>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-2">
+										<b>REACTIVE</b>
+									</div>
+									<div class="col-md-1"></div>
+								</div>
+
+								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0">
+									<div class="panel-body">
+
+										<div class="col-md-12 row" style="margin: 20px 0px;">
+											<div class="col-md-12">
+												<div class="col-md-1"></div>
+												<div class="col-md-2" style="text-align: right; color: lightgrey;">
+													<b><input type="text" class="form-control" ng-model="keys.dummy_keyword" style="text-align: center;"></b>
+												</div>
+												<div class="col-md-2"></div>
+												<div class="col-md-2" style="text-align: center;">
+													<b><input type="text" class="form-control" ng-model="keys.keyword" style="text-align: center;"></b>
+												</div>
+												<div class="col-md-2"></div>
+												<div class="col-md-2">
+													<b><input type="text" class="form-control" ng-model="temp_content[$index].keyword" style="text-align: center;"></b>
+												</div>
+												<div class="col-md-1"></div>
+											</div><br><br>
+											<div class="col-md-12">
+												<div class="col-md-2"></div>
+												<div class="col-md-8">
+													<input type="range" min="-2" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating">
+												</div>
+												<div class="col-md-2"></div>
+											</div><br><br><br>
+											<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
+													
+													<span ng-if="temp_content[$index].key_rating == 0"><input type="text" ng-model="keys.balancing_description[0].desc" class="form-control" style="text-align: center;"></span>
+													<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1"><input type="text" ng-model="keys.balancing_description[1].desc" class="form-control" style="text-align: center;"></span>
+													<span ng-if="temp_content[$index].key_rating >= 1"><input type="text" ng-model="keys.balancing_description[2].desc" class="form-control" style="text-align: center;"></span>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
+							</div>
+							<!--		TAB 4		-->
+							<div class="container panel panel-body" ng-show="menu == 4">
+								
+								<textarea class="form-control" ng-model="user.assessor.description"></textarea>
+								
+								<div class="col-xs-12 col-sm-12" style="margin-top: 25px; margin-bottom: 25px;">
+										
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Self-Awareness</label>
+											<div class="col-sm-4">
+												<div class="input-group">
+													<div class="input-group-addon">(</div>
+														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.slf_aware" ng-value=user.assessor.slf_aware step="0.5">
+													<div class="input-group-addon">)</div>
+												</div>
+											</div>
+											 <div class="col-sm-6" style="margin-top: 7px;">
+												<div class="progress">
+													<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.slf_aware*33.3}}%">{{user.assessor.slf_aware}}/3
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Openness and Ability to Learn</label>
+											<div class="col-sm-4">
+												<div class="input-group">
+													<div class="input-group-addon">(</div>
+														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.openness" ng-value=user.assessor.openness step="0.5">
+													<div class="input-group-addon">)</div>
+												</div>
+											</div>
+											 <div class="col-sm-6" style="margin-top: 7px;">
+												<div class="progress">
+													<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.openness*33.3}}%">{{user.assessor.openness}}/3
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-2 control-label">Personal Mastery</label>
+											<div class="col-sm-4">
+												<div class="input-group">
+													<div class="input-group-addon">(</div>
+														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.per_mast" ng-value=user.assessor.per_mast step="0.5">
+													<div class="input-group-addon">)</div>
+												</div>
+											</div>
+											 <div class="col-sm-6" style="margin-top: 7px;">
+												<div class="progress">
+													<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.per_mast*33.3}}%">{{user.assessor.per_mast}}/3
+													</div>
+												</div>
+											</div>
+										</div>
+									<h5>Total Scores: {{user.assessor.slf_aware+user.assessor.openness+user.assessor.per_mast}} / 9</h5>
+								</div>
+								
+								<div class="row">
+									<h4>My Recommendations: </h4><br>
+									<textarea class="form-control" ng-model="user.assessor.recommend"></textarea>
+								</div>
+								
+								<!--	section 2	-->
+								<div class="row" style="margin-top: 25px;">
+									<h4>Strengths: </h4><br>
+									<ul>
+										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_checkbox">{{keys.keyword}}</li>
+									</ul>
+								</div>
+								
+								<!--	section 3	-->
+								<div class="row" style="margin-top: 25px;">
+									<h4>Learning Needs: </h4><br>
+									<ul>
+										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_checkbox">{{keys.keyword}}</li>
+									</ul>
+								</div>
+								
+								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
