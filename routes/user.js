@@ -694,6 +694,7 @@ router.route('/completion')
             percentage: per,
             reflective_filled: user.question.RQ1!='' && user.question.RQ1 != undefined && user.question.RQ2!='' && user.question.RQ2 != undefined && user.question.RQ3!='' && user.question.RQ3 != undefined,
             questionnaire_filled: que_filled,
+			selected_profile: user.profile.profile_number,
             profile_filled: sec1 && sec2 && sec3 && sec4
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);

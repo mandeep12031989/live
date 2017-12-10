@@ -90,12 +90,17 @@
 											<div class="tile-header">
 												Trueself Profile
 											</div>
-                                            <div class="tile-content-wrapper" ng-if="!percent.questionnaire_filled">
+                                            <div class="tile-content-wrapper" ng-if="percent.questionnaire_filled && !percent.selected_profile">
+												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
+													<span style="font-size: 17px;">Select Profile</span>
+												</div>
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="!percent.questionnaire_filled && !percent.selected_profile">
 												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
 													<span style="font-size: 17px;">Fill Questionnaire</span>
 												</div>
 											</div>
-											<div class="tile-content-wrapper" ng-if="percent.questionnaire_filled">
+											<div class="tile-content-wrapper" ng-if="percent.questionnaire_filled && percent.selected_profile">
 												<i class="glyph-icon icon-book"></i>
 												<div class="tile-content">
 													<span ng-if="!percent.profile_filled">Proceed&nbsp;&nbsp;&nbsp;</span>
@@ -104,11 +109,11 @@
 												</div>
 												<br><br>
 											</div>
-											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="userProfile" ng-if="percent.questionnaire_filled">
+											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="userProfile" ng-if="percent.questionnaire_filled && percent.selected_profile">
 												Explore
 												<i class="glyph-icon icon-arrow-right"></i>
 											</a>
-											<span class="tile-footer tooltip-button" ng-if="!percent.questionnaire_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+											<span class="tile-footer tooltip-button" ng-if="!percent.selected_profile || !percent.questionnaire_filled">Locked<i class="glyph-icon icon-lock"></i></span>
 										</div>
 									</div>
 									<div class="col-md-6">

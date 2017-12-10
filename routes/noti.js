@@ -9,7 +9,7 @@ var User = require('../models/user.js');
 var Verify = require('./verify.js');
 
 router.route('/fac_noti')
-.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                  // Give all keywords in ascending order
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){                  // Give all keywords in ascending order
     
 	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true})
 		.exec(function(e, f){
@@ -33,7 +33,7 @@ router.route('/')
     });
 })
 
-.post(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
+.post(Verify.verifyOrdinaryUser, function(req, res, next){
     var body = sanitize(req.body);      // NoSQL injection prevention
     
     body.date = new Date();
@@ -45,7 +45,7 @@ router.route('/')
 });
 
 router.route('/:id')
-.put(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
+.put(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
     var body = sanitize(req.body);      // NoSQL injection prevention
     
     Noti.findOneAndUpdate({_id: sanitize(req.params.id)}, {$set: req.body}, {new: true})

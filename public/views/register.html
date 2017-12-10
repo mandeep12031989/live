@@ -6,6 +6,13 @@
     }
 </style>
 
+<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" class="w3-animate-top" ng-if="message">
+		<div class="alert alert-warning alert-with-icon" data-notify="container" style="position: fixed; margin-top: 100px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">info_outline</i>
+			<span data-notify="message">{{message}}</span>
+		</div>
+</div>
+
 <div class="center-vertical">
     <div class="center-content row">
 
@@ -74,7 +81,6 @@
                                 <div class="form-group">
                                     <button ng-disabled="!register_button" type="submit" class="btn btn-block btn-lg btn-blue-alt">Create Account</button>
                                 </div>
-                                {{message}}
                             </div>
                         </div>
 
