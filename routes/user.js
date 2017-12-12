@@ -40,7 +40,7 @@ router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'_id': false, 'username': true, 'firstname': true, 'lastname': true, 'facilitator_name': true, 'important_date.registration': true})
+    User.findOne({_id: id}, {'_id': false, 'firstname': true, 'lastname': true, 'facilitator_name': true})
     .exec(function(err, user){
         if(err)
             next(err);
