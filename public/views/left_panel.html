@@ -26,7 +26,7 @@
             <li class="header"><span>Step 1: Reflective Questions</span></li>
             <li>
                 <a ui-sref="reflective-questions" ng-class="current_state == 'reflective-questions' ? 'bg-tab':''">
-                    <span style="color: green; margin-left: 8px; margin-right: 4px;"><i class="material-icons" ng-if="percent.reflective_filled">check_circle</i></span>
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.reflective_filled"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-file" ng-if="!percent.reflective_filled"></i>
                     <span>3 Reflective Questions</span>
                 </a>        
@@ -39,7 +39,7 @@
             </li>
             <li>
                 <a ui-sref="questionnaire" ng-class="current_state == 'questionnaire' ? 'bg-tab':''">
-                    <span style="color: green; margin-left: 8px; margin-right: 4px;"><i class="material-icons" ng-if="percent.questionnaire_filled">check_circle</i></span>
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.questionnaire_filled"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-th" ng-if="!percent.questionnaire_filled"></i>
                     <span>Online Questionnaire</span>
                 </a>
@@ -51,7 +51,7 @@
             <li class="header"><span>Step 2: Assigned TrueSelf Profile</span></li>
             <li>
                 <a ui-sref="select-profile" ng-class="current_state == '' ? 'bg-tab':''">
-                    <span style="color: green; margin-left: 8px; margin-right: 4px;"><i class="material-icons" ng-if="percent.selected_profile">check_circle</i></span>
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.selected_profile"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-arrow-right" ng-if="!percent.selected_profile"></i>
                     <span>Select TrueSelf Profile</span>
                 </a>
@@ -63,7 +63,7 @@
             
             <li>
                 <a ui-sref="userProfile">
-					<span style="color: green; margin-left: 8px; margin-right: 4px;"><i class="material-icons" ng-if="percent.profile_filled">check_circle</i></span>
+					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i class="material-icons">check_circle</i></span>
                     <i class="glyph-icon icon-linecons-doc" ng-if="!xpercent.profile_filled"></i>
                     <span>Create/Update</span>
                 </a>

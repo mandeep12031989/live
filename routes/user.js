@@ -40,7 +40,7 @@ router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'_id': false, 'firstname': true, 'lastname': true, 'facilitator_name': true})
+    User.findOne({_id: id}, {'_id': false, 'username': true, 'firstname': true, 'lastname': true, 'facilitator_name': true})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -73,7 +73,7 @@ router.route('/details')
 })
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
-    //console.log(req.body);
+    console.log(req.body);
     User.findOneAndUpdate({_id: id}, {$set: req.body}, {new: true})
     .exec(function(err, user){
         if(err)
@@ -146,12 +146,12 @@ router.route('/peer_check/:id')
     .exec(function(err, user){
         if(err)
             next(err);
-		
+		//console.log("inside");
 		var found = true;
 		if(user.peer_reviewers.length != 0){
 			//console.log("sent:" + eid);
 			for(var i=0; i<user.peer_reviewers.length; i++){
-				//console.log(v.emailid);
+				//console.log(user.peer_reviewers[i].emailid);
 				if(user.peer_reviewers[i].emailid == eid){
 					found = true;
 					//console.log("popo ");
@@ -169,6 +169,8 @@ router.route('/peer_check/:id')
 		}
 		else if(user.peer_reviewers.length == 0)
         	return res.status(200).json({success: false, message: "Email-ID Not Found !"});
+		if(!found)
+			return res.status(200).json({success: false, message: "Email-ID Not Found !"});
     });
 });
 

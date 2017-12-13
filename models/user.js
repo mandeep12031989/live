@@ -37,6 +37,14 @@ var descriptionSchema = new Schema({
     mini_rating: {
         type: Number,
         default: 0
+    },
+    assessor_mini_rating: {
+        type: Number,
+        default: 0
+    },
+    assessor_relate: {
+        type: String,
+        default: ""
     }
 });
 
@@ -80,7 +88,15 @@ var profileSchema = new Schema({
 	assessor_checkbox: {
 		type: Boolean,
 		default: false
-	}
+	},
+    assessor_key_rating: {
+        type: Number,
+        default: 0
+    },
+    assessor_comment: {                              //comment to specific parent keyword
+        type: String,
+        default: ""
+    }
 });
 
 var userSchema = new Schema({

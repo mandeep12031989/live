@@ -68,6 +68,7 @@ exports = passport.use(new GoogleStrategy({
 			    newUser.lastname = name.join(' ');
 				newUser.username = profile.emails[0].value;
 				newUser.username_verified = true;
+				newUser.important_date.registration = new Date();
 
 				newUser.save(function(err) {
 					if (err)

@@ -133,6 +133,7 @@
 							<ul class="nav nav-pills">
 								<li ng-class="menu == 1 ? 'active' : '' "><a href="" ng-click="menu = 1">RQ | Questionnaire</a></li>
 								<li ng-class="menu == 2 ? 'active' : '' "><a href="" ng-click="menu = 2">Profile</a></li>
+								<li ng-class="menu == 5 ? 'active' : '' "><a href="" ng-click="menu = 5">Review Profile</a></li>
 								<li ng-class="menu == 3 ? 'active' : '' "><a href="" ng-click="menu = 3">Balancing View</a></li>
 								<li ng-class="menu == 4 ? 'active' : '' "><a href="" ng-click="menu = 4">Assessor Template</a></li>
 							</ul>
@@ -551,7 +552,10 @@
 								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
 							</div>
 							<!--		TAB 3		-->
-							<div class="container" ng-show="menu == 3">
+							<div class="container" ng-show="menu == 3 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
+								<b>Profile Not Selected Yet !</b>
+							</div>
+							<div class="container" ng-show="menu == 3 && user.profile.profile_number != 0">
                 
 								<div id="page-title">
 									<h2>Balanced Profile</h2>
@@ -735,6 +739,259 @@
 								
 								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
 							</div>
+							
+							<!--		TAB 5		-->
+<div class="container" ng-show="menu == 5 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
+	<b>Profile Not Selected Yet !</b>
+</div>
+<div id="sb-site" ng-show="menu == 5 && user.profile.profile_number != 0" ng-init="section_num = 1">
+	
+	<style>
+		.back_panel {
+			background-color: #CCFF90;
+			color: black;
+		}
+		#radios label {
+			cursor: pointer;
+			position: relative;
+		}
+			#radios {
+			text-align: center;
+			margin 0 auto;
+		}
+
+		#radios label + label {
+			margin-left: 15px;
+		}
+
+		input[type="radio"] {
+			opacity: 0; /* hidden but still tabable */
+			position: absolute;
+		}
+
+		input[type="radio"] + span {
+			font-family: 'Material Icons';
+			color: #B3CEFB;
+			border-radius: 50%;
+			padding: 5px;
+			transition: all 0.4s;
+			-webkit-transition: all 0.4s;
+		}
+
+		input[type="radio"]:checked + span {
+			color: #D9E7FD;
+		  background-color: #4285F4;
+		}
+
+		input[type="radio"]:focus + span {
+			color: #fff;
+		}
+
+		.material-icons {
+		  font-family: 'Material Icons';
+		  font-weight: normal;
+		  font-style: normal;
+		  font-size: 20px;  /* Preferred icon size */
+		  display: inline-block;
+		  line-height: 1;
+		  text-transform: none;
+		  letter-spacing: normal;
+		  word-wrap: normal;
+		  white-space: nowrap;
+		  direction: ltr;
+
+		  /* Support for all WebKit browsers. */
+		  -webkit-font-smoothing: antialiased;
+		  /* Support for Safari and Chrome. */
+		  text-rendering: optimizeLegibility;
+
+		  /* Support for Firefox. */
+		  -moz-osx-font-smoothing: grayscale;
+
+		  /* Support for IE. */
+		  font-feature-settings: 'liga';
+		}
+	</style>
+	
+    <div id="page-wrapper">
+        
+        <div id="page-content-wrapper">
+            <div>
+                
+                <div class="container">
+
+					<!-- Boostrap Tabs -->
+
+					<script type="text/javascript" src="./assets/widgets/tabs/tabs.js"></script>
+						<div id="page-title">
+							<br>
+							<h2>User Profile</h2>
+							<p class="mrg15B"></p>
+							
+						</div>
+						
+						<div class="row" style="margin: 0 auto;">
+							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+									<span>&#xE15D;</span>
+								</label>
+								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Exhibit Anymore</div>
+							</div>
+							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+									<span>&#xE612;</span>
+								</label>
+								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Relate</div>
+							</div>
+							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+									<span>&#xE40C;</span>
+								</label>
+								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Partially</div>
+							</div>
+							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+									<span>&#xE3A6;</span>
+								</label>
+								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Strongly</div>
+							</div>
+						</div>
+					
+						<div class="row">
+						<div>
+							<ul class="list-group">
+								<li class="mrg10B" ng-click="section_num = 1">
+									<a class="list-group-item" href="" ng-class="checkSectionFill(1) ? 'back_panel':'bg_white'">
+									  Professional Values and Work<br>Culture Preference
+										<i class="glyph-icon icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+								<li class="mrg10B" ng-click="section_num = 2">
+									<a class="list-group-item" href="" ng-class="checkSectionFill(2) ? 'back_panel':'bg_white'">
+										Strengths
+										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+								<li class="mrg10B" ng-click="section_num = 3">
+									<a class="list-group-item" href="" ng-class="checkSectionFill(3) ? 'back_panel':'bg_white'">
+										Learning Needs
+										<i class="glyph-icon icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-9">
+							<div class="tab-content">
+
+								<div class="tab-pane fade active in pad0A" id="faq-tab-1">
+									<div class="panel-group" id="accordion5">
+										<div class="panel ">
+											<div class="panel-heading">
+												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0;">
+
+													<a data-toggle="collapse" data-parent="#accordion5">
+														<b ng-show="section_num == 1">Professional Values and Work Culture Preference</b>
+														<b ng-show="section_num == 2">Strengths</b>
+														<b ng-show="section_num == 3">Learning Needs</b>
+													</a>
+													<span style="float:right; font-size: 15px;">Page {{section_num}}/3</span>
+												</h2>
+											</div>
+											<div class="row" style="width: 95%; margin: auto;">
+
+												 <div class="col-sm-12" ng-repeat="keys in user.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
+													<div class="panel panel-primary">
+														<div class="panel-heading">
+															<h4 class="panel-title">{{keys.keyword}}</h4>
+														</div>
+														<div id="collapseOne" class="panel-collapse collapse in">
+															<!-- LEFT SIDE -->
+															<div class="panel-body pad0B col-sm-6">
+															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
+																	<div class="col-sm-2">
+																		<div id="radios">
+																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore" ng-if="mini.relate == 'donotexhibitanymore'">
+																					 <input type="radio" name="{{mini.mini_description_id}}donotexhibitanymore" id="{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
+																					 <span>&#xE15D;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate" ng-if="mini.relate == 'donotrelate'">
+																					 <input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
+																					 <span>&#xE612;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially" ng-if="mini.relate == 'relatepartially'">
+																					<input type="radio" name="{{mini.mini_description_id}}relatepartially" id="{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
+																					<span>&#xE40C;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly" ng-if="mini.relate == 'relatestrongly'">
+																					<input type="radio" name="{{mini.mini_description_id}}relatestrongly" id="{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.relate" ng-change="mini.mini_rating = 2" />
+																					<span>&#xE3A6;</span>
+																				</label>                          
+																		</div>
+																	</div>
+																	<div class="col-sm-10">
+																		<h5><b>{{mini.mini_description}}</b></h5>  
+																	</div>
+																</div>
+																
+															<br>   
+															   <textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" disabled ng-if="keys.comment"></textarea>
+															</div>
+															<!-- RIGHT SIDE -->
+															<div class="panel-body pad0B col-sm-6">
+															   <div class="row" ng-repeat="mini in user.assessor.profile_content[$index].mini_descriptions" style="margin-bottom: 10px;">
+																	<div class="col-sm-12">
+																		<div id="radios">
+																				<label for="assessor{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore" ng-show="section_num == 3">
+																					 <input type="radio" name="assessor{{mini.mini_description_id}}donotexhibitanymore" id="assessor{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 0" />
+																					 <span>&#xE15D;</span>
+																				</label>
+																				<label for="assessor{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
+																					 <input type="radio" name="assessor{{mini.mini_description_id}}donotrelate" id="assessor{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 0" />
+																					 <span>&#xE612;</span>
+																				</label>
+																				<label for="assessor{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
+																					<input type="radio" name="assessor{{mini.mini_description_id}}relatepartially" id="assessor{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 1" />
+																					<span>&#xE40C;</span>
+																				</label>
+																				<label for="assessor{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
+																					<input type="radio" name="assessor{{mini.mini_description_id}}relatestrongly" id="assessor{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 2" />
+																					<span>&#xE3A6;</span>
+																				</label>                          
+																		</div>
+																	</div>
+																</div>
+																
+															<br>   
+															   <textarea contenteditable="true" rows="2" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment" placeholder="Comment">Comment</textarea>
+															</div>
+															<br>
+														</div>
+													</div>
+												 </div>
+											</div>
+										</div><br>
+										
+										<button type="button" class="btn btn-info" ng-click="section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
+										<button type="button" class="btn btn-success" style="float: right;" ng-click="section_num = section_num+1" ng-disabled="section_num == 3">Next</button>
+										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
+											<button type="button" class="btn btn-warning" ng-click="submitAssessor()">Save</button><br><br>
+										</span>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+						</div>
+                    </div>
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+							
+							
 						</div>
                     </div>
                 </div>
