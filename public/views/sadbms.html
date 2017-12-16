@@ -204,8 +204,8 @@
                                         <tbody>
                                             <tr ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">  
 												<td>{{$index + 1}}.</td>
-												<td><a ui-sref="anyUser({id: user._id})">{{user.username}}</a></td>
-												<td><a ui-sref="anyUser({id: user._id})">{{user.firstname + ' ' + user.lastname}}</a></td> 
+												<td><a ui-sref="anyUser({id: user._id})" target="_blank">{{user.username}}</a></td>
+												<td><a ui-sref="anyUser({id: user._id})" target="_blank">{{user.firstname + ' ' + user.lastname}}</a></td> 
 												<td>{{user.important_date.last_login | date: 'medium'}}</td> 
 												<td>{{user.important_date.registration | date: 'medium'}}</td>
 												<td><input type="checkbox" ng-model="user.are_you.admin" ng-click="save_admfac(user._id, user.are_you)"></td>

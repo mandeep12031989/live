@@ -9,7 +9,19 @@
         .left_border_red{
             border-left:10px solid red;
         }
-
+		
+		.mini_style{
+			border: 1px solid #dedede;
+			border-radius: 25px;
+			margin: 5px;
+			padding: 10px;
+			font-size: 14px;
+		}
+		
+		.mini_style:hover{
+			border-color: #ccc;
+			background: #efefef;
+		}
     </style>
 <span ng-show="loading">
     <div class="spinner">
@@ -87,8 +99,10 @@
                          
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
-                                                    <div class="row" style="margin: 0 auto;">
-                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+                                                    <div class="row" style="margin: 0 auto; text-align: center;">
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+														
+                                                        <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
                                                         
                                                         <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
                                                         <button class="btn ra-100 btn-default">Don't go in depth</button>
@@ -140,7 +154,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
                                                         
                                                         <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
                                                         <button class="btn ra-100 btn-default">Don't go in depth</button>
@@ -192,7 +206,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
                                                         
                                                         <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
                                                         <button class="btn ra-100 btn-default">Don't go in depth</button>
@@ -244,7 +258,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
                                                         
                                                         <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
                                                         <button class="btn ra-100 btn-default">Don't go in depth</button>

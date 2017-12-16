@@ -73,7 +73,7 @@ router.route('/details')
 })
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
-    console.log(req.body);
+    //console.log(req.body);
     User.findOneAndUpdate({_id: id}, {$set: req.body}, {new: true})
     .exec(function(err, user){
         if(err)

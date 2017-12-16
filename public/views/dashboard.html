@@ -235,34 +235,42 @@
 						</div>
 
                         <br>
-						<div class="row">
-							<div class="col-md-10" style="margin: 0 auto; text-align: center;">
-								<div class="col-md-5" style="text-align: right;">Name: </div>
-								<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.name"></div>
-								<br><br>
-								<div class="col-md-5" style="text-align: right;">Relationship: </div>
-								<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.relationship"></div>
-								<br><br>
-								<div class="col-md-5" style="text-align: right;">Email-ID: </div>
-								<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.emailid"></div>
-								<br><br>
-								<button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add</button>
+						
+						<div class="row panel">
+							<div class="col-md-12 panel-body" style="margin: 0 auto; text-align: center;">
+								<div class="col-md-2" style="text-align: right;">Name: </div>
+								<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.name"></div>
+								
+								<div class="col-md-2" style="text-align: right;">Relationship: </div>
+								<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.relationship"></div>
+								
+								<div class="col-md-2" style="text-align: right;">Email-ID: </div>
+								<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.emailid"></div>
+								<br><br><br>
+								<button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add to List</button>
 							</div>
-							<div class="col-md-12" style="margin: 0 auto; text-align: center;" ng-show="reviewers.length != 0">
-								<br><br><br><br><b>Recipients to Review Till Now:</b><br><br>
+						</div>
+						
+						<div id="page-title" style="text-align: center;" ng-show="reviewers.length != 0">
+							<h2>Recipients to Review</h2>
+						</div>
+						<div class="row panel" ng-show="reviewers.length != 0">
+							<div class="col-md-12 panel-body" style="margin: 0 auto; text-align: center;">
+								
 								<span ng-repeat="rec in reviewers">
-									<hr>
-									<div class="col-md-5" style="text-align: right;">Name: </div>
-									<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="rec.name"></div>
-									<br><br>
-									<div class="col-md-5" style="text-align: right;">Relationship: </div>
-									<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="rec.relationship"></div>
-									<br><br>
-									<div class="col-md-5" style="text-align: right;">Email-ID: </div>
-									<div class="col-md-7" style="text-align: left;"><input type="text" width="100%" ng-model="rec.emailid"></div>
+									<h5><b>Reviewer #{{$index}}</b></h5><br>
+									<div class="col-md-2" style="text-align: right;">Name: </div>
+									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.name"></div>
+									
+									<div class="col-md-2" style="text-align: right;">Relationship: </div>
+									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.relationship"></div>
+									
+									<div class="col-md-2" style="text-align: right;">Email-ID: </div>
+									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.emailid"></div>
 									<br><br>
 								</span>
-								<button class="btn btn-danger" ng-click="submitReviewer()">Send</button>
+								<br>
+								<button class="btn btn-danger" ng-click="submitReviewer()">Send Mail</button>
 							</div>
 						</div>
 					</div>

@@ -54,6 +54,19 @@
 		background: inherit;
 		left: 20px;
 	}
+		
+		.mini_style{
+			border: 1px solid #dedede;
+			border-radius: 25px;
+			margin: 5px;
+			padding: 10px;
+			font-size: 14px;
+		}
+		
+		.mini_style:hover{
+			border-color: #ccc;
+			background: #efefef;
+		}
 </style>
 
 <span ng-show="loading">
@@ -427,7 +440,8 @@
 														<ul class="list-group list-group-separator mrg0A row list-group-icons">
 
 															<div class="row" style="margin: 0 auto;">
-																<p class="ra-100" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</p>
+																<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
+
 															</div><br>
 
 															<li class="">
@@ -477,7 +491,7 @@
 														<ul class="list-group list-group-separator mrg0A row list-group-icons">
 
 															<div class="row" style="margin: 0 auto;">
-																<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+																<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
 
 															</div><br>
 
@@ -528,7 +542,7 @@
 														<ul class="list-group list-group-separator mrg0A row list-group-icons">
 
 															<div class="row" style="margin: 0 auto;">
-																<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>
+																<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
 
 															</div><br>
 
@@ -667,9 +681,9 @@
 											<label class="col-sm-2 control-label">Self-Awareness</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon">(</div>
+													<div class="input-group-addon" ng-click="user.assessor.slf_aware>1 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware - 1 : user.assessor.slf_aware = user.assessor.slf_aware"><</div>
 														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.slf_aware" ng-value=user.assessor.slf_aware step="0.5">
-													<div class="input-group-addon">)</div>
+													<div class="input-group-addon" ng-click="user.assessor.slf_aware<3 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware + 1 : user.assessor.slf_aware = user.assessor.slf_aware">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -684,9 +698,9 @@
 											<label class="col-sm-2 control-label">Openness and Ability to Learn</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon">(</div>
+													<div class="input-group-addon" ng-click="user.assessor.openness>1 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness - 1 : user.assessor.openness = user.assessor.openness"><</div>
 														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.openness" ng-value=user.assessor.openness step="0.5">
-													<div class="input-group-addon">)</div>
+													<div class="input-group-addon" ng-click="user.assessor.openness<3 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness + 1 : user.assessor.openness = user.assessor.openness">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -701,9 +715,9 @@
 											<label class="col-sm-2 control-label">Personal Mastery</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon">(</div>
+													<div class="input-group-addon" ng-click="user.assessor.per_mast>1 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 1 : user.assessor.per_mast = user.assessor.per_mast"><</div>
 														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.per_mast" ng-value=user.assessor.per_mast step="0.5">
-													<div class="input-group-addon">)</div>
+													<div class="input-group-addon" ng-click="user.assessor.per_mast<3 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast + 1 : user.assessor.per_mast = user.assessor.per_mast">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -725,7 +739,7 @@
 								<div class="row" style="margin-top: 25px;">
 									<h4>Strengths: </h4><br>
 									<ul>
-										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_checkbox">{{keys.keyword}}</li>
+										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_checkbox"><input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="50%"></li>
 									</ul>
 								</div>
 								
@@ -733,7 +747,7 @@
 								<div class="row" style="margin-top: 25px;">
 									<h4>Learning Needs: </h4><br>
 									<ul>
-										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_checkbox">{{keys.keyword}}</li>
+										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_checkbox"><input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="50%"></li>
 									</ul>
 								</div>
 								
@@ -744,7 +758,7 @@
 <div class="container" ng-show="menu == 5 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
 	<b>Profile Not Selected Yet !</b>
 </div>
-<div id="sb-site" ng-show="menu == 5 && user.profile.profile_number != 0" ng-init="section_num = 1">
+<div id="sb-site" ng-show="menu == 5 && user.profile.profile_number != 0">
 	
 	<style>
 		.back_panel {
@@ -832,7 +846,7 @@
 						
 						<div class="row" style="margin: 0 auto;">
 							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
-								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+								<label class="material-icons" title="Do Not Exhibit Anymore" style="color: skyblue;">
 									<span>&#xE15D;</span>
 								</label>
 								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Exhibit Anymore</div>
@@ -844,13 +858,13 @@
 								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Relate</div>
 							</div>
 							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
-								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+								<label class="material-icons" title="Relate Partially" style="color: skyblue;">
 									<span>&#xE40C;</span>
 								</label>
 								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Partially</div>
 							</div>
 							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
-								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+								<label class="material-icons" title="Relate Strongly" style="color: skyblue;">
 									<span>&#xE3A6;</span>
 								</label>
 								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Strongly</div>
