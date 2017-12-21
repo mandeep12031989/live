@@ -1,13 +1,13 @@
 <style>
-	.left_border_green{
-		border-left:10px solid green;
-	}
-	.left_border_yellow{
-		border-left:10px solid yellow;
-	}
-	.left_border_red{
-		border-left:10px solid red;
-	}
+		.left_border_str{
+            border-left:10px solid #00b0ff;
+        }
+        .left_border_prt{
+            border-left:10px solid #BBDEFB;
+        }
+        .left_border_dnt{
+            border-left:10px solid #efebe9;
+        }
 	
 	.material-switch > input[type="checkbox"] {
 		display: none;
@@ -144,10 +144,11 @@
                         </div>
 						<div class="col-md-9" style="margin: 0 auto; margin-top: 20px;" ng-init="menu = 1">
 							<ul class="nav nav-pills">
-								<li ng-class="menu == 1 ? 'active' : '' "><a href="" ng-click="menu = 1">RQ | Questionnaire</a></li>
-								<li ng-class="menu == 2 ? 'active' : '' "><a href="" ng-click="menu = 2">Profile</a></li>
+								<li ng-class="menu == 1 ? 'active' : '' "><a href="" ng-click="menu = 1">RQs | Questionnaire</a></li>
+								<li ng-class="menu == 2 ? 'active' : '' "><a href="" ng-click="menu = 2">User Profile</a></li>
+								<li ng-class="menu == 3 ? 'active' : '' "><a href="" ng-click="menu = 3">User Balanced View</a></li>
 								<li ng-class="menu == 5 ? 'active' : '' "><a href="" ng-click="menu = 5">Review Profile</a></li>
-								<li ng-class="menu == 3 ? 'active' : '' "><a href="" ng-click="menu = 3">Balancing View</a></li>
+								<li ng-class="menu == 6 ? 'active' : '' "><a href="" ng-click="menu = 6">Assessed Balanced View</a></li>
 								<li ng-class="menu == 4 ? 'active' : '' "><a href="" ng-click="menu = 4">Assessor Template</a></li>
 							</ul>
 							<hr>
@@ -383,7 +384,7 @@
 									<div class="col-md-offset-2 col-sm-2">
 
 										<div class="panel">
-											<div class="panel-heading" ng-class="'left_border_green'">
+											<div class="panel-heading" ng-class="'left_border_str'">
 												Relate Fully
 											</div>
 										</div>
@@ -393,7 +394,7 @@
 									<div class="col-md-offset-1 col-sm-2">
 
 										<div class="panel">
-											<div class="panel-heading" ng-class="'left_border_yellow'">
+											<div class="panel-heading" ng-class="'left_border_prt'">
 												Relate Partially
 											</div>
 										</div>
@@ -403,7 +404,7 @@
 									<div class="col-md-offset-1 col-sm-2">
 
 										<div class="panel">
-											<div class="panel-heading" ng-class="'left_border_red'">
+											<div class="panel-heading" ng-class="'left_border_dnt'">
 												Do not Relate at all
 											</div>
 										</div>
@@ -421,16 +422,12 @@
 											<div class="row">
 
 												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
-													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
 														<div class="panel-heading image-box">
-															<div class="image-content" style="margin-top: 22px;">                        
+															<div class="image-content" style="margin-top: 16px;">                        
 																<div class="meta-box meta-box-bottom">
 																	<h3 class="meta-heading">
 																		{{keys.keyword}}
-																		<span class="material-switch pull-right">
-																			<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
-																			<label for="{{keys.keyword_id}}" class="label-success"></label>
-																		</span>
 																	</h3>
 																</div>                            
 															</div>
@@ -444,10 +441,10 @@
 
 															</div><br>
 
-															<li class="">
+															<li class="" ng-if="keys.comment">
 
 																<a href="" class="list-group-item">
-																	<i class="glyph-icon font-red icon-comment"></i>
+																	
 																	{{keys.comment}}
 																</a>
 															</li>
@@ -465,22 +462,18 @@
 								<div class="panel">
 									<div class="panel-body">
 										<h2 style="text-align:center" id="page-title">
-											<b>Strengths</b>
+											<b>Professional Strengths</b>
 										</h2>
 										<div class="example-box-wrapper">
 											<div class="row">
 
 												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
 														<div class="panel-heading image-box">
-															<div class="image-content" style="margin-top: 22px;">                        
+															<div class="image-content" style="margin-top: 16px;">                        
 																<div class="meta-box meta-box-bottom">
 																	<h3 class="meta-heading">
 																		{{keys.keyword}}
-																		<span class="material-switch pull-right">
-																			<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
-																			<label for="{{keys.keyword_id}}" class="label-success"></label>
-																		</span>
 																	</h3>
 																</div>                            
 															</div>
@@ -495,10 +488,10 @@
 
 															</div><br>
 
-															<li class="">
+															<li class="" ng-if="keys.comment">
 
 																<a href="" class="list-group-item">
-																	<i class="glyph-icon font-red icon-comment"></i>
+																	
 																	{{keys.comment}}
 																</a>
 															</li>
@@ -522,16 +515,12 @@
 											<div class="row">
 
 												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
 														<div class="panel-heading image-box">
-															<div class="image-content" style="margin-top: 22px;">                        
+															<div class="image-content" style="margin-top: 16px;">                        
 																<div class="meta-box meta-box-bottom">
 																	<h3 class="meta-heading">
 																		{{keys.keyword}}
-																		<span class="material-switch pull-right">
-																			<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
-																			<label for="{{keys.keyword_id}}" class="label-success"></label>
-																		</span>
 																	</h3>
 																</div>                            
 															</div>
@@ -546,10 +535,10 @@
 
 															</div><br>
 
-															<li class="">
+															<li class="" ng-if="keys.comment">
 
 																<a href="" class="list-group-item">
-																	<i class="glyph-icon font-red icon-comment"></i>
+																	
 																	{{keys.comment}}
 																</a>
 															</li>
@@ -572,7 +561,7 @@
 							<div class="container" ng-show="menu == 3 && user.profile.profile_number != 0">
                 
 								<div id="page-title">
-									<h2>Balanced Profile</h2>
+									<h2>User Balanced View</h2>
 								</div>
 
 								<style>
@@ -618,11 +607,11 @@
 
 								<div class="panel panel-body row" style="color: red;">
 									<div class="col-md-1"></div>
-									<div class="col-md-2" style="text-align: right;">
+									<div class="col-md-2" style="text-align: right; color:lightgrey;">
 										<b>REACTIVE</b>
 									</div>
 									<div class="col-md-2"></div>
-									<div class="col-md-2" style="text-align: center;">
+									<div class="col-md-2" style="text-align: center; color:#8bc34a;">
 										<b>RESPONSIVE</b>
 									</div>
 									<div class="col-md-2"></div>
@@ -654,7 +643,7 @@
 											<div class="col-md-12">
 												<div class="col-md-2"></div>
 												<div class="col-md-8">
-													<input type="range" min="-2" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating">
+													<input type="range" min="-2" max="2" class="range" step="0.1" ng-model="temp_content[$index].key_rating">
 												</div>
 												<div class="col-md-2"></div>
 											</div><br><br><br>
@@ -681,9 +670,9 @@
 											<label class="col-sm-2 control-label">Self-Awareness</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon" ng-click="user.assessor.slf_aware>1 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware - 1 : user.assessor.slf_aware = user.assessor.slf_aware"><</div>
+													<div class="input-group-addon" ng-click="user.assessor.slf_aware>1 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware - 0.5 : user.assessor.slf_aware = user.assessor.slf_aware"><</div>
 														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.slf_aware" ng-value=user.assessor.slf_aware step="0.5">
-													<div class="input-group-addon" ng-click="user.assessor.slf_aware<3 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware + 1 : user.assessor.slf_aware = user.assessor.slf_aware">></div>
+													<div class="input-group-addon" ng-click="user.assessor.slf_aware<3 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware + 0.5 : user.assessor.slf_aware = user.assessor.slf_aware">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -698,9 +687,9 @@
 											<label class="col-sm-2 control-label">Openness and Ability to Learn</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon" ng-click="user.assessor.openness>1 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness - 1 : user.assessor.openness = user.assessor.openness"><</div>
+													<div class="input-group-addon" ng-click="user.assessor.openness>1 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness - 0.5 : user.assessor.openness = user.assessor.openness"><</div>
 														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.openness" ng-value=user.assessor.openness step="0.5">
-													<div class="input-group-addon" ng-click="user.assessor.openness<3 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness + 1 : user.assessor.openness = user.assessor.openness">></div>
+													<div class="input-group-addon" ng-click="user.assessor.openness<3 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness + 0.5 : user.assessor.openness = user.assessor.openness">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -715,9 +704,9 @@
 											<label class="col-sm-2 control-label">Personal Mastery</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon" ng-click="user.assessor.per_mast>1 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 1 : user.assessor.per_mast = user.assessor.per_mast"><</div>
+													<div class="input-group-addon" ng-click="user.assessor.per_mast>1 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 0.5 : user.assessor.per_mast = user.assessor.per_mast"><</div>
 														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.per_mast" ng-value=user.assessor.per_mast step="0.5">
-													<div class="input-group-addon" ng-click="user.assessor.per_mast<3 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast + 1 : user.assessor.per_mast = user.assessor.per_mast">></div>
+													<div class="input-group-addon" ng-click="user.assessor.per_mast<3 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast + 0.5 : user.assessor.per_mast = user.assessor.per_mast">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -735,11 +724,35 @@
 									<textarea class="form-control" ng-model="user.assessor.recommend"></textarea>
 								</div>
 								
+								<!--	section 1	-->
+								<div class="row" style="margin-top: 25px;">
+									<h4>Professional Values and Work Culture Preference: </h4><br>
+									<ul>
+										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 1 && keys.assessor_checkbox">
+											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%">
+											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;"><i class="material-icons">clear</i></span>
+											<ul>
+												<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
+													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%">
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+								
 								<!--	section 2	-->
 								<div class="row" style="margin-top: 25px;">
-									<h4>Strengths: </h4><br>
+									<h4>Professional Strengths: </h4><br>
 									<ul>
-										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_checkbox"><input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="50%"></li>
+										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_checkbox">
+											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%">
+											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;"><i class="material-icons">clear</i></span>
+											<ul>
+												<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
+													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%">
+												</li>
+											</ul>
+										</li>
 									</ul>
 								</div>
 								
@@ -747,7 +760,15 @@
 								<div class="row" style="margin-top: 25px;">
 									<h4>Learning Needs: </h4><br>
 									<ul>
-										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_checkbox"><input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="50%"></li>
+										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_checkbox">
+											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%">
+											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;"><i class="material-icons">clear</i></span>
+											<ul>
+												<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
+													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%">
+												</li>
+											</ul>
+										</li>
 									</ul>
 								</div>
 								
@@ -763,6 +784,10 @@
 	<style>
 		.back_panel {
 			background-color: #CCFF90;
+			color: black;
+		}
+		.back_active_panel {
+			background-color: #e1f5fe;
 			color: black;
 		}
 		#radios label {
@@ -843,27 +868,31 @@
 							<p class="mrg15B"></p>
 							
 						</div>
-						
+					
 						<div class="row" style="margin: 0 auto;">
-							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+							<div class="col-md-2" style="margin-top: 0px; font-size: 18px; text-align: center;">
+								Profile Sections
+							</div>
+							<div class="col-md-offset-2" ng-show="section_num != 3"></div>
+							<div class="col-md-offset-1 col-md-2" style="margin-bottom: 30px; font-size: 20px;" ng-show="section_num == 3">
 								<label class="material-icons" title="Do Not Exhibit Anymore" style="color: skyblue;">
 									<span>&#xE15D;</span>
 								</label>
 								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Exhibit Anymore</div>
 							</div>
-							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+							<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
 								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
 									<span>&#xE612;</span>
 								</label>
 								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Relate</div>
 							</div>
-							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+							<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
 								<label class="material-icons" title="Relate Partially" style="color: skyblue;">
 									<span>&#xE40C;</span>
 								</label>
 								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Partially</div>
 							</div>
-							<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+							<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
 								<label class="material-icons" title="Relate Strongly" style="color: skyblue;">
 									<span>&#xE3A6;</span>
 								</label>
@@ -875,19 +904,19 @@
 						<div>
 							<ul class="list-group">
 								<li class="mrg10B" ng-click="section_num = 1">
-									<a class="list-group-item" href="" ng-class="checkSectionFill(1) ? 'back_panel':'bg_white'">
+									<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
 									  Professional Values and Work<br>Culture Preference
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>
 								<li class="mrg10B" ng-click="section_num = 2">
-									<a class="list-group-item" href="" ng-class="checkSectionFill(2) ? 'back_panel':'bg_white'">
-										Strengths
+									<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
+										Professional Strengths
 										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
 									</a>
 								</li>
 								<li class="mrg10B" ng-click="section_num = 3">
-									<a class="list-group-item" href="" ng-class="checkSectionFill(3) ? 'back_panel':'bg_white'">
+									<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
 										Learning Needs
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
@@ -905,7 +934,7 @@
 
 													<a data-toggle="collapse" data-parent="#accordion5">
 														<b ng-show="section_num == 1">Professional Values and Work Culture Preference</b>
-														<b ng-show="section_num == 2">Strengths</b>
+														<b ng-show="section_num == 2">Professional Strengths</b>
 														<b ng-show="section_num == 3">Learning Needs</b>
 													</a>
 													<span style="float:right; font-size: 15px;">Page {{section_num}}/3</span>
@@ -915,14 +944,21 @@
 
 												 <div class="col-sm-12" ng-repeat="keys in user.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
 													<div class="panel panel-primary">
-														<div class="panel-heading">
+														<div class="panel-heading" style="text-align: center;">
 															<h4 class="panel-title">{{keys.keyword}}</h4>
+															<span class="material-switch pull-right" style="margin-top: -15px;">
+																<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
+																<label for="{{keys.keyword_id}}" class="label-success"></label>
+															</span>
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
-															<!-- LEFT SIDE -->
-															<div class="panel-body pad0B col-sm-6">
+															<div class="panel-body pad0B col-sm-12">
+																<div class="col-sm-6" style="text-align: center;">By Candidate</div>
+																<div class="col-sm-6" style="text-align: center;">By Facilitator</div>
+																<br><br>
 															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
-																	<div class="col-sm-2">
+																   <!-- LEFT SIDE -->
+																	<div class="col-sm-1">
 																		<div id="radios">
 																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore" ng-if="mini.relate == 'donotexhibitanymore'">
 																					 <input type="radio" name="{{mini.mini_description_id}}donotexhibitanymore" id="{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
@@ -942,41 +978,44 @@
 																				</label>                          
 																		</div>
 																	</div>
-																	<div class="col-sm-10">
+																	<div class="col-sm-5">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
 																	</div>
-																</div>
 																
-															<br>   
-															   <textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" disabled ng-if="keys.comment"></textarea>
-															</div>
+																
+															<br>
+															
 															<!-- RIGHT SIDE -->
-															<div class="panel-body pad0B col-sm-6">
-															   <div class="row" ng-repeat="mini in user.assessor.profile_content[$index].mini_descriptions" style="margin-bottom: 10px;">
-																	<div class="col-sm-12">
-																		<div id="radios">
-																				<label for="assessor{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore" ng-show="section_num == 3">
-																					 <input type="radio" name="assessor{{mini.mini_description_id}}donotexhibitanymore" id="assessor{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 0" />
+																	<div class="col-sm-6">
+																		<div id="radios" ng-click="user.assessor.profile_content[$parent.$index].assessor_checkbox = true;">
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore" ng-show="section_num == 3">
+																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
 																					 <span>&#xE15D;</span>
 																				</label>
-																				<label for="assessor{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
-																					 <input type="radio" name="assessor{{mini.mini_description_id}}donotrelate" id="assessor{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 0" />
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
+																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" value="donotrelate" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
 																					 <span>&#xE612;</span>
 																				</label>
-																				<label for="assessor{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
-																					<input type="radio" name="assessor{{mini.mini_description_id}}relatepartially" id="assessor{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 1" />
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
+																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" value="relatepartially" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 1" />
 																					<span>&#xE40C;</span>
 																				</label>
-																				<label for="assessor{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
-																					<input type="radio" name="assessor{{mini.mini_description_id}}relatestrongly" id="assessor{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.assessor_relate" ng-change="mini.assessor_mini_rating = 2" />
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
+																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" value="relatestrongly" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 2" />
 																					<span>&#xE3A6;</span>
 																				</label>                          
 																		</div>
 																	</div>
 																</div>
 																
-															<br>   
-															   <textarea contenteditable="true" rows="2" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment" placeholder="Comment">Comment</textarea>
+															<br>
+																<div class="col-sm-6">
+																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" disabled ng-if="keys.comment"></textarea>
+																</div>
+																<div class="col-sm-6">
+																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment" placeholder="Comment">Comment</textarea>
+																</div>
+															   
 															</div>
 															<br>
 														</div>
@@ -1004,7 +1043,111 @@
         
     </div>
 </div>
-							
+							<!--		TAB 6		-->
+							<div class="container" ng-show="menu == 6 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
+								<b>Profile Not Selected Yet !</b>
+							</div>
+							<div class="container" ng-show="menu == 6 && user.profile.profile_number != 0">
+                
+								<div id="page-title">
+									<h2>Assessed Balanced View</h2>
+								</div>
+
+								<style>
+										.range {
+										  -webkit-appearance: none;
+										  -moz-appearance: none;
+										  width: 100%
+										}
+
+										input[disabled]{
+											opacity: 1
+										}
+
+										input[type=range]::-webkit-slider-runnable-track {
+										  -webkit-appearance: none;
+
+										  background: rgba(139,195,74,1);
+
+										  background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
+										  height: 10px;
+										}
+
+										input[type=range]::-webkit-slider-thumb {
+										  -webkit-appearance: none;
+										  width: 0; 
+										  height: 0; 
+										  border-left: 10px solid transparent;
+										  border-right: 10px solid transparent;
+										  border-bottom: 15px solid 	#1E88E5;
+										  margin-top: 10px;
+										  -webkit-transition: border 1000ms ease;
+										  transition: border 1000ms ease;
+										}
+								</style>
+
+								<div class="panel panel-body row" style="color: red;">
+									<div class="col-md-1"></div>
+									<div class="col-md-2" style="text-align: right; color:lightgrey;">
+										<b>REACTIVE</b>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-2" style="text-align: center; color:#8bc34a;">
+										<b>RESPONSIVE</b>
+									</div>
+									<div class="col-md-2"></div>
+									<div class="col-md-2">
+										<b>REACTIVE</b>
+									</div>
+									<div class="col-md-1"></div>
+								</div>
+
+								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0">
+									<div class="panel-body">
+
+										<div class="col-md-12 row" style="margin: 20px 0px;">
+											<div class="col-md-12">
+												<div class="col-md-1"></div>
+												<div class="col-md-2" style="text-align: right; color: lightgrey;">
+													<b><input type="text" class="form-control" ng-model="keys.dummy_keyword" style="text-align: center;"></b>
+												</div>
+												<div class="col-md-2"></div>
+												<div class="col-md-2" style="text-align: center;">
+													<b><input type="text" class="form-control" ng-model="keys.keyword" style="text-align: center;"></b>
+												</div>
+												<div class="col-md-2"></div>
+												<div class="col-md-2">
+													<b><input type="text" class="form-control" ng-model="temp_content[$index].keyword" style="text-align: center;"></b>
+												</div>
+												<div class="col-md-1"></div>
+											</div><br><br>
+											<div class="col-md-12">
+												<div class="col-md-2"></div>
+												<div class="col-md-8">
+													<input type="range" min="-2" max="2" class="range" step="0.1" ng-model="temp_content[$index].assessor_key_rating">
+												</div>
+												<div class="col-md-2"></div>
+											</div><br><br><br>
+											<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
+													
+													<span ng-if="temp_content[$index].assessor_key_rating == 0"><input type="text" ng-model="keys.balancing_description[0].desc" class="form-control" style="text-align: center;"></span>
+													<span ng-if="temp_content[$index].assessor_key_rating > 0 && temp_content[$index].assessor_key_rating < 1"><input type="text" ng-model="keys.balancing_description[1].desc" class="form-control" style="text-align: center;"></span>
+													<span ng-if="temp_content[$index].assessor_key_rating >= 1"><input type="text" ng-model="keys.balancing_description[2].desc" class="form-control" style="text-align: center;"></span>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
+							</div>			
 							
 						</div>
                     </div>

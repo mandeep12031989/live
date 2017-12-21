@@ -8,12 +8,19 @@
 
 <div id="sb-site" ng-show="!loading" ng-init="load_questions()">
 	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.message == 'Done'" class="w3-animate-top">
+		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">check_circle</i>
+			<span data-notify="message">Progress Saved !</span>
+		</div>
+	</div>
+	
     <div id="page-wrapper">
         <div id="page-content-wrapper">
 			
             <div id="page-content-margin">
 				
-				<div class="row col-sm-offset-2">
+				<!--<div class="row col-sm-offset-2">
 					<div class="col-sm-8 box" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black;">
 						<h3>Instructions for attempting below questions</h3>
 						<ol>
@@ -22,7 +29,7 @@
 							<li> Mention both negative and positive qualities in your answers.</li>
 						</ol>
 					</div>             
-				</div><br><br>
+				</div><br><br>-->
 				
                     <div class="container">
 						<div class="panel">
@@ -38,7 +45,7 @@
 													<label class="wizard-step">1</label>
 											  <span class="wizard-description">
 												 Question 1
-												 <small>Likes and Dislikes</small>
+												 <small>Qualities You Like in People</small>
 											  </span>
 												</a>
 											</li>
@@ -47,7 +54,7 @@
 													<label class="wizard-step">2</label>
 											  <span class="wizard-description">
 												 Question 2
-												 <small>Described by your closed friends</small>
+												 <small>How Close Friends Describe You</small>
 											  </span>
 												</a>
 											</li>
@@ -56,11 +63,21 @@
 													<label class="wizard-step">3</label>
 											  <span class="wizard-description">
 												 Question 3
-												 <small>Inner Insights</small>
+												 <small>Describe Yourself</small>
 											  </span>
 												</a>
 											</li>
 										</ul>
+										
+										<div class="tab-content">
+											<h3 style="font-weight:bold;">
+											   Sample:
+											</h3>
+											<img src="./images/q1.svg" ng-show="RQ_num == 1">
+											<img src="./images/q2.svg" ng-show="RQ_num == 2">
+											<img src="./images/q3.svg" ng-show="RQ_num == 3">
+										</div>
+										
 										<div class="tab-content">
 
 												<div class="content-box" ng-show="RQ_num == 1">
@@ -68,7 +85,12 @@
 													   What kind of people you like? What qualities you like in them?
 													</h4>
 													<div class="content-box-wrapper">
-														<textarea rows="2" required class="form-control" ng-model="quesDetails.question.RQ1"></textarea>
+														<textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ1" placeholder="Please write in adjectives, keyword or one-liner sentence
+1.
+2.
+3.
+4.
+5."></textarea>
 													</div>
 												</div>
 
@@ -77,21 +99,37 @@
 														How would a close friend of yours describe you? Please mention both positive and negative qualities.
 													</h4>
 													<div class="content-box-wrapper">
-													   <textarea rows="2" required class="form-control" ng-model="quesDetails.question.RQ2"></textarea>
+													   <textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ2" placeholder="Please write both positive and negative qualities
+Positives
+1.
+2.
+3.
+4.
+5.
+Negatives
+1.
+2.
+3.
+4.
+5."></textarea>
 													</div>
 												</div>
 
 												<div class="content-box" ng-show="RQ_num == 3">
 													<h4 class="content-box-header bg-blue">
-														Mention positive and negative qualities about yourself that are not covered in question 2. <br>
-Please also mention negatives qualities that you have improved in last few years.
+														Mention positive and negative qualities about yourself that are not covered in Question 2. <br> Please also mention negatives qualities that you have improved in last few years.
 													</h4>
 													<div class="content-box-wrapper">
-														<textarea rows="2" required class="form-control" ng-model="quesDetails.question.RQ3"></textarea>
+														<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ3" placeholder="Positives
+1.
+2.
+Negatives - Please also mention qualities which you have improved in past sometime
+1.
+2."></textarea>
 													</div>
 												</div>
 
-												<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Prev</a>
+												<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Previous</a>
 												<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 3" style="color: white;">Next</a>
 												<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 3" style="color: white;">Save</a>
 												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 3" style="color: white;">Submit</a>

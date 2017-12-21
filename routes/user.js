@@ -5,6 +5,7 @@ var router = express.Router();
 var sanitize = require('mongo-sanitize');
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
+var CryptoJS = require('node-cryptojs-aes').CryptoJS;
 var child_process = require('child_process');
 
 var User = require('../models/user.js');
@@ -15,7 +16,7 @@ var mailer = require('../mailer.js');
 
 router.route('/list')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
-    User.find({}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true}).sort('-important_date.registration')
+    User.find({}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true}).sort('-important_date.registration')
     .exec(function(err, user){
         if(err)
             next(err);
@@ -27,7 +28,7 @@ router.route('/fac_list')
 .get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
 	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true})
 		.exec(function(e, f){
-			User.find({facilitator_name: f.firstname + ' ' + f.lastname}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true}).sort('-important_date.registration')
+			User.find({facilitator_name: f.firstname + ' ' + f.lastname}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true}).sort('-important_date.registration')
 				.exec(function(err, user){
 					if(err)
 						next(err);
@@ -433,7 +434,7 @@ router.route('/profile/getProfile')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'profile': true})
+    User.findOne({_id: id}, {'firstname': true, 'lastname': true, 'profile': true})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -723,6 +724,7 @@ router.route('/resetpsw/:email')                            // Client Side Neede
 		user.save(function (err, user) {
             if(err)
                 next(err);
+			
 			mailer.lost_details({username: user.username, token: token}, function(ret){
 				var res_from_mailer = ret;
 				//console.log(res_from_mailer);
@@ -736,6 +738,7 @@ router.route('/resetpsw/:email')                            // Client Side Neede
 					return res.status(200).json({ success: true, message: 'Mail Sent... Please Check Your Inbox !' });
 				}
 			});
+			
         });
 			
     });
@@ -773,6 +776,12 @@ router.route('/resetpsw/:email/:token')                            // Client Sid
 					}
 					else {//PSW START
 						user.password_reset_token = false;
+						
+						var scrt = 'portal\/\/\'*iD';
+						var decrypted = CryptoJS.AES.decrypt(body.password, scrt);
+						//console.log(decrypted.toString(CryptoJS.enc.Utf8));
+						body.password = decrypted.toString(CryptoJS.enc.Utf8);
+						
 						user.password = body.password;
 						user.save(function (err,user) {
 							if (err) {
@@ -817,6 +826,12 @@ router.route('/auth/register')
             body.firstname = body.firstname.charAt(0).toUpperCase() + body.firstname.slice(1);
             body.lastname = body.lastname.toLowerCase();
             body.lastname = body.lastname.charAt(0).toUpperCase() + body.lastname.slice(1);*/
+		
+			//console.log(body);
+			var scrt = 'portal\/\/\'*iD';
+			var decrypted = CryptoJS.AES.decrypt(body.password, scrt);
+			//console.log(decrypted.toString(CryptoJS.enc.Utf8));
+			body.password = decrypted.toString(CryptoJS.enc.Utf8);
             
             var user = new User(body);
 
@@ -839,6 +854,12 @@ router.route('/auth/login')
 
         if(!user)
             return res.status(501).json({ message: 'Incorrect Email-ID !' });
+		
+		//console.log(body);
+		var scrt = 'portal\/\/\'*iD';
+		var decrypted = CryptoJS.AES.decrypt(body.password, scrt);
+		//console.log(decrypted.toString(CryptoJS.enc.Utf8));
+		body.password = decrypted.toString(CryptoJS.enc.Utf8);
 
         user.comparePassword(body.password, function(err, isMatch) {
             if (isMatch) {

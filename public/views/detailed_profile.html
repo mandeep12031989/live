@@ -1,13 +1,13 @@
     <style>
     
-        .left_border_green{
-            border-left:10px solid green;
+        .left_border_str{
+            border-left:10px solid #00b0ff;
         }
-        .left_border_yellow{
-            border-left:10px solid yellow;
+        .left_border_prt{
+            border-left:10px solid #BBDEFB;
         }
-        .left_border_red{
-            border-left:10px solid red;
+        .left_border_dnt{
+            border-left:10px solid #efebe9;
         }
 		
 		.mini_style{
@@ -41,14 +41,14 @@
                     <div class="container">
                 
                         <div id="page-title">
-                            <h2>My Detailed Profile</h2>
+                            <h2>Detailed View</h2>
                         </div>
 
                         <div class="row">
                             <div class="col-md-offset-2 col-sm-2">
 
                                 <div class="panel">
-                                    <div class="panel-heading" ng-class="'left_border_green'">
+                                    <div class="panel-heading" ng-class="'left_border_str'">
                                         Relate Fully
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                             <div class="col-md-offset-1 col-sm-2">
 
                                 <div class="panel">
-                                    <div class="panel-heading" ng-class="'left_border_yellow'">
+                                    <div class="panel-heading" ng-class="'left_border_prt'">
                                         Relate Partially
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                             <div class="col-md-offset-1 col-sm-2">
 
                                 <div class="panel">
-                                    <div class="panel-heading" ng-class="'left_border_red'">
+                                    <div class="panel-heading" ng-class="'left_border_dnt'">
                                         Do not Relate at all
                                     </div>
                                 </div>
@@ -85,10 +85,10 @@
                                 <div class="example-box-wrapper">
                                     <div class="row">
                                         
-                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
-                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                        <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
                                                 <div class="panel-heading image-box">
-                                                    <div class="image-content" style="margin-top: 22px;">                        
+                                                    <div class="image-content" style="margin-top: 16px;">                        
                                                         <div class="meta-box meta-box-bottom">
                                                             <h3 class="meta-heading">{{keys.keyword}}</h3>
                                                         </div>                            
@@ -99,7 +99,7 @@
                          
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
-                                                    <div class="row" style="margin: 0 auto; text-align: center;">
+                                                    <div class="row" style="margin: 0 auto;">
 														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
 														
                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
@@ -113,10 +113,9 @@
                                                         <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
                                                     </div><br>
                                 
-                                                    <li class="">
+                                                    <li class="" ng-if="keys.comment">
                               
                                                         <a href="" class="list-group-item">
-                                                            <i class="glyph-icon font-red icon-comment"></i>
                                                             {{keys.comment}}
                                                         </a>
                                                     </li>
@@ -139,10 +138,10 @@
                                 <div class="example-box-wrapper">
                                     <div class="row">
                                         
-                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                        <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
                                                 <div class="panel-heading image-box">
-                                                    <div class="image-content" style="margin-top: 22px;">                        
+                                                    <div class="image-content" style="margin-top: 16px;">                        
                                                         <div class="meta-box meta-box-bottom">
                                                             <h3 class="meta-heading">{{keys.keyword}}</h3>
                                                         </div>                            
@@ -167,8 +166,8 @@
                                 
                                                     <li class="">
                               
-                                                        <a href="" class="list-group-item">
-                                                            <i class="glyph-icon font-red icon-comment"></i>
+                                                        <a href="" class="list-group-item" ng-if="keys.comment">
+                                                            
                                                             {{keys.comment}}
                                                         </a>
                                                     </li>
@@ -191,10 +190,10 @@
                                 <div class="example-box-wrapper">
                                     <div class="row">
                                         
-                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                        <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
                                                 <div class="panel-heading image-box">
-                                                    <div class="image-content" style="margin-top: 22px;">                        
+                                                    <div class="image-content" style="margin-top: 16px;">                        
                                                         <div class="meta-box meta-box-bottom">
                                                             <h3 class="meta-heading">{{keys.keyword}}</h3>
                                                         </div>                            
@@ -219,8 +218,8 @@
                                 
                                                     <li class="">
                               
-                                                        <a href="" class="list-group-item">
-                                                            <i class="glyph-icon font-red icon-comment"></i>
+                                                        <a href="" class="list-group-item" ng-if="keys.comment">
+                                                            
                                                             {{keys.comment}}
                                                         </a>
                                                     </li>
@@ -243,10 +242,10 @@
                                 <div class="example-box-wrapper">
                                     <div class="row">
                                         
-                                        <div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4">
-                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">                        
+                                        <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
                                                 <div class="panel-heading image-box">
-                                                    <div class="image-content" style="margin-top: 22px;">                        
+                                                    <div class="image-content" style="margin-top: 16px;">                        
                                                         <div class="meta-box meta-box-bottom">
                                                             <h3 class="meta-heading">{{keys.keyword}}</h3>
                                                         </div>                            
@@ -271,8 +270,8 @@
                                 
                                                     <li class="">
                               
-                                                        <a href="" class="list-group-item">
-                                                            <i class="glyph-icon font-red icon-comment"></i>
+                                                        <a href="" class="list-group-item" ng-if="keys.comment">
+                                                            
                                                             {{keys.comment}}
                                                         </a>
                                                     </li>

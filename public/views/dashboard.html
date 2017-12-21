@@ -19,209 +19,203 @@
 						</div>
 
                         <br>
+						<ul class="progress-tracker" style="font-size: 15px;">
+						  <li class="progress-step" ng-class="percent.reflective_filled ? 'is-complete' : 'is-active'">
+							<span class="progress-marker">1</span>
+							<span class="progress-title" style="margin-left: -50px;">Reflective Questions</span>
+						  </li>
+						  <li class="progress-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled) ? 'is-complete' : (percent.reflective_filled ? 'is-active' : '')">
+							<span class="progress-marker">2</span>
+							<span class="progress-title" style="margin-left: -35px;">Questionnaire</span>
+						  </li>
+						  <li class="progress-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile) ? 'is-complete' : ((percent.reflective_filled && percent.questionnaire_filled) ? 'is-active' : '')">
+							<span class="progress-marker">3</span>
+							<span class="progress-title" style="margin-left: -28px;">Select Profile</span>
+						  </li>
+						  <li class="progress-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled) ? 'is-complete' : ((percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile) ? 'is-active' : '')">
+							<span class="progress-marker">4</span>
+							<span class="progress-title" style="margin-left: -18px;">Fill Profile</span>
+						  </li>
+						  <li class="progress-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled) ? 'is-complete' : ''">
+							<span class="progress-marker">5</span>
+							<span class="progress-title" style="margin-left: -54px;">View Profile</span>
+						  </li>
+						</ul>
+						<br>
+						
 						<div class="row">
-							<div class="col-md-6" style="text-align: center;">
-								<div class="clearfix" style="display: inline-block;">
+							
+							<div class="col-md-4" style="text-align: center;">
+								<div style="display: inline-block;">
 
 									<div class="c100 big" ng-class="'p'+percent.percentage">
-										<span>{{percent.percentage}}%</span>
+										<span>{{percent.percentage}}% </span>
+										
 										<div class="slice">
 											<div class="bar"></div>
 											<div class="fill"></div>
 										</div>
 									</div>
 
-								</div><br><br><br>
-
-								<div class="col-md-6">
-										<div class="tile-box tile-box-alt mrg20B bg-gray">
-											<div class="tile-header">
-												Refelctive Questions
-											</div>
-                                            <div class="tile-content-wrapper">
-												<i class="glyph-icon icon-pencil"></i>
-												<div class="tile-content">
-													<span ng-if="!percent.reflective_filled">Proceed&nbsp;&nbsp;&nbsp;</span>
-													<span ng-if="percent.reflective_filled">Completed</span>
-													
-												</div>
-												<br><br>
-											</div>
-											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="reflective-questions">
-												Explore
-												<i class="glyph-icon icon-arrow-right"></i>
-											</a>
-										</div>
 								</div>
-
-								<div class="col-md-6">
-										<div class="tile-box tile-box-alt mrg20B bg-purple">
-											<div class="tile-header">
-												Questionnaire
-											</div>
-                                            <div class="tile-content-wrapper" ng-if="!percent.reflective_filled">
-												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
-													<span style="font-size: 17px;">Fill Reflective Questions</span>
-												</div>
-											</div>
-											<div class="tile-content-wrapper" ng-if="percent.reflective_filled">
-												<i class="glyph-icon icon-pencil"></i>
-												<div class="tile-content">
-													<span ng-if="!percent.questionnaire_filled">Proceed&nbsp;&nbsp;&nbsp;</span>
-													<span ng-if="percent.questionnaire_filled">Completed</span>
-													
-												</div>
-												<br><br>
-											</div>
-											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="questionnaire" ng-if="percent.reflective_filled">
-												Explore
-												<i class="glyph-icon icon-arrow-right"></i>
-											</a>
-											<span class="tile-footer tooltip-button" ng-if="!percent.reflective_filled">Locked<i class="glyph-icon icon-lock"></i></span>
-										</div>
-								</div>
-
 							</div>
-
-							<div class="col-md-6">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="tile-box tile-box-alt mrg20B bg-green">
-											<div class="tile-header">
-												Trueself Profile
-											</div>
-                                            <div class="tile-content-wrapper" ng-if="percent.questionnaire_filled && !percent.selected_profile">
-												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
-													<span style="font-size: 17px;">Select Profile</span>
-												</div>
-											</div>
-                                            <div class="tile-content-wrapper" ng-if="!percent.questionnaire_filled && !percent.selected_profile">
-												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
-													<span style="font-size: 17px;">Fill Questionnaire</span>
-												</div>
-											</div>
-											<div class="tile-content-wrapper" ng-if="percent.questionnaire_filled && percent.selected_profile">
-												<i class="glyph-icon icon-book"></i>
-												<div class="tile-content">
-													<span ng-if="!percent.profile_filled">Proceed&nbsp;&nbsp;&nbsp;</span>
-													<span ng-if="percent.profile_filled">Completed</span>
-													
-												</div>
-												<br><br>
-											</div>
-											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="userProfile" ng-if="percent.questionnaire_filled && percent.selected_profile">
-												Explore
-												<i class="glyph-icon icon-arrow-right"></i>
-											</a>
-											<span class="tile-footer tooltip-button" ng-if="!percent.selected_profile || !percent.questionnaire_filled">Locked<i class="glyph-icon icon-lock"></i></span>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="tile-box tile-box-alt mrg20B bg-red">
-											<div class="tile-header">
-												Detailed Profile
-											</div>
-                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
-												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
-													<span style="font-size: 17px;">Fill Trueself Profile</span>
-												</div>
-											</div>
-											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
-												<i class="glyph-icon icon-archive"></i>
-												<div class="tile-content">
-													<span>Completed</span>
-													
-												</div>
-												<br><br>
-											</div>
-											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="detailed-profile" ng-if="percent.profile_filled">
-												Explore
-												<i class="glyph-icon icon-arrow-right"></i>
-											</a>
-											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="tile-box tile-box-alt mrg20B bg-orange">
-											<div class="tile-header">
-												Precise Profile
-											</div>
-                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
-												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
-													<span style="font-size: 17px;">Fill Trueself Profile</span>
-												</div>
-											</div>
-											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
-												<i class="glyph-icon icon-envelope"></i>
-												<div class="tile-content">
-													<span>Completed</span>
-													
-												</div>
-												<br><br>
-											</div>
-											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="precise-profile" ng-if="percent.profile_filled">
-												Explore
-												<i class="glyph-icon icon-arrow-right"></i>
-											</a>
-											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="tile-box tile-box-alt mrg20B bg-blue-alt">
-											<div class="tile-header">
-												Balancing Profile
-											</div>
-                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
-												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
-													<span style="font-size: 17px;">Fill Trueself Profile</span>
-												</div>
-											</div>
-											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
-												<i class="glyph-icon icon-bar-chart"></i>
-												<div class="tile-content">
-													<span>Completed</span>
-												   
-												</div>
-												<br><br>
-											</div>
-											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="balancing-view" ng-if="percent.profile_filled">
-												Explore
-												<i class="glyph-icon icon-arrow-right"></i>
-											</a>
-											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="tile-box tile-box-alt mrg20B bg-grey">
-											<div class="tile-header">
-												Peer Review
-											</div>
-                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
-												<div class="tile-content" style="text-align: center; margin-bottom: 26px; margin-top: 10px;">
-													<span style="font-size: 17px;">Fill Trueself Profile</span>
-												</div>
-											</div>
-											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
-												<i class="glyph-icon icon-share-alt"></i>
-												<div class="tile-content">
-													<span>Reviewed Yet?</span>
-												   
-												</div>
-												<br><br>
-											</div>
-											<a href="" class="tile-footer tooltip-button" data-placement="bottom" ng-if="percent.profile_filled" ng-click="changeView()">
-												Share
-												<i class="glyph-icon icon-arrow-right"></i>
-											</a>
-											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+							<div class="col-sm-8">
+								<div class="col-sm-6">
+									<div class="card card-stats" ui-sref="reflective-questions">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">1</div>
+										<div class="card-header" data-background-color="green" style="font-weight: bold;" ng-if="percent.reflective_filled">1</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Reflective Questions</p>
+											<h3 class="title">
+												<small ng-if="percent.reflective_filled">COMPLETED</small>
+												<small ng-if="!percent.reflective_filled">PROCEED</small>
+											</h3>
 										</div>
 									</div>
 								</div>
-
+								<div class="col-sm-6">
+									<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.questionnaire_filled">2</div>
+										<div class="card-header" data-background-color="green" style="font-weight: bold;" ng-if="percent.questionnaire_filled">2</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Questionnaire</p>
+											<h3 class="title">
+												<small ng-if="percent.questionnaire_filled">COMPLETED</small>
+												<small ng-if="!percent.questionnaire_filled">PROCEED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ng-if="!percent.reflective_filled">
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;">2</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Questionnaire</p>
+											<h3 class="title">
+												<small>FILL REFLECTIVE QUESTIONS</small>
+											</h3>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="card card-stats" ui-sref="select-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;">3</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Trueself Profile</p>
+											<h3 class="title">
+												<small>SELECT PROFILE</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">4</div>
+										<div class="card-header" data-background-color="green" style="font-weight: bold;" ng-if="percent.profile_filled">4</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Trueself Profile</p>
+											<h3 class="title">
+												<small ng-if="percent.profile_filled">COMPLETED</small>
+												<small ng-if="!percent.profile_filled">PROCEED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;" ng-if="!percent.selected_profile">3</div>
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;" ng-if="percent.selected_profile">4</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Trueself Profile</p>
+											<h3 class="title">
+												<small>FILL QUESTIONNAIRE</small>
+											</h3>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="card card-stats" ng-click="changeView()" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+										<div class="card-header" data-background-color="green" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Peer Review</p>
+											<h3 class="title">
+												<small>COMPLETED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Peer Review</p>
+											<h3 class="title">
+												<small>FILL TRUESELF PROFILE</small>
+											</h3>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="col-sm-4">
+									<div class="card card-stats" ui-sref="detailed-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+										<div class="card-header" data-background-color="green" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Detailed View</p>
+											<h3 class="title">
+												<small>COMPLETED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Detailed View</p>
+											<h3 class="title">
+												<small>FILL TRUESELF PROFILE</small>
+											</h3>
+										</div>
+									</div>
+								</div>
+							
+								<div class="col-sm-4">
+									<div class="card card-stats" ui-sref="precise-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+										<div class="card-header" data-background-color="green" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Precised View</p>
+											<h3 class="title">
+												<small>COMPLETED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Precised View</p>
+											<h3 class="title">
+												<small>FILL TRUESELF PROFILE</small>
+											</h3>
+										</div>
+									</div>
+								</div>
+							
+								<div class="col-sm-4">
+									<div class="card card-stats" ui-sref="balancing-view" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+										<div class="card-header" data-background-color="green" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Balanced View</p>
+											<h3 class="title">
+												<small>COMPLETED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;">5</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Balanced View</p>
+											<h3 class="title">
+												<small>FILL TRUESELF PROFILE</small>
+											</h3>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-
-                    </div>
+				</div>
+<!----------------------------------------------------------------------------------------------------------------------------------------->
+						
 					<div class="container" ng-if="to_review">
 						<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.success == true" class="w3-animate-top">
 							<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">

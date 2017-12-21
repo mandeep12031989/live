@@ -16,7 +16,7 @@
 				<div class="row col-sm-offset-1">
 					<!--  <div class="col-sm-1"><h2><span class="label label-danger">Imp.</span></h2></div>  -->   
                     <div class="col-sm-10" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black;">
-						<h3>Instructions for attempting below questions</h3>
+						<h3>Instructions for attempting below Questionnaire</h3>
                         <ol>
                             <li>Read the following questions and choose one option that best describes you.</li>
                             <li>If you relate (or do not relate) with both options, choose the one that has been true for most part of your life.</li>
@@ -32,7 +32,7 @@
                         <div class="panel">
                             <div class="panel-body">
                                 <h1 style="text-align:center; font-weight:bold;" class="title-hero">
-                                   Questionnaire
+                                   <b>Questionnaire</b>
                                 </h1>
                                 <div class="example-box-wrapper">
                                     <div id="form-wizard-3" class="form-wizard">
@@ -41,7 +41,7 @@
 
                                                 <div class="content-box" ng-repeat="q in questions">
                                                     <h4 class="content-box-header bg-blue">
-                                                       {{q.num + '. ' + q.desc}}
+                                                       <b>{{q.num + '. ' + q.desc}}</b>
                                                     </h4>
 													<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
                                                     <input type="radio" ng-model="answers[$index]" value="1"> {{q.keywords[0].keyword}}<br>

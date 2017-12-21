@@ -1,3 +1,9 @@
+<style>
+	.bg-tab {
+		background-color: white;
+	}
+</style>
+
 <span ng-show="loading">
     <div class="spinner">
         <div class="bounce1"></div>
@@ -16,14 +22,14 @@
                 <ul id="sidebar-menu">
                     <li class="header"><span>Analysis</span></li>
                     <li ng-click="tab_num = 1">
-                        <a href="">
+                        <a href="" ng-class="tab_num == 1 ? 'bg-tab':''">
                             <i class="glyph-icon icon-dashboard"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     
                     <li ng-click="tab_num = 2">
-                        <a href="">
+                        <a href="" ng-class="tab_num == 2 ? 'bg-tab':''">
                             <i class="glyph-icon icon-th-list"></i>
                             <span>List Users</span>
                         </a>
@@ -31,7 +37,7 @@
                     
                     <li class="header"><span>Master Questionnaire</span></li>
                     <li ng-click="tab_num = 6">
-                        <a href="">
+                        <a href="" ng-class="tab_num == 6 ? 'bg-tab':''">
                             <i class="glyph-icon icon-cog"></i>
                             <span>View / Edit</span>
                         </a>
@@ -39,13 +45,13 @@
                     
                     <li class="header"><span>Master Parent Keywords</span></li>
                     <li ng-click="tab_num = 3">
-                        <a href="">
+                        <a href="" ng-class="tab_num == 3 ? 'bg-tab':''">
                             <i class="glyph-icon icon-cog"></i>
                             <span>View / Edit</span>
                         </a>
                     </li>
                     <li ng-click="tab_num = 4">
-                        <a href="">
+                        <a href="" ng-class="tab_num == 4 ? 'bg-tab':''">
                             <i class="glyph-icon icon-upload"></i>
                             <span>Add NEW</span>
                         </a>
@@ -53,7 +59,7 @@
                     
                     <li class="header"><span>Notifications</span></li>
                     <li ng-click="tab_num = 5">
-                        <a href="">
+                        <a href="" ng-class="tab_num == 5 ? 'bg-tab':''">
                             <i class="glyph-icon icon-comments"></i>
                             <span>Latest Updates</span>
                         </a>
@@ -196,16 +202,18 @@
                                             <th>#</th>
 											<th ng-click="sort('username')">Email-ID <span class="glyph-icon icon-sort" ng-show="sortKey=='username'" ng-class="{'glyph-icon-chevron-up':reverse,'glyph-icon-chevron-down':!reverse}"></span></th>
 											<th ng-click="sort('firstname')">Name <span class="glyph-icon icon-sort" ng-show="sortKey=='firstname'"></span></th>
-											<th ng-click="sort('login')">Last Logged-In <span class="glyph-icon icon-sort" ng-show="sortKey=='login'"></span></th>
-											<th ng-click="sort('register')">Registered <span class="glyph-icon icon-sort" ng-show="sortKey=='register'"></span></th>
-											<th>Admin</th>
-											<th>Facilitator</th>
+											<th ng-click="sort('profile.profile_number')">Type <span class="glyph-icon icon-sort" ng-show="sortKey=='profile.profile_number'"></span></th>
+											<th ng-click="sort('important_date.last_login')">Last Logged-In <span class="glyph-icon icon-sort" ng-show="sortKey=='important_date.last_login'"></span></th>
+											<th ng-click="sort('important_date.registration')">Registered <span class="glyph-icon icon-sort" ng-show="sortKey=='important_date.registration'"></span></th>
+											<th ng-click="sort('are_you.admin')">Admin<span class="glyph-icon icon-sort" ng-show="sortKey=='are_you.admin'"></span></th>
+											<th ng-click="sort('are_you.facilitator')">Facilitator <span class="glyph-icon icon-sort" ng-show="sortKey=='are_you.facilitator'"></span></th>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">  
 												<td>{{$index + 1}}.</td>
 												<td><a ui-sref="anyUser({id: user._id})" target="_blank">{{user.username}}</a></td>
 												<td><a ui-sref="anyUser({id: user._id})" target="_blank">{{user.firstname + ' ' + user.lastname}}</a></td> 
+												<td>{{user.profile.profile_number}}</td> 
 												<td>{{user.important_date.last_login | date: 'medium'}}</td> 
 												<td>{{user.important_date.registration | date: 'medium'}}</td>
 												<td><input type="checkbox" ng-model="user.are_you.admin" ng-click="save_admfac(user._id, user.are_you)"></td>

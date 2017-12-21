@@ -1,19 +1,25 @@
     <style>
     
-        .left_border_green{
-            border: 5px solid #2196F3;
+        .left_border_str{
+            border: 5px solid #00b0ff;
             border-radius: 15px;
-            padding: 10px;  
+            padding: 15px 20px;
+			font-size: 16px;
+			font-weight: bold;
         }
-        .left_border_yellow{
+        .left_border_prt{
            border: 5px solid #BBDEFB;
             border-radius: 15px;
-            padding: 10px;
+            padding: 15px 20px;
+			font-size: 16px;
+			font-weight: bold;
         }
-        .left_border_red{
-            border: 5px solid #9E9E9E;
+        .left_border_dnt{
+            border: 5px solid #efebe9;
             border-radius: 15px;
-            padding: 10px;
+            padding: 15px 20px;
+			font-size: 16px;
+			font-weight: bold;
         }
 
     </style>
@@ -35,36 +41,30 @@
                     <div class="container">                    
 
                         <div id="page-title">
-                            <h2>My Precise Profile</h2>
+                            <h2>Precise View</h2>
                         </div>
 
                         <div class="row" style="text-align: center;">
                             <div class="col-md-offset-2 col-sm-2">
 
-                                <div class="panel">
-                                    <div class="panel-heading" ng-class="'left_border_green'">
-                                        Relate Fully
-                                    </div>
+                                <div class="panel" ng-class="'left_border_str'">
+									Relate Fully
                                 </div>
 
                             </div>
                             
                             <div class="col-md-offset-1 col-sm-2">
 
-                                <div class="panel">
-                                    <div class="panel-heading" ng-class="'left_border_yellow'">
-                                        Relate Partially
-                                    </div>
+                                <div class="panel" ng-class="'left_border_prt'">
+									Relate Partially
                                 </div>
 
                             </div>
                             
                             <div class="col-md-offset-1 col-sm-2">
 
-                                <div class="panel">
-                                    <div class="panel-heading" ng-class="'left_border_red'">
-                                        Do not Relate at all
-                                    </div>
+                                <div class="panel" ng-class="'left_border_dnt'">
+									Do not Relate at all
                                 </div>
 
                             </div>
@@ -72,204 +72,49 @@
                         </div>
 <!--                                                    SECTION 1                                                          -->
                         <div class="panel">
-                            <div class="panel-body">
-                                <h2 style="text-align:center" id="page-title">
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
                                     <b>Professional Values and Work<br>Culture Preference</b>
                                 </h2>
-                                <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-2" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
-                                            
-                                            <div class="panel-layout">
-                                                <div class="panel-box">
-                                                    
-                                                    <div class="panel-content image-box" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">
-
-                                                        <div class="image-content">
-                                                            
-                                                            <div class="meta-box meta-box-bottom">
-                                                                <h3 class="meta-heading">{{keys.keyword}}</h3>
-                                           
-                                                            </div>
-                            
-                                                        </div>
-                                                        <img src="./assets/image-resources/blurred-bg/blurred-bg-16.jpg" alt="">
-
-                                                    </div>
-                               
-                                                    <ul class="list-group list-group-separator mrg0A row list-group-icons">
-
-                                                        <li class="">
-                              
-                                                            <a class="list-group-item">
-                                                                <i class="glyph-icon font-red icon-comment"></i>
-                                                                {{keys.comment}}
-                                                            </a>
-                                                        </li>
-                                    
-                                                    </ul>
-                           
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        
-                                    </div>
-            
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1" style="margin: 25px auto; display: inline-block;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">{{keys.keyword}}</span>
                                 </div>
                             </div>
                         </div>
 <!--                                                    SECTION 2                                                          -->
                         <div class="panel">
-                            <div class="panel-body">
-                                <h2 style="text-align:center" id="page-title">
-                                    <b>Strengths</b>
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
+                                    <b>Professional Strengths</b>
                                 </h2>
-                                <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-2" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-                                            
-                                            <div class="panel-layout">
-                                                <div class="panel-box">
-                                                    
-                                                    <div class="panel-content image-box" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">
-
-                                                        <div class="image-content">
-                                                            
-                                                            <div class="meta-box meta-box-bottom">
-                                                                <h3 class="meta-heading">{{keys.keyword}}</h3>
-                                           
-                                                            </div>
-                            
-                                                        </div>
-                                                        <img src="./assets/image-resources/blurred-bg/blurred-bg-16.jpg" alt="">
-
-                                                    </div>
-                               
-                                                    <ul class="list-group list-group-separator mrg0A row list-group-icons">
-
-                                                        <li class="">
-                              
-                                                            <a class="list-group-item">
-                                                                <i class="glyph-icon font-red icon-comment"></i>
-                                                                {{keys.comment}}
-                                                            </a>
-                                                        </li>
-                                    
-                                                    </ul>
-                           
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        
-                                    </div>
-            
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="display: inline-block; margin: 25px auto;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">{{keys.keyword}}</span>
                                 </div>
                             </div>
                         </div>
 <!--                                                    SECTION 3                                                          -->
                         <div class="panel">
-                            <div class="panel-body">
-                                <h2 style="text-align:center" id="page-title">
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
                                     <b>Learning Needs</b>
                                 </h2>
-                                <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-2" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-                                            
-                                            <div class="panel-layout">
-                                                <div class="panel-box">
-                                                    
-                                                    <div class="panel-content image-box" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">
-
-                                                        <div class="image-content">
-                                                            
-                                                            <div class="meta-box meta-box-bottom">
-                                                                <h3 class="meta-heading">{{keys.keyword}}</h3>
-                                           
-                                                            </div>
-                            
-                                                        </div>
-                                                        <img src="./assets/image-resources/blurred-bg/blurred-bg-16.jpg" alt="">
-
-                                                    </div>
-                               
-                                                    <ul class="list-group list-group-separator mrg0A row list-group-icons">
-
-                                                        <li class="">
-                              
-                                                            <a class="list-group-item">
-                                                                <i class="glyph-icon font-red icon-comment"></i>
-                                                                {{keys.comment}}
-                                                            </a>
-                                                        </li>
-                                    
-                                                    </ul>
-                           
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        
-                                    </div>
-            
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3" style="display: inline-block; margin: 25px auto;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">{{keys.keyword}}</span>
                                 </div>
                             </div>
                         </div>
 <!--                                                    SECTION 4                                                          -->
                         <div class="panel">
-                            <div class="panel-body">
-                                <h2 style="text-align:center" id="page-title">
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
                                     <b>Communication Style</b>
                                 </h2>
-                                <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-2" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4">
-                                            
-                                            <div class="panel-layout">
-                                                <div class="panel-box">
-                                                    
-                                                    <div class="panel-content image-box" ng-class="keys.key_rating == 0 ? 'left_border_red' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_yellow' : 'left_border_green')">
-
-                                                        <div class="image-content">
-                                                            
-                                                            <div class="meta-box meta-box-bottom">
-                                                                <h3 class="meta-heading">{{keys.keyword}}</h3>
-                                           
-                                                            </div>
-                            
-                                                        </div>
-                                                        <img src="./assets/image-resources/blurred-bg/blurred-bg-16.jpg" alt="">
-
-                                                    </div>
-                               
-                                                    <ul class="list-group list-group-separator mrg0A row list-group-icons">
-
-                                                        <li class="">
-                              
-                                                            <a class="list-group-item">
-                                                                <i class="glyph-icon font-red icon-comment"></i>
-                                                                {{keys.comment}}
-                                                            </a>
-                                                        </li>
-                                    
-                                                    </ul>
-                           
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        
-                                    </div>
-            
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4" style="display: inline-block; margin: 25px auto;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">{{keys.keyword}}</span>
                                 </div>
                             </div>
                         </div>
+						
 						<button class="btn btn-success" ui-sref="dashboard" style="float:right;">Back to Dashboard</button>
                     </div>
             </div>

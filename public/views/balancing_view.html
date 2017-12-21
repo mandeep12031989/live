@@ -16,7 +16,7 @@
                     <div class="container">
                 
                         <div id="page-title">
-                            <h2>My Balanced Profile</h2>
+                            <h2>Balanced View</h2>
                         </div>
 <!--                                                    SECTION START                                                          -->
                         
@@ -63,11 +63,11 @@
 						
 						<div class="panel panel-body row" style="color: red;">
 							<div class="col-md-1"></div>
-							<div class="col-md-2" style="text-align: right;">
+							<div class="col-md-2" style="text-align: right; color:lightgrey;">
 								<b>REACTIVE</b>
 							</div>
 							<div class="col-md-2"></div>
-							<div class="col-md-2" style="text-align: center;">
+							<div class="col-md-2" style="text-align: center; color:#8bc34a;">
 								<b>RESPONSIVE</b>
 							</div>
 							<div class="col-md-2"></div>
@@ -82,19 +82,15 @@
 								
 								<div class="col-md-12 row" style="margin: 20px 0px;">
 									<div class="col-md-12">
-										<div class="col-md-1"></div>
-										<div class="col-md-2" style="text-align: right; color:lightgrey;">
-											<b>{{keys.dummy_keyword}}</b>
+										<div class="col-md-3" style="text-align: right; color:lightgrey;">
+											<b style="border: 1px solid #eee; padding: 7px;">{{keys.dummy_keyword}}</b>
 										</div>
-										<div class="col-md-2"></div>
-										<div class="col-md-2" style="text-align: center;">
-											<b>{{keys.keyword}}</b>
+										<div class="col-md-6" style="text-align: center;">
+											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{keys.keyword}}</b>
 										</div>
-										<div class="col-md-2"></div>
-										<div class="col-md-2">
-											<b>{{temp_content[$index].keyword}}</b>
+										<div class="col-md-3">
+											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{temp_content[$index].keyword}}</b>
 										</div>
-										<div class="col-md-1"></div>
 									</div><br><br>
 									<div class="col-md-12">
 										<div class="col-md-2"></div>
@@ -103,7 +99,7 @@
 										</div>
 										<div class="col-md-2"></div>
 									</div><br><br><br>
-									<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
+									<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:15px;">
 										
 											
 											<span ng-if="temp_content[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
