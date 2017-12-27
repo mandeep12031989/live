@@ -1,9 +1,9 @@
 <style>
 		.left_border_str{
-            border-left:10px solid #00b0ff;
+            border-left:10px solid #FF8800;
         }
         .left_border_prt{
-            border-left:10px solid #BBDEFB;
+            border-left:10px solid #00b0ff;
         }
         .left_border_dnt{
             border-left:10px solid #efebe9;
@@ -67,6 +67,49 @@
 			border-color: #ccc;
 			background: #efefef;
 		}
+										.range {
+										  -webkit-appearance: none;
+										  -moz-appearance: none;
+										  width: 100%
+										}
+
+										input[disabled]{
+											opacity: 1
+										}
+
+										input[type=range]::-webkit-slider-runnable-track {
+										  -webkit-appearance: none;
+
+										  background: rgba(139,195,74,1);
+
+										  background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+
+										  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
+										  height: 10px;
+										}
+
+										input[type=range]::-webkit-slider-thumb {
+										  -webkit-appearance: none;
+										  width: 0; 
+										  height: 0; 
+										  border-left: 10px solid transparent;
+										  border-right: 10px solid transparent;
+										  border-bottom: 15px solid 	#1E88E5;
+										  margin-top: 10px;
+										  -webkit-transition: border 1000ms ease;
+										  transition: border 1000ms ease;
+										}
+	
+		.active_tab{
+			border-bottom: 5px solid #00b0ff;
+			background: #f6f6f6;
+		}
 </style>
 
 <span ng-show="loading">
@@ -90,72 +133,80 @@
             
             <div class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-3" style="margin: 0 auto;">
-                            <div class="card card-profile" style="margin-top: 60px;">
-								<br>
-                                <div class="card-avatar" style="margin: 0 auto;">
-                                    <div style="margin-top: -60px;">
-										<div class="avatar-circle avatar-big" style="margin: 0 auto; height: 120px; width: 120px; background: #FB8C00; top: -50px;">
-											<span class="initials ini-big" style="font-size:70px; top: 37px;">{{user.firstname[0] + user.lastname[0]}}</span>
-										</div>
-									</div>
-                                </div><br>
-                                <div class="content" style="text-align:center;">
-                                    <h6 class="category text-gray">{{user.work_details.department}}</h6>
-                                    <h6 class="category text-gray">{{user.work_details.current_company}}</h6>
-                                    <h4 class="card-title">{{user.firstname + ' ' + user.lastname}}</h4>
-									<hr>
-									<b>Personal Information</b><br>
-                                    <p>
-										<span class="col-md-4" style="text-align: right;"><b>Email-ID:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.username}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>Facilitator:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.facilitator_name}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>Profile:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.profile.profile_number}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>Modification:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.last_modification | date: 'medium'}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>Last Login:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.important_date.last_login | date: 'medium'}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>Registration:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.important_date.registration | date: 'medium'}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>Browser:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.device_details.browser + ' ' + user.device_details.browser_version}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>Platform:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.device_details.os}}</span>
-                                        <br>
-										<span class="col-md-4" style="text-align: right;"><b>OS:</b></span>
-										<span class="col-md-8" style="text-align: left;">{{user.device_details.os_version}}</span>
-                                        <br><br>
-                                    </p>
-                                </div>
-                            </div>
-							<div style="text-align: center;">
-								<button class="btn btn-danger" style="width: 100%;" ui-sref="facPanel"><i style="font-size: 16px;" class="material-icons">reply</i> Back to Panel</button>
+                    <div class="container">
+						<div class="row">
+							<div style="margin: 20px auto; text-align: center;" ng-init="menu = 0">
+								<ul class="nav">
+									<li ng-class="menu == 0 ? 'active_tab' : '' "><a href="" ng-click="menu = 0">User Details</a></li>
+									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">RQs | Questionnaire</a></li>
+									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">User Profile</a></li>
+									<li ng-class="menu == 7 ? 'active_tab' : '' "><a href="" ng-click="menu = 7">R-R Levels</a></li>
+									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">User Balanced View</a></li>
+									<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Review Profile</a></li>
+									<li ng-class="menu == 6 ? 'active_tab' : '' "><a href="" ng-click="menu = 6">Assessed Balanced View</a></li>
+									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Assessor Template</a></li>
+								</ul>
+								<hr>
 							</div>
-                        </div>
-						<div class="col-md-9" style="margin: 0 auto; margin-top: 20px;" ng-init="menu = 1">
-							<ul class="nav nav-pills">
-								<li ng-class="menu == 1 ? 'active' : '' "><a href="" ng-click="menu = 1">RQs | Questionnaire</a></li>
-								<li ng-class="menu == 2 ? 'active' : '' "><a href="" ng-click="menu = 2">User Profile</a></li>
-								<li ng-class="menu == 3 ? 'active' : '' "><a href="" ng-click="menu = 3">User Balanced View</a></li>
-								<li ng-class="menu == 5 ? 'active' : '' "><a href="" ng-click="menu = 5">Review Profile</a></li>
-								<li ng-class="menu == 6 ? 'active' : '' "><a href="" ng-click="menu = 6">Assessed Balanced View</a></li>
-								<li ng-class="menu == 4 ? 'active' : '' "><a href="" ng-click="menu = 4">Assessor Template</a></li>
-							</ul>
-							<hr>
+						</div>
+						<div style="margin: 0 auto;">
+							
+							<!--		TAB 0		-->
+							<div class="col-md-offset-4 col-md-4" ng-show="menu == 0">
+								<div class="card card-profile" style="margin-top: 40px;">
+									<br>
+									<div class="card-avatar" style="margin: 0 auto;">
+										<div style="margin-top: -60px;">
+											<div class="avatar-circle avatar-big" style="margin: 0 auto; height: 120px; width: 120px; background: #FB8C00; top: -50px;">
+												<span class="initials ini-big" style="font-size:70px; top: 37px;">{{user.firstname[0] + user.lastname[0]}}</span>
+											</div>
+										</div>
+									</div><br>
+									<div class="content" style="text-align:center;">
+										<h6 class="category text-gray">{{user.work_details.department}}</h6>
+										<h6 class="category text-gray">{{user.work_details.current_company}}</h6>
+										<h4 class="card-title">{{user.firstname + ' ' + user.lastname}}</h4>
+										<hr>
+										<b>Personal Information</b><br>
+										<p>
+											<span class="col-md-4" style="text-align: right;"><b>Email-ID:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.username}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>Facilitator:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.facilitator_name}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>Profile:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.profile.profile_number}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>Modification:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.last_modification | date: 'medium'}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>Last Login:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.important_date.last_login | date: 'medium'}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>Registration:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.important_date.registration | date: 'medium'}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>Browser:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.device_details.browser + ' ' + user.device_details.browser_version}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>Platform:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.device_details.os}}</span>
+											<br>
+											<span class="col-md-4" style="text-align: right;"><b>OS:</b></span>
+											<span class="col-md-8" style="text-align: left;">{{user.device_details.os_version}}</span>
+											<br><br>
+										</p>
+									</div>
+								</div>
+								<div style="text-align: center;">
+									<button class="btn btn-danger" style="width: 100%;" ui-sref="facPanel"><i style="font-size: 16px;" class="material-icons">reply</i> Back to Panel</button>
+								</div>
+							</div>
+						
 							<!--		TAB 1		-->
-							<div class="container" ng-show="menu == 1">
-								<div class="panel">
-									<div class="panel-body">
+						
+							<div class="container panel panel-body" ng-show="menu == 1">
 										<h1 style="text-align:center; font-weight:bold;" class="title-hero">
 										   Reflective Questions
 										</h1>
@@ -292,11 +343,11 @@
 										<div class="row" ng-if="showQuesAnalysis">
 											<style>
 												.btn_back_false{
-													border: 3px solid #F44336;
+													border: 3px solid #DDD;
 													font-weight: bold;
 												}
 												.btn_back_true{
-													border: 3px solid #5cb85c;
+													border: 3px solid #00C851;
 													font-weight: bold;
 												}
 											</style>
@@ -366,8 +417,6 @@
 												</tr>
 											</table>
 										</div>
-									</div>
-								</div>
 							</div>
 							<!--		TAB 2		-->
 							
@@ -564,47 +613,6 @@
 									<h2>User Balanced View</h2>
 								</div>
 
-								<style>
-										.range {
-										  -webkit-appearance: none;
-										  -moz-appearance: none;
-										  width: 100%
-										}
-
-										input[disabled]{
-											opacity: 1
-										}
-
-										input[type=range]::-webkit-slider-runnable-track {
-										  -webkit-appearance: none;
-
-										  background: rgba(139,195,74,1);
-
-										  background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
-										  height: 10px;
-										}
-
-										input[type=range]::-webkit-slider-thumb {
-										  -webkit-appearance: none;
-										  width: 0; 
-										  height: 0; 
-										  border-left: 10px solid transparent;
-										  border-right: 10px solid transparent;
-										  border-bottom: 15px solid 	#1E88E5;
-										  margin-top: 10px;
-										  -webkit-transition: border 1000ms ease;
-										  transition: border 1000ms ease;
-										}
-								</style>
-
 								<div class="panel panel-body row" style="color: red;">
 									<div class="col-md-1"></div>
 									<div class="col-md-2" style="text-align: right; color:lightgrey;">
@@ -621,7 +629,7 @@
 									<div class="col-md-1"></div>
 								</div>
 
-								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0">
+								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
 									<div class="panel-body">
 
 										<div class="col-md-12 row" style="margin: 20px 0px;">
@@ -670,14 +678,14 @@
 											<label class="col-sm-2 control-label">Self-Awareness</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon" ng-click="user.assessor.slf_aware>1 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware - 0.5 : user.assessor.slf_aware = user.assessor.slf_aware"><</div>
-														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.slf_aware" ng-value=user.assessor.slf_aware step="0.5">
+													<div class="input-group-addon" ng-click="user.assessor.slf_aware>0.5 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware - 0.5 : user.assessor.slf_aware = user.assessor.slf_aware"><</div>
+														<input type="number" max="3" min="0.5" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.slf_aware" ng-value=user.assessor.slf_aware step="0.5">
 													<div class="input-group-addon" ng-click="user.assessor.slf_aware<3 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware + 0.5 : user.assessor.slf_aware = user.assessor.slf_aware">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
 												<div class="progress">
-													<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.slf_aware*33.3}}%">{{user.assessor.slf_aware}}/3
+													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.slf_aware*33.3}}%" ng-class="(user.assessor.slf_aware>=0 && user.assessor.slf_aware<=1)?'progress-bar-danger':(user.assessor.slf_aware<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.slf_aware}}/3
 													</div>
 												</div>
 											</div>
@@ -687,14 +695,14 @@
 											<label class="col-sm-2 control-label">Openness and Ability to Learn</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon" ng-click="user.assessor.openness>1 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness - 0.5 : user.assessor.openness = user.assessor.openness"><</div>
-														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.openness" ng-value=user.assessor.openness step="0.5">
+													<div class="input-group-addon" ng-click="user.assessor.openness>0.5 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness - 0.5 : user.assessor.openness = user.assessor.openness"><</div>
+														<input type="number" max="3" min="0.5" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.openness" ng-value=user.assessor.openness step="0.5">
 													<div class="input-group-addon" ng-click="user.assessor.openness<3 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness + 0.5 : user.assessor.openness = user.assessor.openness">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
 												<div class="progress">
-													<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.openness*33.3}}%">{{user.assessor.openness}}/3
+													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.openness*33.3}}%" ng-class="(user.assessor.openness>=0 && user.assessor.openness<=1)?'progress-bar-danger':(user.assessor.openness<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.openness}}/3
 													</div>
 												</div>
 											</div>
@@ -704,14 +712,14 @@
 											<label class="col-sm-2 control-label">Personal Mastery</label>
 											<div class="col-sm-4">
 												<div class="input-group">
-													<div class="input-group-addon" ng-click="user.assessor.per_mast>1 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 0.5 : user.assessor.per_mast = user.assessor.per_mast"><</div>
-														<input type="number" max="3" min="1" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.per_mast" ng-value=user.assessor.per_mast step="0.5">
+													<div class="input-group-addon" ng-click="user.assessor.per_mast>0.5 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 0.5 : user.assessor.per_mast = user.assessor.per_mast"><</div>
+														<input type="number" max="3" min="0.5" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.per_mast" ng-value=user.assessor.per_mast step="0.5">
 													<div class="input-group-addon" ng-click="user.assessor.per_mast<3 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast + 0.5 : user.assessor.per_mast = user.assessor.per_mast">></div>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
 												<div class="progress">
-													<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.per_mast*33.3}}%">{{user.assessor.per_mast}}/3
+													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.per_mast*33.3}}%" ng-class="(user.assessor.per_mast>=0 && user.assessor.per_mast<=1)?'progress-bar-danger':(user.assessor.per_mast<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.per_mast}}/3
 													</div>
 												</div>
 											</div>
@@ -719,10 +727,13 @@
 									<h5>Total Scores: {{user.assessor.slf_aware+user.assessor.openness+user.assessor.per_mast}} / 9</h5>
 								</div>
 								
-								<div class="row">
-									<h4>My Recommendations: </h4><br>
-									<textarea class="form-control" ng-model="user.assessor.recommend"></textarea>
+								<div class="row" ng-repeat="r in user.assessor.recommend">
+									<input class="form-control" type="text" ng-model="r.title" placeholder="Title"><br>
+									<textarea class="form-control" ng-model="r.desc" placeholder="Description"></textarea>
+									<button class="btn btn-default pull-right" style="margin-bottom: 40px;" ng-click="remove_to_recommend($index)">Remove</button>
+									<br>
 								</div>
+								<button class="btn btn-info" ng-click="add_to_recommend()">+ Add Section</button>
 								
 								<!--	section 1	-->
 								<div class="row" style="margin-top: 25px;">
@@ -1053,46 +1064,7 @@
 									<h2>Assessed Balanced View</h2>
 								</div>
 
-								<style>
-										.range {
-										  -webkit-appearance: none;
-										  -moz-appearance: none;
-										  width: 100%
-										}
-
-										input[disabled]{
-											opacity: 1
-										}
-
-										input[type=range]::-webkit-slider-runnable-track {
-										  -webkit-appearance: none;
-
-										  background: rgba(139,195,74,1);
-
-										  background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
-										  height: 10px;
-										}
-
-										input[type=range]::-webkit-slider-thumb {
-										  -webkit-appearance: none;
-										  width: 0; 
-										  height: 0; 
-										  border-left: 10px solid transparent;
-										  border-right: 10px solid transparent;
-										  border-bottom: 15px solid 	#1E88E5;
-										  margin-top: 10px;
-										  -webkit-transition: border 1000ms ease;
-										  transition: border 1000ms ease;
-										}
-								</style>
+								
 
 								<div class="panel panel-body row" style="color: red;">
 									<div class="col-md-1"></div>
@@ -1110,7 +1082,7 @@
 									<div class="col-md-1"></div>
 								</div>
 
-								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0">
+								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
 									<div class="panel-body">
 
 										<div class="col-md-12 row" style="margin: 20px 0px;">
@@ -1147,8 +1119,61 @@
 									</div>
 								</div>
 								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
-							</div>			
-							
+							</div>
+							<!--		TAB 7		-->
+							<div class="container" ng-show="menu == 7">
+								
+								<div style="margin-bottom: 30px;">
+
+										<div id="page-title">
+											<h2><b>Reactive-Responsive Levels</b></h2>
+										</div>
+									<div class="container">
+
+										<div class="panel" style="background: #ffe590;">
+											<div class="panel-body row">
+												<div class="col-md-10" style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+														</span>
+													</div>
+												</div>
+												<div class="col-md-2" style="display: inline-block; text-align: center;">Responsive</div>
+											</div>
+										</div>
+
+										<div class="panel" style="background: #f9ffaf;">
+											<div class="panel-body row">
+												<div class="col-md-10" style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+														</span>
+													</div>
+												</div>
+												<div class="col-md-2" style="display: inline-block; text-align: center;">Moderate</div>
+											</div>
+										</div>
+
+										<div class="panel" style="background: #ddffa5;">
+											<div class="panel-body row">
+												<div class="col-md-10" style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+														</span>
+													</div>
+												</div>
+												<div class="col-md-2" style="display: inline-block; text-align: center;">Reactive</div>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+<!--											END TABS												-->
 						</div>
                     </div>
                 </div>

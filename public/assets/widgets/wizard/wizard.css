@@ -37,6 +37,15 @@
     left: auto;
     width: 50%;
 }
+.bg_progress{
+    background: #ccc;
+}
+.bg_progress_active{
+    background: #26c6da;
+}
+.bg_progress_completed{
+    background: #66bb6a;
+}
 .form-wizard > ul > li a .wizard-step {
     font-size: 16px;
     line-height: 42px;
@@ -50,7 +59,6 @@
     text-align: center;
     color: #fafafa;
     border-radius: 100px;
-    background: #ccc;
 }
 .form-wizard > ul > li a .wizard-description {
     font-size: 13px;

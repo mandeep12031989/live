@@ -1,13 +1,35 @@
     <style>
     
         .left_border_str{
-            border-left:10px solid #00b0ff;
+            border-left:10px solid #FF8800;
         }
         .left_border_prt{
-            border-left:10px solid #BBDEFB;
+            border-left:10px solid #00b0ff;
         }
         .left_border_dnt{
             border-left:10px solid #efebe9;
+        }
+		
+		.left_border_str2{
+            border: 5px solid #FF8800;
+            border-radius: 15px;
+            padding: 15px 20px;
+			font-size: 16px;
+			font-weight: bold;
+        }
+        .left_border_prt2{
+           border: 5px solid #00b0ff;
+            border-radius: 15px;
+            padding: 15px 20px;
+			font-size: 16px;
+			font-weight: bold;
+        }
+        .left_border_dnt2{
+            border: 5px solid #efebe9;
+            border-radius: 15px;
+            padding: 15px 20px;
+			font-size: 16px;
+			font-weight: bold;
         }
 		
 		.mini_style{
@@ -21,6 +43,50 @@
 		.mini_style:hover{
 			border-color: #ccc;
 			background: #efefef;
+		}
+		
+		.active_tab{
+			border-bottom: 5px solid #00b0ff;
+			background: #f6f6f6;
+		}
+		
+		.range {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			width: 100%
+		}
+									
+		input[disabled]{
+			opacity: 1
+		}
+									
+		input[type=range]::-webkit-slider-runnable-track {
+			-webkit-appearance: none;
+										
+			background: rgba(139,195,74,1);
+										
+			background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+									
+			background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+                                    
+			background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+                                      
+			background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+                                  
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
+			height: 10px;
+		}
+								
+		input[type=range]::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 0; 
+			height: 0; 
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+			border-bottom: 15px solid 	#1E88E5;
+			margin-top: 10px;
+			-webkit-transition: border 1000ms ease;
+			transition: border 1000ms ease;
 		}
     </style>
 <span ng-show="loading">
@@ -36,14 +102,24 @@
             
             
             <div id="page-content-wrapper">
-                <div id="page-content">
-                
-                    <div class="container">
+                <div id="page-content" style="margin-bottom: 30px;">
                 
                         <div id="page-title">
-                            <h2>Detailed View</h2>
+                            <h2><b>Trueself Report</b></h2>
                         </div>
-
+						
+						<div class="row">
+							<div id="page-title" style="margin: 20px auto; font-size: 18px;" ng-init="menu = 1">
+								<ul class="nav">
+									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">Detailed View</a></li>
+									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precised View</a></li>
+									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balanced View</a></li>
+								</ul>
+							</div>
+						</div>
+                
+<!--                                                    MENU 1                                                          -->
+                    <div class="container" ng-show="menu == 1">
                         <div class="row">
                             <div class="col-md-offset-2 col-sm-2">
 
@@ -234,7 +310,7 @@
                             </div>
                         </div>
 <!--                                                    SECTION 4                                                          -->
-                        <div class="panel">
+                        <!--<div class="panel">
                             <div class="panel-body">
                                 <h2 style="text-align:center" id="page-title">
                                     <b>Communication Style</b>
@@ -257,15 +333,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
-                                                        
-                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
-                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
-                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
-                                                                            <br><br>
-                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
-                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
-                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="">
@@ -285,10 +353,139 @@
                                 </div>
                             </div>
 							
-                        </div>
-                        <button class="btn btn-success" ui-sref="dashboard" style="float:right;">Back to Dashboard</button>
+                        </div>-->
                         
                     </div>
+					
+<!--                                                    MENU 2                                                          -->
+					<div class="container" ng-show="menu == 2">
+						<div class="row" style="text-align: center;">
+                            <div class="col-md-offset-2 col-sm-2">
+
+                                <div class="panel" ng-class="'left_border_str2'">
+									Relate Fully
+                                </div>
+
+                            </div>
+                            
+                            <div class="col-md-offset-1 col-sm-2">
+
+                                <div class="panel" ng-class="'left_border_prt2'">
+									Relate Partially
+                                </div>
+
+                            </div>
+                            
+                            <div class="col-md-offset-1 col-sm-2">
+
+                                <div class="panel" ng-class="'left_border_dnt2'">
+									Do not Relate at all
+                                </div>
+
+                            </div>
+                            
+                        </div>
+<!--                                                    SECTION 1                                                          -->
+						<div class="panel">
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
+                                    <b>Professional Values and Work<br>Culture Preference</b>
+                                </h2>
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1" style="margin: 25px auto; display: inline-block;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+                                </div>
+                            </div>
+                        </div>
+<!--                                                    SECTION 2                                                          -->
+                        <div class="panel">
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
+                                    <b>Professional Strengths</b>
+                                </h2>
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="display: inline-block; margin: 25px auto;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+                                </div>
+                            </div>
+                        </div>
+<!--                                                    SECTION 3                                                          -->
+                        <div class="panel">
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
+                                    <b>Learning Needs</b>
+                                </h2>
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3" style="display: inline-block; margin: 25px auto;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+                                </div>
+                            </div>
+                        </div>
+<!--                                                    SECTION 4                                                          -->
+                        <!--<div class="panel">
+                            <div class="panel-body" style="text-align:center">
+                                <h2 id="page-title">
+                                    <b>Communication Style</b>
+                                </h2>
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4" style="display: inline-block; margin: 25px auto;">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+                                </div>
+                            </div>
+                        </div>-->
+					</div>
+					
+<!--                                                    MENU 3                                                          -->
+					<div class="container" ng-show="menu == 3">
+						<div class="panel panel-body row" style="color: red;">
+							<div class="col-md-1"></div>
+							<div class="col-md-2" style="text-align: right; color:lightgrey;">
+								<b>REACTIVE</b>
+							</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-2" style="text-align: center; color:#8bc34a;">
+								<b>RESPONSIVE</b>
+							</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-2">
+								<b>REACTIVE</b>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+						
+						<div class="panel" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
+                            <div class="panel-body">
+								
+								<div class="col-md-12 row" style="margin: 20px 0px;">
+									<div class="col-md-12">
+										<div class="col-md-3" style="text-align: right; color:lightgrey;">
+											<b style="border: 1px solid #eee; padding: 7px;">{{keys.dummy_keyword}}</b>
+										</div>
+										<div class="col-md-6" style="text-align: center;">
+											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{keys.keyword}}</b>
+										</div>
+										<div class="col-md-3">
+											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{temp_content[$index].keyword}}</b>
+										</div>
+									</div><br><br>
+									<div class="col-md-12">
+										<div class="col-md-2"></div>
+										<div class="col-md-8">
+											<input type="range" min="-2" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating" disabled>
+										</div>
+										<div class="col-md-2"></div>
+									</div><br><br><br>
+									<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:15px;">
+										
+											
+											<span ng-if="temp_content[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
+											<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1">{{keys.balancing_description[1].desc}}</span>
+											<span ng-if="temp_content[$index].key_rating >= 1">{{keys.balancing_description[2].desc}}</span>
+										
+									</div>
+								</div>
+                            </div>
+                        </div>
+					</div>
+					
+					<button class="btn btn-success pull-right" ui-sref="dashboard">Back to Dashboard</button>
+					
                 </div>
             </div>
         </div>

@@ -207,7 +207,7 @@ var userSchema = new Schema({
 			type: String,
 			default: '<name>\'s enneagram assessment results are <positive/negative>. <He/She> is at Moderate moving to higher personal mastery levels. <He/She> is enneagram type <type>.'
 		},
-		recommend: String
+		recommend: [new Schema({title: String, desc: String})]
 	}
 });
 

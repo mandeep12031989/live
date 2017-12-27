@@ -29,30 +29,31 @@
                     <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.reflective_filled"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-file" ng-if="!percent.reflective_filled"></i>
                     <span>3 Reflective Questions</span>
-                </a>        
-<!--
-                    <ul>
-                        <li><a href="buttons.html" ><span>View</span></a></li>
-                        <li><a href="labels-badges.html"><span>Edit/Update</span></a></li>
-                       
-                    </ul>-->
+                </a>
             </li>
             <li>
-                <a ui-sref="questionnaire" ng-class="current_state == 'questionnaire' ? 'bg-tab':''">
+                <a ui-sref="questionnaire" ng-class="current_state == 'questionnaire' ? 'bg-tab':''" ng-if="percent.reflective_filled">
                     <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.questionnaire_filled"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-th" ng-if="!percent.questionnaire_filled"></i>
                     <span>Online Questionnaire</span>
                 </a>
-            
+                <a href="" ng-class="current_state == 'questionnaire' ? 'bg-tab':''" ng-if="!percent.reflective_filled">
+					<i class="glyph-icon icon-th"></i>
+                    <span>Online Questionnaire</span>
+                </a>
             </li>
 
             <li class="divider"></li>
 
             <li class="header"><span>Step 2: Assigned TrueSelf Profile</span></li>
             <li>
-                <a ui-sref="select-profile" ng-class="current_state == '' ? 'bg-tab':''">
+                <a ui-sref="select-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled">
                     <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.selected_profile"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-arrow-right" ng-if="!percent.selected_profile"></i>
+                    <span>Select TrueSelf Profile</span>
+                </a>
+                <a href="" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
+					<i class="glyph-icon icon-arrow-right"></i>
                     <span>Select TrueSelf Profile</span>
                 </a>
             </li>
@@ -62,37 +63,27 @@
 			<li class="header">Step 3: Building TrueSelf Profile </li>
             
             <li>
-                <a ui-sref="userProfile">
+                <a ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
 					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i class="material-icons">check_circle</i></span>
-                    <i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
+					<i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
                     <span>Create/Update</span>
                 </a>
-                <div class="sidebar-submenu">
-
-                    <ul>
-                        <li><a href="helper-classes.html" title="Helper classes"><span>Helper classes</span></a></li>
-                        <li><a href="page-transitions.html" title="Page transitions"><span>Page transitions</span></a></li>
-                        <li><a href="animations.html" title="Animations"><span>Animations</span></a></li>
-                    </ul>
-
-                </div><!-- .sidebar-submenu -->
-            </li>
-<!--
-            <li>
-                <a ui-sref="detailed-profile">
+                <a ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile)" href="">
                     <i class="glyph-icon icon-linecons-doc"></i>
-                    <span>View</span>
+                    <span>Create/Update</span>
                 </a>
-                <div class="sidebar-submenu">
-
-                    <ul>
-                        <li><a href="helper-classes.html" title="Helper classes"><span>TrueSelf Profile</span></a></li>
-                        <li><a href="page-transitions.html" title="Page transitions"><span>Balancing Profile</span></a></li>
-
-                    </ul>
-
-                </div>
-            </li>-->
+            </li>
+            
+            <li>
+                <a ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;"><i class="material-icons">check_circle</i></span>
+                    <span>Trueself Report</span>
+                </a>
+                <a ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)" href="">
+                    <i class="glyph-icon icon-linecons-doc"></i>
+                    <span>Trueself Report</span>
+                </a>
+            </li>
 		
 		</ul><!-- #sidebar-menu -->
 

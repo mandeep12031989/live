@@ -42,7 +42,7 @@
 										<ul>
 											<li ng-click="RQ_num = 1;" ng-class="RQ_num == 1 ? 'active':''">
 												<a data-toggle="tab">
-													<label class="wizard-step">1</label>
+													<label class="wizard-step bg_progress">1</label>
 											  <span class="wizard-description">
 												 Question 1
 												 <small>Qualities You Like in People</small>
@@ -51,7 +51,7 @@
 											</li>
 											<li ng-click="RQ_num = 2;" ng-class="RQ_num == 2 ? 'active':''">
 												<a data-toggle="tab">
-													<label class="wizard-step">2</label>
+													<label class="wizard-step bg_progress">2</label>
 											  <span class="wizard-description">
 												 Question 2
 												 <small>How Close Friends Describe You</small>
@@ -60,7 +60,7 @@
 											</li>
 											<li ng-click="RQ_num = 3;" ng-class="RQ_num == 3 ? 'active':''">
 												<a data-toggle="tab">
-													<label class="wizard-step">3</label>
+													<label class="wizard-step bg_progress">3</label>
 											  <span class="wizard-description">
 												 Question 3
 												 <small>Describe Yourself</small>
@@ -70,9 +70,9 @@
 										</ul>
 										
 										<div class="tab-content">
-											<h3 style="font-weight:bold;">
-											   Sample:
-											</h3>
+											<h4 style="font-weight:bold;">
+											   See Sample Below :
+											</h4>
 											<img src="./images/q1.svg" ng-show="RQ_num == 1">
 											<img src="./images/q2.svg" ng-show="RQ_num == 2">
 											<img src="./images/q3.svg" ng-show="RQ_num == 3">
@@ -132,7 +132,7 @@ Negatives - Please also mention qualities which you have improved in past someti
 												<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Previous</a>
 												<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 3" style="color: white;">Next</a>
 												<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 3" style="color: white;">Save</a>
-												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 3" style="color: white;">Submit</a>
+												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 3" style="color: white;" ng-disabled="!(quesDetails.question.RQ1 && quesDetails.question.RQ2 && quesDetails.question.RQ3)">Submit</a>
 
 										</div>
 									</div>

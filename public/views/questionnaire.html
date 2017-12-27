@@ -6,14 +6,28 @@
     </div>    
 </span>
 
-<div id="sb-site" ng-show="!loading">
+<div id="sb-site" ng-show="!loading" ng-init="after_fill = false;">
 
     <div id="page-wrapper">
         
         <div id="page-content-wrapper">
             <div id="page-content-margin">
 				
-				<div class="row col-sm-offset-1">
+				<div class="container" ng-show="after_fill">
+      
+					<div class="jumbotron">
+					  <h1>Thank-you!</h1>
+					  <p>For completing Step 1. <strong> Please do consult your Facilitator before you Proceed</strong></p>
+
+
+					</div>
+                
+					<button ng-click="after_fill = false;" class="btn btn-danger">Retake your Questionnaire</button>
+					<button ui-sref="dashboard" class="btn btn-success">Proceed</button>
+    
+				</div>
+				
+				<div class="row col-sm-offset-1" ng-show="!after_fill">
 					<!--  <div class="col-sm-1"><h2><span class="label label-danger">Imp.</span></h2></div>  -->   
                     <div class="col-sm-10" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black;">
 						<h3>Instructions for attempting below Questionnaire</h3>
@@ -27,7 +41,7 @@
                 	       
 				</div>
                 <br><br>
-                    <div class="container">
+                    <div class="container" ng-show="!after_fill">
 
                         <div class="panel">
                             <div class="panel-body">
@@ -49,7 +63,7 @@
 													</div>
                                                 </div>
                                             
-                                                <a class="btn btn-primary pull-right" ng-click="saveQues()" style="color: white;">Submit</a>
+                                                <a class="btn btn-primary pull-right" ng-click="saveQues(); after_fill = true;" style="color: white;">Submit</a>
 
                                         </div>
 										

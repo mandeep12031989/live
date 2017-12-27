@@ -37,6 +37,52 @@ router.route('/fac_list')
 		});
 });
 
+router.route('/mailToFac')
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
+	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true, facilitator_name: true})
+		.exec(function(e, f){
+			if(e)
+				return next(e);
+			//console.log(f);
+		
+			if(f.facilitator_name != '--UNKNOWN--'){
+				var arr = f.facilitator_name.split(' ');
+
+				User.find({'firstname': { $regex: arr[0] }, 'are_you.facilitator': true}, {username: true, firstname: true, lastname: true})
+					.exec(function(err, user){
+						if(err)
+							return next(err);
+					
+						var i=0;
+						while((user[i].firstname + ' ' + user[i].lastname) != f.facilitator_name){
+							i++;
+						}
+
+						var mailData = {to: user[i].username};
+						var link = "http://portal-idiscover.herokuapp.com/#/user/"+req.decoded._id;
+						mailData.subject = "iDiscover.me | Progress | "+f.firstname+' '+f.lastname+" Filled their Trueself Profile";
+						mailData.html = 'Hello,<br> Please click on the link below to start assessing '+user.firstname+' '+user.lastname+'\'s Profile .<br><a href='+link+'>Start Assessing</a>';
+
+								mailer.custom_mail(mailData, function(ret){
+									var res_from_mailer = ret;
+									//console.log(res_from_mailer);
+
+									if(res_from_mailer == false){
+										//console.log('Updated error!');
+										return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+									}
+									else if(res_from_mailer == true){
+										//console.log('Updated token!');
+										res.status(200).json({success: true, message: "Mail Sent to Reviewers Successfully !"});
+									}
+								});
+					});
+			}
+			else
+				return res.status(501).json({ success: false, message: 'Please Select Your Facilitator !' });
+		});
+});
+
 router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
@@ -681,14 +727,20 @@ router.route('/completion')
                     }
                 }
             }
-            if(sec1)
+            /*if(sec1)
                 per += 14;
             if(sec2)
-                per += 15;
-            if(sec3)
                 per += 14;
-            if(sec4)
+            if(sec3)
                 per += 15;
+            if(sec4)
+                per += 15;*/
+			if(sec1)
+                per += 19;
+            if(sec2)
+                per += 19;
+            if(sec3)
+                per += 20;
         }
 		
 		//questionnaire left
@@ -698,7 +750,7 @@ router.route('/completion')
             reflective_filled: user.question.RQ1!='' && user.question.RQ1 != undefined && user.question.RQ2!='' && user.question.RQ2 != undefined && user.question.RQ3!='' && user.question.RQ3 != undefined,
             questionnaire_filled: que_filled,
 			selected_profile: user.profile.profile_number,
-            profile_filled: sec1 && sec2 && sec3 && sec4
+            profile_filled: sec1 && sec2 && sec3// && sec4
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);
         res.status(200).json(final_obj);

@@ -68,6 +68,9 @@
 	  font-feature-settings: 'liga';
 	}
     
+	.bg_uncomp{
+		background: #ffefef;
+	}
 </style>
 
 <span ng-show="loading">
@@ -145,30 +148,30 @@
 						<div class="row">
 						<div>
 							<ul class="list-group">
-								<li class="mrg10B" ng-click="section_num = 1">
+								<li class="mrg10B" ng-click="checkRel[section_num-1] = true; section_num = 1">
 									<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
 									  Professional Values and Work<br>Culture Preference
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>
-								<li class="mrg10B" ng-click="section_num = 2">
+								<li class="mrg10B" ng-click="checkRel[section_num-1] = true; (checkSectionFill(1)?section_num=2:'');">
 									<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
 										Professional Strengths
 										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
 									</a>
 								</li>
-								<li class="mrg10B" ng-click="section_num = 3">
+								<li class="mrg10B" ng-click="checkRel[section_num-1] = true; (checkSectionFill(1) && checkSectionFill(2)?section_num=3:'');">
 									<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
 										Learning Needs
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>
-								<li class="mrg10B" ng-click="section_num = 4">
+								<!--<li class="mrg10B" ng-click="(checkSectionFill(1) && checkSectionFill(2) && checkSectionFill(3)?section_num=4:'');">
 									<a class="list-group-item" href="" ng-class="section_num == 4 ? 'back_active_panel' : (checkSectionFill(4) ? 'back_panel':'bg_white')">
 										Communication Style
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 						<div class="col-md-9">
@@ -184,9 +187,9 @@
 														<b ng-show="section_num == 1">Professional Values and Work Culture Preference</b>
 														<b ng-show="section_num == 2">Professional Strengths</b>
 														<b ng-show="section_num == 3">Learning Needs</b>
-														<b ng-show="section_num == 4">Communication Style</b>
+														<!--<b ng-show="section_num == 4">Communication Style</b>-->
 													</a>
-													<span style="float:right; font-size: 15px;">Page {{section_num}}/4</span>
+													<span style="float:right; font-size: 15px;">Page {{section_num}}/3</span>
 												</h2>
 											</div>
 											<div class="row" style="width: 95%; margin: auto;">
@@ -198,7 +201,7 @@
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
-															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;">
+															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;" ng-class="((!mini.relate) && checkRel[section_num-1])?'bg_uncomp':''">
 																	<div class="col-sm-6" ng-if="section_num != 3">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
 																	</div>
@@ -241,10 +244,11 @@
 																				</label>                          
 																		</div>
 																	</div>
+																	<!--<div style="color: red; text-align: center;" ng-show="(!mini.relate) && checkRel[section_num-1]">How much do you relate ?</div>-->
 																</div>
 																
-															<br>   
-															   <textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Comment" ng-if="section_num == 2 || section_num == 4">Comment</textarea>
+															<br>
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Comment" ng-if="section_num == 2 || section_num == 4">Comment</textarea>
 															</div>
 															<br>
 														</div>
@@ -254,10 +258,10 @@
 										</div><br>
 										
 										<button type="button" class="btn btn-info" ng-click="section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
-										<button type="button" class="btn btn-success" style="float: right;" ng-click="section_num = section_num+1" ng-disabled="section_num == 4">Next</button>
+										<button type="button" class="btn btn-success" style="float: right;" ng-click="checkRel[section_num-1] = true; (checkSectionFill(section_num)?(section_num = section_num+1):'');" ng-disabled="section_num == 3">Next</button>
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
-											<button type="button" class="btn btn-warning" ng-click="saveProfile()" ng-show="section_num != 4">Save</button>
-											<button type="button" class="btn btn-danger" ng-click="submitProfile()" ng-show="section_num == 4">Submit</button><br><br>
+											<button type="button" class="btn btn-warning" ng-click="saveProfile()" ng-show="section_num != 3">Save</button>
+											<button type="button" class="btn btn-danger" ng-click="checkRel[section_num-1] = true; (checkSectionFill(section_num)?submitProfile():'');" ng-show="section_num == 3">Submit</button><br><br>
 										</span>
 									</div>
 
