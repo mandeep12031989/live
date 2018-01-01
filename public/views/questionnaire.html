@@ -29,13 +29,12 @@
 				
 				<div class="row col-sm-offset-1" ng-show="!after_fill">
 					<!--  <div class="col-sm-1"><h2><span class="label label-danger">Imp.</span></h2></div>  -->   
-                    <div class="col-sm-10" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black;">
+                    <div class="col-sm-10" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black; font-size: 14px;">
 						<h3>Instructions for attempting below Questionnaire</h3>
                         <ol>
-                            <li>Read the following questions and choose one option that best describes you.</li>
-                            <li>If you relate (or do not relate) with both options, choose the one that has been true for most part of your life.</li>
-                            <li>If you have changed in the past sometime, please select option which was true earlier.</li>
                             <li>All 36 questions are mandatory.</li>
+                            <li>In each question, choose one option that best describes you.</li>
+                            <li>If you relate (or do not relate) with both options, choose the one that has been true for most part of your life.</li>
                         </ol>
 					</div>                  
                 	       
@@ -63,7 +62,7 @@
 													</div>
                                                 </div>
                                             
-                                                <a class="btn btn-primary pull-right" ng-click="saveQues(); after_fill = true;" style="color: white;">Submit</a>
+                                                <a class="btn btn-primary pull-right" ng-click="saveQues()" style="color: white;">Submit</a>
 
                                         </div>
 										

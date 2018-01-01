@@ -1,12 +1,7 @@
 <style>
-	.left_border_str{
-		border-left:10px solid #FF8800;
-	}
-	.left_border_prt{
-		border-left:10px solid #00b0ff;
-	}
-	.left_border_dnt{
-		border-left:10px solid #efebe9;
+	
+	.LHS_tab{
+		text-align: center; margin-top:auto; margin-bottom:auto; top: -15px;
 	}
 </style>
 
@@ -27,41 +22,46 @@
                         <div id="page-title">
                             <h2><b>Reactive-Responsive Levels</b></h2>
                         </div>
-                    <div class="container">
-
-                        <div class="panel" style="background: #ffe590;">
-                            <div class="panel-body row">
-								<div class="col-md-10" style="text-align: center;">
+                    <div class="container" style="width:80%; margin-right:auto; margin-left:auto;" >
+						<div class="row">
+						<div class="col-md-2 LHS_tab"><h3><b>Responsive</b></h3></div>
+                        <div class="col-sm-10 panel" style="background: #ffe590;">
+                            <div class="panel-body">
+								<div style="text-align: center;">
 									<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;">
 										<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.mini_description}}</span>
 									</div>
 								</div>
-								<div class="col-md-2" style="display: inline-block; text-align: center;">Responsive</div>
+							</div>
                             </div>
                         </div>
-
-                        <div class="panel" style="background: #f9ffaf;">
-                            <div class="panel-body row">
-								<div class="col-md-10" style="text-align: center;">
+						<div class="row">
+						<div class="col-md-2 LHS_tab"><h3><b>Moderate</b></h3></div>
+                        <div class="col-sm-10 panel" style="background: #f9ffaf;">
+                            <div class="panel-body">
+								<div style="text-align: center;">
 									<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;">
 										<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
 									</div>
 								</div>
-								<div class="col-md-2" style="display: inline-block; text-align: center;">Moderate</div>
+							</div>	
                             </div>
+						
                         </div>
-
-                        <div class="panel" style="background: #ddffa5;">
-                            <div class="panel-body row">
-								<div class="col-md-10" style="text-align: center;">
+						<div class="row">
+						<div class="col-md-2 LHS_tab"><h3><b>Reactive</b></h3></div>
+                        <div class="col-sm-10 panel" style="background: #ddffa5;">
+                            <div class="panel-body">
+								<div  style="text-align: center;">
 									<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;">
 										<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">{{mini.mini_description}}</span>
 									</div>
 								</div>
-								<div class="col-md-2" style="display: inline-block; text-align: center;">Reactive</div>
+								
                             </div>
+							
                         </div>
-                        
+                        </div>
                     </div>
 					
 					<button class="btn btn-success pull-right" ui-sref="dashboard">Back to Dashboard</button>

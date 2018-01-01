@@ -1,9 +1,9 @@
 <style>
 		.left_border_str{
-            border-left:10px solid #FF8800;
+            border-left:10px solid #00b0ff;
         }
         .left_border_prt{
-            border-left:10px solid #00b0ff;
+            border-left:10px solid #ffb74d;
         }
         .left_border_dnt{
             border-left:10px solid #efebe9;
@@ -63,10 +63,16 @@
 			font-size: 14px;
 		}
 		
-		.mini_style:hover{
+		.mini_style_grey{
 			border-color: #ccc;
 			background: #efefef;
 		}
+		
+		.mini_style_green{
+			border-color: #ccc;
+			background: #ddffbb;
+		}
+	
 										.range {
 										  -webkit-appearance: none;
 										  -moz-appearance: none;
@@ -80,15 +86,13 @@
 										input[type=range]::-webkit-slider-runnable-track {
 										  -webkit-appearance: none;
 
-										  background: rgba(139,195,74,1);
+										  background: -repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
+									
+										background: -webkit-repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
 
-										  background: -repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+										background: -o-repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
 
-										  background: -webkit-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -o-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
-
-										  background: -ms-repeating-linear-gradient(0deg,rgb(232, 232, 232) 0%,rgba(218, 226, 231, 0.91) 50%,rgba(139,195,74,1) 50%,rgba(139,191,78,0.91) 61.3%,rgba(255,238,88,0.8) 70.2%,rgba(255,238,88,1) 81.8%,rgba(244,67,54,0.74) 91%,rgba(244,67,54,1) 100%);
+										background: -ms-repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
 
 										  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
 										  height: 10px;
@@ -109,6 +113,10 @@
 		.active_tab{
 			border-bottom: 5px solid #00b0ff;
 			background: #f6f6f6;
+		}
+	
+		.LHS_tab{
+			text-align: center; margin-top:auto; margin-bottom:auto; top: -15px;
 		}
 </style>
 
@@ -139,12 +147,10 @@
 								<ul class="nav">
 									<li ng-class="menu == 0 ? 'active_tab' : '' "><a href="" ng-click="menu = 0">User Details</a></li>
 									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">RQs | Questionnaire</a></li>
-									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">User Profile</a></li>
-									<li ng-class="menu == 7 ? 'active_tab' : '' "><a href="" ng-click="menu = 7">R-R Levels</a></li>
-									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">User Balanced View</a></li>
-									<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Review Profile</a></li>
-									<li ng-class="menu == 6 ? 'active_tab' : '' "><a href="" ng-click="menu = 6">Assessed Balanced View</a></li>
-									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Assessor Template</a></li>
+									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Candidate Profile</a></li>
+									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Review Profile</a></li>
+									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Assessed Candidate Profile</a></li>
+									<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Assessor Template</a></li>
 								</ul>
 								<hr>
 							</div>
@@ -199,7 +205,7 @@
 										</p>
 									</div>
 								</div>
-								<div style="text-align: center;">
+								<div style="text-align: center; margin-bottom: 40px;">
 									<button class="btn btn-danger" style="width: 100%;" ui-sref="facPanel"><i style="font-size: 16px;" class="material-icons">reply</i> Back to Panel</button>
 								</div>
 							</div>
@@ -418,6 +424,7 @@
 											</table>
 										</div>
 							</div>
+							
 							<!--		TAB 2		-->
 							
 							<div class="container" ng-show="menu == 2 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
@@ -425,250 +432,704 @@
 							</div>
 							<div class="container" ng-show="menu == 2 && user.profile.profile_number != 0">
 								
-								<div id="page-title">
-									<h2>Detailed Profile</h2>
-								</div>
-
 								<div class="row">
-									<div class="col-md-offset-2 col-sm-2">
-
-										<div class="panel">
-											<div class="panel-heading" ng-class="'left_border_str'">
-												Relate Fully
-											</div>
-										</div>
-
+									<div id="page-title" style="margin: 0px auto 20px auto;" ng-init="candidate_tab = 1">
+										<ul class="nav">
+											<li ng-class="candidate_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 1">Detailed View</a></li>
+											<li ng-class="candidate_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 2">Balanced View</a></li>
+											<li ng-class="candidate_tab == 3 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 3">Reactive-Responsive Levels</a></li>
+										</ul>
 									</div>
-
-									<div class="col-md-offset-1 col-sm-2">
-
-										<div class="panel">
-											<div class="panel-heading" ng-class="'left_border_prt'">
-												Relate Partially
-											</div>
-										</div>
-
-									</div>
-
-									<div class="col-md-offset-1 col-sm-2">
-
-										<div class="panel">
-											<div class="panel-heading" ng-class="'left_border_dnt'">
-												Do not Relate at all
-											</div>
-										</div>
-
-									</div>
-
 								</div>
-		<!--                                                    SECTION 1                                                          -->
-								<div class="panel">
-									<div class="panel-body">
-										<h2 style="text-align:center" id="page-title">
-											<b>Professional Values and Work<br>Culture Preference</b>
-										</h2>
-										<div class="example-box-wrapper">
-											<div class="row">
+								<div ng-show="candidate_tab == 1">
+									<div class="row">
+										<div class="col-md-offset-2 col-sm-2">
 
-												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
-													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
-														<div class="panel-heading image-box">
-															<div class="image-content" style="margin-top: 16px;">                        
-																<div class="meta-box meta-box-bottom">
-																	<h3 class="meta-heading">
-																		{{keys.keyword}}
-																	</h3>
-																</div>                            
+											<div class="panel">
+												<div class="panel-heading" ng-class="'left_border_str'">
+													Relate Fully
+												</div>
+											</div>
+
+										</div>
+
+										<div class="col-md-offset-1 col-sm-2">
+
+											<div class="panel">
+												<div class="panel-heading" ng-class="'left_border_prt'">
+													Relate Partially
+												</div>
+											</div>
+
+										</div>
+
+										<div class="col-md-offset-1 col-sm-2">
+
+											<div class="panel">
+												<div class="panel-heading" ng-class="'left_border_dnt'">
+													Do not Relate at all
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+			<!--                                                    SECTION 1                                                          -->
+									<div class="panel">
+										<div class="panel-body">
+											<h2 style="text-align:center" id="page-title">
+												<b>Professional Values and Work Culture Preferences</b>
+											</h2>
+											<div class="example-box-wrapper">
+												<div class="row">
+
+													<div class="col-md-4" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
+														<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
+															<div class="panel-heading image-box">
+																<div class="image-content" style="margin-top: 16px;">                        
+																	<div class="meta-box meta-box-bottom">
+																		<h3 class="meta-heading">
+																			{{keys.keyword}}
+																		</h3>
+																	</div>                            
+																</div>
+																<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
 															</div>
-															<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+															<ul class="list-group list-group-separator mrg0A row list-group-icons">
+
+																<div class="row" style="margin: 0 auto;">
+																	<span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-class="mini.relate == 'donotexhibitanymore' ? 'mini_style_green' : ((mini.relate == 'relatestrongly'||mini.relate == 'relatepartially') ? 'mini_style_grey':'')">{{mini.mini_description}}</span>													                                 <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
+
+																</div><br>
+
+																<li class="" ng-if="keys.comment">
+
+																	<a href="" class="list-group-item">
+
+																		{{keys.comment}}
+																	</a>
+																</li>
+
+															</ul>
 														</div>
-
-														<ul class="list-group list-group-separator mrg0A row list-group-icons">
-
-															<div class="row" style="margin: 0 auto;">
-																<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
-
-															</div><br>
-
-															<li class="" ng-if="keys.comment">
-
-																<a href="" class="list-group-item">
-																	
-																	{{keys.comment}}
-																</a>
-															</li>
-
-														</ul>
 													</div>
+
 												</div>
 
 											</div>
-											
 										</div>
 									</div>
-								</div>
-		<!--                                                    SECTION 2                                                          -->
-								<div class="panel">
-									<div class="panel-body">
-										<h2 style="text-align:center" id="page-title">
-											<b>Professional Strengths</b>
-										</h2>
-										<div class="example-box-wrapper">
-											<div class="row">
+			<!--                                                    SECTION 2                                                          -->
+									<div class="panel">
+										<div class="panel-body">
+											<h2 style="text-align:center" id="page-title">
+												<b>Professional Strengths</b>
+											</h2>
+											<div class="example-box-wrapper">
+												<div class="row">
 
-												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
-														<div class="panel-heading image-box">
-															<div class="image-content" style="margin-top: 16px;">                        
-																<div class="meta-box meta-box-bottom">
-																	<h3 class="meta-heading">
-																		{{keys.keyword}}
-																	</h3>
-																</div>                            
+													<div class="col-md-4" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
+														<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
+															<div class="panel-heading image-box">
+																<div class="image-content" style="margin-top: 16px;">                        
+																	<div class="meta-box meta-box-bottom">
+																		<h3 class="meta-heading">
+																			{{keys.keyword}}
+																		</h3>
+																	</div>                            
+																</div>
+																<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
 															</div>
-															<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
 
+															<ul class="list-group list-group-separator mrg0A row list-group-icons">
+
+																<div class="row" style="margin: 0 auto;">
+																	<span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-class="mini.relate == 'donotexhibitanymore' ? 'mini_style_green' : ((mini.relate == 'relatestrongly'||mini.relate == 'relatepartially') ? 'mini_style_grey':'')">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
+
+																</div><br>
+
+																<li class="" ng-if="keys.comment">
+
+																	<a href="" class="list-group-item">
+
+																		{{keys.comment}}
+																	</a>
+																</li>
+
+															</ul>
 														</div>
-
-														<ul class="list-group list-group-separator mrg0A row list-group-icons">
-
-															<div class="row" style="margin: 0 auto;">
-																<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
-
-															</div><br>
-
-															<li class="" ng-if="keys.comment">
-
-																<a href="" class="list-group-item">
-																	
-																	{{keys.comment}}
-																</a>
-															</li>
-
-														</ul>
 													</div>
+
 												</div>
 
 											</div>
-											
 										</div>
 									</div>
-								</div>
-		<!--                                                    SECTION 3                                                          -->
-								<div class="panel">
-									<div class="panel-body">
-										<h2 style="text-align:center" id="page-title">
-											<b>Learning Needs</b>
-										</h2>
-										<div class="example-box-wrapper">
-											<div class="row">
+			<!--                                                    SECTION 3                                                          -->
+									<div class="panel">
+										<div class="panel-body">
+											<h2 style="text-align:center" id="page-title">
+												<b>Learning Needs</b>
+											</h2>
+											<div class="example-box-wrapper">
+												<div class="row">
 
-												<div class="col-md-6" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-													<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
-														<div class="panel-heading image-box">
-															<div class="image-content" style="margin-top: 16px;">                        
-																<div class="meta-box meta-box-bottom">
-																	<h3 class="meta-heading">
-																		{{keys.keyword}}
-																	</h3>
-																</div>                            
+													<div class="col-md-4" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
+														<div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
+															<div class="panel-heading image-box">
+																<div class="image-content" style="margin-top: 16px;">                        
+																	<div class="meta-box meta-box-bottom">
+																		<h3 class="meta-heading">
+																			{{keys.keyword}}
+																		</h3>
+																	</div>                            
+																</div>
+																<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
 															</div>
-															<img src="./assets/image-resources/blurred-bg/bg.png" alt="">
 
+															<ul class="list-group list-group-separator mrg0A row list-group-icons">
+
+																<div class="row" style="margin: 0 auto;">
+																	<span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-class="mini.relate == 'donotexhibitanymore' ? 'mini_style_green' : ((mini.relate == 'relatestrongly'||mini.relate == 'relatepartially') ? 'mini_style_grey':'')">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
+
+																</div><br>
+
+																<li class="" ng-if="keys.comment">
+
+																	<a href="" class="list-group-item">
+
+																		{{keys.comment}}
+																	</a>
+																</li>
+
+															</ul>
 														</div>
-
-														<ul class="list-group list-group-separator mrg0A row list-group-icons">
-
-															<div class="row" style="margin: 0 auto;">
-																<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
-
-															</div><br>
-
-															<li class="" ng-if="keys.comment">
-
-																<a href="" class="list-group-item">
-																	
-																	{{keys.comment}}
-																</a>
-															</li>
-
-														</ul>
 													</div>
+
 												</div>
 
 											</div>
-											
 										</div>
 									</div>
 								</div>
-								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
+								
+								<div class="container" ng-show="candidate_tab == 2">
+
+									<div class="panel panel-body row">
+										<div class="col-md-2"></div>
+										<div class="col-md-2" style="text-align: center; color:#8bc34a;">
+											<b>RESPONSIVE</b><br>
+											<span style="color: #888;">Strengths when balanced</span>
+										</div>
+										<div class="col-md-4"></div>
+										<div class="col-md-2" style="text-align: center; color:red;">
+											<b>REACTIVE</b><br>
+											<span style="color: #888;">Strengths when overused</span>
+										</div>
+									</div>
+
+									<div class="panel" ng-repeat="keys in user.profile.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
+										<div class="panel-body">
+
+											<div class="col-md-12 row" style="margin: 20px 0px;">
+												<div class="col-md-12">
+													<div class="col-md-3" style="text-align: right;">
+														<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{keys.keyword}}</b>
+													</div>
+													<div class="col-md-6"></div>
+													<div class="col-md-3" style="text-align: left;">
+														<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{temp_content[$index].keyword}}</b>
+													</div>
+												</div><br><br>
+												<div class="col-md-12">
+													<div class="col-md-2"></div>
+													<div class="col-md-8">
+														<input type="range" min="0" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating" disabled>
+													</div>
+													<div class="col-md-2"></div>
+												</div><br><br><br>
+												<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:15px;">
+														<span ng-if="temp_content[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
+														<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1">{{keys.balancing_description[1].desc}}</span>
+														<span ng-if="temp_content[$index].key_rating >= 1">{{keys.balancing_description[2].desc}}</span>
+
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								
+								<div ng-show="candidate_tab == 3" style="width:80%; margin-right:auto; margin-left:auto;">
+									<div class="row">
+										<div class="col-md-2 LHS_tab"><h3><b>Responsive</b></h3></div>
+										<div class="col-sm-10 panel" style="background: #ffe590;">
+											<div class="panel-body">
+												<div style="text-align: center;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.mini_description}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2 LHS_tab"><h3><b>Moderate</b></h3></div>
+										<div class="col-sm-10 panel" style="background: #f9ffaf;">
+											<div class="panel-body">
+												<div style="text-align: center;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2 LHS_tab"><h3><b>Reactive</b></h3></div>
+										<div class="col-sm-10 panel" style="background: #ddffa5;">
+											<div class="panel-body">
+												<div  style="text-align: center;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">{{mini.mini_description}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										Following Learning Needs are not applicable as shared by {{user.firstname + ' ' + user.lastname}}:<br><br>
+										<div class="col-sm-12 panel" style="background: #fff;">
+											<div class="panel-body">
+												<div  style="text-align: center;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotrelate'">{{mini.mini_description}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
+							
 							<!--		TAB 3		-->
-							<div class="container" ng-show="menu == 3 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
+											
+<div class="container" ng-show="menu == 3 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
+	<b>Profile Not Selected Yet !</b>
+</div>
+<div id="sb-site" ng-show="menu == 3 && user.profile.profile_number != 0">
+	
+	<style>
+		.back_panel {
+			background-color: #CCFF90;
+			color: black;
+		}
+		.back_active_panel {
+			background-color: #e1f5fe;
+			color: black;
+		}
+		#radios label {
+			cursor: pointer;
+			position: relative;
+		}
+			#radios {
+			text-align: center;
+			margin 0 auto;
+		}
+
+		#radios label + label {
+			margin-left: 15px;
+		}
+
+		input[type="radio"] {
+			opacity: 0; /* hidden but still tabable */
+			position: absolute;
+		}
+
+		input[type="radio"] + span {
+			font-family: 'Material Icons';
+			color: #B3CEFB;
+			border-radius: 50%;
+			padding: 5px;
+			transition: all 0.4s;
+			-webkit-transition: all 0.4s;
+		}
+
+		input[type="radio"]:checked + span {
+			color: #D9E7FD;
+		  background-color: #4285F4;
+		}
+
+		input[type="radio"]:focus + span {
+			color: #fff;
+		}
+		.icon{
+			color: #B3CEFB;
+		}
+		.material-icons {
+		  font-family: 'Material Icons';
+		  font-weight: normal;
+		  font-style: normal;
+		  font-size: 20px;  /* Preferred icon size */
+		  display: inline-block;
+		  line-height: 1;
+		  text-transform: none;
+		  letter-spacing: normal;
+		  word-wrap: normal;
+		  white-space: nowrap;
+		  direction: ltr;
+
+		  /* Support for all WebKit browsers. */
+		  -webkit-font-smoothing: antialiased;
+		  /* Support for Safari and Chrome. */
+		  text-rendering: optimizeLegibility;
+
+		  /* Support for Firefox. */
+		  -moz-osx-font-smoothing: grayscale;
+
+		  /* Support for IE. */
+		  font-feature-settings: 'liga';
+		}
+	</style>
+	
+    <div id="page-wrapper">
+        
+        <div id="page-content-wrapper">
+            <div>
+                
+                <div class="container">
+
+					<!-- Boostrap Tabs -->
+
+					<script type="text/javascript" src="./assets/widgets/tabs/tabs.js"></script>
+						<div id="page-title">
+							<br>
+							<h2>{{user.firstname + ' ' + user.lastname}}'s Profile</h2>
+							<p class="mrg15B"></p>
+							
+						</div>
+					
+						<div class="row" style="margin: 0 auto;">
+							<div class="col-md-2" style="margin-top: 30px; font-size: 20px; text-align: center;">
+								Profile Sections
+							</div>
+							<div class="col-md-10" style="margin: 0 auto;">
+								<div class="col-md-12" style="text-align: center; margin-bottom: 10px;">
+									In the statements below, kindly choose from the following options:
+								</div>
+								<div class="col-md-3" ng-if="section_num != 3"></div>
+								<div class="col-md-2" ng-if="section_num == 3"></div>
+								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;" ng-show="section_num == 3">
+									<label class="material-icons" title="Improved Over Time" style="color: skyblue;">
+										<span>&#xE15D;</span>
+									</label>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Improved Over Time</div>
+								</div>
+								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+										<span>&#xE612;</span>
+									</label>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Relate</div>
+								</div>
+								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Relate Partially" style="color: skyblue;">
+										<span>&#xE427;</span>
+									</label>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Partially</div>
+								</div>
+								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Relate Strongly" style="color: skyblue;">
+										<span>&#xE3A6;</span>
+									</label>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Strongly</div>
+								</div>
+							</div>
+							
+						</div>
+					
+						<div class="row">
+						<div>
+							<ul class="list-group">
+								<li class="mrg10B" ng-click="section_num = 1">
+									<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
+									  Professional Values and Work<br>Culture Preferences
+										<i class="glyph-icon icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+								<li class="mrg10B" ng-click="section_num = 2">
+									<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
+										Professional Strengths
+										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+								<li class="mrg10B" ng-click="section_num = 3">
+									<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
+										Learning Needs
+										<i class="glyph-icon icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+								<!--<li class="mrg10B" ng-click="section_num = 5">
+									<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : 'bg_white'">
+										Recommendations for Manager
+										<i class="glyph-icon icon-angle-right mrg0A"></i>
+									</a>
+								</li>-->
+							</ul>
+						</div>
+						<div class="col-md-9">
+							<div class="tab-content">
+
+								<div class="tab-pane fade active in pad0A" id="faq-tab-1">
+									<div class="panel-group" id="accordion5">
+										<div class="panel ">
+											<div class="panel-heading">
+												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0;">
+
+													<a data-toggle="collapse" data-parent="#accordion5">
+														<b ng-show="section_num == 1">Professional Values and Work Culture Preferences</b>
+														<b ng-show="section_num == 2">Professional Strengths</b>
+														<b ng-show="section_num == 3">Learning Needs</b>
+													</a>
+													<span style="float:right; font-size: 15px;">Page {{section_num}}/3</span>
+												</h2>
+											</div>
+											<div class="row" style="width: 95%; margin: auto;">
+
+												 <div class="col-sm-12" ng-repeat="keys in user.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
+													<div class="panel panel-primary">
+														<div class="panel-heading" style="text-align: center;">
+															<h4 class="panel-title">{{keys.keyword}}</h4>
+															<span class="material-switch pull-right" style="margin-top: -15px;">
+																<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
+																<label for="{{keys.keyword_id}}" class="label-success"></label>
+															</span>
+														</div>
+														<div id="collapseOne" class="panel-collapse collapse in">
+															<div class="panel-body pad0B col-sm-12">
+																<div class="col-sm-6" style="text-align: center;">By Candidate</div>
+																<div class="col-sm-6" style="text-align: center;">By Facilitator</div>
+																<br><br>
+															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
+																   <!-- LEFT SIDE -->
+																	<div class="col-sm-1">
+																		<div id="radios">
+																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time" ng-if="mini.relate == 'donotexhibitanymore'">
+																					 
+																					 <span class="icon">&#xE15D;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate" ng-if="mini.relate == 'donotrelate'">
+																				
+																					 <span class="icon">&#xE612;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially" ng-if="mini.relate == 'relatepartially'">
+																					
+																					<span class="icon">&#xE427;</span>
+																				</label>
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly" ng-if="mini.relate == 'relatestrongly'">
+																				
+																					<span class="icon">&#xE3A6;</span>
+																				</label>                          
+																		</div>
+																	</div>
+																	<div class="col-sm-5">
+																		<h5><b>{{mini.mini_description}}</b></h5>  
+																	</div>
+																
+																
+															<br>
+															
+															<!-- RIGHT SIDE -->
+																	<div class="col-sm-6">
+																		<div id="radios" ng-click="user.assessor.profile_content[$parent.$index].assessor_checkbox = true;">
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time" ng-show="section_num == 3">
+																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
+																					 <span>&#xE15D;</span>
+																				</label>
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
+																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" value="donotrelate" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
+																					 <span>&#xE612;</span>
+																				</label>
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
+																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" value="relatepartially" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 1" />
+																					<span>&#xE427;</span>
+																				</label>
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
+																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" value="relatestrongly" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 2" />
+																					<span>&#xE3A6;</span>
+																				</label>                          
+																		</div>
+																	</div>
+																</div>
+																
+															<br>
+																<div class="col-sm-6">
+																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" disabled ng-if="keys.comment"></textarea>
+																</div>
+																<div class="col-sm-6">
+																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment" placeholder="Comment">Comment</textarea>
+																</div>
+															   
+															</div>
+															<br>
+														</div>
+													</div>
+												 </div>
+											</div>
+										</div><br>
+										
+										<button type="button" class="btn btn-info" ng-click="section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
+										<button type="button" class="btn btn-success" style="float: right;" ng-click="section_num = section_num+1" ng-disabled="section_num == 3">Next</button>
+										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
+											<button type="button" class="btn btn-warning" ng-click="submitAssessor()">Save</button><br><br>
+										</span>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+						</div>
+                    </div>
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+											
+							<!--		TAB 4		-->
+											
+							<div class="container" ng-show="menu == 4 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
 								<b>Profile Not Selected Yet !</b>
 							</div>
-							<div class="container" ng-show="menu == 3 && user.profile.profile_number != 0">
-                
-								<div id="page-title">
-									<h2>User Balanced View</h2>
+							<div class="container" ng-show="menu == 4 && user.profile.profile_number != 0">
+								
+								<div class="row">
+									<div id="page-title" style="margin: 0px auto 20px auto;" ng-init="assessor_tab = 1">
+										<ul class="nav">
+											<li ng-class="assessor_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 1">Assessed Balanced View</a></li>
+											<li ng-class="assessor_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 2">Assessed Reactive-Responsive Levels</a></li>
+										</ul>
+									</div>
 								</div>
-
-								<div class="panel panel-body row" style="color: red;">
-									<div class="col-md-1"></div>
-									<div class="col-md-2" style="text-align: right; color:lightgrey;">
-										<b>REACTIVE</b>
+								
+								<div ng-show="assessor_tab == 1">
+									
+									<div class="panel panel-body row">
+										<div class="col-md-2"></div>
+										<div class="col-md-2" style="text-align: center; color:#8bc34a;">
+											<b>RESPONSIVE</b><br>
+											<span style="color: #888;">Strengths when balanced</span>
+										</div>
+										<div class="col-md-4"></div>
+										<div class="col-md-2" style="text-align: center; color:red;">
+											<b>REACTIVE</b><br>
+											<span style="color: #888;">Strengths when overused</span>
+										</div>
 									</div>
-									<div class="col-md-2"></div>
-									<div class="col-md-2" style="text-align: center; color:#8bc34a;">
-										<b>RESPONSIVE</b>
-									</div>
-									<div class="col-md-2"></div>
-									<div class="col-md-2">
-										<b>REACTIVE</b>
-									</div>
-									<div class="col-md-1"></div>
-								</div>
 
-								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
-									<div class="panel-body">
+									<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
+										<div class="panel-body">
 
-										<div class="col-md-12 row" style="margin: 20px 0px;">
-											<div class="col-md-12">
-												<div class="col-md-1"></div>
-												<div class="col-md-2" style="text-align: right; color: lightgrey;">
-													<b><input type="text" class="form-control" ng-model="keys.dummy_keyword" style="text-align: center;"></b>
+											<div class="col-md-12 row" style="margin: 20px 0px;">
+												<div class="col-md-12">
+													<div class="col-md-2"></div>
+													<div class="col-md-3" style="text-align: left;">
+														<b><input type="text" class="form-control" ng-model="keys.keyword" style="text-align: center;"></b>
+													</div>
+													<div class="col-md-2"></div>
+													<div class="col-md-3" style="text-align: right;">
+														<b><input type="text" class="form-control" ng-model="temp_content[$index].keyword" style="text-align: center;"></b>
+													</div>
+												</div><br><br>
+												<div class="col-md-12">
+													<div class="col-md-2"></div>
+													<div class="col-md-8">
+														<input type="range" min="0" max="2" class="range" step="0.1" ng-model="temp_content[$index].assessor_key_rating">
+													</div>
+													<div class="col-md-2"></div>
+												</div><br><br><br>
+												<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
+
+														<span ng-if="temp_content[$index].assessor_key_rating == 0"><input type="text" ng-model="keys.balancing_description[0].desc" class="form-control" style="text-align: center;"></span>
+														<span ng-if="temp_content[$index].assessor_key_rating > 0 && temp_content[$index].assessor_key_rating < 1"><input type="text" ng-model="keys.balancing_description[1].desc" class="form-control" style="text-align: center;"></span>
+														<span ng-if="temp_content[$index].assessor_key_rating >= 1"><input type="text" ng-model="keys.balancing_description[2].desc" class="form-control" style="text-align: center;"></span>
+
 												</div>
-												<div class="col-md-2"></div>
-												<div class="col-md-2" style="text-align: center;">
-													<b><input type="text" class="form-control" ng-model="keys.keyword" style="text-align: center;"></b>
-												</div>
-												<div class="col-md-2"></div>
-												<div class="col-md-2">
-													<b><input type="text" class="form-control" ng-model="temp_content[$index].keyword" style="text-align: center;"></b>
-												</div>
-												<div class="col-md-1"></div>
-											</div><br><br>
-											<div class="col-md-12">
-												<div class="col-md-2"></div>
-												<div class="col-md-8">
-													<input type="range" min="-2" max="2" class="range" step="0.1" ng-model="temp_content[$index].key_rating">
-												</div>
-												<div class="col-md-2"></div>
-											</div><br><br><br>
-											<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
-													
-													<span ng-if="temp_content[$index].key_rating == 0"><input type="text" ng-model="keys.balancing_description[0].desc" class="form-control" style="text-align: center;"></span>
-													<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1"><input type="text" ng-model="keys.balancing_description[1].desc" class="form-control" style="text-align: center;"></span>
-													<span ng-if="temp_content[$index].key_rating >= 1"><input type="text" ng-model="keys.balancing_description[2].desc" class="form-control" style="text-align: center;"></span>
-												
 											</div>
 										</div>
 									</div>
 								</div>
-								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
+								
+								<div ng-show="assessor_tab == 2" style="width:80%; margin-right:auto; margin-left:auto;">
+									<div class="row">
+										<div class="col-md-2 LHS_tab"><h3><b>Responsive</b></h3></div>
+										<div class="col-sm-10 panel" style="background: #ffe590;">
+											<div class="panel-body">
+												<div style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2 LHS_tab"><h3><b>Moderate</b></h3></div>
+										<div class="col-sm-10 panel" style="background: #f9ffaf;">
+											<div class="panel-body">
+												<div style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+														</span>
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-2 LHS_tab"><h3><b>Reactive</b></h3></div>
+										<div class="col-sm-10 panel" style="background: #ddffa5;">
+											<div class="panel-body">
+												<div  style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										Following Learning Needs are not applicable as shared by Assessor:<br><br>
+										<div class="col-sm-12 panel" style="background: #fff;">
+											<div class="panel-body">
+												<div  style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotrelate'">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+
+								<button class="btn btn-danger" style="float:right; margin-bottom: 30px;" ng-click="submitAssessor()">Save</button>
 							</div>
-							<!--		TAB 4		-->
-							<div class="container panel panel-body" ng-show="menu == 4">
+							
+							<!--		TAB 5		-->
+							
+							<div class="container panel panel-body" ng-show="menu == 5">
 								
 								<textarea class="form-control" ng-model="user.assessor.description"></textarea>
 								
@@ -737,7 +1198,7 @@
 								
 								<!--	section 1	-->
 								<div class="row" style="margin-top: 25px;">
-									<h4>Professional Values and Work Culture Preference: </h4><br>
+									<h4>Professional Values and Work Culture Preferences: </h4><br>
 									<ul>
 										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 1 && keys.assessor_checkbox">
 											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%">
@@ -784,394 +1245,6 @@
 								</div>
 								
 								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
-							</div>
-							
-							<!--		TAB 5		-->
-<div class="container" ng-show="menu == 5 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
-	<b>Profile Not Selected Yet !</b>
-</div>
-<div id="sb-site" ng-show="menu == 5 && user.profile.profile_number != 0">
-	
-	<style>
-		.back_panel {
-			background-color: #CCFF90;
-			color: black;
-		}
-		.back_active_panel {
-			background-color: #e1f5fe;
-			color: black;
-		}
-		#radios label {
-			cursor: pointer;
-			position: relative;
-		}
-			#radios {
-			text-align: center;
-			margin 0 auto;
-		}
-
-		#radios label + label {
-			margin-left: 15px;
-		}
-
-		input[type="radio"] {
-			opacity: 0; /* hidden but still tabable */
-			position: absolute;
-		}
-
-		input[type="radio"] + span {
-			font-family: 'Material Icons';
-			color: #B3CEFB;
-			border-radius: 50%;
-			padding: 5px;
-			transition: all 0.4s;
-			-webkit-transition: all 0.4s;
-		}
-
-		input[type="radio"]:checked + span {
-			color: #D9E7FD;
-		  background-color: #4285F4;
-		}
-
-		input[type="radio"]:focus + span {
-			color: #fff;
-		}
-
-		.material-icons {
-		  font-family: 'Material Icons';
-		  font-weight: normal;
-		  font-style: normal;
-		  font-size: 20px;  /* Preferred icon size */
-		  display: inline-block;
-		  line-height: 1;
-		  text-transform: none;
-		  letter-spacing: normal;
-		  word-wrap: normal;
-		  white-space: nowrap;
-		  direction: ltr;
-
-		  /* Support for all WebKit browsers. */
-		  -webkit-font-smoothing: antialiased;
-		  /* Support for Safari and Chrome. */
-		  text-rendering: optimizeLegibility;
-
-		  /* Support for Firefox. */
-		  -moz-osx-font-smoothing: grayscale;
-
-		  /* Support for IE. */
-		  font-feature-settings: 'liga';
-		}
-	</style>
-	
-    <div id="page-wrapper">
-        
-        <div id="page-content-wrapper">
-            <div>
-                
-                <div class="container">
-
-					<!-- Boostrap Tabs -->
-
-					<script type="text/javascript" src="./assets/widgets/tabs/tabs.js"></script>
-						<div id="page-title">
-							<br>
-							<h2>User Profile</h2>
-							<p class="mrg15B"></p>
-							
-						</div>
-					
-						<div class="row" style="margin: 0 auto;">
-							<div class="col-md-2" style="margin-top: 0px; font-size: 18px; text-align: center;">
-								Profile Sections
-							</div>
-							<div class="col-md-offset-2" ng-show="section_num != 3"></div>
-							<div class="col-md-offset-1 col-md-2" style="margin-bottom: 30px; font-size: 20px;" ng-show="section_num == 3">
-								<label class="material-icons" title="Do Not Exhibit Anymore" style="color: skyblue;">
-									<span>&#xE15D;</span>
-								</label>
-								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Exhibit Anymore</div>
-							</div>
-							<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-								<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
-									<span>&#xE612;</span>
-								</label>
-								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Relate</div>
-							</div>
-							<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-								<label class="material-icons" title="Relate Partially" style="color: skyblue;">
-									<span>&#xE40C;</span>
-								</label>
-								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Partially</div>
-							</div>
-							<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-								<label class="material-icons" title="Relate Strongly" style="color: skyblue;">
-									<span>&#xE3A6;</span>
-								</label>
-								<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Strongly</div>
-							</div>
-						</div>
-					
-						<div class="row">
-						<div>
-							<ul class="list-group">
-								<li class="mrg10B" ng-click="section_num = 1">
-									<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
-									  Professional Values and Work<br>Culture Preference
-										<i class="glyph-icon icon-angle-right mrg0A"></i>
-									</a>
-								</li>
-								<li class="mrg10B" ng-click="section_num = 2">
-									<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
-										Professional Strengths
-										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
-									</a>
-								</li>
-								<li class="mrg10B" ng-click="section_num = 3">
-									<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
-										Learning Needs
-										<i class="glyph-icon icon-angle-right mrg0A"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-md-9">
-							<div class="tab-content">
-
-								<div class="tab-pane fade active in pad0A" id="faq-tab-1">
-									<div class="panel-group" id="accordion5">
-										<div class="panel ">
-											<div class="panel-heading">
-												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0;">
-
-													<a data-toggle="collapse" data-parent="#accordion5">
-														<b ng-show="section_num == 1">Professional Values and Work Culture Preference</b>
-														<b ng-show="section_num == 2">Professional Strengths</b>
-														<b ng-show="section_num == 3">Learning Needs</b>
-													</a>
-													<span style="float:right; font-size: 15px;">Page {{section_num}}/3</span>
-												</h2>
-											</div>
-											<div class="row" style="width: 95%; margin: auto;">
-
-												 <div class="col-sm-12" ng-repeat="keys in user.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
-													<div class="panel panel-primary">
-														<div class="panel-heading" style="text-align: center;">
-															<h4 class="panel-title">{{keys.keyword}}</h4>
-															<span class="material-switch pull-right" style="margin-top: -15px;">
-																<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
-																<label for="{{keys.keyword_id}}" class="label-success"></label>
-															</span>
-														</div>
-														<div id="collapseOne" class="panel-collapse collapse in">
-															<div class="panel-body pad0B col-sm-12">
-																<div class="col-sm-6" style="text-align: center;">By Candidate</div>
-																<div class="col-sm-6" style="text-align: center;">By Facilitator</div>
-																<br><br>
-															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
-																   <!-- LEFT SIDE -->
-																	<div class="col-sm-1">
-																		<div id="radios">
-																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore" ng-if="mini.relate == 'donotexhibitanymore'">
-																					 <input type="radio" name="{{mini.mini_description_id}}donotexhibitanymore" id="{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
-																					 <span>&#xE15D;</span>
-																				</label>
-																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate" ng-if="mini.relate == 'donotrelate'">
-																					 <input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
-																					 <span>&#xE612;</span>
-																				</label>
-																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially" ng-if="mini.relate == 'relatepartially'">
-																					<input type="radio" name="{{mini.mini_description_id}}relatepartially" id="{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
-																					<span>&#xE40C;</span>
-																				</label>
-																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly" ng-if="mini.relate == 'relatestrongly'">
-																					<input type="radio" name="{{mini.mini_description_id}}relatestrongly" id="{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.relate" ng-change="mini.mini_rating = 2" />
-																					<span>&#xE3A6;</span>
-																				</label>                          
-																		</div>
-																	</div>
-																	<div class="col-sm-5">
-																		<h5><b>{{mini.mini_description}}</b></h5>  
-																	</div>
-																
-																
-															<br>
-															
-															<!-- RIGHT SIDE -->
-																	<div class="col-sm-6">
-																		<div id="radios" ng-click="user.assessor.profile_content[$parent.$index].assessor_checkbox = true;">
-																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" class="material-icons" title="Do Not Exhibit Anymore" ng-show="section_num == 3">
-																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
-																					 <span>&#xE15D;</span>
-																				</label>
-																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
-																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" value="donotrelate" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
-																					 <span>&#xE612;</span>
-																				</label>
-																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
-																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" value="relatepartially" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 1" />
-																					<span>&#xE40C;</span>
-																				</label>
-																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
-																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" value="relatestrongly" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 2" />
-																					<span>&#xE3A6;</span>
-																				</label>                          
-																		</div>
-																	</div>
-																</div>
-																
-															<br>
-																<div class="col-sm-6">
-																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" disabled ng-if="keys.comment"></textarea>
-																</div>
-																<div class="col-sm-6">
-																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment" placeholder="Comment">Comment</textarea>
-																</div>
-															   
-															</div>
-															<br>
-														</div>
-													</div>
-												 </div>
-											</div>
-										</div><br>
-										
-										<button type="button" class="btn btn-info" ng-click="section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
-										<button type="button" class="btn btn-success" style="float: right;" ng-click="section_num = section_num+1" ng-disabled="section_num == 3">Next</button>
-										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
-											<button type="button" class="btn btn-warning" ng-click="submitAssessor()">Save</button><br><br>
-										</span>
-									</div>
-
-								</div>
-
-							</div>
-						</div>
-						</div>
-                    </div>
-
-            </div>
-        </div>
-        
-    </div>
-</div>
-							<!--		TAB 6		-->
-							<div class="container" ng-show="menu == 6 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
-								<b>Profile Not Selected Yet !</b>
-							</div>
-							<div class="container" ng-show="menu == 6 && user.profile.profile_number != 0">
-                
-								<div id="page-title">
-									<h2>Assessed Balanced View</h2>
-								</div>
-
-								
-
-								<div class="panel panel-body row" style="color: red;">
-									<div class="col-md-1"></div>
-									<div class="col-md-2" style="text-align: right; color:lightgrey;">
-										<b>REACTIVE</b>
-									</div>
-									<div class="col-md-2"></div>
-									<div class="col-md-2" style="text-align: center; color:#8bc34a;">
-										<b>RESPONSIVE</b>
-									</div>
-									<div class="col-md-2"></div>
-									<div class="col-md-2">
-										<b>REACTIVE</b>
-									</div>
-									<div class="col-md-1"></div>
-								</div>
-
-								<div class="panel" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
-									<div class="panel-body">
-
-										<div class="col-md-12 row" style="margin: 20px 0px;">
-											<div class="col-md-12">
-												<div class="col-md-1"></div>
-												<div class="col-md-2" style="text-align: right; color: lightgrey;">
-													<b><input type="text" class="form-control" ng-model="keys.dummy_keyword" style="text-align: center;"></b>
-												</div>
-												<div class="col-md-2"></div>
-												<div class="col-md-2" style="text-align: center;">
-													<b><input type="text" class="form-control" ng-model="keys.keyword" style="text-align: center;"></b>
-												</div>
-												<div class="col-md-2"></div>
-												<div class="col-md-2">
-													<b><input type="text" class="form-control" ng-model="temp_content[$index].keyword" style="text-align: center;"></b>
-												</div>
-												<div class="col-md-1"></div>
-											</div><br><br>
-											<div class="col-md-12">
-												<div class="col-md-2"></div>
-												<div class="col-md-8">
-													<input type="range" min="-2" max="2" class="range" step="0.1" ng-model="temp_content[$index].assessor_key_rating">
-												</div>
-												<div class="col-md-2"></div>
-											</div><br><br><br>
-											<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
-													
-													<span ng-if="temp_content[$index].assessor_key_rating == 0"><input type="text" ng-model="keys.balancing_description[0].desc" class="form-control" style="text-align: center;"></span>
-													<span ng-if="temp_content[$index].assessor_key_rating > 0 && temp_content[$index].assessor_key_rating < 1"><input type="text" ng-model="keys.balancing_description[1].desc" class="form-control" style="text-align: center;"></span>
-													<span ng-if="temp_content[$index].assessor_key_rating >= 1"><input type="text" ng-model="keys.balancing_description[2].desc" class="form-control" style="text-align: center;"></span>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
-							</div>
-							<!--		TAB 7		-->
-							<div class="container" ng-show="menu == 7">
-								
-								<div style="margin-bottom: 30px;">
-
-										<div id="page-title">
-											<h2><b>Reactive-Responsive Levels</b></h2>
-										</div>
-									<div class="container">
-
-										<div class="panel" style="background: #ffe590;">
-											<div class="panel-body row">
-												<div class="col-md-10" style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
-														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">
-															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
-														</span>
-													</div>
-												</div>
-												<div class="col-md-2" style="display: inline-block; text-align: center;">Responsive</div>
-											</div>
-										</div>
-
-										<div class="panel" style="background: #f9ffaf;">
-											<div class="panel-body row">
-												<div class="col-md-10" style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
-														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">
-															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
-														</span>
-													</div>
-												</div>
-												<div class="col-md-2" style="display: inline-block; text-align: center;">Moderate</div>
-											</div>
-										</div>
-
-										<div class="panel" style="background: #ddffa5;">
-											<div class="panel-body row">
-												<div class="col-md-10" style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
-														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">
-															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
-														</span>
-													</div>
-												</div>
-												<div class="col-md-2" style="display: inline-block; text-align: center;">Reactive</div>
-											</div>
-										</div>
-
-									</div>
-
-								</div>
 							</div>
 <!--											END TABS												-->
 						</div>

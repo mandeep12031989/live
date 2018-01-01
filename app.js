@@ -77,6 +77,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Importing Routing files
 var routes = require('./routes/index');
 var keyword = require('./routes/keyword');
+var added = require('./routes/added');
 var user = require('./routes/user');
 var noti = require('./routes/noti');
 var ques = require('./routes/ques');
@@ -84,6 +85,7 @@ var ques = require('./routes/ques');
 // linking callback function to route
 app.use('/', routes);
 app.use('/keyword', keyword);
+app.use('/added', added);
 app.use('/user', user);
 app.use('/noti', noti);
 app.use('/ques', ques);

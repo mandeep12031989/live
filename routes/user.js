@@ -59,7 +59,7 @@ router.route('/mailToFac')
 						}
 
 						var mailData = {to: user[i].username};
-						var link = "http://portal-idiscover.herokuapp.com/#/user/"+req.decoded._id;
+						var link = "portal-idiscover.herokuapp.com/#/user/"+req.decoded._id;
 						mailData.subject = "iDiscover.me | Progress | "+f.firstname+' '+f.lastname+" Filled their Trueself Profile";
 						mailData.html = 'Hello,<br> Please click on the link below to start assessing '+user.firstname+' '+user.lastname+'\'s Profile .<br><a href='+link+'>Start Assessing</a>';
 
@@ -83,6 +83,34 @@ router.route('/mailToFac')
 		});
 });
 
+router.route('/mailToOwn')
+.post(Verify.verifyOrdinaryUser, function(req, res, next){
+	var mailData = sanitize(req.body);
+	
+	User.findOne({_id: req.decoded._id}, {username: true})
+		.exec(function(e, user){
+			if(e)
+				return next(e);
+			//console.log(f);
+		
+			mailData.to = user.username;
+
+			mailer.custom_mail(mailData, function(ret){
+				var res_from_mailer = ret;
+				//console.log(res_from_mailer);
+
+				if(res_from_mailer == false){
+					//console.log('Updated error!');
+					return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+				}
+				else if(res_from_mailer == true){
+					//console.log('Updated token!');
+					res.status(200).json({success: true, message: "Mail Sent to Reviewers Successfully !"});
+				}
+			});
+		});
+});
+
 router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
@@ -99,7 +127,7 @@ router.route('/personal')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'_id': false, 'important_date': false, 'OauthId': false, 'OauthToken': false, 'password': false, 'password_reset_token': false, 'are_you': false, 'profile': false, 'question': false, 'device_details': false})
+    User.findOne({_id: id}, {'_id': false, 'important_date': false, 'OauthId': false, 'OauthToken': false, 'password': false, 'password_reset_token': false, 'are_you': false, 'profile': false, 'question': false, 'device_details': false, 'assessor': false})
     .exec(function(err, user){
         if(err)
             next(err);

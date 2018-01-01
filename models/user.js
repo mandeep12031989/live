@@ -58,6 +58,10 @@ var profileSchema = new Schema({
         default: "P__S__K__"
     },
     keyword: String,                        //keyword name
+	new_keyword: {
+		type: Boolean,
+		default: false
+	},
     mini_descriptions: [descriptionSchema],     //keyword's different meanings/statements or say mini-descriptions
     linked_keyword: {                           //linked to which keyword ?
         type: String,
