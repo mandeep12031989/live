@@ -100,7 +100,11 @@ var profileSchema = new Schema({
     assessor_comment: {                              //comment to specific parent keyword
         type: String,
         default: ""
-    }
+    },
+	assessor_bal_in_report: {
+		type: Boolean,
+		default: true
+	}
 });
 
 var userSchema = new Schema({
@@ -211,7 +215,12 @@ var userSchema = new Schema({
 			type: String,
 			default: '<name>\'s enneagram assessment results are <positive/negative>. <He/She> is at Moderate moving to higher personal mastery levels. <He/She> is enneagram type <type>.'
 		},
-		recommend: [new Schema({title: String, desc: String})]
+		recommend: [new Schema({title: String, desc: String})],
+		rubric: {
+			type: Array,
+			default: []
+		},
+		recommendations_for_manager: [new Schema({typeID: String, title: String, statements: [new Schema({sID: {type: String, default: "P__N__S__"}, statement: String, selected: {type: Boolean, default: false}})]})]
 	}
 });
 

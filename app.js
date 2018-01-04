@@ -81,6 +81,7 @@ var added = require('./routes/added');
 var user = require('./routes/user');
 var noti = require('./routes/noti');
 var ques = require('./routes/ques');
+var rec_for_man = require('./routes/rec_for_man');
 
 // linking callback function to route
 app.use('/', routes);
@@ -89,6 +90,7 @@ app.use('/added', added);
 app.use('/user', user);
 app.use('/noti', noti);
 app.use('/ques', ques);
+app.use('/rec_for_man', rec_for_man);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

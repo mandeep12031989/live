@@ -256,7 +256,8 @@
 																				<label for="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
 																					<input type="radio" name="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" id="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" value="relatestrongly" ng-model="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].relate" ng-change="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_rating = 2" />
 																					<span>&#xE3A6;</span>
-																				</label>                          
+																				</label>
+																				<span ng-click="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].relate = ''; user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_rating = 0;" style="position:relative; left: 10px; top: -6px;"><a href="">clear</a></span>
 																		</div>
 																	</div>
 																</div>

@@ -57,6 +57,20 @@
                         </a>
                     </li>
                     
+                    <li class="header"><span>Master Recommendations</span></li>
+                    <li ng-click="tab_num = 7">
+                        <a href="" ng-class="tab_num == 7 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-cog"></i>
+                            <span>View / Edit</span>
+                        </a>
+                    </li>
+                    <li ng-click="tab_num = 8">
+                        <a href="" ng-class="tab_num == 8 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-upload"></i>
+                            <span>Add NEW</span>
+                        </a>
+                    </li>
+                    
                     <li class="header"><span>Notifications</span></li>
                     <li ng-click="tab_num = 5">
                         <a href="" ng-class="tab_num == 5 ? 'bg-tab':''">
@@ -368,10 +382,11 @@
                                 </div>
                             </div>
 						
-						<button type="button" class="btn btn-success" ng-click="updateThatProfile(profile_num, section_num, pk.keyword_id[8])" style="width:100%;">UPDATE</button>
+						<button type="button" class="btn btn-success" ng-click="updateThatProfile(profile_num, section_num, pk.keyword_id[8], $index)" style="width:100%;">UPDATE</button>
 						
 					</div>
                 </div>
+				
                 <!--                        TAB 4                           -->
                 <div class="container" ng-show="tab_num == 4">
 					<span style="color:red;">*NOTE :- You can push and save only one keyword at a time.</span><br>
@@ -515,6 +530,75 @@
 					</div>
                     
                 </div>
+				
+				<!--                        TAB 7                           -->
+                <div class="container" ng-show="tab_num == 7">
+                        <div>
+                            Profile: <input type="number" ng-model="rec_num" min="1" max="9"><br><br>
+                            <button type="button" class="btn btn-danger" ng-click="getThatRecommend(rec_num)" ng-disabled="!(rec_num)">GET</button>
+                        </div>
+                        <br>
+                        <div class="panel" ng-repeat="mr in masterRecommend">
+                            <div class="panel-body" style="margin-bottom: 15px;">
+								
+                                <h2 style="text-align:center" id="page-title">
+									<div class="col-md-2">
+										<b><input type="text" ng-model="mr.typeID" style="text-align:center; color: #FF0000; width: 100%"></b>
+									</div>
+									<div class="col-md-10">
+                                    	<b><input type="text" ng-model="mr.title" style="text-align:center; color: #FF0000; width: 100%"></b>
+									</div>
+                                </h2>
+								
+								<div ng-repeat="st in mr.statements" style="margin: 30px;">
+									<div class="col-md-2">
+										<input type="text" ng-model="st.sID" style="text-align:center; color: #FF0000; width: 100%">
+									</div>
+									<div class="col-md-10">
+										<input type="text" ng-model="st.statement" style="text-align:center; color: #FF0000; width: 100%">
+									</div>
+								</div>
+                                
+                            </div>
+						
+						<button type="button" class="btn btn-success" ng-click="updateThatRecommend(rec_num, mr.typeID[5], $index)" style="width:100%;">UPDATE</button>
+						
+					</div>
+                </div>
+				
+				<!--                        TAB 8                           -->
+                <div class="container" ng-show="tab_num == 8">
+					<span style="color:red;">*NOTE :- You can push only one statement at a time.</span><br>
+					<br><b>Structure:</b> {{structure_rec}}<br><b>Structure Mini:</b> {{structure_stat}}<br><br>
+					<b>Recommendation =></b><br>
+					<div class="col-md-12" style="text-align:center;">
+						<div class="col-md-6">
+							Type-ID: <input type="text" ng-model="structure_rec.typeID"><br>
+						</div>
+						<div class="col-md-6">
+							Title: <input type="text" ng-model="structure_rec.title" style="width: 80%;">
+						</div>
+					</div>
+					
+					<br>
+					
+					<b>Statement =></b><br>
+					<div class="col-md-12" style="text-align:center;">
+						<div class="col-md-6">
+							Statement-ID: <input type="text" ng-model="structure_stat.sID">
+						</div>
+						<div class="col-md-6">
+							Statement: <input type="text" ng-model="structure_stat.statement" style="width: 80%;">
+						</div>
+					</div>
+					
+					<br><br><br>
+					<button type="button" class="btn btn-warning" ng-click="push_stat()">Push Statement</button> 
+					<button type="button" class="btn btn-warning" ng-click="structure_rec.statements.pop()" ng-disabled="!structure_rec.statements.length" style="float:right;">Pop Statement</button><br><br>
+					<button type="button" class="btn btn-danger" ng-click="push_rec()" ng-disabled="structure_rec.statements.length == 0 || structure_rec.typeID.length == 0 || structure_rec.title.length == 0">Push Recommend</button><br><br>
+                    
+                </div>
+				
                 <!--                        TAB 5                           -->
                 <div class="container" ng-show="tab_num == 5">
                     
