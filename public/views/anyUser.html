@@ -446,8 +446,8 @@
 									<div id="page-title" style="margin: 0px auto 20px auto;" ng-init="candidate_tab = 1">
 										<ul class="nav">
 											<li ng-class="candidate_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 1">Detailed View</a></li>
-											<li ng-class="candidate_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 2">Balanced View</a></li>
-											<li ng-class="candidate_tab == 3 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 3">Reactive-Responsive Levels</a></li>
+											<li ng-class="candidate_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 2">Balancing Strengths</a></li>
+											<li ng-class="candidate_tab == 3 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 3">Personal Mastery Levels</a></li>
 										</ul>
 									</div>
 								</div>
@@ -679,7 +679,7 @@
 										<div class="col-sm-10 panel" style="background: #ffe590;">
 											<div class="panel-body">
 												<div style="text-align: center;">
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.mini_description}}</span>
 													</div>
 												</div>
@@ -691,7 +691,7 @@
 										<div class="col-sm-10 panel" style="background: #f9ffaf;">
 											<div class="panel-body">
 												<div style="text-align: center;">
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
 													</div>
 												</div>
@@ -703,7 +703,7 @@
 										<div class="col-sm-10 panel" style="background: #ddffa5;">
 											<div class="panel-body">
 												<div  style="text-align: center;">
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">{{mini.mini_description}}</span>
 													</div>
 												</div>
@@ -711,11 +711,11 @@
 										</div>
 									</div>
 									<div class="row">
-										Following Learning Needs are not applicable as shared by {{user.firstname + ' ' + user.lastname}}:<br><br>
+										<span style="font-size: 14px; font-weight: bold;">{{user.firstname + ' ' + user.lastname}} did not relate with the following Learning Needs:</span><br><br>
 										<div class="col-sm-12 panel" style="background: #fff;">
 											<div class="panel-body">
 												<div  style="text-align: center;">
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotrelate'">{{mini.mini_description}}</span>
 													</div>
 												</div>
@@ -1059,8 +1059,8 @@
 								<div class="row">
 									<div id="page-title" style="margin: 0px auto 20px auto;" ng-init="assessor_tab = 1">
 										<ul class="nav">
-											<li ng-class="assessor_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 1">Assessed Balanced View</a></li>
-											<li ng-class="assessor_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 2">Assessed Reactive-Responsive Levels</a></li>
+											<li ng-class="assessor_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 1">Assessed Balancing Strengths</a></li>
+											<li ng-class="assessor_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 2">Assessed Personal Mastery Levels</a></li>
 										</ul>
 									</div>
 								</div>
@@ -1122,7 +1122,7 @@
 										<div class="col-sm-10 panel" style="background: #ffe590;">
 											<div class="panel-body">
 												<div style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'donotexhibitanymore'">
 															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
 														</span>
@@ -1136,7 +1136,7 @@
 										<div class="col-sm-10 panel" style="background: #f9ffaf;">
 											<div class="panel-body">
 												<div style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'relatepartially'">
 															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
 														</span>
@@ -1150,7 +1150,7 @@
 										<div class="col-sm-10 panel" style="background: #ddffa5;">
 											<div class="panel-body">
 												<div  style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'relatestrongly'">
 															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
 														</span>
@@ -1160,11 +1160,11 @@
 										</div>
 									</div>
 									<div class="row">
-										Following Learning Needs are not applicable as shared by Assessor:<br><br>
+										<span style="font-size: 14px; font-weight: bold;">Assessor did not relate with the following Learning Needs:</span><br><br>
 										<div class="col-sm-12 panel" style="background: #fff;">
 											<div class="panel-body">
 												<div  style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'donotrelate'">
 															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
 														</span>
@@ -1244,7 +1244,7 @@
 										</div>
 
 										<div class="form-group">
-											<label class="col-sm-2 control-label">Personal Mastery</label>
+											<label class="col-sm-2 control-label">Personal Mastery Levels</label>
 											<div class="col-sm-4">
 												<div class="input-group">
 													<div class="input-group-addon" ng-click="user.assessor.per_mast>0.5 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 0.5 : user.assessor.per_mast = user.assessor.per_mast"><</div>

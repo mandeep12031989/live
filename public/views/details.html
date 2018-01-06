@@ -125,8 +125,8 @@
 												<div class="form-group">
 													<label for="" class="col-sm-4 control-label">Choose iDiscover Facilitator</label>
 													<div class="col-sm-8">
-														<div class="clearfix row">
-															<div class="">
+														<div class="clearfix row" style="margin-bottom: 7px;">
+															<div class="col-sm-12">
 																<select class="form-control" required ng-model="userDetails.facilitator_name">
 																	<option class="" value="" disabled>Select</option>
 																	<option value="Lavish Dudeja">Lavish Dudeja</option>
@@ -134,7 +134,9 @@
 																	<option value="Pranam Bansal">Pranam Bansal</option>
 																</select>
 															</div>
-
+														</div>
+														<div style="text-align: center;" ng-if="submitted && ((userDetails.facilitator_name == '') || (userDetails.facilitator_name == '--UNKNOWN--'))">
+															<span style="color: red;">Kindly choose iDiscover Facilitator</span>
 														</div>
 													</div>
 												</div>

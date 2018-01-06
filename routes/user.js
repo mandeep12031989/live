@@ -699,7 +699,7 @@ router.route('/completion')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'question': true, 'profile': true})
+    User.findOne({_id: id}, {'question': true, 'profile': true, 'are_you.facilitator': true})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -778,7 +778,8 @@ router.route('/completion')
             reflective_filled: user.question.RQ1!='' && user.question.RQ1 != undefined && user.question.RQ2!='' && user.question.RQ2 != undefined && user.question.RQ3!='' && user.question.RQ3 != undefined,
             questionnaire_filled: que_filled,
 			selected_profile: user.profile.profile_number,
-            profile_filled: sec1 && sec2 && sec3// && sec4
+            profile_filled: sec1 && sec2 && sec3,// && sec4,
+			you_are_fac: user.are_you.facilitator
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);
         res.status(200).json(final_obj);

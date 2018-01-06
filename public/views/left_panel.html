@@ -47,9 +47,12 @@
 
             <li class="header"><span>Step 2: Assigning TrueSelf Profile</span></li>
             <li>
-                <a ui-sref="select-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled">
-                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.selected_profile"><i class="material-icons">check_circle</i></span>
-					<i class="glyph-icon icon-arrow-right" ng-if="!percent.selected_profile"></i>
+                <a ui-sref="select-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
+					<i class="glyph-icon icon-arrow-right"></i>
+                    <span>Select TrueSelf Profile</span>
+                </a>
+                <a style="color: #949494;" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;"><i class="material-icons">check_circle</i></span>
                     <span>Select TrueSelf Profile</span>
                 </a>
                 <a style="color: #949494;" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
@@ -84,6 +87,19 @@
                     <span>Trueself Report</span>
                 </a>
             </li>
+			
+			<!--	ONLY FOR FAC	-->
+
+            <li class="divider" ng-if="percent.you_are_fac"></li>
+			
+            <li ng-if="percent.you_are_fac">
+                <a ui-sref="facPanel">
+					<i class="glyph-icon icon-arrow-right"></i>
+                    <span>Go to Facilitator Panel</span>
+                </a>
+            </li>
+			
+			<!--		END FAC		-->
 		
 		</ul><!-- #sidebar-menu -->
 

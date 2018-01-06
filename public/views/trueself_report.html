@@ -13,20 +13,20 @@
 		.left_border_str2{
             border: 3px solid #00b0ff;
             border-radius: 15px;
-            padding: 8px 20px;
-			font-size: 16px;
+            padding: 7px 20px;
+			font-size: 15px;
         }
         .left_border_prt2{
            border: 3px solid #ffb74d;
             border-radius: 15px;
-            padding: 8px 20px;
-			font-size: 16px;
+            padding: 7px 20px;
+			font-size: 15px;
         }
         .left_border_dnt2{
             border: 3px solid #efebe9;
             border-radius: 15px;
-            padding: 8px 20px;
-			font-size: 16px;
+            padding: 7px 20px;
+			font-size: 15px;
         }
 		
 		.mini_style{
@@ -103,16 +103,16 @@
                 <div id="page-content" style="margin-bottom: 30px;">
                 
                         <div id="page-title">
-                            <h2><b>Trueself Report</b></h2>
+                            <h2><b>{{profile_content.firstname}}'s Trueself Report</b></h2>
                         </div>
 						
 						<div class="row">
-							<div id="page-title" style="margin: 20px auto; font-size: 18px;" ng-init="menu = 1">
+							<div id="page-title" style="margin: 0px auto; font-size: 18px;" ng-init="menu = 1">
 								<ul class="nav">
 									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">Detailed View</a></li>
-									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precised View</a></li>
-									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balanced View</a></li>
-									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Reactive-Responsive Levels</a></li>
+									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precise View</a></li>
+									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balancing Strengths</a></li>
+									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Personal Mastery Levels</a></li>
 								</ul>
 							</div>
 						</div>
@@ -358,61 +358,52 @@
 					
 <!--                                                    MENU 2                                                          -->
 					<div class="container" ng-show="menu == 2">
-						<div class="row" style="text-align: center;">
-                            <div class="col-md-offset-2 col-sm-2">
-
-                                <div class="panel" ng-class="'left_border_str2'" style="font-size: 12px;">
+						<div class="row" style="text-align: center; margin: 0 auto;">
+                            <div class="col-md-offset-2 col-md-2">
+                                <div class="panel" ng-class="'left_border_str2'" style="font-size: 12px; width: 150px; padding: 5px 5px;">
 									Relate Fully
                                 </div>
-
                             </div>
-                            
-                            <div class="col-md-offset-1 col-sm-2">
-
-                                <div class="panel" ng-class="'left_border_prt2'" style="font-size: 12px;">
+                            <div class="col-md-offset-1 col-md-2">
+                                <div class="panel" ng-class="'left_border_prt2'" style="font-size: 12px; width: 150px; padding: 5px 5px;">
 									Relate Partially
                                 </div>
-
                             </div>
-                            
-                            <div class="col-md-offset-1 col-sm-2">
-
-                                <div class="panel" ng-class="'left_border_dnt2'" style="font-size: 12px;">
+                            <div class="col-md-offset-1 col-md-2">
+                                <div class="panel" ng-class="'left_border_dnt2'" style="font-size: 12px; width: 150px; padding: 5px 5px;">
 									Do not Relate at all
                                 </div>
-
                             </div>
-                            
                         </div>
 <!--                                                    SECTION 1                                                          -->
-						<div class="panel">
-                            <div class="panel-body" style="text-align:center; padding: 15px 10%;">
+						<div class="panel" style="width: 90%; margin: 20px auto;">
+                            <div class="panel-body" style="text-align:center; padding: 15px 5%;">
                                 <h2 id="page-title">
                                     <b>Professional Values and Work Culture Preferences</b>
                                 </h2>
-                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1" style="margin: 25px auto; display: inline-block;">
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1" style="margin: 17px auto; display: inline-block;">
 									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
                                 </div>
                             </div>
                         </div>
 <!--                                                    SECTION 2                                                          -->
-                        <div class="panel">
-                            <div class="panel-body" style="text-align:center; padding: 15px 10%;">
+                        <div class="panel" style="width: 90%; margin: 20px auto;">
+                            <div class="panel-body" style="text-align:center; padding: 15px 5%;">
                                 <h2 id="page-title">
                                     <b>Professional Strengths</b>
                                 </h2>
-                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="display: inline-block; margin: 25px auto;">
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="display: inline-block; margin: 17px auto;">
 									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
                                 </div>
                             </div>
                         </div>
 <!--                                                    SECTION 3                                                          -->
-                        <div class="panel">
-                            <div class="panel-body" style="text-align:center; padding: 15px 10%;">
+                        <div class="panel" style="width: 90%; margin: 20px auto;">
+                            <div class="panel-body" style="text-align:center; padding: 15px 5%;">
                                 <h2 id="page-title">
                                     <b>Learning Needs</b>
                                 </h2>
-                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3" style="display: inline-block; margin: 25px auto;">
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3" style="display: inline-block; margin: 17px auto;">
 									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
                                 </div>
                             </div>
@@ -482,7 +473,7 @@
 							<div class="col-sm-10 panel" style="background: #ffe590;">
 								<div class="panel-body">
 									<div style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;">
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.mini_description}}</span>
 										</div>
 									</div>
@@ -494,7 +485,7 @@
 							<div class="col-sm-10 panel" style="background: #f9ffaf;">
 								<div class="panel-body">
 									<div style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;">
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
 										</div>
 									</div>
@@ -506,7 +497,7 @@
 							<div class="col-sm-10 panel" style="background: #ddffa5;">
 								<div class="panel-body">
 									<div  style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;">
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">{{mini.mini_description}}</span>
 										</div>
 									</div>
@@ -514,11 +505,11 @@
 							</div>
 						</div>
 						<div class="row">
-							Following Learning Needs are not applicable as shared by {{profile_content.firstname + ' ' + profile_content.lastname}}:<br><br>
+							<span style="font-size: 14px; font-weight: bold;">{{profile_content.firstname + ' ' + profile_content.lastname}} did not relate with the following Learning Needs:</span><br><br>
 							<div class="col-sm-12 panel" style="background: #fff;">
 								<div class="panel-body">
 									<div  style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;">
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotrelate'">{{mini.mini_description}}</span>
 										</div>
 									</div>

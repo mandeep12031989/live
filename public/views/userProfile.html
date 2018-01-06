@@ -100,12 +100,12 @@
 			<span data-notify="message">Connection Error !</span>
 		</div>
 	</div>
-	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="checkRel[section_num-1]" class="w3-animate-top">
+	<!--<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="checkRel[section_num-1]" class="w3-animate-top">
 		<div class="alert alert-info alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">info</i>
 			<span data-notify="message">Please Select Missing Options !</span>
 		</div>
-	</div>
+	</div>-->
     <div id="page-wrapper">
         
         <div id="page-content-wrapper">
@@ -279,11 +279,17 @@
 												
 											</div>
 											<div style="text-align: center;">
-												<button class="btn btn-default" ng-click="pushNewKey(section_num); keyAdded[section_num-1]=true;" ng-if="!keyAdded[section_num-1]">Add NEW Keyword</button>
+												<button class="btn btn-info" ng-click="pushNewKey(section_num); keyAdded[section_num-1]=true;" ng-if="!keyAdded[section_num-1]">
+													<span ng-show="section_num == 1">+ Add more values</span>
+													<span ng-show="section_num == 2">+ Add more strengths</span>
+													<span ng-show="section_num == 3">+ Add more learning needs</span>
+												</button>
 												
 												<div class="col-md-12" ng-if="keyAdded[section_num-1]">
 													<div class="col-md-5">
-														<input type="text" class="form-control" size="100%" placeholder="Add NEW Strength" style="text-align: center;" ng-model="pk.keyword" required>
+														<input type="text" class="form-control" size="100%" placeholder="Add Value" style="text-align: center;" ng-model="pk.keyword" required ng-show="section_num == 1">
+														<input type="text" class="form-control" size="100%" placeholder="Add Strength" style="text-align: center;" ng-model="pk.keyword" required ng-show="section_num == 2">
+														<input type="text" class="form-control" size="100%" placeholder="Add Learning Need" style="text-align: center;" ng-model="pk.keyword" required ng-show="section_num == 3">
 													</div>
 													<div class="col-md-5">
 														<input type="text" class="form-control" size="100%" placeholder="Add Description" style="text-align: center;" ng-model="pk.mini_descriptions[0].mini_description" required>
