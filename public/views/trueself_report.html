@@ -96,7 +96,7 @@
     </div>    
 </span>
 
-<div id="sb-site" ng-show="!loading">
+<div id="sb-site" ng-show="!loading" ng-init="menu = 1">
         <div id="page-wrapper">
             
             <div id="page-content-wrapper">
@@ -107,7 +107,7 @@
                         </div>
 						
 						<div class="row">
-							<div id="page-title" style="margin: 0px auto; font-size: 18px;" ng-init="menu = 1">
+							<div id="page-title" style="margin: 0px auto; font-size: 18px;">
 								<ul class="nav">
 									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">Detailed View</a></li>
 									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precise View</a></li>
@@ -518,7 +518,10 @@
 						</div>
 					</div>
 					
-					<button class="btn btn-success pull-right" ui-sref="dashboard">Back to Dashboard</button>
+					<button class="btn btn-info" ng-show="(menu!=1)" ng-click="backMenu()">Back</button>
+					<button class="btn btn-info pull-right" ng-show="(menu!=4)" ng-click="nextMenu()">Next</button>
+					<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==4)" ui-sref="feedback">Proceed</button>
+					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==4)">Back to Dashboard</button>
 					
                 </div>
             </div>

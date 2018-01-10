@@ -182,6 +182,9 @@
 							{{n.date | date: 'medium'}} | {{n.who + ' ' + n.statement}} <span style="float: right;">{{n.facilitator_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn close" ng-click="n.seen = !n.seen; notiRead(n);"><i class="material-icons" ng-show="!n.seen">done</i><i class="material-icons" ng-show="n.seen">clear</i></span></span>
 						</span>
 					</div>
+                    <div style="margin: 30px auto 30px auto; text-align: center;">
+						<button class="btn btn-default" ng-click="removeDuplicatesForFac()">Remove Duplicates</button>{{dup2}}
+					</div>
 					
                 </div>
             </div>
