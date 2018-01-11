@@ -687,7 +687,7 @@
 											<div class="panel-body">
 												<div style="text-align: center;">
 													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
-														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.mini_description}}</span>
+														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.responsive_statement}}</span>
 													</div>
 												</div>
 											</div>
@@ -989,7 +989,7 @@
 													<span style="float:right; font-size: 15px;">Page {{section_num}}/3</span>
 												</h2>
 											</div>
-											<div class="row" style="width: 95%; margin: auto;">
+											<div class="row" style="width: 98%; margin: auto;">
 
 												 <div class="col-sm-12" ng-repeat="keys in user.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
 													<div class="panel panel-primary">
@@ -1207,7 +1207,7 @@
 												<div style="text-align: center;">
 													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'donotexhibitanymore'">
-															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+															<input type="text" ng-model="mini.responsive_statement" style="text-align: center;">
 														</span>
 													</div>
 												</div>
