@@ -128,35 +128,35 @@
 							<div class="col-md-2" style="margin-top: 30px; font-size: 20px; text-align: center;">
 								Profile Sections
 							</div>
-							<div class="col-md-10" style="margin: 0 auto;">
-								<div class="col-md-12" style="text-align: center; margin-bottom: 10px;">
+							<div class="col-md-10" style="margin: 0 auto; padding: 0 50px;">
+								<div class="col-md-12" style="text-align: center; margin-bottom: 10px; font-size: 15px;">
 									In the statements below, kindly choose from the following options:
 								</div>
-								<div class="col-md-3" ng-if="section_num != 3"></div>
-								<div class="col-md-2" ng-if="section_num == 3"></div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;" ng-show="section_num == 3">
+								<div class="col-md-2" ng-if="section_num != 3"></div>
+								<!--<div class="col-md-2" ng-if="section_num == 3"></div>-->
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;" ng-show="section_num == 3">
 									<label class="material-icons" title="Improved Over Time" style="color: skyblue;">
 										<span>&#xE15D;</span>
 									</label>
 									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Improved Over Time</div>
 								</div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-									<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Never Exhibited" style="color: skyblue;">
 										<span>&#xE612;</span>
 									</label>
-									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Relate</div>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Never Exhibited</div>
 								</div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-									<label class="material-icons" title="Relate Partially" style="color: skyblue;">
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Exhibit Sometimes" style="color: skyblue;">
 										<span>&#xE427;</span>
 									</label>
-									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Partially</div>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Exhibit Sometimes</div>
 								</div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-									<label class="material-icons" title="Relate Strongly" style="color: skyblue;">
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Exhibit Strongly" style="color: skyblue;">
 										<span>&#xE3A6;</span>
 									</label>
-									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Strongly</div>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Exhibit Strongly</div>
 								</div>
 							</div>
 							
@@ -221,13 +221,13 @@
 																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time" ng-if="mini.relate == 'donotexhibitanymore'">
 																					 <span class="icon">&#xE15D;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate" ng-if="mini.relate == 'donotrelate'">
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited" ng-if="mini.relate == 'donotrelate'">
 																					 <span class="icon">&#xE612;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially" ng-if="mini.relate == 'relatepartially'">
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes" ng-if="mini.relate == 'relatepartially'">
 																					<span class="icon">&#xE427;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly" ng-if="mini.relate == 'relatestrongly'">
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly" ng-if="mini.relate == 'relatestrongly'">
 																					<span class="icon">&#xE3A6;</span>
 																				</label>                          
 																		</div>
@@ -245,15 +245,15 @@
 																					 <input type="radio" name="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" id="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].relate" ng-change="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_rating = 0" />
 																					 <span>&#xE15D;</span>
 																				</label>
-																				<label for="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
+																				<label for="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited">
 																					 <input type="radio" name="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" id="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" value="donotrelate" ng-model="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].relate" ng-change="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_rating = 0" />
 																					 <span>&#xE612;</span>
 																				</label>
-																				<label for="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
+																				<label for="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes">
 																					<input type="radio" name="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" id="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" value="relatepartially" ng-model="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].relate" ng-change="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_rating = 1" />
 																					<span>&#xE427;</span>
 																				</label>
-																				<label for="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
+																				<label for="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly">
 																					<input type="radio" name="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" id="peer{{user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" value="relatestrongly" ng-model="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].relate" ng-change="user.peer_reviewer_data.reviews[$parent.$index].mini_descriptions[$index].mini_rating = 2" />
 																					<span>&#xE3A6;</span>
 																				</label>
@@ -421,11 +421,11 @@
 								<div class="col-md-6" style="margin: 20px 0px;">
 									<div class="col-md-12">
 										<div class="col-md-4" style="text-align: right;">
-											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{keys.keyword}}</b>
+											<b style="border: 1px solid #008fe2; padding: 4px; background: #008fe2; color: #fff; opacity: 0.7; font-size: 12px;">{{keys.keyword}}</b>
 										</div>
 										<div class="col-md-4"></div>
 										<div class="col-md-4" style="text-align: left;">
-											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{temp_content[$index].keyword}}</b>
+											<b style="border: 1px solid #008fe2; padding: 4px; background: #008fe2; color: #fff; opacity: 0.7; font-size: 12px;">{{temp_content[$index].keyword}}</b>
 										</div>
 									</div><br><br>
 									<div class="col-md-12">
@@ -435,7 +435,7 @@
 										</div>
 										<div class="col-md-2"></div>
 									</div><br><br><br>
-									<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:15px;">
+									<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:13px;">
 										<span ng-if="temp_content[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
 										<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1">{{keys.balancing_description[1].desc}}</span>
 										<span ng-if="temp_content[$index].key_rating >= 1">{{keys.balancing_description[2].desc}}</span>
@@ -445,11 +445,11 @@
 								<div class="col-md-6" style="margin: 20px 0px; border-left: 2px solid #eee;">
 									<div class="col-md-12">
 										<div class="col-md-4" style="text-align: right;">
-											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{keys.keyword}}</b>
+											<b style="border: 1px solid #008fe2; padding: 4px; background: #008fe2; color: #fff; opacity: 0.7; font-size: 12px;">{{keys.keyword}}</b>
 										</div>
 										<div class="col-md-4"></div>
 										<div class="col-md-4" style="text-align: left;">
-											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{temp_content[$index].keyword}}</b>
+											<b style="border: 1px solid #008fe2; padding: 4px; background: #008fe2; color: #fff; opacity: 0.7; font-size: 12px;">{{temp_content[$index].keyword}}</b>
 										</div>
 									</div><br><br>
 									<div class="col-md-12">
@@ -459,7 +459,7 @@
 										</div>
 										<div class="col-md-2"></div>
 									</div><br><br><br>
-									<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:15px;">
+									<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:13px;">
 										<span ng-if="temp_content2[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
 										<span ng-if="temp_content2[$index].key_rating > 0 && temp_content2[$index].key_rating < 1">{{keys.balancing_description[1].desc}}</span>
 										<span ng-if="temp_content2[$index].key_rating >= 1">{{keys.balancing_description[2].desc}}</span>

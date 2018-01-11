@@ -106,7 +106,7 @@
 								<div class="col-sm-6">
 									<div class="card card-stats" ui-sref="reflective-questions">
 										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">1</div>
-										<div class="card-header" data-background-color="green" style="font-weight: bold;" ng-if="percent.reflective_filled">1</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.reflective_filled">1</div>
 										<div class="card-content">
 											<p class="category" style="font-size: 17px;">3 Reflective Questions</p>
 											<h3 class="title">
@@ -119,7 +119,7 @@
 								<div class="col-sm-6">
 									<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled">
 										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.questionnaire_filled">1</div>
-										<div class="card-header" data-background-color="green" style="font-weight: bold;" ng-if="percent.questionnaire_filled">1</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.questionnaire_filled">1</div>
 										<div class="card-content">
 											<p class="category" style="font-size: 17px;">Questionnaire</p>
 											<h3 class="title">
@@ -150,7 +150,7 @@
 									</div>
 									<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
 										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">3</div>
-										<div class="card-header" data-background-color="green" style="font-weight: bold;" ng-if="percent.profile_filled">3</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">3</div>
 										<div class="card-content">
 											<p class="category" style="font-size: 17px;">Building Trueself Profile</p>
 											<h3 class="title">
@@ -171,7 +171,7 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="card card-stats" ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
-										<div class="card-header" data-background-color="green" style="font-weight: bold;">Explore</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
 										<div class="card-content">
 											<p class="category" style="font-size: 17px;">Trueself Report</p>
 											<h3 class="title">
@@ -198,8 +198,20 @@
 							</h1>
 								
 							<div class="col-sm-4">
+									<div class="card card-stats" ui-sref="feedback">
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">View</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 17px;">Feedback</p>
+											<h3 class="title">
+												<small></small>
+											</h3>
+										</div>
+									</div>
+							</div>
+								
+							<div class="col-sm-4">
 									<div class="card card-stats" ng-click="changeView()">
-										<div class="card-header" data-background-color="green" style="font-weight: bold;">Explore</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
 										<div class="card-content">
 											<p class="category" style="font-size: 17px;">Peer Review</p>
 											<h3 class="title">
@@ -248,7 +260,7 @@
 							<div class="col-md-12 panel-body" style="margin: 0 auto; text-align: center;">
 								
 								<span ng-repeat="rec in reviewers">
-									<h5><b>Reviewer #{{$index}}</b></h5><br>
+									<h5><b>Reviewer #{{$index+1}}</b></h5><br>
 									<div class="col-md-2" style="text-align: right;">Name: </div>
 									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.name"></div>
 									

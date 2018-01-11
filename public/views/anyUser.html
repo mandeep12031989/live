@@ -1,4 +1,10 @@
 <style>
+		div{
+			-webkit-user-select: auto;
+			-moz-user-select: auto;
+			-ms-user-select: auto;
+			user-select: auto;
+		}
 		.left_border_str{
             border-left:10px solid #00b0ff;
         }
@@ -153,11 +159,11 @@
                 <div class="container-fluid">
                     <div class="container">
 						<div class="row">
-							<div style="margin: 20px auto; text-align: center;" ng-init="menu = 0">
+							<div style="margin: 20px auto 10px auto; text-align: center;" ng-init="menu = 0">
 								<ul class="nav">
-									<li ng-class="menu == 0 ? 'active_tab' : '' "><a href="" ng-click="menu = 0">User Details</a></li>
+									<li ng-class="menu == 0 ? 'active_tab' : '' "><a href="" ng-click="menu = 0">{{user.firstname}}'s Details</a></li>
 									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">RQs | Questionnaire</a></li>
-									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Candidate Profile</a></li>
+									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">{{user.firstname}}'s Profile</a></li>
 									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Review Profile</a></li>
 									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Assessed Candidate Profile</a></li>
 									<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Assessor Template</a></li>
@@ -443,11 +449,12 @@
 							<div class="container" ng-show="menu == 2 && user.profile.profile_number != 0">
 								
 								<div class="row">
-									<div id="page-title" style="margin: 0px auto 20px auto;" ng-init="candidate_tab = 1">
+									<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="candidate_tab = 1">
 										<ul class="nav">
 											<li ng-class="candidate_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 1">Detailed View</a></li>
 											<li ng-class="candidate_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 2">Balancing Strengths</a></li>
 											<li ng-class="candidate_tab == 3 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 3">Personal Mastery Levels</a></li>
+											<li ng-class="candidate_tab == 4 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 4">Feedback</a></li>
 										</ul>
 									</div>
 								</div>
@@ -457,7 +464,7 @@
 
 											<div class="panel">
 												<div class="panel-heading" ng-class="'left_border_str'">
-													Relate Fully
+													Exhibit Strongly
 												</div>
 											</div>
 
@@ -467,7 +474,7 @@
 
 											<div class="panel">
 												<div class="panel-heading" ng-class="'left_border_prt'">
-													Relate Partially
+													Exhibit Sometimes
 												</div>
 											</div>
 
@@ -477,7 +484,7 @@
 
 											<div class="panel">
 												<div class="panel-heading" ng-class="'left_border_dnt'">
-													Do not Relate at all
+													Never Exhibited
 												</div>
 											</div>
 
@@ -723,6 +730,82 @@
 										</div>
 									</div>
 								</div>
+								
+								<div ng-show="candidate_tab == 4" style="width:70%; margin-right:auto; margin-left:auto;">
+									<div class="container">
+										<style>
+											.checked {
+												color: orange;
+											}
+										</style>
+												<div class="panel">
+													<div class="panel-body">
+
+														<div class="example-box-wrapper">
+															<form class="form-horizontal" role="form" style="padding: 0px 30px 0px 30px;">
+																<div style="margin-top: 15px;">
+																	<label for="q1">1. How much time in total did you spend creating your TrueSelf profile?</label>
+																	<br><span style="margin-left: 14px;" ng-if="user.feedback.q1">{{user.feedback.q1}}</span>
+																	<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q1">- Not Filled -</span>
+																</div>
+																<div style="margin-top: 30px;">
+																	<label for="q2">2. How closely does the profile created by you describe you as a person - to someone reading, who doesn't know you prior?</label>
+																	<br><span style="margin-left: 14px;" ng-if="user.feedback.q2">{{user.feedback.q2}}</span>
+																	<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q2">- Not Filled -</span>
+																</div>
+																<div style="margin-top: 30px;">
+																	<label for="q3">3. In what aspects do you think this exercise helped you (choose more than one option if applicable)?</label>
+																	<ul ng-if="user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a4">
+																		<li ng-if="user.feedback.q3.a1"> Awareness of my strengths and learning needs</li>
+																		<li ng-if="user.feedback.q3.a2"> Insight into working together in a team</li>
+																		<li ng-if="user.feedback.q3.a3"> Understanding how I have grown over last few years</li>
+																		<li ng-if="user.feedback.q3.a4"> All of these</li>
+																	</ul>
+																	<span style="margin-left: 14px; color: red;" ng-if="!(user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a4)"><br>- Not Filled -</span>
+																</div>
+																<div style="margin-top: 30px;">
+																	<label for="q4">4. Any new learning for yourself that you possibly had an idea about earlier but it got deeper through this exercise?</label>
+																	<br><span style="margin-left: 14px;" ng-if="user.feedback.q4">{{user.feedback.q4}}</span>
+																	<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q4">- Not Filled -</span>
+																</div>
+																<div style="margin-top: 30px;">
+																	<label for="q5">5. How likely are you to recommend this assessment to your friends and colleagues?</label>
+																	<div class="input-prepend input-group col-md-12" style="margin-left: 0px;" ng-if="user.feedback.q5">
+																		<span class="material-icons" ng-class="(user.feedback.q5>=1)?'checked':''" title="1">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=2)?'checked':''" title="2">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=3)?'checked':''" title="3">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=4)?'checked':''" title="4">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=5)?'checked':''" title="5">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=6)?'checked':''" title="6">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=7)?'checked':''" title="7">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=8)?'checked':''" title="8">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=9)?'checked':''" title="9">grade</span>
+																		<span class="material-icons" ng-class="(user.feedback.q5>=10)?'checked':''" title="10">grade</span>
+																	</div>
+																	<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q5"><br>- Not Filled -</span>
+																</div>
+																<div style="margin-top: 30px;">
+																	<label for="q6">6. What is it that you liked most in this exercise? What is it that can be improved further?</label>
+																	<br><span style="margin-left: 14px;" ng-if="user.feedback.q6">{{user.feedback.q6}}</span>
+																	<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q6">- Not Filled -</span>
+																</div>
+																<div style="margin-top: 30px;">
+																	<label for="q7">7. Did you face any difficulty in finding any of the Step(s) on the Portal?</label>
+																	<div class="input-prepend input-group col-md-12" style="margin-left: 3px;" ng-if="user.feedback.q7">
+																		<span class="material-icons" ng-class="(user.feedback.q7==1)?'checked':''" title="everytime" style="margin-right: 80px;">thumb_down</span>
+																		<span class="material-icons" ng-class="(user.feedback.q7==2)?'checked':''" title="sometime">thumbs_up_down</span>
+																		<span class="material-icons" ng-class="(user.feedback.q7==3)?'checked':''" title="not at all" style="margin-left: 80px;">thumb_up</span>
+																	</div>
+																	<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q7"><br>- Not Filled -</span>
+																</div>
+															</form>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+								
 							</div>
 							
 							<!--		TAB 3		-->
@@ -826,35 +909,35 @@
 							<div class="col-md-2" style="margin-top: 30px; font-size: 20px; text-align: center;">
 								Profile Sections
 							</div>
-							<div class="col-md-10" style="margin: 0 auto;">
-								<div class="col-md-12" style="text-align: center; margin-bottom: 10px;">
+							<div class="col-md-10" style="margin: 0 auto; padding: 0 50px;">
+								<div class="col-md-12" style="text-align: center; margin-bottom: 10px; font-size: 15px;">
 									In the statements below, kindly choose from the following options:
 								</div>
-								<div class="col-md-3" ng-if="section_num != 3"></div>
-								<div class="col-md-2" ng-if="section_num == 3"></div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;" ng-show="section_num == 3">
+								<div class="col-md-2" ng-if="section_num != 3"></div>
+								<!--<div class="col-md-2" ng-if="section_num == 3"></div>-->
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;" ng-show="section_num == 3">
 									<label class="material-icons" title="Improved Over Time" style="color: skyblue;">
 										<span>&#xE15D;</span>
 									</label>
 									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Improved Over Time</div>
 								</div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-									<label class="material-icons" title="Do Not Relate" style="color: skyblue;">
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Never Exhibited" style="color: skyblue;">
 										<span>&#xE612;</span>
 									</label>
-									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Do Not Relate</div>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Never Exhibited</div>
 								</div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-									<label class="material-icons" title="Relate Partially" style="color: skyblue;">
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Exhibit Sometimes" style="color: skyblue;">
 										<span>&#xE427;</span>
 									</label>
-									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Partially</div>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Exhibit Sometimes</div>
 								</div>
-								<div class="col-md-2" style="margin-bottom: 30px; font-size: 20px;">
-									<label class="material-icons" title="Relate Strongly" style="color: skyblue;">
+								<div class="col-md-3" style="margin-bottom: 30px; font-size: 20px;">
+									<label class="material-icons" title="Exhibit Strongly" style="color: skyblue;">
 										<span>&#xE3A6;</span>
 									</label>
-									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Relate Strongly</div>
+									<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Exhibit Strongly</div>
 								</div>
 							</div>
 							
@@ -930,15 +1013,15 @@
 																					 
 																					 <span class="icon">&#xE15D;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate" ng-if="mini.relate == 'donotrelate'">
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited" ng-if="mini.relate == 'donotrelate'">
 																				
 																					 <span class="icon">&#xE612;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Relate Partially" ng-if="mini.relate == 'relatepartially'">
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes" ng-if="mini.relate == 'relatepartially'">
 																					
 																					<span class="icon">&#xE427;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly" ng-if="mini.relate == 'relatestrongly'">
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly" ng-if="mini.relate == 'relatestrongly'">
 																				
 																					<span class="icon">&#xE3A6;</span>
 																				</label>                          
@@ -958,15 +1041,15 @@
 																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
 																					 <span>&#xE15D;</span>
 																				</label>
-																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" class="material-icons" title="Do Not Relate">
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited">
 																					 <input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}donotrelate" value="donotrelate" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 0" />
 																					 <span>&#xE612;</span>
 																				</label>
-																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" class="material-icons" title="Relate Partially">
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes">
 																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatepartially" value="relatepartially" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 1" />
 																					<span>&#xE427;</span>
 																				</label>
-																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Relate Strongly">
+																				<label for="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly">
 																					<input type="radio" name="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" id="assessor{{user.assessor.profile_content[$parent.$index].mini_descriptions[$index].mini_description_id}}relatestrongly" value="relatestrongly" ng-model="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_relate" ng-change="user.assessor.profile_content[$parent.$index].mini_descriptions[$index].assessor_mini_rating = 2" />
 																					<span>&#xE3A6;</span>
 																				</label>
@@ -1057,7 +1140,7 @@
 							<div class="container" ng-show="menu == 4 && user.profile.profile_number != 0">
 								
 								<div class="row">
-									<div id="page-title" style="margin: 0px auto 20px auto;" ng-init="assessor_tab = 1">
+									<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="assessor_tab = 1">
 										<ul class="nav">
 											<li ng-class="assessor_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 1">Assessed Balancing Strengths</a></li>
 											<li ng-class="assessor_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 2">Assessed Personal Mastery Levels</a></li>

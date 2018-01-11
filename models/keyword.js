@@ -26,7 +26,8 @@ var descriptionSchema = new Schema({
             type: Boolean,
             default: false
         }
-    }
+    },
+	responsive_statement: String
 });
 
 var keywordSchema = new Schema({
@@ -57,7 +58,10 @@ var keywordSchema = new Schema({
     balancing_description: [new Schema({desc: String})],
     comment_placeholder: [new Schema({question: String})],
 	dummy_keyword: String,
-	profile_version: String
+	key_version: {
+		type: String,
+		default: 'v1.1'
+	}
 });
 
 module.exports = mongoose.model('keywordSchema', keywordSchema);
