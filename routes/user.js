@@ -169,18 +169,6 @@ router.route('/questions')
     });
 });
 
-router.route('/feedback')
-.get(Verify.verifyOrdinaryUser, function(req, res, next){
-    var id = req.decoded._id;
-    
-    User.findOne({_id: id}, {'_id': false, 'feedback': true})
-    .exec(function(err, user){
-        if(err)
-            next(err);
-        res.status(200).json(user);
-    });
-});
-
 router.route('/reviewers')
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     var body = sanitize(req.body);
@@ -520,10 +508,10 @@ router.route('/profile/getProfile')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'firstname': true, 'lastname': true, 'profile': true, 'feedback': true})
+    User.findOne({_id: id}, {'firstname': true, 'lastname': true, 'profile': true})
     .exec(function(err, user){
         if(err)
-            return next(err);
+            next(err);
         res.status(200).json(user);
     });
 });
@@ -711,7 +699,7 @@ router.route('/completion')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'question': true, 'profile': true, 'are_you.facilitator': true, 'feedback': true})
+    User.findOne({_id: id}, {'question': true, 'profile': true, 'are_you.facilitator': true})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -723,7 +711,8 @@ router.route('/completion')
             per += 5;
         if(user.question.RQ3 != '' && user.question.RQ3 != undefined)
             per += 5;
-        
+        if(user.feedback.submitted)
+            per += 14;
         //console.log(user.question.RQ1 + ' | ' + user.question.RQ2 + ' | ' + user.question.RQ3 + ' | ' + user.feedback.submitted + ' = ' + per);
         
         // 14 % for questionnaire
@@ -782,23 +771,8 @@ router.route('/completion')
                 per += 20;
         }
 		
-		//console.log(per);
-		if(user.feedback.q1)
-			per += 2;
-		if(user.feedback.q2)
-			per += 2;
-		if(user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a4)
-			per += 2;
-		if(user.feedback.q4)
-			per += 2;
-		if(user.feedback.q5)
-			per += 2;
-		if(user.feedback.q6)
-			per += 2;
-		if(user.feedback.q7)
-			per += 2;
-		//console.log(per);
-		
+		//questionnaire left
+        
         var final_obj = {
             percentage: per,
             reflective_filled: user.question.RQ1!='' && user.question.RQ1 != undefined && user.question.RQ2!='' && user.question.RQ2 != undefined && user.question.RQ3!='' && user.question.RQ3 != undefined,

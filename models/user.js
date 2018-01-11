@@ -80,7 +80,7 @@ var profileSchema = new Schema({
     balancing_description: [new Schema({desc: String})],
     comment_placeholder: [new Schema({question: String})],
 	dummy_keyword: String,
-    key_version: String,
+    profile_version: String,
     key_rating: {
         type: Number,
         default: 0
@@ -202,14 +202,7 @@ var userSchema = new Schema({
         submitted: {
             type: Boolean,
             default: false
-        },
-		q1: String,
-		q2: String,
-		q3: Object,
-		q4: String,
-		q5: String,
-		q6: String,
-		q7: String
+        }
     },
 	peer_reviewers: [new Schema({name: String, emailid: String, relationship: String, date: Date})],
 	peer_reviews: [new Schema({emailid: String, reviews: [profileSchema], last_modified: Date})],

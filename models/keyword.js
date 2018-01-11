@@ -57,10 +57,7 @@ var keywordSchema = new Schema({
     balancing_description: [new Schema({desc: String})],
     comment_placeholder: [new Schema({question: String})],
 	dummy_keyword: String,
-	key_version: {
-		type: String,
-		default: 'v1.1'
-	}
+	profile_version: String
 });
 
 module.exports = mongoose.model('keywordSchema', keywordSchema);

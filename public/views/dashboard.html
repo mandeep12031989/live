@@ -198,18 +198,6 @@
 							</h1>
 								
 							<div class="col-sm-4">
-									<div class="card card-stats" ui-sref="feedback">
-										<div class="card-header" data-background-color="green" style="font-weight: bold;">View</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Feedback</p>
-											<h3 class="title">
-												<small></small>
-											</h3>
-										</div>
-									</div>
-							</div>
-								
-							<div class="col-sm-4">
 									<div class="card card-stats" ng-click="changeView()">
 										<div class="card-header" data-background-color="green" style="font-weight: bold;">Explore</div>
 										<div class="card-content">
@@ -260,7 +248,7 @@
 							<div class="col-md-12 panel-body" style="margin: 0 auto; text-align: center;">
 								
 								<span ng-repeat="rec in reviewers">
-									<h5><b>Reviewer #{{$index+1}}</b></h5><br>
+									<h5><b>Reviewer #{{$index}}</b></h5><br>
 									<div class="col-md-2" style="text-align: right;">Name: </div>
 									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.name"></div>
 									
