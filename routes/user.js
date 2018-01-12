@@ -913,7 +913,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
 	
 	var tkn = authe.makeToken();
     //console.log("THIS IS TOKEN: "+tkn);
-    res.redirect('app.idiscover.me/#/oauth/google/'+tkn);
+    res.redirect('http://app.idiscover.me/#/oauth/google/'+tkn);
 });
 
 router.route('/auth/register')
