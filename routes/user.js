@@ -59,7 +59,7 @@ router.route('/mailToFac')
 						}
 
 						var mailData = {to: user[i].username};
-						var link = "portal-idiscover.herokuapp.com/#/user/"+req.decoded._id;
+						var link = "app.idiscover.me/#/user/"+req.decoded._id;
 						mailData.subject = "iDiscover.me | Progress | "+f.firstname+' '+f.lastname+" Filled their Trueself Profile";
 						mailData.html = 'Hello,<br> Please click on the link below to start assessing '+user.firstname+' '+user.lastname+'\'s Profile .<br><a href='+link+'>Start Assessing</a>';
 
@@ -198,7 +198,7 @@ router.route('/reviewers')
 			user.peer_reviewers.push(body[i]);
 		});
 		
-		var link = "http://portal-idiscover.herokuapp.com/#/peer-review/"+user._id;
+		var link = "app.idiscover.me/#/peer-review/"+user._id;
 		mailData.subject = "iDiscover.me | Request to Review "+user.firstname+' '+user.lastname+"'s Profile";
 		mailData.html = 'Hello,<br> Please click on the link below to start reviewing '+user.firstname+' '+user.lastname+'\'s Profile .<br><a href='+link+'>Start Reviewing</a>';
 		
@@ -913,7 +913,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
 	
 	var tkn = authe.makeToken();
     //console.log("THIS IS TOKEN: "+tkn);
-    res.redirect('http://portal-idiscover.herokuapp.com/#/oauth/google/'+tkn);
+    res.redirect('app.idiscover.me/#/oauth/google/'+tkn);
 });
 
 router.route('/auth/register')

@@ -46,7 +46,7 @@ exports.custom_mail = function(data, callback){
 exports.lost_details = function(data, callback){
 	//console.log(data);
     
-    link = "http://portal-idiscover.herokuapp.com/#/reset/" + data.username + '/' +data.token;
+    link = "app.idiscover.me/#/reset/" + data.username + '/' +data.token;
 	//console.log(link);
 	
     mailOptions = {
