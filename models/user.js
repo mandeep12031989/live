@@ -165,20 +165,8 @@ var userSchema = new Schema({
         },
         profile_content: [profileSchema],
         track: [new Schema({ time_taken: Date })],
-        module1: {
-            type: Boolean,
-            default: false
-        },	// not in use
-        module2: {
-            type: Boolean,
-            default: false
-        },	// not in use
-        module3: {
-            type: Boolean,
-            default: false
-		}// not in use
+		old: [new Schema({ pro: [profileSchema], pro_num: Number })]
     },
-    //location: String,
     age: Number,
     sex: String,
     work_details: {
@@ -207,10 +195,10 @@ var userSchema = new Schema({
 		q1: String,
 		q2: String,
 		q3: {
-			a1: String,
-			a2: String,
-			a3: String,
-			a4: String
+			a1: Boolean,
+			a2: Boolean,
+			a3: Boolean,
+			a4: Boolean
 		},
 		q4: String,
 		q5: String,

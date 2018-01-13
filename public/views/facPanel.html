@@ -80,12 +80,12 @@
                         <div class="col-sm-6 col-md-4">
 							<div class="card card-stats">
                                 <div class="card-header" data-background-color="green">
-                                    <i class="material-icons">person_add</i>
+                                    <i class="material-icons">location_city</i>
                                 </div>
                                 <div class="card-content">
-                                    <p class="category">Total Facilitators</p>
-                                    <h3 class="title">{{analysis_content.f_len}}
-                                        <small>FACILITATOR(S)</small>
+                                    <p class="category">Total Companies</p>
+                                    <h3 class="title">{{analysis_content.comps.length}}
+                                        <small>COMPANIES</small>
                                     </h3>
                                 </div>
                             </div>
@@ -93,12 +93,12 @@
                         <div class="col-sm-6 col-md-4">
 							<div class="card card-stats">
                                 <div class="card-header" data-background-color="orange">
-                                    <i class="material-icons">adb</i>
+                                    <i class="material-icons">public</i>
                                 </div>
                                 <div class="card-content">
-                                    <p class="category">Total Admins</p>
-                                    <h3 class="title">{{analysis_content.a_len}}
-                                        <small>ADMIN(S)</small>
+                                    <p class="category">To Be Decided</p>
+                                    <h3 class="title">0
+                                        <small>NULL</small>
                                     </h3>
                                 </div>
                             </div>
@@ -139,6 +139,16 @@
                                     <p class="category">Click on any Email-ID or Name to explore more about them.</p>
                                 </div><br>
                                 <div class="card-content table-responsive">
+									<!-- Grouping Here -->
+									<div class="panel panel-body">
+										Group by Company:<br>
+										<div ng-repeat="co in analysis_content.comps" style="padding: 5px; border: 1px solid #efefef; width: 33.33%; display: inline-block; cursor:pointer;" ng-click="grouping(co._id)">
+											{{$index+1 + '. '}}<span style="float: right; padding-right: 10px;">{{co._id}}</span>
+										</div>
+									</div>
+									
+									<!-- Grouping End -->
+									
 									<!-- Search Here -->
 									<div class="input-group">
 										<div class="input-group-addon" style="background-color: #fafafa;">
@@ -158,6 +168,8 @@
 											<th ng-click="sort('profile.profile_number')">Type <span class="glyph-icon icon-sort" ng-show="sortKey=='profile.profile_number'"></span></th>
 											<th ng-click="sort('important_date.last_login')">Last Logged-In <span class="glyph-icon icon-sort" ng-show="sortKey=='important_date.last_login'"></span></th>
 											<th ng-click="sort('important_date.registration')">Registered <span class="glyph-icon icon-sort" ng-show="sortKey=='important_date.registration'"></span></th>
+											<th ng-click="sort('work_details.current_company')">Company <span class="glyph-icon icon-sort" ng-show="sortKey=='work_details.current_company'"></span></th>
+											<th ng-click="sort('work_details.department')">Dept. <span class="glyph-icon icon-sort" ng-show="sortKey=='work_details.department'"></span></th>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">  
@@ -167,6 +179,8 @@
 												<td>{{user.profile.profile_number}}</td> 
 												<td>{{user.important_date.last_login | date: 'medium'}}</td> 
 												<td>{{user.important_date.registration | date: 'medium'}}</td>
+												<td>{{user.work_details.current_company}}</td>
+												<td>{{user.work_details.department}}</td>
 											</tr>
                                         </tbody>
                                     </table>

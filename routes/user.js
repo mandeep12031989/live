@@ -16,7 +16,7 @@ var mailer = require('../mailer.js');
 
 router.route('/list')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
-    User.find({}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true}).sort('-important_date.registration')
+    User.find({}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true}).sort('-important_date.registration')
     .exec(function(err, user){
         if(err)
             next(err);
@@ -28,7 +28,7 @@ router.route('/fac_list')
 .get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
 	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true})
 		.exec(function(e, f){
-			User.find({facilitator_name: f.firstname + ' ' + f.lastname}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true}).sort('-important_date.registration')
+			User.find({facilitator_name: f.firstname + ' ' + f.lastname}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true}).sort('-important_date.registration')
 				.exec(function(err, user){
 					if(err)
 						next(err);
@@ -86,7 +86,7 @@ router.route('/mailToFac')
 router.route('/mailToOwn')
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
 	var mailData = sanitize(req.body);
-	
+	console.log(mailData);
 	User.findOne({_id: req.decoded._id}, {username: true})
 		.exec(function(e, user){
 			if(e)
@@ -221,6 +221,19 @@ router.route('/reviewers')
 				});
 			}
 		});
+    });
+});
+
+router.route('/report/:id')
+.get(function(req, res, next){
+    var id = sanitize(req.params.id);
+    
+    User.findOne({_id: id}, {'profile.profile_content': true, 'firstname': true, 'lastname': true})
+    .exec(function(err, user){
+        if(err)
+            next(err);
+		
+        res.status(200).json(user);
     });
 });
 
@@ -404,11 +417,14 @@ router.route('/profile/insertProfile')                          // will use req.
     })
     .then(function(key){
         //console.log(key);
-        User.findOne({_id: id})
+        User.findOne({_id: id}, {profile: true})
         .exec(function(err_u, user){
             if(err_u)
                return next(err_u);
-            user.profile = {};
+			
+			//saving old-profile
+			user.profile.old.push({pro: user.profile.profile_content, pro_num: user.profile.profile_number});
+			
             user.profile.profile_number = pr_num;
             user.profile.profile_content = key;
             user.save(function(e, us){
@@ -652,7 +668,11 @@ router.route('/fac_analysis')
 							child.send(to_send);
 
 							child.on('message', message => {
-								res.status(200).json(message);
+								User.aggregate([{$match: {facilitator_name: u.firstname + ' ' + u.lastname}}, {$group : {_id : {$toUpper: "$work_details.current_company"}, total : {$sum : 1}}}]).sort('_id')
+								.exec(function(er, re){
+									message.comps = re;
+									res.status(200).json(message);
+								});
 							});
 						});
 					

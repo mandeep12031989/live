@@ -86,6 +86,7 @@
         <div id="page-content-wrapper">
             <div id="page-content-margin">
                 <!--                        TAB 1                           -->
+				
                 <div class="container" ng-show="tab_num == 1">
 					
                     <div class="row row-bg">
@@ -185,6 +186,7 @@
 										<div class="input-group-addon">
 											<b>Found {{(userList | filter:search).length}} of {{userList.length}}</b>
 										</div>
+										
 									</div><br><br>
 									<!-- Search End -->
                                     <table class="table">
@@ -195,6 +197,8 @@
 											<th ng-click="sort('profile.profile_number')">Type <span class="glyph-icon icon-sort" ng-show="sortKey=='profile.profile_number'"></span></th>
 											<th ng-click="sort('important_date.last_login')">Last Logged-In <span class="glyph-icon icon-sort" ng-show="sortKey=='important_date.last_login'"></span></th>
 											<th ng-click="sort('important_date.registration')">Registered <span class="glyph-icon icon-sort" ng-show="sortKey=='important_date.registration'"></span></th>
+											<th ng-click="sort('work_details.current_company')">Company <span class="glyph-icon icon-sort" ng-show="sortKey=='work_details.current_company'"></span></th>
+											<th ng-click="sort('work_details.department')">Dept. <span class="glyph-icon icon-sort" ng-show="sortKey=='work_details.department'"></span></th>
 											<th ng-click="sort('are_you.admin')">Admin<span class="glyph-icon icon-sort" ng-show="sortKey=='are_you.admin'"></span></th>
 											<th ng-click="sort('are_you.facilitator')">Facilitator <span class="glyph-icon icon-sort" ng-show="sortKey=='are_you.facilitator'"></span></th>
                                         </thead>
@@ -206,6 +210,8 @@
 												<td>{{user.profile.profile_number}}</td> 
 												<td>{{user.important_date.last_login | date: 'medium'}}</td> 
 												<td>{{user.important_date.registration | date: 'medium'}}</td>
+												<td>{{user.work_details.current_company}}</td>
+												<td>{{user.work_details.department}}</td>
 												<td><input type="checkbox" ng-model="user.are_you.admin" ng-click="save_admfac(user._id, user.are_you)"></td>
 												<td><input type="checkbox" ng-model="user.are_you.facilitator" ng-click="save_admfac(user._id, user.are_you)"></td>
 											</tr>
@@ -213,6 +219,7 @@
                                     </table>
                                 </div>
                             </div>
+					
                 </div>
                 <!--                        TAB 6                           -->
                 <div class="container" ng-show="tab_num == 6">

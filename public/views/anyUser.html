@@ -154,16 +154,26 @@
 	</div>
         
         <div class="main-panel">
-            
+            <div style="text-align: center; margin-bottom: -20px;" class="panel panel-body row">
+				<div class="col-md-4">
+					<b>Candidate Name:</b> {{user.firstname + ' ' + user.lastname}}
+				</div>
+				<div class="col-md-4">
+					<b>Company:</b> {{user.work_details.current_company}}
+				</div>
+				<div class="col-md-4">
+					<b>Department:</b> {{user.work_details.department}}
+				</div>
+			</div><br>
             <div class="content">
                 <div class="container-fluid">
                     <div class="container">
 						<div class="row">
 							<div style="margin: 20px auto 10px auto; text-align: center;" ng-init="menu = 0">
 								<ul class="nav">
-									<li ng-class="menu == 0 ? 'active_tab' : '' "><a href="" ng-click="menu = 0">{{user.firstname}}'s Details</a></li>
+									<li ng-class="menu == 0 ? 'active_tab' : '' "><a href="" ng-click="menu = 0">Candidate Details</a></li>
 									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">RQs | Questionnaire</a></li>
-									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">{{user.firstname}}'s Profile</a></li>
+									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Candidate Profile</a></li>
 									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Review Profile</a></li>
 									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Assessed Candidate Profile</a></li>
 									<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Assessor Template</a></li>
