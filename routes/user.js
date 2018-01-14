@@ -86,7 +86,7 @@ router.route('/mailToFac')
 router.route('/mailToOwn')
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
 	var mailData = sanitize(req.body);
-	console.log(mailData);
+	//console.log(mailData);
 	User.findOne({_id: req.decoded._id}, {username: true})
 		.exec(function(e, user){
 			if(e)
