@@ -66,10 +66,10 @@
 												<div class="form-group">
 													<label for="q3" class="control-label">3. In what aspects do you think this exercise helped you (choose more than one option if applicable)?</label>
 													<div class="input-prepend input-group">
-														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a1" style="margin: 5px 16px 0 16px;"> Awareness of my strengths and learning needs<br>
-														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a2" style="margin: 5px 16px 0 16px;"> Insight into working together in a team<br>
-														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a3" style="margin: 5px 16px 0 16px;"> Understanding how I have grown over last few years<br>
-														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a4" style="margin: 5px 16px 0 16px;"> All of these
+														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a1" style="margin: 5px 16px 0 16px;" ng-change="userFB.feedback.q3.a1 ? '':userFB.feedback.q3.a4=false"> Awareness of my strengths and learning needs<br>
+														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a2" style="margin: 5px 16px 0 16px;" ng-change="userFB.feedback.q3.a2 ? '':userFB.feedback.q3.a4=false"> Insight into working together in a team<br>
+														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a3" style="margin: 5px 16px 0 16px;" ng-change="userFB.feedback.q3.a3 ? '':userFB.feedback.q3.a4=false"> Understanding how I have grown over last few years<br>
+														<input type="checkbox" name="q3" ng-model="userFB.feedback.q3.a4" style="margin: 5px 16px 0 16px;" ng-change="userFB.feedback.q3.a4 ? (userFB.feedback.q3.a1=true?(userFB.feedback.q3.a2=true?(userFB.feedback.q3.a3=true):''):''):(userFB.feedback.q3.a1=false?'':(userFB.feedback.q3.a2=false?'':(userFB.feedback.q3.a3=false)))"> All of these
 													</div>
 													<span ng-if="!(userFB.feedback.q3.a1 || userFB.feedback.q3.a2 || userFB.feedback.q3.a3 || userFB.feedback.q3.a4) && btn_press" style="color:red;">-- Kindly provide the above information --</span>
 												</div>

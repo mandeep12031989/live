@@ -1004,7 +1004,7 @@
 												 <div class="col-sm-12" ng-repeat="keys in user.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
 													<div class="panel panel-primary">
 														<div class="panel-heading" style="text-align: center;">
-															<h4 class="panel-title">{{keys.keyword}}</h4>
+															<h4 class="panel-title"><b>{{keys.keyword}}</b></h4>
 															<span class="material-switch pull-right" style="margin-top: -15px;">
 																<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
 																<label for="{{keys.keyword_id}}" class="label-success"></label>

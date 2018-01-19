@@ -71,6 +71,14 @@
                         </a>
                     </li>
                     
+                    <li class="header"><span>Master Facilitators List</span></li>
+                    <li ng-click="tab_num = 9">
+                        <a href="" ng-class="tab_num == 9 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-cog"></i>
+                            <span>View / Edit</span>
+                        </a>
+                    </li>
+                    
                     <li class="header"><span>Notifications</span></li>
                     <li ng-click="tab_num = 5">
                         <a href="" ng-class="tab_num == 5 ? 'bg-tab':''">
@@ -170,7 +178,16 @@
                 </div>
                 <!--                        TAB 2                       -->
                 <div class="container" ng-show="tab_num == 2">
-					
+					<!--<h1>Movies</h1>
+
+<div ng-init="movies = [{title:'Man on the Moon', genre:'action'},{title:'Meet the Robinsons', genre:'family'},{title:'Sphere', genre:'action'}];" />
+<input type="checkbox" ng-model="genrefilters.action" />Action
+<br />
+<input type="checkbox" ng-model="genrefilters.family" />Family
+<br />{{genrefilters.action}}::{{genrefilters.family}}
+<ul>
+    <li ng-repeat="movie in movies | bygenre:genrefilters">{{movie.title}}: {{movie.genre}}</li>
+</ul>-->
 							<div class="card">
                                 <div class="card-header" data-background-color="purple">
                                     <h4 class="title">List of Registered Users</h4>
@@ -599,6 +616,57 @@
                     
                 </div>
 				
+                <!--                        TAB 9                           -->
+				<div class="container" ng-show="tab_num == 9">
+					
+					<h3>Facilitators List</h3><br>
+					
+					<!-- Search Here -->
+					<div class="input-group">
+						<div class="input-group-addon" style="background-color: #fafafa;">
+							<i class="glyph-icon icon-search"></i>
+						</div>
+						<input type="search" class="form-control col-md-11" placeholder="Search" ng-model="searchFac">
+						<div class="input-group-addon">
+							<b>Found {{(facList | filter:searchFac).length}} of {{facList.length}}</b>
+						</div>			
+					</div><br><br>
+									<!-- Search End -->
+					
+					<div class="panel panel-body">
+						<div class="row" ng-repeat="fc in facList | filter: {facName: searchFac}">
+							<div class="col-md-12" style="color: #dd8888;">{{fc.date | date: 'medium'}}</div>
+							<div class="col-md-1">
+								<a ui-sref="anyUser({id: fc.facID})" target="_blank" style="width: 100%;" class="btn btn-default">{{$index+1}}</a>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" size="100%" placeholder="facID" style="text-align: center;" ng-model="fc.facID">
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" size="100%" placeholder="Facilitator Name" style="text-align: center;" ng-model="fc.facName">
+							</div>
+							<div class="col-md-2">
+								<button style="width: 100%;" class="btn btn-success" ng-click="facUpdation(fc)">Update</button>
+							</div>
+							<div class="col-md-1">
+								<button style="width: 100%;" class="btn btn-danger" ng-click="facDeletion($index, fc._id)">X</button>
+							</div>
+							<br><br><br>
+						</div>
+					</div>
+					<div>
+						<div class="col-md-5">
+							<input type="text" class="form-control" size="100%" placeholder="facID" style="text-align: center;" ng-model="facObj.facID">
+						</div>
+						<div class="col-md-5">
+							<input type="text" class="form-control" size="100%" placeholder="Facilitator Name" style="text-align: center;" ng-model="facObj.facName">
+						</div>
+						<div class="col-md-2">
+							<button style="width: 100%;" class="btn btn-info" ng-click="addFacToList()">Add</button>
+						</div>
+					</div>
+				</div>
+				
                 <!--                        TAB 5                           -->
                 <div class="container" ng-show="tab_num == 5">
 					<div ng-repeat="n in noti" class="alert alert-with-icon w3-animate-left" ng-class="n.seen ? 'alert-success' : 'alert-danger'">
@@ -612,6 +680,7 @@
 					</div>
 					
                 </div>
+				<!--                        TABS END                           -->
             </div>
         </div>
     </div>

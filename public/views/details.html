@@ -128,11 +128,13 @@
 														<div class="clearfix row" style="margin-bottom: 7px;">
 															<div class="col-sm-12">
 																<select class="form-control" required ng-model="userDetails.facilitator_name">
-																	<option class="" value="" disabled>Select</option>
-																	<option value="Lavish Dudeja">Lavish Dudeja</option>
+																	<option class="" value="" disabled>Select iDiscover Facilitator</option>
+																	<option ng-repeat="fc in facList" value="{{fc.facName}}">{{fc.facName}}</option>
+																	<!--<option value="Lavish Dudeja">Lavish Dudeja</option>
 																	<option value="Mandeep Singh Kalra">Mandeep Singh Kalra</option>
-																	<option value="Pranam Bansal">Pranam Bansal</option>
+																	<option value="Pranam Bansal">Pranam Bansal</option>-->
 																</select>
+																
 															</div>
 														</div>
 														<div style="text-align: center;" ng-if="submitted && ((userDetails.facilitator_name == '') || (userDetails.facilitator_name == '--UNKNOWN--'))">

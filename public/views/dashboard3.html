@@ -1,0 +1,243 @@
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading">
+
+    <div id="page-wrapper">
+        
+        <div id="page-content-wrapper">
+            <div id="page-content-margin">
+                    <div class="container" ng-if="!to_review">
+
+						<div id="page-title">
+							<h2>Dashboard</h2>
+						</div>
+
+                        <br>
+						<div class="row">
+							<div class="col-md-6" style="text-align: center;">
+								<div class="clearfix" style="display: inline-block;">
+
+									<div class="c100 big" ng-class="'p'+percent.percentage">
+										<span>{{percent.percentage}}%</span>
+										<div class="slice">
+											<div class="bar"></div>
+											<div class="fill"></div>
+										</div>
+									</div>
+
+								</div><br><br><br>
+
+							</div>
+
+							<div class="col-md-6">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="tile-box tile-box-alt mrg20B bg-gray">
+											<div class="tile-header">
+												Refelctive Questions
+											</div>
+                                            <div class="tile-content-wrapper">
+												<div class="">
+													<span ng-if="!percent.reflective_filled">Proceed&nbsp;&nbsp;&nbsp;</span>
+													<span ng-if="percent.reflective_filled">Completed</span>
+													
+												</div>
+											</div>
+											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="reflective-questions">
+												Explore
+												<i class="glyph-icon icon-arrow-right"></i>
+											</a>
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="tile-box tile-box-alt mrg20B bg-purple">
+											<div class="tile-header">
+												Questionnaire
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="!percent.reflective_filled">
+												<div class="">
+													<span style="font-size: 13px;">Fill Reflective Questions</span>
+												</div>
+											</div>
+											<div class="tile-content-wrapper" ng-if="percent.reflective_filled">
+												<div class="">
+													<span ng-if="!percent.questionnaire_filled">Proceed&nbsp;&nbsp;&nbsp;</span>
+													<span ng-if="percent.questionnaire_filled">Completed</span>
+													
+												</div>
+											</div>
+											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="questionnaire" ng-if="percent.reflective_filled">
+												Explore
+												<i class="glyph-icon icon-arrow-right"></i>
+											</a>
+											<span class="tile-footer tooltip-button" ng-if="!percent.reflective_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="tile-box tile-box-alt mrg20B bg-green">
+											<div class="tile-header">
+												Trueself Profile
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="percent.questionnaire_filled && !percent.selected_profile">
+												<div class="">
+													<span style="font-size: 13px;">Select Profile</span>
+												</div>
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="!percent.questionnaire_filled && !percent.selected_profile">
+												<div class="">
+													<span style="font-size: 13px;">Fill Questionnaire</span>
+												</div>
+											</div>
+											<div class="tile-content-wrapper" ng-if="percent.questionnaire_filled && percent.selected_profile">
+												<div class="">
+													<span ng-if="!percent.profile_filled">Proceed&nbsp;&nbsp;&nbsp;</span>
+													<span ng-if="percent.profile_filled">Completed</span>
+													
+												</div>
+											</div>
+											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="userProfile" ng-if="percent.questionnaire_filled && percent.selected_profile">
+												Explore
+												<i class="glyph-icon icon-arrow-right"></i>
+											</a>
+											<span class="tile-footer tooltip-button" ng-if="!percent.selected_profile || !percent.questionnaire_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="tile-box tile-box-alt mrg20B bg-red">
+											<div class="tile-header">
+												Detailed View
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
+												<div class="">
+													<span style="font-size: 13px;">Fill Trueself Profile</span>
+												</div>
+											</div>
+											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
+												<div class="">
+													<span>Completed</span>
+													
+												</div>
+											</div>
+											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="detailed-profile" ng-if="percent.profile_filled">
+												Explore
+												<i class="glyph-icon icon-arrow-right"></i>
+											</a>
+											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="tile-box tile-box-alt mrg20B bg-blue-alt">
+											<div class="tile-header">
+												Balanced View
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
+												<div class="">
+													<span style="font-size: 13px;">Fill Trueself Profile</span>
+												</div>
+											</div>
+											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
+												<div class="">
+													<span>Completed</span>
+												   
+												</div>
+											</div>
+											<a class="tile-footer tooltip-button" data-placement="bottom" ui-sref="balancing-view" ng-if="percent.profile_filled">
+												Explore
+												<i class="glyph-icon icon-arrow-right"></i>
+											</a>
+											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="tile-box tile-box-alt mrg20B bg-grey">
+											<div class="tile-header">
+												Peer Review
+											</div>
+                                            <div class="tile-content-wrapper" ng-if="!percent.profile_filled">
+												<div class="">
+													<span style="font-size: 13px;">Fill Trueself Profile</span>
+												</div>
+											</div>
+											<div class="tile-content-wrapper" ng-if="percent.profile_filled">
+												<div class="">
+													<span>Reviewed Yet?</span>
+												   
+												</div>
+											</div>
+											<a href="" class="tile-footer tooltip-button" data-placement="bottom" ng-if="percent.profile_filled" ng-click="changeView()">
+												Share
+												<i class="glyph-icon icon-arrow-right"></i>
+											</a>
+											<span class="tile-footer tooltip-button" ng-if="!percent.profile_filled">Locked<i class="glyph-icon icon-lock"></i></span>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+                    </div>
+					<div class="container" ng-if="to_review">
+						<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.success == true" class="w3-animate-top">
+							<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+								<i data-notify="icon" class="material-icons">info</i>
+								<span data-notify="message">{{success.message}}</span>
+							</div>
+						</div>
+						<div id="page-title" style="text-align: center;">
+							<a href="" ng-click="changeView()"><h6>Back to Dashboard</h6></a><br>
+							<h2>Enter Details of Peer Reviewer(s)</h2>
+						</div>
+
+                        <br>
+						
+						<div class="row panel">
+							<div class="col-md-12 panel-body" style="margin: 0 auto; text-align: center;">
+								<div class="col-md-2" style="text-align: right;">Name: </div>
+								<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.name"></div>
+								
+								<div class="col-md-2" style="text-align: right;">Relationship: </div>
+								<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.relationship"></div>
+								
+								<div class="col-md-2" style="text-align: right;">Email-ID: </div>
+								<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="reviewer.emailid"></div>
+								<br><br><br>
+								<button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add to List</button>
+							</div>
+						</div>
+						
+						<div id="page-title" style="text-align: center;" ng-show="reviewers.length != 0">
+							<h2>Recipients to Review</h2>
+						</div>
+						<div class="row panel" ng-show="reviewers.length != 0">
+							<div class="col-md-12 panel-body" style="margin: 0 auto; text-align: center;">
+								
+								<span ng-repeat="rec in reviewers">
+									<h5><b>Reviewer #{{$index}}</b></h5><br>
+									<div class="col-md-2" style="text-align: right;">Name: </div>
+									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.name"></div>
+									
+									<div class="col-md-2" style="text-align: right;">Relationship: </div>
+									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.relationship"></div>
+									
+									<div class="col-md-2" style="text-align: right;">Email-ID: </div>
+									<div class="col-md-2" style="text-align: left;"><input type="text" width="100%" ng-model="rec.emailid"></div>
+									<br><br>
+								</span>
+								<br>
+								<button class="btn btn-danger" ng-click="submitReviewer()">Send Mail</button>
+							</div>
+						</div>
+					</div>
+            </div>
+        </div>
+    </div>
+
+</div>
