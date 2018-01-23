@@ -644,6 +644,11 @@
 								</div>
 								
 								<div class="container" ng-show="candidate_tab == 2">
+									<div style="text-align: center; color: grey;">
+										<div style="width: 85%; margin: 0 auto 30px auto;">
+											<h5>The following view helps you to see the balance between strengths and learning needs (weaknesses). Our strengths are something which we are good at but when over-utilized they can also turn into our weaknesses. E.g., being ‘straight-forward’ is a strength, but when we become too straight-forward we may come across to others as being ‘blunt’.</h5>
+										</div>
+									</div>
 
 									<div class="panel panel-body row">
 										<div class="col-md-2"></div>
@@ -691,9 +696,15 @@
 								</div>
 								
 								<div ng-show="candidate_tab == 3" style="width:80%; margin-right:auto; margin-left:auto;">
+									<div style="text-align: center; margin-bottom: 30px; color: grey;">
+										<h5>Reactive-Responsive levels provides a measure of our growth trajectory. As we become more self-aware and self-observing.</h5>
+									</div>
 									<div class="row">
-										<div class="col-md-2 LHS_tab"><h3><b>Responsive</b></h3></div>
-										<div class="col-sm-10 panel" style="background: #ffe590;">
+										<div class="col-md-2 LHS_tab">
+											<h4><b>Responsive</b></h4>
+											<span style="font-size: 11px; color: grey;">(Higher personal mastery levels; driven by empowering beliefs)</span>
+										</div>
+										<div class="col-sm-10 panel" style="background: #ddffa5;">
 											<div class="panel-body">
 												<div style="text-align: center;">
 													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
@@ -704,7 +715,10 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-2 LHS_tab"><h3><b>Moderate</b></h3></div>
+										<div class="col-md-2 LHS_tab">
+											<h4><b>Moderate</b></h4>
+											<span style="font-size: 11px; color: grey;">(Building capacity to self-observe; starting to question once limiting beliefs)</span>
+										</div>
 										<div class="col-sm-10 panel" style="background: #f9ffaf;">
 											<div class="panel-body">
 												<div style="text-align: center;">
@@ -716,8 +730,11 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-2 LHS_tab"><h3><b>Reactive</b></h3></div>
-										<div class="col-sm-10 panel" style="background: #ddffa5;">
+										<div class="col-md-2 LHS_tab">
+											<h4><b>Reactive</b></h4>
+											<span style="font-size: 11px; color: grey;">(Lower personal mastery levels; limiting beliefs remains unchallenged)</span>
+										</div>
+										<div class="col-sm-10 panel" style="background: #ffe590;">
 											<div class="panel-body">
 												<div  style="text-align: center;">
 													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
@@ -976,6 +993,12 @@
 								</li>
 								<li class="mrg10B" ng-click="section_num = 5">
 									<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : 'bg_white'">
+										Growth Recommendations
+										<i class="glyph-icon icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+								<li class="mrg10B" ng-click="section_num = 6">
+									<a class="list-group-item" href="" ng-class="section_num == 6 ? 'back_active_panel' : 'bg_white'">
 										Recommendations for Manager
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
@@ -986,7 +1009,7 @@
 							<div class="tab-content">
 
 								<div class="tab-pane fade active in pad0A" id="faq-tab-1">
-									<div class="panel-group" id="accordion5" ng-show="section_num != 5">
+									<div class="panel-group" id="accordion5" ng-show="section_num != 6">
 										<div class="panel">
 											<div class="panel-heading">
 												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0;">
@@ -995,8 +1018,10 @@
 														<b ng-show="section_num == 1">Professional Values and Work Culture Preferences</b>
 														<b ng-show="section_num == 2">Professional Strengths</b>
 														<b ng-show="section_num == 3">Learning Needs</b>
+														<b ng-show="section_num == 5">Growth Recommendations</b>
 													</a>
-													<span style="float:right; font-size: 15px;">Page {{section_num}}/3</span>
+													<span style="float:right; font-size: 15px;" ng-show="section_num != 5">Page {{section_num}}/5</span>
+													<span style="float:right; font-size: 15px;" ng-show="section_num == 5">Page {{section_num-1}}/5</span>
 												</h2>
 											</div>
 											<div class="row" style="width: 98%; margin: auto;">
@@ -1082,17 +1107,26 @@
 														</div>
 													</div>
 												 </div>
+												
+												<div class="col-sm-12" ng-show="section_num == 5" style="margin-bottom: 20px; font-size: 16px;">
+													<div ng-repeat="rc in user.profile.growth_recommendations">
+														<span class="col-sm-1" style="text-align: center;">
+															<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;" disabled>
+														</span>
+														<span class="col-sm-11" style="margin-bottom: 10px;">{{rc.statement}}</span>
+													</div>
+												</div>
 											</div>
 										</div><br>
 										
-										<button type="button" class="btn btn-info" ng-click="section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
-										<button type="button" class="btn btn-success" style="float: right;" ng-click="section_num = section_num+1" ng-disabled="section_num == 3">Next</button>
+										<button type="button" class="btn btn-info" ng-click="(section_num == 5)?section_num = section_num-2:section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
+										<button type="button" class="btn btn-success" style="float: right;" ng-click="(section_num == 3)?section_num = section_num+2:section_num = section_num+1" ng-disabled="section_num == 6">Next</button>
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
 											<button type="button" class="btn btn-warning" ng-click="submitAssessor()">Save</button><br><br>
 										</span>
 									</div>
 									
-									<div class="panel-group" id="accordion5" ng-show="section_num == 5">
+									<div class="panel-group" id="accordion5" ng-show="section_num == 6">
 										<div class="panel">
 											<div class="panel-heading">
 												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0;">
@@ -1100,6 +1134,7 @@
 													<a data-toggle="collapse" data-parent="#accordion5">
 														<b>Recommendations for Manager</b>
 													</a>
+													<span style="float:right; font-size: 15px;">Page {{section_num-1}}/5</span>
 												</h2>
 											</div>
 											
@@ -1124,7 +1159,9 @@
 											</div>
 										</div><br>
 										
-										<span style="display: block; text-align: center; margin-top: 0px; margin-left: 55px;">
+										<button type="button" class="btn btn-info" ng-click="(section_num == 5)?section_num = section_num-2:section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
+										<button type="button" class="btn btn-success" style="float: right;" ng-click="(section_num == 3)?section_num = section_num+2:section_num = section_num+1" ng-disabled="section_num == 6">Next</button>
+										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
 											<button type="button" class="btn btn-warning" ng-click="submitAssessor()">Save</button><br><br>
 										</span>
 									</div>
@@ -1159,6 +1196,12 @@
 								</div>
 								
 								<div ng-show="assessor_tab == 1">
+									
+									<div style="text-align: center; color: grey;">
+										<div style="width: 85%; margin: 0 auto 30px auto;">
+											<h5>The following view helps you to see the balance between strengths and learning needs (weaknesses). Our strengths are something which we are good at but when over-utilized they can also turn into our weaknesses. E.g., being ‘straight-forward’ is a strength, but when we become too straight-forward we may come across to others as being ‘blunt’.</h5>
+										</div>
+									</div>
 									
 									<div class="panel panel-body row">
 										<div class="col-md-2"></div>
@@ -1210,9 +1253,15 @@
 								</div>
 								
 								<div ng-show="assessor_tab == 2" style="width:80%; margin-right:auto; margin-left:auto;">
+									<div style="text-align: center; margin-bottom: 30px; color: grey;">
+										<h5>Reactive-Responsive levels provides a measure of our growth trajectory. As we become more self-aware and self-observing.</h5>
+									</div>
 									<div class="row">
-										<div class="col-md-2 LHS_tab"><h3><b>Responsive</b></h3></div>
-										<div class="col-sm-10 panel" style="background: #ffe590;">
+										<div class="col-md-2 LHS_tab">
+											<h4><b>Responsive</b></h4>
+											<span style="font-size: 11px; color: grey;">(Higher personal mastery levels; driven by empowering beliefs)</span>
+										</div>
+										<div class="col-sm-10 panel" style="background: #ddffa5;">
 											<div class="panel-body">
 												<div style="text-align: center;">
 													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
@@ -1225,7 +1274,10 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-2 LHS_tab"><h3><b>Moderate</b></h3></div>
+										<div class="col-md-2 LHS_tab">
+											<h4><b>Moderate</b></h4>
+											<span style="font-size: 11px; color: grey;">(Building capacity to self-observe; starting to question once limiting beliefs)</span>
+										</div>
 										<div class="col-sm-10 panel" style="background: #f9ffaf;">
 											<div class="panel-body">
 												<div style="text-align: center;">
@@ -1239,8 +1291,11 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-2 LHS_tab"><h3><b>Reactive</b></h3></div>
-										<div class="col-sm-10 panel" style="background: #ddffa5;">
+										<div class="col-md-2 LHS_tab">
+											<h4><b>Reactive</b></h4>
+											<span style="font-size: 11px; color: grey;">(Lower personal mastery levels; limiting beliefs remains unchallenged)</span>
+										</div>
+										<div class="col-sm-10 panel" style="background: #ffe590;">
 											<div class="panel-body">
 												<div  style="text-align: center;">
 													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">

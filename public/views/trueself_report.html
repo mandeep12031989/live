@@ -423,6 +423,11 @@
 					
 <!--                                                    MENU 3                                                          -->
 					<div class="container" ng-show="menu == 3">
+						<div style="text-align: center; color: grey;">
+							<div style="width: 85%; margin: 0 auto 30px auto;">
+								<h5>The following view helps you to see the balance between your strengths and learning needs (weaknesses). Our strengths are something which we are good at but when over-utilized they can also turn into our weaknesses. E.g., being ‘straight-forward’ is a strength, but when we become too straight-forward we may come across to others as being ‘blunt’.</h5>
+							</div>
+						</div>
 						<div class="panel panel-body row">
 							<div class="col-md-2"></div>
 							<div class="col-md-2" style="text-align: center; color:#8bc34a;">
@@ -468,9 +473,15 @@
 					</div>
 <!--                                                    MENU 4                                                          -->
 					<div class="container" ng-show="menu == 4" style="width:80%; margin-right:auto; margin-left:auto;">
+						<div style="text-align: center; margin-bottom: 30px; color: grey;">
+							<h4>Reactive-Responsive levels provides a measure of our growth trajectory. As we become more self-aware and self-observing.</h4>
+						</div>
 						<div class="row">
-							<div class="col-md-2 LHS_tab"><h3><b>Responsive</b></h3></div>
-							<div class="col-sm-10 panel" style="background: #ffe590;">
+							<div class="col-md-2 LHS_tab">
+								<h4><b>Responsive</b></h4>
+								<span style="font-size: 11px; color: grey;">(Higher personal mastery levels; driven by empowering beliefs)</span>
+							</div>
+							<div class="col-sm-10 panel" style="background: #ddffa5;">
 								<div class="panel-body">
 									<div style="text-align: center;">
 										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
@@ -481,7 +492,10 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-2 LHS_tab"><h3><b>Moderate</b></h3></div>
+							<div class="col-md-2 LHS_tab">
+								<h4><b>Moderate</b></h4>
+								<span style="font-size: 11px; color: grey;">(Building capacity to self-observe; starting to question once limiting beliefs)</span>
+							</div>
 							<div class="col-sm-10 panel" style="background: #f9ffaf;">
 								<div class="panel-body">
 									<div style="text-align: center;">
@@ -493,8 +507,11 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-2 LHS_tab"><h3><b>Reactive</b></h3></div>
-							<div class="col-sm-10 panel" style="background: #ddffa5;">
+							<div class="col-md-2 LHS_tab">
+								<h4><b>Reactive</b></h4>
+								<span style="font-size: 11px; color: grey;">(Lower personal mastery levels; limiting beliefs remains unchallenged)</span>
+							</div>
+							<div class="col-sm-10 panel" style="background: #ffe590;">
 								<div class="panel-body">
 									<div  style="text-align: center;">
 										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">

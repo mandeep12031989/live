@@ -165,7 +165,8 @@ var userSchema = new Schema({
         },
         profile_content: [profileSchema],
         track: [new Schema({ time_taken: Date })],
-		old: [new Schema({ pro: [profileSchema], pro_num: Number })]
+		old: [new Schema({ pro: [profileSchema], pro_num: Number })],
+		growth_recommendations: [new Schema({ sID: String, statement: String, selected: Boolean })]
     },
     age: Number,
     sex: String,

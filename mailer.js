@@ -52,7 +52,7 @@ exports.lost_details = function(data, callback){
     mailOptions = {
         to : data.username,
         subject : "iDiscover.me | Request for Password Change",
-        html : 'Hello,<br> Please click on the link to change your password.<br><a href='+link+'>Click Here to Change Your Password</a>'
+        html : 'Hello,<br><br> Please click on the link to change your password. This link is only valid for <b>one</b> hour.<br><a href='+link+'>Click Here to Change Your Password</a>'
     };
     //console.log(mailOptions);
 	
