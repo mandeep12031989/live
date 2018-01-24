@@ -84,6 +84,8 @@ var ques = require('./routes/ques');
 var rec_for_man = require('./routes/rec_for_man');
 var growth_rec = require('./routes/growth_rec');
 var facList = require('./routes/facList');
+var openQues = require('./routes/openQues');
+var openUser = require('./routes/openUser');
 
 // linking callback function to route
 app.use('/', routes);
@@ -94,6 +96,8 @@ app.use('/noti', noti);
 app.use('/ques', ques);
 app.use('/growth_rec', growth_rec);
 app.use('/facList', facList);
+app.use('/openQues', openQues);
+app.use('/openUser', openUser);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

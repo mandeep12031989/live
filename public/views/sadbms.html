@@ -43,6 +43,14 @@
                         </a>
                     </li>
                     
+                    <li class="header"><span>Open Questionnaire</span></li>
+                    <li ng-click="tab_num = 12">
+                        <a href="" ng-class="tab_num == 12 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-cog"></i>
+                            <span>View / Edit</span>
+                        </a>
+                    </li>
+                    
                     <li class="header" class="row"><span>Master Parent Keywords</span></li>
                     <li ng-click="tab_num = 3">
                         <a href="" ng-class="tab_num == 3 ? 'bg-tab':''">
@@ -734,6 +742,40 @@
 					<br><br><br>
 					<button type="button" class="btn btn-danger" ng-click="push_growth()" ng-disabled="!structure_growth.statement">Submit</button><br><br>
                     
+                </div>
+                <!--                        TAB 12                           -->
+                <div class="container" ng-show="tab_num == 12">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h1 style="text-align:center; font-weight:bold;" class="title-hero">
+                                   Open Questionnaire
+                                </h1>
+                                <div class="example-box-wrapper">
+                                    <div id="form-wizard-3" class="form-wizard">
+                                        
+                                        <div class="tab-content">
+
+                                                <div class="content-box" ng-repeat="q in questions2">
+                                                    <h4 class="content-box-header bg-blue">
+                                                       {{q.num}}. <input type="text" ng-model="q.desc" size="100%">
+                                                    </h4><br>
+													<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
+                                                    1. <input type="text" ng-model="q.keywords[0].keyword" size="100%"><br><br>
+													Linking: <input type="text" ng-model="q.keywords[0].linking">&nbsp;&nbsp;&nbsp;
+													Profile: <input type="text" ng-model="q.keywords[0].from_profile"><br><br>
+                                                    2. <input type="text" ng-model="q.keywords[1].keyword" size="100%"><br><br>
+													Linking: <input type="text" ng-model="q.keywords[1].linking">&nbsp;&nbsp;&nbsp;
+													Profile: <input type="text" ng-model="q.keywords[1].from_profile">
+													</div>
+													<button class="btn btn-success" ng-click="updateQues2(q._id, q)" style="color: white; width: 100%;">Update</button>
+                                                </div>
+
+                                        </div>
+										
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
 				<!--                        TABS END                           -->
             </div>

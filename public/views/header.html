@@ -7,6 +7,7 @@
                 <a ui-sref="dashboard" class="logo-content-big"></a>
             </div>
             <div id="header-nav-left">
+				
                 <div class="user-account-btn dropdown">
                     <a class="user-profile" data-toggle="dropdown">
 						<span class="avatar-circle avatar-small">
@@ -36,11 +37,10 @@
                             <div class="divider"></div>
                             <ul class="reset-ul mrg5B">
                                 <li>
-                                    <a ui-sref="dashboard">                               
-                                        Share
+                                    <a copy-to-clipboard text-to-copy="'app.idiscover.me/#/trueself-report-share/'+user._id">
+                                        Copy to Clipboard
                                     </a>
-
-                                    <textarea class="form-control" rows="1">https://app.idiscover.me/</textarea>
+                                    <textarea class="form-control" rows="2">app.idiscover.me/#/trueself-report-share/{{user._id}}</textarea>
                                 </li>
 
                             </ul>

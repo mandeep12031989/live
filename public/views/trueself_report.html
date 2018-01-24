@@ -88,6 +88,7 @@
 			text-align: center; margin-top:auto; margin-bottom:auto; top: -15px;
 		}
     </style>
+
 <span ng-show="loading">
     <div class="spinner">
         <div class="bounce1"></div>
@@ -97,25 +98,35 @@
 </span>
 
 <div id="sb-site" ng-show="!loading" ng-init="menu = 1">
+	
         <div id="page-wrapper">
             
             <div id="page-content-wrapper">
                 <div id="page-content" style="margin-bottom: 30px;">
                 
-                        <div id="page-title">
-                            <h2><b>{{profile_content.firstname}}'s Trueself Report</b></h2>
-                        </div>
-						
-						<div class="row">
-							<div id="page-title" style="margin: 0px auto; font-size: 18px;">
-								<ul class="nav">
-									<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">Detailed View</a></li>
-									<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precise View</a></li>
-									<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balancing Strengths</a></li>
-									<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Personal Mastery Levels</a></li>
-								</ul>
-							</div>
+					<div id="page-title">
+						<h2><b>{{profile_content.firstname}}'s Trueself Report</b></h2>
+					</div>
+					
+					<div class="row">
+						<div id="page-title" style="margin: 0px auto;">
+							<ul class="tab-slider--tabs">
+								<li class="tab-slider--trigger" ng-class="profile_selected == -1 ? 'active-profile' : ''" ng-click="profile_selected = -1">Profile {{profile_content.profile.profile_number}}</li>
+								<li ng-repeat="op in profile_content.profile.old" class="tab-slider--trigger" ng-class="profile_selected == chosenProfile($index) ? 'active-profile' : ''" ng-click="chooseProfile($index)">Profile {{op.pro_num}}</li>
+							</ul>
 						</div>
+					</div>
+					
+					<div class="row">
+						<div id="page-title" style="margin: 0px auto; font-size: 18px;">
+							<ul class="nav">
+								<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">Detailed View</a></li>
+								<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precise View</a></li>
+								<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balancing Strengths</a></li>
+								<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Personal Mastery Levels</a></li>
+							</ul>
+						</div>
+					</div>
                 
 <!--                                                    MENU 1                                                          -->
                     <div class="container" ng-show="menu == 1">
@@ -158,10 +169,10 @@
                                     <b>Professional Values and Work Culture Preferences</b>
                                 </h2>
                                 <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
+									<!--			default profile			-->
+                                    <div class="row" ng-show="profile_selected == -1">
                                         <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1">
-                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">
                                                 <div class="panel-heading image-box">
                                                     <div class="image-content" style="margin-top: 16px;">                        
                                                         <div class="meta-box meta-box-bottom">
@@ -176,16 +187,6 @@
                                   
                                                     <div class="row" style="margin: 0 auto;">
 														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
-														
-                                                        <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
-                                                        
-                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
-                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
-                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
-                                                                            <br><br>
-                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
-                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
-                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
                                                     </div><br>
                                 
                                                     <li class="" ng-if="keys.comment">
@@ -200,6 +201,38 @@
                                         </div>
                 
                                     </div>
+									<!--			rest profiles			-->
+									<div class="row" ng-show="profile_selected != -1">
+										<div class="col-md-4" ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 1">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">
+                                                <div class="panel-heading image-box">
+                                                    <div class="image-content" style="margin-top: 16px;">                        
+                                                        <div class="meta-box meta-box-bottom">
+                                                            <h3 class="meta-heading">{{keys.keyword}}</h3>
+                                                        </div>                            
+                                                    </div>
+                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+                                                </div>
+                         
+                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
+                                  
+                                                    <div class="row" style="margin: 0 auto;">
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+                                                    </div><br>
+                                
+                                                    <li class="" ng-if="keys.comment">
+                              
+                                                        <a href="" class="list-group-item">
+                                                            {{keys.comment}}
+                                                        </a>
+                                                    </li>
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+									</div>
+									
                                     <hr style=" border-width: 6px;">
                                 </div>
                             </div>
@@ -211,8 +244,8 @@
                                     <b>Strengths</b>
                                 </h2>
                                 <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
+                                    <!--			default profile			-->
+                                    <div class="row" ng-show="profile_selected == -1">
                                         <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
                                             <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
                                                 <div class="panel-heading image-box">
@@ -228,15 +261,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
-                                                        
-                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
-                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
-                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
-                                                                            <br><br>
-                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
-                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
-                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="">
@@ -252,6 +277,37 @@
                                         </div>
                 
                                     </div>
+									<!--			rest profiles			-->
+									<div class="row" ng-show="profile_selected != -1">
+										<div class="col-md-4" ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">
+                                                <div class="panel-heading image-box">
+                                                    <div class="image-content" style="margin-top: 16px;">                        
+                                                        <div class="meta-box meta-box-bottom">
+                                                            <h3 class="meta-heading">{{keys.keyword}}</h3>
+                                                        </div>                            
+                                                    </div>
+                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+                                                </div>
+                         
+                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
+                                  
+                                                    <div class="row" style="margin: 0 auto;">
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+                                                    </div><br>
+                                
+                                                    <li class="" ng-if="keys.comment">
+                              
+                                                        <a href="" class="list-group-item">
+                                                            {{keys.comment}}
+                                                        </a>
+                                                    </li>
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+									</div>
                                     <hr style=" border-width: 6px;">
                                 </div>
                             </div>
@@ -263,8 +319,8 @@
                                     <b>Learning Needs</b>
                                 </h2>
                                 <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
+                                    <!--			default profile			-->
+                                    <div class="row" ng-show="profile_selected == -1">
                                         <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
                                             <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
                                                 <div class="panel-heading image-box">
@@ -280,15 +336,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span> 														                                                         <!--<button class="btn ra-100 btn-default" ng-repeat="mini in keys.mini_descriptions" style="margin: 5px 5px 5px 5px;">{{mini.mini_description}}</button>-->
-                                                        
-                                                        <!--<button class="btn ra-100 btn-primary">Lack follow through</button>
-                                                        <button class="btn ra-100 btn-default">Don't go in depth</button>
-                                                        <button class="btn ra-100 btn-success">Get bored easily</button>
-                                                                            <br><br>
-                                                        <button class="btn ra-100 btn-purple">Dislike routine tasks</button>
-                                                        <button class="btn ra-100 btn-azure">Initiate too much change</button>-->
-                                                        <!-- <button class="btn ra-100 btn-black" href="#">Black</button> -->
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="">
@@ -304,6 +352,38 @@
                                         </div>
                 
                                     </div>
+									<!--			rest profiles			-->
+									<div class="row" ng-show="profile_selected != -1">
+										<div class="col-md-4" ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3">
+                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">
+                                                <div class="panel-heading image-box">
+                                                    <div class="image-content" style="margin-top: 16px;">                        
+                                                        <div class="meta-box meta-box-bottom">
+                                                            <h3 class="meta-heading">{{keys.keyword}}</h3>
+                                                        </div>                            
+                                                    </div>
+                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
+
+                                                </div>
+                         
+                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
+                                  
+                                                    <div class="row" style="margin: 0 auto;">
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+                                                    </div><br>
+                                
+                                                    <li class="" ng-if="keys.comment">
+                              
+                                                        <a href="" class="list-group-item">
+                                                            {{keys.comment}}
+                                                        </a>
+                                                    </li>
+                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+									</div>
+									
                                     <hr style=" border-width: 6px;">
                                 </div>
                             </div>
@@ -381,7 +461,12 @@
                                 <h2 id="page-title">
                                     <b>Professional Values and Work Culture Preferences</b>
                                 </h2>
-                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1" style="margin: 17px auto; display: inline-block;">
+								<!--			default profile			-->
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected == -1">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+                                </div>
+								<!--			rest profiles			-->
+                                <div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 1" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected != -1">
 									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
                                 </div>
                             </div>
@@ -392,7 +477,12 @@
                                 <h2 id="page-title">
                                     <b>Professional Strengths</b>
                                 </h2>
-                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="display: inline-block; margin: 17px auto;">
+								<!--			default profile			-->
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="display: inline-block; margin: 17px auto;" ng-show="profile_selected == -1">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+                                </div>
+								<!--			rest profiles			-->
+                                <div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected != -1">
 									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
                                 </div>
                             </div>
@@ -403,7 +493,12 @@
                                 <h2 id="page-title">
                                     <b>Learning Needs</b>
                                 </h2>
-                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3" style="display: inline-block; margin: 17px auto;">
+								<!--			default profile			-->
+                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3" style="display: inline-block; margin: 17px auto;" ng-show="profile_selected == -1">
+									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+                                </div>
+								<!--			rest profiles			-->
+                                <div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected != -1">
 									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
                                 </div>
                             </div>
@@ -424,7 +519,7 @@
 <!--                                                    MENU 3                                                          -->
 					<div class="container" ng-show="menu == 3">
 						<div style="text-align: center; color: grey;">
-							<div style="width: 85%; margin: 0 auto 30px auto;">
+							<div style="width: 70%; margin: 0 auto 30px auto;">
 								<h5>The following view helps you to see the balance between your strengths and learning needs (weaknesses). Our strengths are something which we are good at but when over-utilized they can also turn into our weaknesses. E.g., being ‘straight-forward’ is a strength, but when we become too straight-forward we may come across to others as being ‘blunt’.</h5>
 							</div>
 						</div>
@@ -440,8 +535,38 @@
 								<span style="color: #888;">Strengths when overused</span>
 							</div>
 						</div>
-						
-						<div class="panel" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4">
+						<!--			default profile			-->
+						<div class="panel" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4" ng-show="profile_selected == -1">
+                            <div class="panel-body">
+								
+								<div class="col-md-12 row" style="margin: 20px 0px;">
+									<div class="col-md-12">
+										<div class="col-md-3" style="text-align: right;">
+											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{keys.keyword}}</b>
+										</div>
+										<div class="col-md-6"></div>
+										<div class="col-md-3" style="text-align: left;">
+											<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{temp_content[$index].keyword}}</b>
+										</div>
+									</div><br><br>
+									<div class="col-md-12">
+										<div class="col-md-2"></div>
+										<div class="col-md-8">
+											<input type="range" min="0" max="2" class="range" step="0.001" ng-model="temp_content[$index].key_rating" disabled>
+										</div>
+										<div class="col-md-2"></div>
+									</div><br><br><br>
+									<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:15px;">
+											<span ng-if="temp_content[$index].key_rating == 0">{{keys.balancing_description[0].desc}}</span>
+											<span ng-if="temp_content[$index].key_rating > 0 && temp_content[$index].key_rating < 1">{{keys.balancing_description[1].desc}}</span>
+											<span ng-if="temp_content[$index].key_rating >= 1">{{keys.balancing_description[2].desc}}</span>
+										
+									</div>
+								</div>
+                            </div>
+                        </div>
+						<!--			rest profiles			-->
+						<div class="panel" ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4" ng-show="profile_selected != -1">
                             <div class="panel-body">
 								
 								<div class="col-md-12 row" style="margin: 20px 0px;">
@@ -474,7 +599,7 @@
 <!--                                                    MENU 4                                                          -->
 					<div class="container" ng-show="menu == 4" style="width:80%; margin-right:auto; margin-left:auto;">
 						<div style="text-align: center; margin-bottom: 30px; color: grey;">
-							<h4>Reactive-Responsive levels provides a measure of our growth trajectory. As we become more self-aware and self-observing.</h4>
+							<h5>Reactive-Responsive levels provides a measure of our growth trajectory. As we become more self-aware and self-observing, we grow from lower levels of consiousness (Reactive level) to higher levels of our consiousness (Responsive level).</h5>
 						</div>
 						<div class="row">
 							<div class="col-md-2 LHS_tab">
@@ -484,7 +609,12 @@
 							<div class="col-sm-10 panel" style="background: #ddffa5;">
 								<div class="panel-body">
 									<div style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
+											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.responsive_statement}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected != -1">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.responsive_statement}}</span>
 										</div>
 									</div>
@@ -499,7 +629,12 @@
 							<div class="col-sm-10 panel" style="background: #f9ffaf;">
 								<div class="panel-body">
 									<div style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
+											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected != -1">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
 										</div>
 									</div>
@@ -514,19 +649,30 @@
 							<div class="col-sm-10 panel" style="background: #ffe590;">
 								<div class="panel-body">
 									<div  style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
+											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">{{mini.mini_description}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected != -1">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">{{mini.mini_description}}</span>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						
 						<div class="row">
 							<span style="font-size: 14px; font-weight: bold;">{{profile_content.firstname + ' ' + profile_content.lastname}} did not relate with the following Learning Needs:</span><br><br>
-							<div class="col-sm-12 panel" style="background: #fff;">
+							<div class="panel col-sm-12" style="background: #fff;">
 								<div class="panel-body">
 									<div  style="text-align: center;">
-										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
+											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotrelate'">{{mini.mini_description}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected != -1">
 											<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotrelate'">{{mini.mini_description}}</span>
 										</div>
 									</div>

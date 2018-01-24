@@ -115,7 +115,7 @@ router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'_id': false, 'username': true, 'firstname': true, 'lastname': true, 'facilitator_name': true})
+    User.findOne({_id: id}, {'username': true, 'firstname': true, 'lastname': true, 'facilitator_name': true})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -423,7 +423,8 @@ router.route('/profile/insertProfile')                          // will use req.
                return next(err_u);
 			
 			//saving old-profile
-			user.profile.old.push({pro: user.profile.profile_content, pro_num: user.profile.profile_number});
+			if(user.profile.profile_number)
+				user.profile.old.push({pro: user.profile.profile_content, pro_num: user.profile.profile_number});
 			
             user.profile.profile_number = pr_num;
             user.profile.profile_content = key;
