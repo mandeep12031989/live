@@ -1641,45 +1641,55 @@
 							
 							<div class="container panel panel-body" ng-show="menu == 5">
 								
-								<textarea class="form-control" ng-model="user.assessor.description"></textarea>
+								<textarea class="form-control" ng-model="user.assessor.description" ng-show="switchView == 1"></textarea>
+								<h4 ng-show="switchView == 2" style="padding: 15px;">{{user.assessor.description}}</h4>
 								
 								<div class="col-xs-12 col-sm-12" style="margin-top: 25px; margin-bottom: 25px;">
 										
 										<div class="form-group">
 											<label class="col-sm-2 control-label">Self-Awareness</label>
-											<div class="col-sm-4">
-												<div class="input-group">
+											<div class="col-sm-4" style="text-align: center;">
+												<div class="input-group" ng-show="switchView == 1">
 													<div class="input-group-addon" ng-click="user.assessor.slf_aware>0.5 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware - 0.5 : user.assessor.slf_aware = user.assessor.slf_aware"><</div>
 														<input type="number" max="3" min="0" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.slf_aware" ng-value=user.assessor.slf_aware step="0.5">
 													<div class="input-group-addon" ng-click="user.assessor.slf_aware<3 || !user.assessor.slf_aware ? user.assessor.slf_aware = user.assessor.slf_aware + 0.5 : user.assessor.slf_aware = user.assessor.slf_aware">></div>
 												</div>
+												<div ng-show="switchView == 2">
+													<b>{{user.assessor.slf_aware}}</b>
+												</div>
 											</div>
-											 <div class="col-sm-6" style="margin-top: 7px;">
+											 <div class="col-sm-6" style="margin-top: 7px; text-align: center;">
 												<div class="progress">
 													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.slf_aware*33.3}}%" ng-class="(user.assessor.slf_aware>=0 && user.assessor.slf_aware<=1)?'progress-bar-danger':(user.assessor.slf_aware<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.slf_aware}}/3
 													</div>
 												</div>
 											</div>
-											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px;">
+											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px; text-align: center;">
 												<span ng-show="user.assessor.slf_aware>=0 && user.assessor.slf_aware<=1">
-													<input type="text" ng-model="user.assessor.rubric[0][0]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[0][0]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[0][0]}}</span>
 												</span>
 												<span ng-show="user.assessor.slf_aware>1 && user.assessor.slf_aware<=2">
-													<input type="text" ng-model="user.assessor.rubric[0][1]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[0][1]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[0][1]}}</span>
 												</span>
 												<span ng-show="user.assessor.slf_aware>2">
-													<input type="text" ng-model="user.assessor.rubric[0][2]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[0][2]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[0][2]}}</span>
 												</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-sm-2 control-label">Openness and Ability to Learn</label>
-											<div class="col-sm-4">
-												<div class="input-group">
+											<div class="col-sm-4" style="text-align: center;">
+												<div class="input-group" ng-show="switchView == 1">
 													<div class="input-group-addon" ng-click="user.assessor.openness>0.5 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness - 0.5 : user.assessor.openness = user.assessor.openness"><</div>
 														<input type="number" max="3" min="0" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.openness" ng-value=user.assessor.openness step="0.5">
 													<div class="input-group-addon" ng-click="user.assessor.openness<3 || !user.assessor.openness ? user.assessor.openness = user.assessor.openness + 0.5 : user.assessor.openness = user.assessor.openness">></div>
+												</div>
+												<div ng-show="switchView == 2">
+													<b>{{user.assessor.openness}}</b>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -1688,26 +1698,32 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px;">
+											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px; text-align: center;">
 												<span ng-show="user.assessor.openness>=0 && user.assessor.openness<=1">
-													<input type="text" ng-model="user.assessor.rubric[1][0]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[1][0]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[1][0]}}</span>
 												</span>
 												<span ng-show="user.assessor.openness>1 && user.assessor.openness<=2">
-													<input type="text" ng-model="user.assessor.rubric[1][1]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[1][1]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[1][1]}}</span>
 												</span>
 												<span ng-show="user.assessor.openness>2">
-													<input type="text" ng-model="user.assessor.rubric[1][2]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[1][2]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[1][2]}}</span>
 												</span>
 											</div>
 										</div>
 
 										<div class="form-group">
 											<label class="col-sm-2 control-label">Personal Mastery Levels</label>
-											<div class="col-sm-4">
-												<div class="input-group">
+											<div class="col-sm-4" style="text-align: center;">
+												<div class="input-group" ng-show="switchView == 1">
 													<div class="input-group-addon" ng-click="user.assessor.per_mast>0.5 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 0.5 : user.assessor.per_mast = user.assessor.per_mast"><</div>
 														<input type="number" max="3" min="0" class="form-control" id="slfno" name="selfwareness" placeholder="Enter number from 1-3" string-to-number ng-model="user.assessor.per_mast" ng-value=user.assessor.per_mast step="0.5">
 													<div class="input-group-addon" ng-click="user.assessor.per_mast<3 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast + 0.5 : user.assessor.per_mast = user.assessor.per_mast">></div>
+												</div>
+												<div ng-show="switchView == 2">
+													<b>{{user.assessor.per_mast}}</b>
 												</div>
 											</div>
 											 <div class="col-sm-6" style="margin-top: 7px;">
@@ -1716,71 +1732,85 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px;">
+											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px; text-align: center;">
 												<span ng-show="user.assessor.per_mast>=0 && user.assessor.per_mast<=1">
-													<input type="text" ng-model="user.assessor.rubric[2][0]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[2][0]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[2][0]}}</span>
 												</span>
 												<span ng-show="user.assessor.per_mast>1 && user.assessor.per_mast<=2">
-													<input type="text" ng-model="user.assessor.rubric[2][1]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[2][1]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[2][1]}}</span>
 												</span>
 												<span ng-show="user.assessor.per_mast>2">
-													<input type="text" ng-model="user.assessor.rubric[2][2]" class="form-control" style="text-align: center;">
+													<input type="text" ng-model="user.assessor.rubric[2][2]" class="form-control" style="text-align: center;" ng-show="switchView == 1">
+													<span ng-show="switchView == 2">{{user.assessor.rubric[2][2]}}</span>
 												</span>
 											</div>
 										</div>
-									<h5>Total Scores: {{user.assessor.slf_aware+user.assessor.openness+user.assessor.per_mast}} / 9</h5>
+									<h5><b>Total Scores: {{user.assessor.slf_aware+user.assessor.openness+user.assessor.per_mast}} / 9</b></h5>
 								</div>
-								
-								<div class="row" ng-repeat="r in user.assessor.recommend">
+								<hr>
+								<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 1">
 									<input class="form-control" type="text" ng-model="r.title" placeholder="Title"><br>
 									<textarea class="form-control" ng-model="r.desc" placeholder="Description"></textarea>
 									<button class="btn btn-default pull-right" style="margin-bottom: 40px;" ng-click="remove_to_recommend($index)">Remove</button>
 									<br>
 								</div>
-								<button class="btn btn-info" ng-click="add_to_recommend()">+ Add Section</button>
-								
+								<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 2" style="padding: 15px;">
+									<div><h4><b>{{r.title}}</b></h4></div>
+									<div style="margin-left: 20px; font-size: 15px;">{{r.desc}}</div>
+									<br>
+								</div>
+								<button class="btn btn-info" ng-click="add_to_recommend()" ng-show="switchView == 1">+ Add Section</button>
+								<hr>
 								<!--	section 1	-->
 								<div class="row" style="margin-top: 25px;">
-									<h4>Professional Values and Work Culture Preferences: </h4><br>
+									<h4><b>Professional Values and Work Culture Preferences: </b></h4><br>
 									<ul>
 										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 1 && keys.assessor_checkbox">
-											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%">
-											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;"><i class="material-icons">clear</i></span>
+											<span ng-show="switchView == 2" style="font-size: 15px;">{{keys.keyword}}</span>
+											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%" ng-show="switchView == 1">
+											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
 											<ul>
 												<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
-													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%">
+													<span ng-show="switchView == 2" style="font-size: 15px;">{{mini.mini_description}}</span>
+													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%" ng-show="switchView == 1">
 												</li>
 											</ul>
 										</li>
 									</ul>
 								</div>
-								
+								<hr>
 								<!--	section 2	-->
 								<div class="row" style="margin-top: 25px;">
-									<h4>Professional Strengths: </h4><br>
+									<h4><b>Professional Strengths: </b></h4><br>
 									<ul>
 										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_checkbox">
-											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%">
-											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;"><i class="material-icons">clear</i></span>
+											<span ng-show="switchView == 2" style="font-size: 15px;">{{keys.keyword}}</span>
+											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%" ng-show="switchView == 1">
+											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
 											<ul>
 												<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
-													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%">
+													<span ng-show="switchView == 2" style="font-size: 15px;">{{mini.mini_description}}</span>
+													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%" ng-show="switchView == 1">
 												</li>
 											</ul>
 										</li>
 									</ul>
 								</div>
-								
+								<hr>
 								<!--	section 3	-->
 								<div class="row" style="margin-top: 25px;">
-									<h4>Learning Needs: </h4><br>
+									<h4><b>Learning Needs: </b></h4><br>
 									<ul>
 										<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_checkbox">
-											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%">
-											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;"><i class="material-icons">clear</i></span>
+											<span ng-show="switchView == 2" style="font-size: 15px;">{{keys.keyword}}</span>
+											<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%" ng-show="switchView == 1">
+											<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
 											<ul>
 												<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
-													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%">
+													<span ng-show="switchView == 2" style="font-size: 15px;">{{mini.mini_description}}</span>
+													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%" ng-show="switchView == 1">
 												</li>
 											</ul>
 										</li>
@@ -1788,8 +1818,8 @@
 								</div>
 								
 								<!--	section Recommendations		-->
-								<div class="row" style="margin-top: 25px;">
-									<h4>Recommendations for Manager: </h4><br>
+								<div class="row" style="margin-top: 25px; margin-bottom: 30px;" ng-show="switchView == 1">
+									<h4><b>Recommendations for Manager: </b></h4><br>
 									<ul>
 										<li ng-repeat="recs in user.assessor.recommendations_for_manager">
 											{{recs.title}}
@@ -1803,6 +1833,10 @@
 									</ul>
 								</div>
 								
+								<button class="btn btn-info" style="margin-bottom: 30px;" ng-click="switchView==1 ? switchView=2:switchView=1">
+									<span ng-show="switchView == 1">Printable View</span>
+									<span ng-show="switchView == 2">Editable View</span>
+								</button>
 								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor(2)">Save</button>
 							</div>
 <!--											END TABS												-->
