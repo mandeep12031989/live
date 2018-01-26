@@ -14,6 +14,25 @@
         .left_border_dnt{
             border-left:10px solid #efebe9;
         }
+		
+		.left_border_str2{
+            border: 3px solid #00b0ff;
+            border-radius: 15px;
+            padding: 7px 20px;
+			font-size: 15px;
+        }
+        .left_border_prt2{
+           border: 3px solid #ffb74d;
+            border-radius: 15px;
+            padding: 7px 20px;
+			font-size: 15px;
+        }
+        .left_border_dnt2{
+            border: 3px solid #efebe9;
+            border-radius: 15px;
+            padding: 7px 20px;
+			font-size: 15px;
+        }
 	
 	.material-switch > input[type="checkbox"] {
 		display: none;
@@ -207,14 +226,35 @@
 											<span class="col-md-5" style="text-align: right;"><b>Facilitator:</b></span>
 											<span class="col-md-7" style="text-align: left;">{{user.facilitator_name}}</span>
 											<br>
-											<span class="col-md-5" style="text-align: right;"><b>Profile:</b></span>
-											<span class="col-md-7" style="text-align: left;">{{user.profile.profile_number}}</span>
-											<br>
 											<span class="col-md-5" style="text-align: right;"><b>Experience:</b></span>
 											<span class="col-md-7" style="text-align: left;">{{user.work_details.experience}}</span>
 											<br>
 											<span class="col-md-5" style="text-align: right;"><b>Role & Responsibility:</b></span>
 											<span class="col-md-7" style="text-align: left;">{{user.work_details.role_responsibility}}</span>
+											<br>
+										</p>
+										<hr>
+										<b>Trueself Profile Information</b><br>
+										<p class="row" style="padding: 10px;">
+											<span class="col-md-5" style="text-align: right;"><b>Profile:</b></span>
+											<span class="col-md-7" style="text-align: left;">{{user.profile.profile_number}}</span>
+											<br>
+											<span class="col-md-5" style="text-align: right;"><b>Time-taken to fill Profile:</b></span>
+											<span class="col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.profile.track | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-md-5" style="text-align: right;"><b>Time-taken to fill RQs:</b></span>
+											<span class="col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.question.RQtrack | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-md-5" style="text-align: right;"><b>Time-taken to fill Questionnaire:</b></span>
+											<span class="col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.question.Questrack | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-md-offset-5 col-md-7" style="color: #aaa; text-align: left;">--- latest to oldest --></span>
 											<br>
 										</p>
 										<hr>
@@ -259,7 +299,7 @@
 
 														<div class="content-box">
 															<h4 class="content-box-header bg-blue">
-															   What kind of people you like? What qualities you like in them?
+															   Q1. What kind of people you like? What qualities you like in them?
 															</h4>
 															<div class="content-box-wrapper" ng-if="user.question.RQ1">
 																<span>{{user.question.RQ1}}</span><br>
@@ -274,7 +314,7 @@
 
 														<div class="content-box">
 															<h4 class="content-box-header bg-blue">
-																How would a close friend of yours describe you? Please mention both positive and negative qualities.
+																Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.
 															</h4>
 															<div class="content-box-wrapper" ng-if="user.question.RQ2">
 															   <span>{{user.question.RQ2}}</span>
@@ -286,7 +326,7 @@
 
 														<div class="content-box">
 															<h4 class="content-box-header bg-blue">
-																Mention positive and negative qualities about yourself that are not covered in question 2. <br>
+																Q3. Mention positive and negative qualities about yourself that are not covered in question 2. <br>
 																Please also mention negatives qualities that you have improved in last few years.
 															</h4>
 															<div class="content-box-wrapper" ng-if="user.question.RQ3">
@@ -486,6 +526,7 @@
 									<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="candidate_tab = 1">
 										<ul class="nav">
 											<li ng-class="candidate_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 1">Detailed View</a></li>
+											<li ng-class="candidate_tab == 5 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 5">Preicse View</a></li>
 											<li ng-class="candidate_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 2">Balancing Strengths</a></li>
 											<li ng-class="candidate_tab == 3 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 3">Personal Mastery Levels</a></li>
 											<li ng-class="candidate_tab == 4 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 4">Feedback</a></li>
@@ -760,6 +801,74 @@
 									</div>
 								</div>
 								
+								<div class="container" ng-show="candidate_tab == 5">
+									<div class="row" style="text-align: center; margin: 0 auto;">
+										<div class="col-md-offset-2 col-md-2">
+											<div class="panel" ng-class="'left_border_str2'" style="font-size: 12px; width: 150px; padding: 5px 5px;">
+												Exhibit Strongly
+											</div>
+										</div>
+										<div class="col-md-offset-1 col-md-2">
+											<div class="panel" ng-class="'left_border_prt2'" style="font-size: 12px; width: 150px; padding: 5px 5px;">
+												Exhibit Sometimes
+											</div>
+										</div>
+										<div class="col-md-offset-1 col-md-2">
+											<div class="panel" ng-class="'left_border_dnt2'" style="font-size: 12px; width: 150px; padding: 5px 5px;">
+												Never Exhibited
+											</div>
+										</div>
+									</div>
+			<!--                                                    SECTION 1                                                          -->
+									<div class="panel" style="width: 90%; margin: 20px auto;">
+										<div class="panel-body" style="text-align:center; padding: 15px 5%;">
+											<h2 id="page-title">
+												<b>Professional Values and Work Culture Preferences</b>
+											</h2>
+											<!--			default profile			-->
+											<div ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 1" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected == -1">
+												<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+											</div>
+											<!--			rest profiles			-->
+											<div ng-repeat="keys in user.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 1" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected != -1">
+												<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+											</div>
+										</div>
+									</div>
+			<!--                                                    SECTION 2                                                          -->
+									<div class="panel" style="width: 90%; margin: 20px auto;">
+										<div class="panel-body" style="text-align:center; padding: 15px 5%;">
+											<h2 id="page-title">
+												<b>Professional Strengths</b>
+											</h2>
+											<!--			default profile			-->
+											<div ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="display: inline-block; margin: 17px auto;" ng-show="profile_selected == -1">
+												<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+											</div>
+											<!--			rest profiles			-->
+											<div ng-repeat="keys in user.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected != -1">
+												<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+											</div>
+										</div>
+									</div>
+			<!--                                                    SECTION 3                                                          -->
+									<div class="panel" style="width: 90%; margin: 20px auto;">
+										<div class="panel-body" style="text-align:center; padding: 15px 5%;">
+											<h2 id="page-title">
+												<b>Learning Needs</b>
+											</h2>
+											<!--			default profile			-->
+											<div ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 3" style="display: inline-block; margin: 17px auto;" ng-show="profile_selected == -1">
+												<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+											</div>
+											<!--			rest profiles			-->
+											<div ng-repeat="keys in user.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3" style="margin: 17px auto; display: inline-block;" ng-show="profile_selected != -1">
+												<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
 								<div class="container" ng-show="candidate_tab == 2">
 									<div style="text-align: center; color: grey;">
 										<div style="width: 75%; margin: 0 auto 30px auto;">
@@ -855,7 +964,7 @@
 											<div class="panel-body">
 												<div style="text-align: center;">
 													<!--			default profile			-->
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore'">{{mini.responsive_statement}}</span>
 													</div>
 													<!--			rest profiles			-->
@@ -875,7 +984,7 @@
 											<div class="panel-body">
 												<div style="text-align: center;">
 													<!--			default profile			-->
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
 													</div>
 													<!--			rest profiles			-->
@@ -895,7 +1004,7 @@
 											<div class="panel-body">
 												<div  style="text-align: center;">
 													<!--			default profile			-->
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'relatestrongly'">{{mini.mini_description}}</span>
 													</div>
 													<!--			rest profiles			-->
@@ -912,7 +1021,7 @@
 											<div class="panel-body">
 												<div  style="text-align: center;">
 													<!--			default profile			-->
-													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
+													<div ng-repeat="keys in user.profile.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3" ng-show="profile_selected == -1">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotrelate'">{{mini.mini_description}}</span>
 													</div>
 													<!--			rest profiles			-->
@@ -1289,7 +1398,7 @@
 										<button type="button" class="btn btn-info" ng-click="(section_num == 5)?section_num = section_num-2:section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
 										<button type="button" class="btn btn-success" style="float: right;" ng-click="(section_num == 3)?section_num = section_num+2:section_num = section_num+1" ng-disabled="section_num == 6">Next</button>
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
-											<button type="button" class="btn btn-warning" ng-click="submitAssessor()">Save</button><br><br>
+											<button type="button" class="btn btn-warning" ng-click="submitAssessor(1)">Save</button><br><br>
 										</span>
 									</div>
 									
@@ -1329,7 +1438,7 @@
 										<button type="button" class="btn btn-info" ng-click="(section_num == 5)?section_num = section_num-2:section_num = section_num-1" ng-disabled="section_num == 1">Back</button>
 										<button type="button" class="btn btn-success" style="float: right;" ng-click="(section_num == 3)?section_num = section_num+2:section_num = section_num+1" ng-disabled="section_num == 6">Next</button>
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
-											<button type="button" class="btn btn-warning" ng-click="submitAssessor()">Save</button><br><br>
+											<button type="button" class="btn btn-warning" ng-click="submitAssessor(1)">Save</button><br><br>
 										</span>
 									</div>
 
@@ -1389,7 +1498,8 @@
 												<input id="{{keys.keyword_id}}2" type="checkbox" name="{{keys.keyword_id}}2" ng-model="user.assessor.profile_content[$index].assessor_bal_in_report"/>
 												<label for="{{keys.keyword_id}}2" class="label-warning material-switch2"></label>
 											</span>
-											<div class="col-md-12 row" style="margin: 20px 0px;">
+											<!--	EDITABLE VIEW	-->
+											<div class="col-md-12 row" style="margin: 20px 0px;" ng-show="switchView == 1">
 												<div class="col-md-12">
 													<div class="col-md-2"></div>
 													<div class="col-md-3" style="text-align: left;">
@@ -1397,21 +1507,46 @@
 													</div>
 													<div class="col-md-2"></div>
 													<div class="col-md-3" style="text-align: right;">
-														<b><input type="text" class="form-control" ng-model="temp_content[$index].keyword" style="text-align: center;"></b>
+														<b><input type="text" class="form-control" ng-model="temp_content2[$index].keyword" style="text-align: center;"></b>
 													</div>
 												</div><br><br>
 												<div class="col-md-12">
 													<div class="col-md-2"></div>
 													<div class="col-md-8">
-														<input type="range" min="0" max="2" class="range" step="0.1" ng-model="temp_content[$index].assessor_key_rating">
+														<input type="range" min="0" max="2" class="range" step="0.1" ng-model="temp_content2[$index].assessor_key_rating">
 													</div>
 													<div class="col-md-2"></div>
 												</div><br><br><br>
 												<div class="col-md-12 list-group list-group-icons" style="text-align:center;margin-top:-10px;">
 
-														<span ng-if="temp_content[$index].assessor_key_rating == 0"><input type="text" ng-model="keys.balancing_description[0].desc" class="form-control" style="text-align: center;"></span>
-														<span ng-if="temp_content[$index].assessor_key_rating > 0 && temp_content[$index].assessor_key_rating < 1"><input type="text" ng-model="keys.balancing_description[1].desc" class="form-control" style="text-align: center;"></span>
-														<span ng-if="temp_content[$index].assessor_key_rating >= 1"><input type="text" ng-model="keys.balancing_description[2].desc" class="form-control" style="text-align: center;"></span>
+														<span ng-if="temp_content2[$index].assessor_key_rating == 0"><input type="text" ng-model="keys.balancing_description[0].desc" class="form-control" style="text-align: center;"></span>
+														<span ng-if="temp_content2[$index].assessor_key_rating > 0 && temp_content2[$index].assessor_key_rating < 1"><input type="text" ng-model="keys.balancing_description[1].desc" class="form-control" style="text-align: center;"></span>
+														<span ng-if="temp_content2[$index].assessor_key_rating >= 1"><input type="text" ng-model="keys.balancing_description[2].desc" class="form-control" style="text-align: center;"></span>
+
+												</div>
+											</div>
+											<!--	PRINTABLE VIEW	-->
+											<div class="col-md-12 row" style="margin: 20px 0px;" ng-show="switchView == 2">
+												<div class="col-md-12">
+													<div class="col-md-3" style="text-align: right;">
+														<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{keys.keyword}}</b>
+													</div>
+													<div class="col-md-6"></div>
+													<div class="col-md-3" style="text-align: left;">
+														<b style="border: 1px solid #008fe2; padding: 7px; background: #008fe2; color: #fff; opacity: 0.7;">{{temp_content2[$index].keyword}}</b>
+													</div>
+												</div><br><br>
+												<div class="col-md-12">
+													<div class="col-md-2"></div>
+													<div class="col-md-8">
+														<input type="range" min="0" max="2" class="range" step="0.001" ng-model="temp_content2[$index].assessor_key_rating" disabled>
+													</div>
+													<div class="col-md-2"></div>
+												</div><br><br><br>
+												<div class="col-md-12 list-group list-group-icons" style="text-align:center; margin-top:-10px; font-size:15px;">
+														<span ng-if="temp_content2[$index].assessor_key_rating == 0">{{keys.balancing_description[0].desc}}</span>
+														<span ng-if="temp_content2[$index].assessor_key_rating > 0 && temp_content2[$index].assessor_key_rating < 1">{{keys.balancing_description[1].desc}}</span>
+														<span ng-if="temp_content2[$index].assessor_key_rating >= 1">{{keys.balancing_description[2].desc}}</span>
 
 												</div>
 											</div>
@@ -1433,7 +1568,8 @@
 												<div style="text-align: center;">
 													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'donotexhibitanymore'">
-															<input type="text" ng-model="mini.responsive_statement" style="text-align: center;">
+															<input type="text" ng-model="mini.responsive_statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+															<span ng-show="switchView == 2">{{mini.responsive_statement}}</span>
 														</span>
 													</div>
 												</div>
@@ -1450,7 +1586,8 @@
 												<div style="text-align: center;">
 													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'relatepartially'">
-															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+															<span ng-show="switchView == 2">{{mini.mini_description}}</span>
 														</span>
 													</div>
 												</div>
@@ -1467,7 +1604,8 @@
 												<div  style="text-align: center;">
 													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'relatestrongly'">
-															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+															<span ng-show="switchView == 2">{{mini.mini_description}}</span>
 														</span>
 													</div>
 												</div>
@@ -1481,7 +1619,8 @@
 												<div  style="text-align: center;">
 													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.keyword_id[5] == 3">
 														<span style="margin: 5px 5px;" ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate == 'donotrelate'">
-															<input type="text" ng-model="mini.mini_description" style="text-align: center;">
+															<input type="text" ng-model="mini.mini_description" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+															<span ng-show="switchView == 2">{{mini.mini_description}}</span>
 														</span>
 													</div>
 												</div>
@@ -1491,7 +1630,11 @@
 									
 								</div>
 
-								<button class="btn btn-danger" style="float:right; margin-bottom: 30px;" ng-click="submitAssessor()">Save</button>
+								<button class="btn btn-info" style="margin-bottom: 30px;" ng-click="switchView==1 ? switchView=2:switchView=1">
+									<span ng-show="switchView == 1">Printable View</span>
+									<span ng-show="switchView == 2">Editable View</span>
+								</button>
+								<button class="btn btn-danger" style="float:right; margin-bottom: 30px;" ng-click="submitAssessor(2)">Save</button>
 							</div>
 							
 							<!--		TAB 5		-->
@@ -1660,7 +1803,7 @@
 									</ul>
 								</div>
 								
-								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor()">Save</button>
+								<button class="btn btn-danger" style="float:right;" ng-click="submitAssessor(2)">Save</button>
 							</div>
 <!--											END TABS												-->
 						</div>

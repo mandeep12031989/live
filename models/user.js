@@ -164,7 +164,7 @@ var userSchema = new Schema({
             default: 0
         },
         profile_content: [profileSchema],
-        track: [new Schema({ time_taken: Date })],
+        track: [new Schema({ time_taken: Number })],				// in seconds
 		old: [new Schema({ pro: [profileSchema], pro_num: Number })],
 		growth_recommendations: [new Schema({ sID: String, statement: String, selected: Boolean })]
     },
@@ -181,7 +181,9 @@ var userSchema = new Schema({
         RQ1: String,
         RQ2: String,
         RQ3: String,
-        questionnaire: Array
+        questionnaire: Array,
+		RQtrack: [new Schema({ time_taken: Number })],				// in seconds
+		Questrack: [new Schema({ time_taken: Number })]				// in seconds
     },
 	last_modification: {
 		type: Date,
