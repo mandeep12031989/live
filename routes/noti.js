@@ -57,6 +57,32 @@ router.route('/:id')
 
 });
 
+router.route('/removeNotiByFac')
+.delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
+    var body = sanitize(req.body);      // NoSQL injection prevention
+    
+    Noti.remove({facilitator_name: body.facilitator_name})
+    .exec(function(err, noti){
+        if(err)
+            return next(err);
+		//console.log(noti);
+        return res.status(200).json({message: "Done"});
+    });
+});
+
+router.route('/removeNotiByNameAndFac')
+.delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
+    var body = sanitize(req.body);      // NoSQL injection prevention
+    
+    Noti.remove({who: body.name ,facilitator_name: body.facilitator_name})
+    .exec(function(err, noti){
+        if(err)
+            return next(err);
+		//console.log(noti);
+        return res.status(200).json({message: "Done"});
+    });
+});
+
 router.route('/removeDuplicates')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                  // Give all keywords in ascending order
     var len = 0, l = 0, l1 = 0;

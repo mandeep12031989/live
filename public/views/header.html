@@ -34,15 +34,14 @@
 
                                 </div>
                             </div>
-                            <div class="divider"></div>
-                            <ul class="reset-ul mrg5B">
+                            <div class="divider" ng-if="user.profile_filled"></div>
+                            <ul class="reset-ul mrg5B" ng-if="user.profile_filled" style="text-align: center;">
                                 <li>
+                                    <textarea class="form-control" rows="2" disabled style="text-align: center;">app.idiscover.me/#/trueself-report-share/{{user._id}}</textarea>
                                     <a copy-to-clipboard text-to-copy="'app.idiscover.me/#/trueself-report-share/'+user._id">
                                         Copy to Clipboard
                                     </a>
-                                    <textarea class="form-control" rows="2">app.idiscover.me/#/trueself-report-share/{{user._id}}</textarea>
                                 </li>
-
                             </ul>
                             <div class="pad5A button-pane button-pane-alt text-center">
                                 <a ng-click="doLogout()" class="btn display-block font-normal btn-danger" style="color: white;">

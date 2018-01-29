@@ -94,6 +94,7 @@ app.use('/added', added);
 app.use('/user', user);
 app.use('/noti', noti);
 app.use('/ques', ques);
+app.use('/rec_for_man', rec_for_man);
 app.use('/growth_rec', growth_rec);
 app.use('/facList', facList);
 app.use('/openQues', openQues);

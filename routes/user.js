@@ -115,11 +115,38 @@ router.route('/name')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'username': true, 'firstname': true, 'lastname': true, 'facilitator_name': true})
+    User.findOne({_id: id}, {'username': true, 'firstname': true, 'lastname': true, 'facilitator_name': true, 'profile.profile_content': true})
     .exec(function(err, user){
         if(err)
-            next(err);
-        res.status(200).json(user);
+            return next(err);
+		
+		var allDone = true;
+		if(user.profile.profile_content.length){
+            for(var k = 0; k < user.profile.profile_content.length; k++){
+                for(var p = 0; p < user.profile.profile_content[k].mini_descriptions.length; p++){
+					//console.log(user.profile.profile_content[k].mini_descriptions[p].mini_description_id);
+					if(!user.profile.profile_content[k].mini_descriptions[p].relate.length && user.profile.profile_content[k].mini_descriptions[p].mini_description_id[5]!=4)
+						allDone = false;
+					break;
+                }
+				if(!allDone)
+					break;
+            }
+        }
+		if(user.profile.profile_content.length == 0)
+			allDone =false;
+			
+		var finalObj = {	username: user.username,
+							firstname: user.firstname,
+							lastname: user.lastname,
+							facilitator_name: user.facilitator_name,
+							'profile.profile_content': [],
+							profile_filled: allDone,
+							_id: id
+					   };
+		
+		
+        return res.status(200).json(finalObj);
     });
 });
 
@@ -149,7 +176,7 @@ router.route('/details')
 .post(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     //console.log(req.body);
-    User.findOneAndUpdate({_id: id}, {$set: req.body}, {new: true})
+    User.findOneAndUpdate({_id: id}, {$set: sanitize(req.body)}, {new: true})
     .exec(function(err, user){
         if(err)
             return next(err);
@@ -973,7 +1000,7 @@ router.route('/auth/register')
 });
 
 router.route('/auth/login')
-.post(function(req, res, next) {  
+.post(function(req, res, next) {
     var body = sanitize(req.body);
     
     User.findOne({ username: body.username }, function(err, user) {      
@@ -1004,7 +1031,7 @@ router.route('/auth/login')
             else
                 return res.status(501).json({ "message": 'Incorrect password !' });              
         });
-    });    
+    });
 });
 
 router.get('/auth/logout', Verify.verifyOrdinaryUser, function(req, res) {

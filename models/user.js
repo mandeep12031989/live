@@ -136,7 +136,8 @@ var userSchema = new Schema({
     },
     facilitator_name: {
         type: String,
-        default: "--UNKNOWN--"
+        default: "--UNKNOWN--",
+		index: true
     },
     are_you: {
         admin: {
@@ -211,6 +212,9 @@ var userSchema = new Schema({
 	peer_reviewers: [new Schema({name: String, emailid: String, relationship: String, date: Date})],
 	peer_reviews: [new Schema({emailid: String, reviews: [profileSchema], last_modified: Date})],
 	assessor: {
+		result: String,
+		position: String,
+		per_mast_lvl: String,
 		slf_aware: Number,
 		openness: Number,
 		per_mast: Number,

@@ -218,6 +218,9 @@
 														</div>
 														<!--<b ng-show="section_num == 4">Communication Style</b>-->
 														<b ng-show="section_num == 5">Growth Recommendations</b>
+														<div ng-show="section_num == 5" style="font-size: 14px; padding: 10px 6% 10px 0;">
+															Below are some suggested growth recommendations that you adopt for your personal and professional development. Please select those which apply in your case.
+														</div>
 													</a>
 													
 												</h2>
@@ -276,9 +279,10 @@
 																	</div>
 																	<!--<div style="color: red; text-align: center;" ng-show="(!mini.relate) && checkRel[section_num-1]">How much do you relate ?</div>-->
 																</div>
-																<!--
-															<br>
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Comment" ng-if="section_num == 2 || section_num == 4">Comment</textarea>-->
+																
+																<br ng-if="section_num == 2 || section_num == 3">
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How can an excess use of this strength turn into an 'improvement area' for you?" ng-if="section_num == 2" style="text-align: center;"></textarea>
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="What practices can you adopt to overcome this improvement area?" ng-if="section_num == 3" style="text-align: center;"></textarea>
 															</div>
 															<br>
 														</div>
