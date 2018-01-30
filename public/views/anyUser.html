@@ -1658,9 +1658,9 @@
 											<span class="col-md-3" style="text-align: right;">Personal Mastery Level:</span><span class="col-md-3">
 												<select ng-model="user.assessor.per_mast_lvl" class="form-control">
 													<option value="Responsive">Responsive</option>
-													<option value="Moderate-Responsive">Moderate-Responsive</option>
+													<option value="Moderate moving towards Responsive">Moderate moving towards Responsive</option>
 													<option value="Moderate">Moderate</option>
-													<option value="Reactive-Moderate">Reactive-Moderate</option>
+													<option value="Reactive moving towards Moderate">Reactive moving towards Moderate</option>
 													<option value="Reactive">Reactive</option>
 												</select>
 											</span>
@@ -1674,7 +1674,7 @@
 									</div>
 
 									<textarea class="form-control" ng-model="user.assessor.description" ng-show="switchView == 1"></textarea>
-									<h4 ng-show="switchView == 2" style="padding: 15px;">{{user.assessor.description}}</h4>
+									<h4 ng-show="switchView == 2" style="padding: 15px;" ng-bind-html="user.assessor.description | linebreaks"></h4>
 
 									<div class="row col-sm-12" style="margin-top: 25px; margin-bottom: 25px; text-align: center;">
 
@@ -1787,7 +1787,7 @@
 									<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 1">
 										<input class="form-control" type="text" ng-model="r.title" placeholder="Title"><br>
 										<textarea class="form-control" ng-model="r.desc" placeholder="Description"></textarea><br>
-										<button class="btn btn-danger" style="margin-bottom: 40px;" ng-click="addNewLine($index)">+ Add Line-break</button>
+										<!--<button class="btn btn-danger" style="margin-bottom: 40px;" ng-click="addNewLine($index)">+ Add Line-break</button>-->
 										<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="remove_to_recommend($index)">Remove</button>
 										<br>
 									</div>

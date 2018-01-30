@@ -312,6 +312,9 @@
 												
 											</div>
 											<div style="text-align: center;">
+												<div style="font-size: 13px; padding: 10px 6% 10px 0; color: grey;" ng-show="section_num>=1 && section_num<=3">
+													Does this section covers all your <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span>? If No, use the below button to add more <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span>.
+												</div>
 												<button class="btn btn-info" ng-click="pushNewKey(section_num); keyAdded[section_num-1]=true;" ng-if="!keyAdded[section_num-1]" ng-show="section_num != 5">
 													<span ng-show="section_num == 1">+ Add more values</span>
 													<span ng-show="section_num == 2">+ Add more strengths</span>
