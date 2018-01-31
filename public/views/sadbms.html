@@ -65,6 +65,20 @@
                         </a>
                     </li>
                     
+                    <li class="header"><span>Beliefs</span></li>
+                    <li ng-click="tab_num = 13">
+                        <a href="" ng-class="tab_num == 13 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-cog"></i>
+                            <span>View / Edit</span>
+                        </a>
+                    </li>
+                    <li ng-click="tab_num = 14">
+                        <a href="" ng-class="tab_num == 14 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-upload"></i>
+                            <span>Add NEW</span>
+                        </a>
+                    </li>
+                    
                     <li class="header"><span>Growth Recommendations</span></li>
                     <li ng-click="tab_num = 10">
                         <a href="" ng-class="tab_num == 10 ? 'bg-tab':''">
@@ -703,6 +717,47 @@
 					
                 </div>
 				
+				<!--                        TAB 13                           -->
+                <div class="container" ng-show="tab_num == 13">
+                        <div>
+                            Profile: <input type="number" ng-model="rec_num2" min="1" max="9"><br><br>
+                            <button type="button" class="btn btn-danger" ng-click="getBeliefs(rec_num2)" ng-disabled="!(rec_num2)">GET</button>
+                        </div>
+                        <br>
+                        <div class="panel" ng-repeat="mr in beliefs">
+                            <div class="panel-body" style="margin-bottom: 15px;">
+								<div class="col-md-2">
+									<input type="text" ng-model="mr.sID" style="text-align:center; color: #FF0000; width: 100%">
+								</div>
+								<div class="col-md-10">
+									<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%">
+								</div>
+                            </div>
+						
+						<button type="button" class="btn btn-success" ng-click="updateBeliefs(rec_num2, mr.sID[5], $index)" style="width:100%;">UPDATE</button>
+						
+					</div>
+                </div>
+				
+				<!--                        TAB 14                           -->
+                <div class="container" ng-show="tab_num == 14">
+					<span style="color:red;">*NOTE :- You can push only one statement at a time.</span><br>
+					<br><b>Structure:</b> {{structure_beliefs}}
+					<b>Statement =></b><br>
+					<div class="col-md-12" style="text-align:center;">
+						<div class="col-md-6">
+							Statement-ID: <input type="text" style="text-align: center;" ng-model="structure_beliefs.sID">
+						</div>
+						<div class="col-md-6">
+							Statement: <input type="text" ng-model="structure_beliefs.statement" style="width: 80%;">
+						</div>
+					</div>
+					
+					<br><br><br>
+					<button type="button" class="btn btn-danger" ng-click="push_beliefs()" ng-disabled="!structure_beliefs.statement">Submit</button><br><br>
+                    
+                </div>
+				
 				<!--                        TAB 10                           -->
                 <div class="container" ng-show="tab_num == 10">
                         <div>
@@ -743,6 +798,7 @@
 					<button type="button" class="btn btn-danger" ng-click="push_growth()" ng-disabled="!structure_growth.statement">Submit</button><br><br>
                     
                 </div>
+				
                 <!--                        TAB 12                           -->
                 <div class="container" ng-show="tab_num == 12">
                         <div class="panel">

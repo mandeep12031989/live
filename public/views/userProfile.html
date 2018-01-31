@@ -71,6 +71,26 @@
 	.bg_uncomp{
 		background: #ffefef;
 	}
+	
+	.allRating {
+		padding: 3px 8px;
+		border: 1px solid #64b5f6;
+		margin: 0 5px;
+		color: #64b5f6;
+		border-radius: 100px;
+		font-weight: bold;
+		font-size: 11px;
+	}
+	.allRating:hover {
+		background: #e3f2fd;
+		color: #64b5f6;
+		border-color: #64b5f6;
+	}
+	.checked_rating {
+		background: #1e88e5;
+		color: white;
+		border-color: #1e88e5;
+	}
 </style>
 
 <span ng-show="loading">
@@ -100,7 +120,7 @@
 			<span data-notify="message">Connection Error !</span>
 		</div>
 	</div>
-	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="checkRel[section_num-1] && (!checkSectionFill(section_num))" class="w3-animate-top">
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="checkRel[section_num] && (!checkSectionFill(section_num))" class="w3-animate-top">
 		<div class="alert alert-info alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">info</i>
 			<span data-notify="message">Please Select Missing Options !</span>
@@ -161,19 +181,25 @@
 						<div class="row">
 						<div>
 							<ul class="list-group">
-								<li class="mrg10B" ng-click="checkRel[section_num-1] = true; section_num = 1">
+								<li class="mrg10B" ng-click="checkRel[section_num] = true; section_num = 0">
+									<a class="list-group-item" href="" ng-class="section_num == 0 ? 'back_active_panel' : (checkSectionFill(0) ? 'back_panel':'bg_white')">
+									  Beliefs
+										<i class="glyph-icon icon-angle-right mrg0A"></i>
+									</a>
+								</li>
+								<li class="mrg10B" ng-click="checkRel[section_num] = true; (checkSectionFill(0)?section_num=1:'');">
 									<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
 									  Professional Values and Work<br>Culture Preferences
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>
-								<li class="mrg10B" ng-click="checkRel[section_num-1] = true; (checkSectionFill(1)?section_num=2:'');">
+								<li class="mrg10B" ng-click="checkRel[section_num] = true; (checkSectionFill(0) && checkSectionFill(1)?section_num=2:'');">
 									<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
 										Professional Strengths
 										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
 									</a>
 								</li>
-								<li class="mrg10B" ng-click="checkRel[section_num-1] = true; (checkSectionFill(1) && checkSectionFill(2)?section_num=3:'');">
+								<li class="mrg10B" ng-click="checkRel[section_num] = true; (checkSectionFill(0) && checkSectionFill(1) && checkSectionFill(2)?section_num=3:'');">
 									<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
 										Learning Needs
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
@@ -185,7 +211,7 @@
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>-->
-								<li class="mrg10B" ng-click="checkRel[section_num-1] = true; (checkSectionFill(1) && checkSectionFill(2)?section_num=5:'');">
+								<li class="mrg10B" ng-click="checkRel[section_num] = true; (checkSectionFill(1) && checkSectionFill(2)?section_num=5:'');">
 									<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
 										Growth Recommendations
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
@@ -201,9 +227,13 @@
 										<div class="panel">
 											<div class="panel-heading">
 												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0;">
-													<span style="float:right; font-size: 15px;" ng-show="section_num != 5">Page {{section_num}}/4</span>
-													<span style="float:right; font-size: 15px;" ng-show="section_num == 5">Page {{section_num-1}}/4</span>
+													<span style="float:right; font-size: 15px;" ng-show="section_num != 5">Page {{section_num+1}}/5</span>
+													<span style="float:right; font-size: 15px;" ng-show="section_num == 5">Page {{section_num}}/5</span>
 													<a data-toggle="collapse" data-parent="#accordion5">
+														<b ng-show="section_num == 0">Beliefs</b>
+														<div ng-show="section_num == 0" style="font-size: 14px; padding: 10px 6% 10px 0;">
+															On a scale of 1-10, rate how strongly you resonate with the following statements.
+														</div>
 														<b ng-show="section_num == 1">Professional Values and Work Culture Preferences</b>
 														<div ng-show="section_num == 1" style="font-size: 14px; padding: 10px 6% 10px 0;">
 															Values you exhibit and ideal work culture you prefer or strive to create for others.
@@ -227,21 +257,46 @@
 											</div>
 											<div class="row" style="width: 98%; margin: auto;">
 
-												 <div class="col-sm-6" ng-repeat="keys in profile_content.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
+												<div class="col-md-12" ng-show="section_num == 0" style="margin-bottom: 20px; font-size: 14px;">
+													<div class="col-md-12 row" ng-repeat="rc in profile_content.profile.beliefs">
+														<div class="col-md-6">{{rc.statement}}</div>
+														<div class="col-md-6" style="text-align: center; padding: 0 5px; margin: 0 auto;">
+															<div class="input-prepend input-group col-md-12">
+																<span ng-click="rc.how_much = 1;" ng-class="(rc.how_much>=1)?'checked_rating':''" title="1" class="allRating">1</span>
+																<span ng-click="rc.how_much = 2;" ng-class="(rc.how_much>=2)?'checked_rating':''" title="2" class="allRating">2</span>
+																<span ng-click="rc.how_much = 3;" ng-class="(rc.how_much>=3)?'checked_rating':''" title="3" class="allRating">3</span>
+																<span ng-click="rc.how_much = 4;" ng-class="(rc.how_much>=4)?'checked_rating':''" title="4" class="allRating">4</span>
+																<span ng-click="rc.how_much = 5;" ng-class="(rc.how_much>=5)?'checked_rating':''" title="5" class="allRating">5</span>
+																<span ng-click="rc.how_much = 6;" ng-class="(rc.how_much>=6)?'checked_rating':''" title="6" class="allRating">6</span>
+																<span ng-click="rc.how_much = 7;" ng-class="(rc.how_much>=7)?'checked_rating':''" title="7" class="allRating">7</span>
+																<span ng-click="rc.how_much = 8;" ng-class="(rc.how_much>=8)?'checked_rating':''" title="8" class="allRating">8</span>
+																<span ng-click="rc.how_much = 9;" ng-class="(rc.how_much>=9)?'checked_rating':''" title="9" class="allRating">9</span>
+																<span ng-click="rc.how_much = 10;" ng-class="(rc.how_much==10)?'checked_rating':''" title="10" class="allRating">10</span>
+															</div>
+														</div>
+														<div class="col-md-6" style="margin-bottom: 10px;">
+															<textarea rows="2" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you selected this rating? Why not less or why not more?
+" ng-model="rc.comment"></textarea>
+														</div>
+														<div class="col-md-6" style="margin-bottom: 10px;"></div>
+													</div>
+												</div>
+												
+												<div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
 													<div class="panel panel-primary">
 														<div class="panel-heading">
 															<h4 class="panel-title"><b>{{keys.keyword}}</b></h4>
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
-															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;" ng-class="((!mini.relate) && checkRel[section_num-1])?'bg_uncomp':''">
-																	<div class="col-sm-6" ng-if="section_num != 3">
+															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;" ng-class="((!mini.relate) && checkRel[section_num])?'bg_uncomp':''">
+																	<div class="col-md-6" ng-if="section_num != 3">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
 																	</div>
-																	<div class="col-sm-4" ng-if="section_num == 3">
+																	<div class="col-md-4" ng-if="section_num == 3">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
 																	</div>
-																   	<div class="col-sm-6" ng-if="section_num != 3">
+																   	<div class="col-md-6" ng-if="section_num != 3">
 																		<div id="radios">
 																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited">
 																					 <input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
@@ -257,7 +312,7 @@
 																				</label>
 																		</div>
 																	</div>
-																	<div class="col-sm-8" ng-if="section_num == 3">
+																	<div class="col-md-8" ng-if="section_num == 3">
 																		<div id="radios">
 																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time">
 																					 <input type="radio" name="{{mini.mini_description_id}}donotexhibitanymore" id="{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
@@ -277,51 +332,69 @@
 																				</label>                          
 																		</div>
 																	</div>
-																	<!--<div style="color: red; text-align: center;" ng-show="(!mini.relate) && checkRel[section_num-1]">How much do you relate ?</div>-->
+																	<!--<div style="color: red; text-align: center;" ng-show="(!mini.relate) && checkRel[section_num]">How much do you relate ?</div>-->
 																</div>
 																
-																<br ng-if="section_num == 2 || section_num == 3">
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How can an excess use of this strength turn into an 'improvement area' for you?" ng-if="section_num == 2" style="text-align: center;"></textarea>
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="What practices can you adopt to overcome this improvement area?" ng-if="section_num == 3" style="text-align: center;"></textarea>
+																<br ng-if="section_num >= 1 && section_num <= 3">
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Why is this value it important to you?" ng-if="section_num == 1" style="text-align: center;"></textarea>
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How do you utilize this strength in your personal or professional role?" ng-if="section_num == 2" style="text-align: center;"></textarea>
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="In what ways does this learning need limit you in your role and what practices can you adopt to overcome it?
+" ng-if="section_num == 3" style="text-align: center;"></textarea>
 															</div>
 															<br>
 														</div>
 													</div>
-												 </div>
+												</div>
 												
-												<div class="col-sm-12" ng-show="section_num == 5" style="margin-bottom: 20px; font-size: 16px;">
+												<div class="col-md-12" ng-show="section_num == 5" style="margin-bottom: 20px; font-size: 16px;">
 													<div ng-repeat="rc in profile_content.profile.growth_recommendations">
-														<span class="col-sm-1" style="text-align: center;">
+														<span class="col-md-1" style="text-align: center;">
 															<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;">
 														</span>
-														<span class="col-sm-11" style="margin-bottom: 10px;">{{rc.statement}}</span>
+														<span class="col-md-11" style="margin-bottom: 10px;">{{rc.statement}}</span>
 													</div>
 													<div style="text-align: center;" ng-show="!addingGrowth">
 														<button class="btn btn-info" ng-click="addingGrowth=true;">+ Add more</button>
 													</div>
 												
 													<div style="text-align: center;" ng-show="addingGrowth">
-														<span class="col-sm-11">
+														<span class="col-md-11">
 															<input type="text" class="form-control" placeholder="Add Growth" style="text-align: center;" ng-model="newGrowth.statement">
 														</span>
-														<span class="col-sm-1">
+														<span class="col-md-1">
 															<button class="btn btn-danger" ng-click="pushNewGrowth(); addingGrowth=false;">Done</button>
 														</span>
 													</div>
 												</div>
 												
 											</div>
-											<div style="text-align: center;">
-												<div style="font-size: 13px; padding: 10px 6% 10px 0; color: grey;" ng-show="section_num>=1 && section_num<=3">
-													Does this section covers all your <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span>? If No, use the below button to add more <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span>.
+											<div style="text-align: center;" ng-show="section_num>=1 && section_num<=3">
+												<div style="font-size: 13px; padding: 15px 0 10px 0; color: grey;">
+													<div class="col-md-6" style="text-align: right; margin: 5px auto;">
+														To what percentage does this section cover your <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span>?
+													</div>
+													<div class="col-md-6" style="text-align: left;">
+														<select class="form-control" ng-model="profile_content.profile.eachSectionRelate[section_num-1]">
+															<option value="Below 50%">Below 50% (I could not relate to it much)</option>
+															<option value="70% - 80%">70% - 80% (Relate to great extent)</option>
+															<option value="80% - 90%">80% - 90% (Relate very closely)</option>
+															<option value="Above 90">Above 90% (Relate fully)</option>
+														</select>
+													</div>
+													<div class="col-md-1"></div>
 												</div>
-												<button class="btn btn-info" ng-click="pushNewKey(section_num); keyAdded[section_num-1]=true;" ng-if="!keyAdded[section_num-1]" ng-show="section_num != 5">
+												
+												<div style="font-size: 13px; padding: 30px 0 10px 0; color: grey;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
+													Use the below button to add those <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> that are not covered in the profile.
+												</div>
+												
+												<button class="btn btn-info" ng-click="pushNewKey(section_num); keyAdded[section_num-1]=true;" ng-if="!keyAdded[section_num-1]" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
 													<span ng-show="section_num == 1">+ Add more values</span>
 													<span ng-show="section_num == 2">+ Add more strengths</span>
 													<span ng-show="section_num == 3">+ Add more learning needs</span>
 												</button>
 												
-												<div class="col-md-12" ng-if="keyAdded[section_num-1]" ng-show="section_num != 5">
+												<div class="col-md-12" ng-if="keyAdded[section_num-1]">
 													<div class="col-md-5">
 														<input type="text" class="form-control" size="100%" placeholder="Add Value" style="text-align: center;" ng-model="pk.keyword" required ng-show="section_num == 1">
 														<input type="text" class="form-control" size="100%" placeholder="Add Strength" style="text-align: center;" ng-model="pk.keyword" required ng-show="section_num == 2">
@@ -338,8 +411,8 @@
 										</div><br>
 										
 										<button type="button" class="btn btn-info" ng-click="(section_num == 5)? section_num = section_num - 2 : section_num = section_num - 1" ng-disabled="section_num == 1">Back</button>
-										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num-1] = true; (checkSectionFill(section_num)?((section_num == 3)?section_num = section_num+2:section_num = section_num+1):'');" ng-show="section_num != 5">Next</button>
-										<button type="button" class="btn btn-danger pull-right" ng-click="checkRel[section_num-1] = true; (checkSectionFill(section_num)?submitProfile():'');" ng-show="section_num == 5">Submit</button>
+										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num] = true; (checkSectionFill(section_num)?((section_num == 3)?section_num = section_num+2:section_num = section_num+1):'');" ng-show="section_num != 5">Next</button>
+										<button type="button" class="btn btn-danger pull-right" ng-click="checkRel[section_num] = true; (checkSectionFill(section_num)?submitProfile():'');" ng-show="section_num == 5">Submit</button>
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
 											<button type="button" class="btn btn-warning" ng-click="saveProfile()">Save</button><br><br>
 										</span>

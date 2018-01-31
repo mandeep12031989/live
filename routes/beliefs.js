@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var sanitize = require('mongo-sanitize');       // To stop NoSQL injections - any req starts with $ will be emitted
-var Recs = require('../models/growth_rec');     // Profile Model
+var Recs = require('../models/beliefs');     // Profile Model
 var Verify = require('./verify');
 
 router.route('/')
