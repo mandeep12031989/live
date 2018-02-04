@@ -1,0 +1,123 @@
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading" style="background-color: #fff;">
+   
+    <div id="page-wrapper">
+		
+        <div id="page-content-wrapper">
+            <div>
+                <!--                        TAB 1                           -->
+                <div class="container" style="margin-top: 30px;">
+					
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-4">
+							<div class="card card-stats" ng-click="tab_num = 2">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">group</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Total Candidates</p>
+                                    <h3 class="title">{{userList.length}}
+                                        <small>USER(S)</small>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+					
+					<div class="card">
+						<div class="card-header" data-background-color="purple">
+							<h4 class="title">List of Users</h4>
+							<p class="category">Click on any Email-ID or Name to explore more about them.</p>
+						</div><br>
+						<div class="card-content table-responsive">
+									
+							<!-- Search Here -->
+							<div class="input-group">
+								<div class="input-group-addon" style="background-color: #fafafa;">
+									<i class="glyph-icon icon-search"></i>
+								</div>
+								<input type="search" class="form-control col-md-11" placeholder="Search" ng-model="search">
+								<div class="input-group-addon">
+									<b>Found {{(userList | filter:search).length}} of {{userList.length}}</b>
+								</div>
+							</div><br><br>
+							<!-- Search End -->
+							<table class="table">
+								<thead class="text-primary">
+									<th>#</th>
+									<th ng-click="sort('emailID')">Email-ID <span class="glyph-icon icon-sort" ng-show="sortKey=='emailID'" ng-class="{'glyph-icon-chevron-up':reverse,'glyph-icon-chevron-down':!reverse}"></span></th>
+									<th ng-click="sort('fullname')">Full Name <span class="glyph-icon icon-sort" ng-show="sortKey=='fullname'"></span></th>
+									<th ng-click="sort('date')">Date <span class="glyph-icon icon-sort" ng-show="sortKey=='date'"></span></th>
+								</thead>
+								<tbody ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">
+									<tr ng-click="user.openBox = !user.openBox">
+										<td>{{$index + 1}}.</td>
+										<td>{{user.emailID}}</td>
+										<td>{{user.fullname}}</td> 
+										<td>{{user.date | date: 'medium'}}</td>
+									</tr>
+									<tr ng-show="user.openBox">
+										<td colspan="4" style="text-align: center;">
+											<div class="row">
+												<div style="margin: 0 auto;">
+													<table width="80%">
+														<tr>
+															<th>Profile</th>
+															<td>1</td>
+															<td>2</td>
+															<td>3</td>
+															<td>4</td>
+															<td>5</td>
+															<td>6</td>
+															<td>7</td>
+															<td>8</td>
+															<td>9</td>
+														</tr>
+														<tr>
+															<th>Scores</th>
+															<td>{{specificSum(user.questionnaire, 1)}}</td>
+															<td>{{specificSum(user.questionnaire, 2)}}</td>
+															<td>{{specificSum(user.questionnaire, 3)}}</td>
+															<td>{{specificSum(user.questionnaire, 4)}}</td>
+															<td>{{specificSum(user.questionnaire, 5)}}</td>
+															<td>{{specificSum(user.questionnaire, 6)}}</td>
+															<td>{{specificSum(user.questionnaire, 7)}}</td>
+															<td>{{specificSum(user.questionnaire, 8)}}</td>
+															<td>{{specificSum(user.questionnaire, 9)}}</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+                </div>
+                <!--                        TAB 3                           -->
+                <div class="container" ng-show="tab_num == 3">
+                    
+					<div ng-repeat="n in noti" class="alert alert-with-icon w3-animate-left" ng-class="n.seen ? 'alert-success' : 'alert-danger'">
+						<i data-notify="icon" class="material-icons">add_alert</i>
+						<span data-notify="message">
+							{{n.date | date: 'medium'}} | {{n.who + ' ' + n.statement}} <span style="float: right;">{{n.facilitator_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="btn close" ng-click="n.seen = !n.seen; notiRead(n);"><i class="material-icons" ng-show="!n.seen">done</i><i class="material-icons" ng-show="n.seen">clear</i></span></span>
+						</span>
+					</div>
+                    <div style="margin: 30px auto 30px auto; text-align: center;">
+						<button class="btn btn-default" ng-click="removeDuplicatesForFac()">Remove Duplicates</button>
+					</div>
+					
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

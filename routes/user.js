@@ -667,11 +667,13 @@ router.route('/fac_analysis')
                   };
     var child = child_process.fork(__dirname + '/analysis.js', [], {});
 	
-	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true})
+	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true, 'are_you.admin': true})
 		.exec(function(e, u){
 			if(e)
 				return next(e);
-			//console.log(u);
+
+			to_send.fullAuth = u.are_you.admin;
+		
 			User.aggregate([{$match: {facilitator_name: u.firstname + ' ' + u.lastname}}, {$group : {_id : "$profile.profile_number", total : {$sum : 1}}}]).sort('_id')
 				.exec(function(e, r){
 					if(e)
@@ -692,7 +694,7 @@ router.route('/fac_analysis')
 
 							to_send.user = dates;
 							to_send.dates = dates;
-
+						
 							child.send(to_send);
 
 							child.on('message', message => {

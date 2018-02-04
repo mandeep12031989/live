@@ -19,7 +19,8 @@ process.on('message', message => {
                     a_len: a_len,
                     u_len: message.user.length,
                     months: [],
-                    variant_profile_num: message.variant_profile_num
+                    variant_profile_num: message.variant_profile_num,
+				   	fullAuth: message.fullAuth
                   };
     
     //console.log(message.dates[0].important_date.registration);

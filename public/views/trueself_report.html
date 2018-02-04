@@ -96,7 +96,7 @@
 		}
     </style>
 
-<span ng-show="loading">
+<span ng-show="loading || profile_content.profile.profile_number==0">
     <div class="spinner">
         <div class="bounce1"></div>
         <div class="bounce2"></div>
@@ -104,7 +104,7 @@
     </div>    
 </span>
 
-<div id="sb-site" ng-show="!loading" ng-init="menu = 1">
+<div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0" ng-init="menu = 1">
 	
         <div id="page-wrapper">
             
@@ -610,11 +610,11 @@
 							<h5>Reactive-Responsive levels provides a measure of our growth trajectory. As we become more self-aware and self-observing, we grow from lower levels of consiousness (Reactive level) to higher levels of our consiousness (Responsive level).</h5>
 						</div>
 						<div class="row">
-							<div class="col-md-2 LHS_tab">
+							<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
 								<h4><b>Responsive</b></h4>
 								<span style="font-size: 11px; color: grey;">(Higher personal mastery levels; driven by empowering beliefs)</span>
 							</div>
-							<div class="col-sm-9 panel" style="background: #ddffa5;">
+							<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ddffa5;">
 								<div class="panel-body">
 									<div style="text-align: center;">
 										<!--			default profile			-->
@@ -633,11 +633,11 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-2 LHS_tab">
+							<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
 								<h4><b>Moderate</b></h4>
 								<span style="font-size: 11px; color: grey;">(Building capacity to self-observe; starting to question once limiting beliefs)</span>
 							</div>
-							<div class="col-sm-9 panel" style="background: #f9ffaf;">
+							<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #f9ffaf;">
 								<div class="panel-body">
 									<div style="text-align: center;">
 										<!--			default profile			-->
@@ -656,11 +656,11 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-2 LHS_tab">
+							<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
 								<h4><b>Reactive</b></h4>
 								<span style="font-size: 11px; color: grey;">(Lower personal mastery levels; limiting beliefs remains unchallenged)</span>
 							</div>
-							<div class="col-sm-9 panel" style="background: #ffe590;">
+							<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ffe590;">
 								<div class="panel-body">
 									<div  style="text-align: center;">
 										<!--			default profile			-->

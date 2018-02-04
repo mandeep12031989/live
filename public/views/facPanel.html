@@ -139,6 +139,7 @@
                                     <p class="category">Click on any Email-ID or Name to explore more about them.</p>
                                 </div><br>
                                 <div class="card-content table-responsive">
+									
 									<!-- Grouping Here -->
 									<div class="panel panel-body">
 										Group by Company:<br>
@@ -146,7 +147,6 @@
 											{{$index+1 + '. '}}<span style="float: right; padding-right: 10px;">{{co._id}}</span>
 										</div>
 									</div>
-									
 									<!-- Grouping End -->
 									
 									<!-- Search Here -->
@@ -160,6 +160,11 @@
 										</div>
 									</div><br><br>
 									<!-- Search End -->
+									
+									<div ng-if="analysis_content.fullAuth && !switchingDone">
+										<button class="btn btn-info pull-right" ng-click="switchToAdmin()">Get All User-List</button>
+									</div>
+									
                                     <table class="table">
                                         <thead class="text-primary">
                                             <th>#</th>

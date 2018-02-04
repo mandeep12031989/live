@@ -8,7 +8,7 @@ var openUser = require('../models/openUser.js');
 var Verify = require('./verify.js');
 
 router.route('/')
-.get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){                  // Give all keywords in ascending order
+.get(function(req, res, next){                  // Give all keywords in ascending order
     
     openUser.find().sort('-date')
     .exec(function(err, user){
@@ -30,7 +30,7 @@ router.route('/')
 });
 
 router.route('/:id')
-.put(Verify.verifyOrdinaryUser, function(req, res, next){
+.put(function(req, res, next){
     var body = sanitize(req.body);      // NoSQL injection prevention
     
     openUser.findOneAndUpdate({_id: sanitize(req.params.id)}, {$set: req.body}, {new: true})
