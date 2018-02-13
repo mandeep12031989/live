@@ -71,26 +71,6 @@
 	.bg_uncomp{
 		background: #ffefef;
 	}
-	
-	.allRating {
-		padding: 3px 8px;
-		border: 1px solid #64b5f6;
-		margin: 0 5px;
-		color: #64b5f6;
-		border-radius: 100px;
-		font-weight: bold;
-		font-size: 11px;
-	}
-	.allRating:hover {
-		background: #e3f2fd;
-		color: #64b5f6;
-		border-color: #64b5f6;
-	}
-	.checked_rating {
-		background: #1e88e5;
-		color: white;
-		border-color: #1e88e5;
-	}
 </style>
 
 <span ng-show="loading || profile_content.profile.profile_number==0">
@@ -280,28 +260,26 @@
 											</div>
 											<div class="row" style="width: 98%; margin: auto;">
 
-												<div class="col-md-12" ng-show="section_num == 0" style="margin-bottom: 20px; font-size: 14px;">
-													<div class="col-md-12 row" ng-repeat="rc in profile_content.profile.beliefs" ng-class="((!rc.how_much) && checkRel[section_num])?'bg_uncomp':''">
-														<div class="col-md-6">{{rc.statement}}</div>
-														<div class="col-md-6" style="text-align: center; padding: 0 5px; margin: 0 auto;">
-															<div class="input-prepend input-group col-md-12">
-																<span ng-click="rc.how_much = 1;" ng-class="(rc.how_much>=1)?'checked_rating':''" title="1" class="allRating">1</span>
-																<span ng-click="rc.how_much = 2;" ng-class="(rc.how_much>=2)?'checked_rating':''" title="2" class="allRating">2</span>
-																<span ng-click="rc.how_much = 3;" ng-class="(rc.how_much>=3)?'checked_rating':''" title="3" class="allRating">3</span>
-																<span ng-click="rc.how_much = 4;" ng-class="(rc.how_much>=4)?'checked_rating':''" title="4" class="allRating">4</span>
-																<span ng-click="rc.how_much = 5;" ng-class="(rc.how_much>=5)?'checked_rating':''" title="5" class="allRating">5</span>
-																<span ng-click="rc.how_much = 6;" ng-class="(rc.how_much>=6)?'checked_rating':''" title="6" class="allRating">6</span>
-																<span ng-click="rc.how_much = 7;" ng-class="(rc.how_much>=7)?'checked_rating':''" title="7" class="allRating">7</span>
-																<span ng-click="rc.how_much = 8;" ng-class="(rc.how_much>=8)?'checked_rating':''" title="8" class="allRating">8</span>
-																<span ng-click="rc.how_much = 9;" ng-class="(rc.how_much>=9)?'checked_rating':''" title="9" class="allRating">9</span>
-																<span ng-click="rc.how_much = 10;" ng-class="(rc.how_much==10)?'checked_rating':''" title="10" class="allRating">10</span>
-															</div>
+												<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="section_num == 0" style="margin-bottom: 20px; font-size: 14px;">
+													<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 row" ng-repeat="rc in profile_content.profile.beliefs" ng-class="((!rc.how_much) && checkRel[section_num])?'bg_uncomp':''" style="padding: 4px;">
+														<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">{{rc.statement}}</div>
+														<div class="input-prepend input-group col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: center;">
+															<span ng-click="rc.how_much = 1;" ng-class="(rc.how_much>=1)?'checked_rating':''" title="1" class="allRating">1</span>
+															<span ng-click="rc.how_much = 2;" ng-class="(rc.how_much>=2)?'checked_rating':''" title="2" class="allRating">2</span>
+															<span ng-click="rc.how_much = 3;" ng-class="(rc.how_much>=3)?'checked_rating':''" title="3" class="allRating">3</span>
+															<span ng-click="rc.how_much = 4;" ng-class="(rc.how_much>=4)?'checked_rating':''" title="4" class="allRating">4</span>
+															<span ng-click="rc.how_much = 5;" ng-class="(rc.how_much>=5)?'checked_rating':''" title="5" class="allRating">5</span>
+															<span ng-click="rc.how_much = 6;" ng-class="(rc.how_much>=6)?'checked_rating':''" title="6" class="allRating">6</span>
+															<span ng-click="rc.how_much = 7;" ng-class="(rc.how_much>=7)?'checked_rating':''" title="7" class="allRating">7</span>
+															<span ng-click="rc.how_much = 8;" ng-class="(rc.how_much>=8)?'checked_rating':''" title="8" class="allRating">8</span>
+															<span ng-click="rc.how_much = 9;" ng-class="(rc.how_much>=9)?'checked_rating':''" title="9" class="allRating">9</span>
+															<span ng-click="rc.how_much = 10;" ng-class="(rc.how_much==10)?'checked_rating':''" title="10" class="allRating">10</span>
 														</div>
-														<div class="col-md-6" style="margin-bottom: 10px;">
+														<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding: 5px;">
 															<textarea rows="2" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you select this rating? Why not less or why not more?
 " ng-model="rc.comment"></textarea>
 														</div>
-														<div class="col-md-6" style="margin-bottom: 10px;"></div>
+														<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="margin-bottom: 10px;"></div>
 													</div>
 												</div>
 												
@@ -360,7 +338,7 @@
 																
 																<br ng-if="section_num >= 1 && section_num <= 3">
 																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Why is this value it important to you?" ng-if="section_num == 1" style="text-align: center;"></textarea>
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How do you utilize this strength in your personal or professional role?" ng-if="section_num == 2" style="text-align: center;"></textarea>
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How can an excess use of this strength turn into an 'improvement area' for you?" ng-if="section_num == 2" style="text-align: center;"></textarea>
 																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="In what ways does this learning need limit you in your role and what practices can you adopt to overcome it?
 " ng-if="section_num == 3" style="text-align: center;"></textarea>
 															</div>
@@ -374,7 +352,7 @@
 														<span class="col-md-1" style="text-align: center;">
 															<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;">
 														</span>
-														<span class="col-md-11" style="margin-bottom: 10px;">{{rc.statement}}</span>
+														<span class="col-md-11" style="margin-bottom: 10px;" ng-click="rc.selected = !rc.selected">{{rc.statement}}</span>
 													</div>
 													
 													<div style="font-size: 13px; padding: 30px 0 10px 0; color: grey; text-align: center; margin-top: 50px;">
