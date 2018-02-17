@@ -169,7 +169,8 @@ var userSchema = new Schema({
 		old: [new Schema({ pro: [profileSchema], pro_num: Number })],
 		growth_recommendations: [new Schema({ sID: String, statement: String, selected: Boolean })],
 		beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String })],
-		eachSectionRelate: Array
+		eachSectionRelate: Array,
+		eachSectionShareMore: Array
     },
     age: Number,
     sex: String,

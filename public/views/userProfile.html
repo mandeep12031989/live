@@ -236,24 +236,33 @@
 													<span style="float:right; font-size: 15px;" ng-show="section_num != 5">Page {{section_num+1}}/5</span>
 													<span style="float:right; font-size: 15px;" ng-show="section_num == 5">Page {{section_num}}/5</span>
 													<a data-toggle="collapse" data-parent="#accordion5">
+														
 														<b ng-show="section_num == 0">Beliefs</b>
 														<b ng-show="section_num == 1">Professional Values and Work Culture Preferences</b>
-														<div ng-show="section_num == 1" style="font-size: 14px; padding: 10px 6% 10px 0;">
-															Values you exhibit and ideal work culture you prefer or strive to create for others.
-														</div>
 														<b ng-show="section_num == 2">Professional Strengths</b>
-														<div ng-show="section_num == 2" style="font-size: 14px; padding: 10px 6% 10px 0;">
-															Strengths you bring to workplace in your role or while working with others.
-														</div>
 														<b ng-show="section_num == 3">Learning Needs</b>
-														<div ng-show="section_num == 3" style="font-size: 14px; padding: 10px 6% 10px 0;">
-															Choose your Areas for Development as seen by you or others. Your authentic selection will assist the manager in your professional development further.
-														</div>
-														<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 0px 6% 10px 0;">
-															{{sectionDescs[profile_content.profile.profile_number-1][section_num-1]}}
-														</div>
 														<!--<b ng-show="section_num == 4">Communication Style</b>-->
 														<b ng-show="section_num == 5">Growth Recommendations</b>
+														
+														<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;">
+															{{sectionDescs[profile_content.profile.profile_number-1][section_num-1]}}
+														</div>
+														
+														<div ng-show="section_num == 1" style="font-size: 15px; padding: 0px 6% 10px 0;">
+															Please select values you exhibit and ideal work culture you prefer or strive to create for others.
+														</div>
+														<div ng-show="section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0;">
+															Please select strengths you bring to workplace in your role or while working with others.
+														</div>
+														<div ng-show="section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0;">
+															Choose your Areas for Development as seen by you or others. Your authentic selection will assist the manager in your professional development further.
+														</div>
+														<div style="padding: 5px 0; border: 2px solid #efefef; margin-top: 10px;" ng-show="section_num >= 0 && section_num <= 3">
+															<img src="./images/Beliefs instruction.png" style="width: 100%;" ng-show="section_num == 0">
+															<img src="./images/Values instruction.png" style="width: 100%;" ng-show="section_num == 1">
+															<img src="./images/Strengths instruction.png" style="width: 100%;" ng-show="section_num == 2">
+															<img src="./images/Learning needs instruction.png" style="width: 100%;" ng-show="section_num == 3">
+														</div>
 													</a>
 													
 												</h2>
@@ -375,11 +384,11 @@
 												
 											</div>
 											<div style="text-align: center;" ng-show="section_num>=1 && section_num<=3">
-												<div class="col-xs-12 col-sm-12 col-md-12" style="font-size: 13px; padding: 15px 0 10px 0; color: grey; margin: 0 auto 25px auto;">
-													<div class="col-xs-6 col-sm-6 col-md-6" style="text-align: right; margin-top: 6px;">
-														<b>To what percentage does this section cover your <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span>?</b>
+												<div class="row" style="font-size: 13px; color: grey; margin: 0 auto 10px auto;" ng-class="((!profile_content.profile.eachSectionRelate[section_num-1]) && checkRel[section_num])?'bg_uncomp':''">
+													<div class="col-xs-12 col-sm-12 col-md-7" style="text-align: right; margin-top: 6px;">
+														<b>How closely does this section describe your <span ng-show="section_num == 1">values or work culture preferences</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> - to someone reading, who doesn't know you prior?</b>
 													</div>
-													<div class="col-xs-6 col-sm-6 col-md-6">
+													<div class="col-xs-12 col-sm-12 col-md-5" style="margin: auto 0; text-align: center;">
 														<select class="form-control" ng-model="profile_content.profile.eachSectionRelate[section_num-1]" style="width: 80%;">
 															<option value="Below 50%">Below 50% (I could not relate to it much)</option>
 															<option value="70% - 80%">70% - 80% (Relate to great extent)</option>
@@ -389,6 +398,16 @@
 													</div>
 												</div>
 												
+												<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
+													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px;">
+														<b>Please share your <span ng-show="section_num == 1">values or work culture preferences</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> not covered above.</b>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-12">
+														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionShareMore[section_num-1]"></textarea>
+													</div>
+												</div>
+												
+												<!--	BUTTON ADD
 												<div class="col-xs-12 col-sm-12 col-md-12" style="font-size: 13px; padding: 10px 0 10px 0; color: grey;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
 													Use the below button to add those <span ng-show="section_num == 1">values or work culture preferences</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> that are not covered in the profile.
 												</div>
@@ -414,7 +433,7 @@
 															<button class="btn btn-danger" ng-click="addNewKey(section_num);">Done</button>
 														</div>
 													</div>
-												</div>
+												</div>-->
 											</div>
 										</div><br>
 										

@@ -1067,7 +1067,7 @@
 																<div style="margin-top: 30px;">
 																	<label for="q2">2. How closely does the profile created by you describe you as a person - to someone reading, who doesn't know you prior?</label>
 																	<br><span style="margin-left: 14px;" ng-if="user.feedback.q2">{{user.feedback.q2}}</span>
-																	<br><textarea class="form-control" ng-model="user.feedback.q2_detailed" disabled ng-if="user.feedback.q2 && (user.feedback.q2 != 'Above 90')"></textarea>
+																	<br><textarea class="form-control" ng-model="user.feedback.q2_detailed" disabled ng-if="user.feedback.q2 && user.feedback.s2 && (user.feedback.q2 != 'Above 90')"></textarea>
 																	<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q2">- Not Filled -</span>
 																</div>
 																<div style="margin-top: 30px;">
@@ -1363,23 +1363,24 @@
 													<a data-toggle="collapse" data-parent="#accordion5">
 														<b ng-show="section_num == 0">Beliefs</b>
 														<b ng-show="section_num == 1">Professional Values and Work Culture Preferences</b>
-														<div ng-show="section_num == 1" style="font-size: 14px; padding: 10px 6% 10px 0;">
-															Values you exhibit and ideal work culture you prefer or strive to create for others.
-														</div>
 														<b ng-show="section_num == 2">Professional Strengths</b>
-														<div ng-show="section_num == 2" style="font-size: 14px; padding: 10px 6% 10px 0;">
-															Strengths you bring to workplace in your role or while working with others.
-														</div>
 														<b ng-show="section_num == 3">Learning Needs</b>
-														<div ng-show="section_num == 3" style="font-size: 14px; padding: 10px 6% 10px 0;">
-															Choose your Areas for Development as seen by you or others. Your authentic selection will assist the manager in your professional development further.
-														</div>
-														<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 0px 6% 10px 0;">
+														<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;">
 															{{sectionDescs[user.profile.profile_number-1][section_num-1]}}
 														</div>
 														<!--<b ng-show="section_num == 4">Communication Style</b>-->
 														<b ng-show="section_num == 5">Growth Recommendations</b>
 														<b ng-show="section_num == 6">Recommendations for Manager</b>
+														
+														<div ng-show="section_num == 1" style="font-size: 15px; padding: 10px 6% 10px 0;">
+															Values you exhibit and ideal work culture you prefer or strive to create for others.
+														</div>
+														<div ng-show="section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0;">
+															Strengths you bring to workplace in your role or while working with others.
+														</div>
+														<div ng-show="section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0;">
+															Choose your Areas for Development as seen by you or others. Your authentic selection will assist the manager in your professional development further.
+														</div>
 													</a>
 													
 												</h2>
@@ -1495,9 +1496,17 @@
 												
 												<div class="col-md-12" style="font-size: 13px; padding: 15px 0 10px 0; color: grey; margin-bottom: 15px;" ng-show="section_num>=1 && section_num<=3">
 													<div class="col-md-12" style="text-align: center;">
-														To what percentage does this section cover your <span ng-show="section_num == 1">values</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span>?
+														How closely does this section describe your <span ng-show="section_num == 1">values or work culture preferences</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> - to someone reading, who doesn't know you prior?
 														&nbsp;&nbsp;
 														<b>{{user.profile.eachSectionRelate[section_num-1]}}</b>
+													</div>
+													<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="user.profile.eachSectionRelate[section_num-1] != 'Above 90%' && user.profile.eachSectionRelate[section_num-1] != ''">
+														<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px;">
+															<b>Please share your <span ng-show="section_num == 1">values or work culture preferences</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> not covered above.</b>
+														</div>
+														<div class="col-xs-12 col-sm-12 col-md-12">
+															<textarea class="form-control" style="text-align: center;" ng-model="user.profile.eachSectionShareMore[section_num-1]" disabled></textarea>
+														</div>
 													</div>
 												</div>
 												

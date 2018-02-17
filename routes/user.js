@@ -836,11 +836,11 @@ router.route('/completion')
 		if(user.feedback.q1)
 			per += 2;
 		if(user.feedback.q2)
-			per += 2;
+			per += 3;
 		if(user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a4)
-			per += 2;
-		if(user.feedback.q4)
-			per += 2;
+			per += 3;
+		/*if(user.feedback.q4)
+			per += 2;*/
 		if(user.feedback.q5)
 			per += 2;
 		if(user.feedback.q6)

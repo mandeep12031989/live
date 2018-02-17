@@ -24,6 +24,7 @@ var mailOptions, link, token;
 
 exports.custom_mail = function(data, callback){
     mailOptions = {
+		from : '"iDiscover.me" info@idiscover.me',
         to : data.to,
         subject : data.subject,
         html : data.html
@@ -50,6 +51,7 @@ exports.lost_details = function(data, callback){
 	//console.log(link);
 	
     mailOptions = {
+		from : '"iDiscover.me" info@idiscover.me',
         to : data.username,
         subject : "iDiscover.me | Request for Password Change",
         html : 'Hello,<br><br> Please click on the link to change your password. This link is only valid for <b>one</b> hour.<br><a href='+link+'>Click Here to Change Your Password</a>'

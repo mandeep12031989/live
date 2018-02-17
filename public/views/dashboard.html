@@ -3,7 +3,8 @@
 		background: #fff3e0;
 		border: 2px dotted #ffe1A0;
 		margin: -20px 80px 20px 80px;
-		padding: 10px;
+		padding: 6px;
+		font-size: 15px;
 	}
 	
 	.card:hover{
@@ -65,7 +66,7 @@
 						
 						<!--	INFO BOX	-->
 						<div class="row info_box" ng-if="!percent.reflective_filled">
-							<i class="material-icons">info</i> <span style="margin: 3px auto;">Thank You for registering with iDiscover. Kindly proceed with Step 1.</span>
+							<i class="material-icons">info</i> <span style="margin: 3px auto;">Kindly proceed with Step 1.</span>
 						</div>
 						
 						<div class="row info_box" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
@@ -104,67 +105,74 @@
 							
 							<div class="col-sm-8">
 								<div class="col-sm-6">
-									<div class="card card-stats" ui-sref="reflective-questions">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">1</div>
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.reflective_filled">1</div>
+									<div class="card card-stats" ui-sref="reflective-questions" ng-if="!percent.reflective_filled || percent.questionnaire_filled">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">Step 1</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.reflective_filled">Step 1</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">3 Reflective Questions</p>
+											<p class="category" style="font-size: 16px;">Reflective Questions</p>
 											<h3 class="title">
-												<small ng-if="percent.reflective_filled">COMPLETED</small>
-												<small ng-if="!percent.reflective_filled">PROCEED</small>
+												<small style="font-size: 14px" ng-if="percent.questionnaire_filled">COMPLETED</small>
+												<small style="font-size: 14px" ng-if="!percent.questionnaire_filled">PROCEED</small>
 											</h3>
 										</div>
 									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.questionnaire_filled">1</div>
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.questionnaire_filled">1</div>
+									<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 1</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Questionnaire</p>
+											<p class="category" style="font-size: 16px;">Reflective Questions</p>
 											<h3 class="title">
-												<small ng-if="percent.questionnaire_filled">COMPLETED</small>
-												<small ng-if="!percent.questionnaire_filled">PROCEED</small>
-											</h3>
-										</div>
-									</div>
-									<div class="card card-stats" ng-if="!percent.reflective_filled">
-										<div class="card-header" data-background-color="grey" style="font-weight: bold;">1</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Questionnaire</p>
-											<h3 class="title">
-												<small>COMPLETE PREVIOUS STEPS</small>
+												<small style="font-size: 14px">PROCEED WITH QUESTIONNAIRE</small>
 											</h3>
 										</div>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="card card-stats" ui-sref="select-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;">2</div>
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 2</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Assigning Trueself Profile</p>
+											<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
 											<h3 class="title">
-												<small>SELECT TRUESELF PROFILE</small>
+												<small style="font-size: 14px">SELECT TRUESELF PROFILE</small>
 											</h3>
 										</div>
 									</div>
-									<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">3</div>
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">3</div>
+									<div class="card card-stats" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Step 2</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Building Trueself Profile</p>
+											<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
 											<h3 class="title">
-												<small ng-if="percent.profile_filled">COMPLETED</small>
-												<small ng-if="!percent.profile_filled">PROCEED</small>
+												<small style="font-size: 14px">COMPLETED</small>
 											</h3>
 										</div>
 									</div>
 									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
-										<div class="card-header" data-background-color="grey" style="font-weight: bold;">2</div>
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 2</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Assigning Trueself Profile</p>
+											<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
 											<h3 class="title">
-												<small>COMPLETE PREVIOUS STEPS</small>
+												<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
+											</h3>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
+											<h3 class="title">
+												<small style="font-size: 14px" ng-if="percent.profile_filled">COMPLETED</small>
+												<small style="font-size: 14px" ng-if="!percent.profile_filled">PROCEED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.selected_profile)">
+										<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 3</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
+											<h3 class="title">
+												<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
 											</h3>
 										</div>
 									</div>
@@ -173,18 +181,18 @@
 									<div class="card card-stats" ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
 										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Trueself Report</p>
+											<p class="category" style="font-size: 16px;">Trueself Report</p>
 											<h3 class="title">
-												<small>COMPLETED</small>
+												<small style="font-size: 14px">COMPLETED</small>
 											</h3>
 										</div>
 									</div>
 									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
 										<div class="card-header" data-background-color="grey" style="font-weight: bold;">Locked</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Trueself Report</p>
+											<p class="category" style="font-size: 16px;">Trueself Report</p>
 											<h3 class="title">
-												<small>COMPLETE PREVIOUS STEPS</small>
+												<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
 											</h3>
 										</div>
 									</div>
@@ -197,13 +205,13 @@
 								Add-on tools
 							</h1>
 								
-							<div class="col-sm-4">
+							<div class="col-sm-offset-2 col-sm-4">
 									<div class="card card-stats" ui-sref="feedback">
 										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">View</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Feedback</p>
+											<p class="category" style="font-size: 16px;">Feedback</p>
 											<h3 class="title">
-												<small></small>
+												<small style="font-size: 14px"></small>
 											</h3>
 										</div>
 									</div>
@@ -213,9 +221,9 @@
 									<div class="card card-stats" ng-click="changeView()">
 										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 17px;">Peer Review</p>
+											<p class="category" style="font-size: 16px;">Peer Review</p>
 											<h3 class="title">
-												<small></small>
+												<small style="font-size: 14px"></small>
 											</h3>
 										</div>
 									</div>
