@@ -82,13 +82,13 @@
 </span>
 
 <div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0">
-	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="waitingQueue == true" class="w3-animate-top">
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="waitingQueue == true && !success.message" class="w3-animate-top">
 		<div class="alert alert-info alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">cached</i>
 			<span data-notify="message">Saving Your Progress !</span>
 		</div>
 	</div>
-	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.message == 'Done'" class="w3-animate-top">
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="waitingQueue == false && success.message == 'Done'" class="w3-animate-top">
 		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">check_circle</i>
 			<span data-notify="message">Progress Saved !</span>
@@ -244,24 +244,29 @@
 														<!--<b ng-show="section_num == 4">Communication Style</b>-->
 														<b ng-show="section_num == 5">Growth Recommendations</b>
 														
-														<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;">
+														<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;  font-weight: bold;">
 															{{sectionDescs[profile_content.profile.profile_number-1][section_num-1]}}
 														</div>
 														
-														<div ng-show="section_num == 1" style="font-size: 15px; padding: 0px 6% 10px 0;">
+														<div ng-show="section_num == 0" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
+															Beliefs are deeply rooted convictions about the world and about ourselves. Please select how strongly you relate with the following belief statements and answer the associated questions.
+														</div>
+														<div ng-show="section_num == 1" style="font-size: 15px; padding: 0px 6% 10px 0; font-weight: bold;">
 															Please select values you exhibit and ideal work culture you prefer or strive to create for others.
 														</div>
-														<div ng-show="section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0;">
+														<div ng-show="section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Please select strengths you bring to workplace in your role or while working with others.
 														</div>
-														<div ng-show="section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0;">
+														<div ng-show="section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Choose your Areas for Development as seen by you or others. Your authentic selection will assist the manager in your professional development further.
 														</div>
-														<div style="padding: 5px 0; border: 2px solid #efefef; margin-top: 10px;" ng-show="section_num >= 0 && section_num <= 3">
-															<img src="./images/Beliefs instruction.png" style="width: 100%;" ng-show="section_num == 0">
-															<img src="./images/Values instruction.png" style="width: 100%;" ng-show="section_num == 1">
-															<img src="./images/Strengths instruction.png" style="width: 100%;" ng-show="section_num == 2">
-															<img src="./images/Learning needs instruction.png" style="width: 100%;" ng-show="section_num == 3">
+														
+														<div style="padding: 5px 0; border: 2px solid #33b5e5; margin-top: 10px; text-align: left; border-radius: 7px;" ng-show="section_num >= 0 && section_num <= 3">
+															<b style="font-size: 15px; margin-left: 15px;">For your reference, see a sample below :</b>
+															<img src="./images/sec0.png" style="width: 100%; padding: 0% 2%;" ng-show="section_num == 0">
+															<img src="./images/sec1.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 1">
+															<img src="./images/sec2.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 2">
+															<img src="./images/sec3.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 3">
 														</div>
 													</a>
 													
@@ -438,7 +443,7 @@
 										</div><br>
 										
 										<button type="button" class="btn btn-info" ng-click="(section_num == 5)? section_num = section_num - 2 : section_num = section_num - 1" ng-disabled="section_num == 1">Back</button>
-										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num] = true; (checkSectionFill(section_num)?((section_num == 3)?section_num = section_num+2:section_num = section_num+1):'');" ng-show="section_num != 5">Next</button>
+										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num] = true; second3timer = true; (checkSectionFill(section_num)?((section_num == 3)?section_num = section_num+2:section_num = section_num+1):'');" ng-show="section_num != 5">Next</button>
 										<button type="button" class="btn btn-danger pull-right" ng-click="checkRel[section_num] = true; (checkSectionFill(section_num)?submitProfile():'');" ng-show="section_num == 5">Submit</button>
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
 											<button type="button" class="btn btn-warning" ng-click="saveProfile()">Save</button><br><br>

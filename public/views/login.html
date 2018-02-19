@@ -22,7 +22,18 @@
 			<!-- LOGIN -->
             <div class="content-box border-top border-red clearfix" style="margin-top:20%; text-align: center;" ng-show="which_one == 1">
                <br><img src=".\assets/image-resources/logo%20blue.png" width="300px"><br>
-                <div class="content-box-wrapper row" style="margin: 0 auto;">
+				
+				<div style="margin: 15px; padding: 15px;" ng-if="deviceDet == 'ie'">
+					<div class="col-xs-12 col-sm-12 col-md-12">
+						<i class="material-icons" style="color: #aaa; font-size: 60px;">phonelink_off</i><br><br>
+						It seems your browser is not compatible with iDiscover.me.<br><br>
+						We highly recommend you will use one of the browsers listed below:<br><br>
+						<a href="https://www.google.com/chrome/">Google Chrome</a><br>
+						<a href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a>
+					</div>
+				</div>
+				
+                <div class="content-box-wrapper row" style="margin: 0 auto;" ng-if="deviceDet != 'ie'">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-xs-12 col-sm-12 col-md-8">
 							<h3> Log in to your iDiscover.me account</h3>
@@ -80,6 +91,7 @@
 					</a>
 
                 </div>
+				
             </div>
 			<!-- FORGOT PSW -->
 			<div class="content-box border-top border-red clearfix" style="margin-top:30%;" ng-show="which_one == 2">

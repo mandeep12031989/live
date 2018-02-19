@@ -58,9 +58,6 @@
 		}
 									
 		input[type=range]::-webkit-slider-runnable-track {
-			-webkit-appearance: none;
-			-moz-appearance: none;
-										
 			background: -repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
 									
 			background: -webkit-repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
@@ -70,8 +67,7 @@
 			background: -ms-repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
                                       
 			background: -moz-repeating-linear-gradient(0deg,rgba(139,195,74,1) 0%,rgba(139,191,78,0.91) 20%,rgba(255,238,88,0.8) 40%,rgba(255,238,88,1) 60%,rgba(244,67,54,0.74) 80%,rgba(244,67,54,1) 100%);
-                                  
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8BC34A', endColorstr='#ff357f ', GradientType=1 );
+			
 			height: 10px;
 		}
 								
@@ -198,7 +194,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-if="mini.relate == 'relatestrongly' || mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="" ng-if="keys.comment">
@@ -230,7 +226,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-if="mini.relate == 'relatestrongly' || mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="" ng-if="keys.comment">
@@ -273,7 +269,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-if="mini.relate == 'relatestrongly' || mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="">
@@ -306,7 +302,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-if="mini.relate == 'relatestrongly' || mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="" ng-if="keys.comment">
@@ -348,7 +344,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-if="mini.relate == 'relatestrongly' || mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="">
@@ -381,7 +377,7 @@
                                                 <ul class="list-group list-group-separator mrg0A row list-group-icons">
                                   
                                                     <div class="row" style="margin: 0 auto;">
-														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
+														<span ng-repeat="mini in keys.mini_descriptions" class="mini_style" ng-if="mini.relate == 'relatestrongly' || mini.relate == 'relatepartially'">{{mini.mini_description}}</span>
                                                     </div><br>
                                 
                                                     <li class="" ng-if="keys.comment">
@@ -400,51 +396,6 @@
                                 </div>
                             </div>
                         </div>
-<!--                                                    SECTION 4                                                          -->
-                        <!--<div class="panel">
-                            <div class="panel-body">
-                                <h2 style="text-align:center" id="page-title">
-                                    <b>Communication Style</b>
-                                </h2>
-                                <div class="example-box-wrapper">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4">
-                                            <div class="panel" ng-class="keys.key_rating == 0 ? 'left_border_dnt' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt' : 'left_border_str')">                        
-                                                <div class="panel-heading image-box">
-                                                    <div class="image-content" style="margin-top: 16px;">                        
-                                                        <div class="meta-box meta-box-bottom">
-                                                            <h3 class="meta-heading">{{keys.keyword}}</h3>
-                                                        </div>                            
-                                                    </div>
-                                                    <img src="./assets/image-resources/blurred-bg/bg.png" alt="">
-
-                                                </div>
-                         
-                                                <ul class="list-group list-group-separator mrg0A row list-group-icons">
-                                  
-                                                    <div class="row" style="margin: 0 auto;">
-                                                        <span ng-repeat="mini in keys.mini_descriptions" class="mini_style">{{mini.mini_description}}</span>
-                                                    </div><br>
-                                
-                                                    <li class="">
-                              
-                                                        <a href="" class="list-group-item" ng-if="keys.comment">
-                                                            
-                                                            {{keys.comment}}
-                                                        </a>
-                                                    </li>
-                                    
-                                                </ul>
-                                            </div>
-                                        </div>
-                
-                                    </div>
-                                    
-                                </div>
-                            </div>
-							
-                        </div>-->
                         
                     </div>
 					
@@ -515,17 +466,7 @@
                                 </div>
                             </div>
                         </div>
-<!--                                                    SECTION 4                                                          -->
-                        <!--<div class="panel">
-                            <div class="panel-body" style="text-align:center">
-                                <h2 id="page-title">
-                                    <b>Communication Style</b>
-                                </h2>
-                                <div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 4" style="display: inline-block; margin: 25px auto;">
-									<span style="margin: 5px 5px;" ng-class="keys.key_rating == 0 ? 'left_border_dnt2' : ((keys.key_rating > 0 && keys.key_rating < 1) ? 'left_border_prt2' : 'left_border_str2')">{{keys.keyword}}</span>
-                                </div>
-                            </div>
-                        </div>-->
+						
 					</div>
 					
 <!--                                                    MENU 3                                                          -->
