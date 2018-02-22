@@ -87,13 +87,6 @@
 		.LHS_tab{
 			text-align: center; margin-top:auto; margin-bottom:auto; top: -15px;
 		}
-		
-		.paei_tabs{
-			color: white;
-			margin: 15px;
-			padding-top: 20px;
-			padding-bottom: 20px;
-		}
     </style>
 
 <span ng-show="loading || profile_content.profile.profile_number==0">
@@ -131,7 +124,7 @@
 								<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precise View</a></li>
 								<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balancing Strengths</a></li>
 								<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Personal Mastery Levels</a></li>
-								<!--<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Competencies</a></li>-->
+								<!--<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Leadership Competencies</a></li>-->
 							</ul>
 						</div>
 					</div>
@@ -645,76 +638,154 @@
 					
 <!--                                                    MENU 5                                                          -->
 					<div class="container" ng-show="menu == 5">
-                        <div class="row">
-							<div class="panel panel-body col-md-12" style="text-align: center;">
+                        <div class="row" style="margin: 0 auto;">
+							<div class="panel panel-body row col-md-12" style="text-align: center;">
+								<!--					STRENGTHS					-->
 								<div class="col-md-3">
-									<div class="paei_tabs" style="background: #ff4444;">
+									<div class="paei_tabs" ng-class="(max == Pcount)?'paei_responsive':((min == Pcount)?'paei_reactive':'paei_moderate')">
 										<b>PRODUCING</b>
 									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Pcount)?'paei_responsiveB':((min == Pcount)?'paei_reactiveB':'paei_moderateB')">
 										<span><b>Strengths</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')"><hr>{{mini.mini_description}}</span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.p"><hr>{{mini.mini_description}}</span>
 										</div>
-									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
-										<span><b>Learning Needs</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially') || (mini.relate == 'donotexhibitanymore')"><hr>{{mini.mini_description}}</span>
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.p"><hr>{{mini.responsive_statement}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.p"><hr>{{mini.mini_description}}</span>
+										</div>
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.p"><hr>{{mini.responsive_statement}}</span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-3">
-									<div class="paei_tabs" style="background: #ffbb33;">
+									<div class="paei_tabs" ng-class="(max == Acount)?'paei_responsive':((min == Acount)?'paei_reactive':'paei_moderate')">
 										<b>ADMINISTRATING</b>
 									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Acount)?'paei_responsiveB':((min == Acount)?'paei_reactiveB':'paei_moderateB')">
 										<span><b>Strengths</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')"><hr>{{mini.mini_description}}</span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.a"><hr>{{mini.mini_description}}</span>
 										</div>
-									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
-										<span><b>Learning Needs</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially') || (mini.relate == 'donotexhibitanymore')"><hr>{{mini.mini_description}}</span>
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.a"><hr>{{mini.responsive_statement}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.a"><hr>{{mini.mini_description}}</span>
+										</div>
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.a"><hr>{{mini.responsive_statement}}</span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-3">
-									<div class="paei_tabs" style="background: #fb8c00;">
+									<div class="paei_tabs" ng-class="(max == Ecount)?'paei_responsive':((min == Ecount)?'paei_reactive':'paei_moderate')">
 										<b>ENTERPRENEURING</b>
 									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Ecount)?'paei_responsiveB':((min == Ecount)?'paei_reactiveB':'paei_moderateB')">
 										<span><b>Strengths</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')"><hr>{{mini.mini_description}}</span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.e"><hr>{{mini.mini_description}}</span>
 										</div>
-									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
-										<span><b>Learning Needs</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially') || (mini.relate == 'donotexhibitanymore')"><hr>{{mini.mini_description}}</span>
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.e"><hr>{{mini.responsive_statement}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.e"><hr>{{mini.mini_description}}</span>
+										</div>
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.e"><hr>{{mini.responsive_statement}}</span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-3">
-									<div class="paei_tabs" style="background: #00C851;">
+									<div class="paei_tabs" ng-class="(max == Icount)?'paei_responsive':((min == Icount)?'paei_reactive':'paei_moderate')">
 										<b>INTEGRATING</b>
 									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Icount)?'paei_responsiveB':((min == Icount)?'paei_reactiveB':'paei_moderateB')">
 										<span><b>Strengths</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')"><hr>{{mini.mini_description}}</span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.i"><hr>{{mini.mini_description}}</span>
 										</div>
-									</div>
-									<div class="panel panel-body" style="margin-left: 15px; margin-right: 15px;">
-										<span><b>Learning Needs</b></span>
-										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3">
-											<span ng-repeat="mini in keys.mini_descriptions" ng-if="(mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially') || (mini.relate == 'donotexhibitanymore')"><hr>{{mini.mini_description}}</span>
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.i"><hr>{{mini.responsive_statement}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.i"><hr>{{mini.mini_description}}</span>
+										</div>
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="mini.relate == 'donotexhibitanymore' && mini.paei_tag.i"><hr>{{mini.responsive_statement}}</span>
 										</div>
 									</div>
 								</div>
+								
+								<div class="col-md-12" style="margin-bottom: 15px;"><hr style="border: 3px solid #efefef;"></div>
+								
+								<!--					LEARNING NEEDS					-->
+								<div class="col-md-3">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Pcount)?'paei_responsiveB':((min == Pcount)?'paei_reactiveB':'paei_moderateB')">
+										<span><b>Learning Needs</b></span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.p"><hr>{{mini.mini_description}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.p"><hr>{{mini.mini_description}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Acount)?'paei_responsiveB':((min == Acount)?'paei_reactiveB':'paei_moderateB')">
+										<span><b>Learning Needs</b></span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.a"><hr>{{mini.mini_description}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.a"><hr>{{mini.mini_description}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Ecount)?'paei_responsiveB':((min == Ecount)?'paei_reactiveB':'paei_moderateB')">
+										<span><b>Learning Needs</b></span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.e"><hr>{{mini.mini_description}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.e"><hr>{{mini.mini_description}}</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div style="margin-left: 15px; margin-right: 15px;" ng-class="(max == Icount)?'paei_responsiveB':((min == Icount)?'paei_reactiveB':'paei_moderateB')">
+										<span><b>Learning Needs</b></span>
+										<!--			default profile			-->
+										<div ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && profile_selected == -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.i"><hr>{{mini.mini_description}}</span>
+										</div>
+										<!--			rest profiles			-->
+										<div ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && profile_selected != -1">
+											<span ng-repeat="mini in keys.mini_descriptions" ng-if="((mini.relate == 'relatestrongly') || (mini.relate == 'relatepartially')) && mini.paei_tag.i"><hr>{{mini.mini_description}}</span>
+										</div>
+									</div>
+								</div>
+								<!--					END						-->
 							</div>
 						</div>
 					</div>
@@ -722,9 +793,9 @@
 					<!--									TABS END											-->
 					
 					<button class="btn btn-info" ng-show="(menu!=1)" ng-click="backMenu()">Back</button>
-					<button class="btn btn-info pull-right" ng-show="(menu!=4)" ng-click="nextMenu()">Next</button>
-					<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==4)" ui-sref="feedback">Proceed</button>
-					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==4)">Back to Dashboard</button>
+					<button class="btn btn-info pull-right" ng-show="(menu!=5)" ng-click="nextMenu()">Next</button>
+					<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==5)" ui-sref="feedback">Proceed</button>
+					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==5)">Back to Dashboard</button>
 					
                 </div>
             </div>

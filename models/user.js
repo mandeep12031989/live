@@ -34,6 +34,24 @@ var descriptionSchema = new Schema({
             default: false
         }
     },
+    paei_tag: {
+        p: {
+            type: Boolean,
+            default: false
+        },
+        a: {
+            type: Boolean,
+            default: false
+        },
+        e: {
+            type: Boolean,
+            default: false
+        },
+        i: {
+            type: Boolean,
+            default: false
+        }
+    },
 	responsive_statement: String,
     mini_rating: {
         type: Number,
