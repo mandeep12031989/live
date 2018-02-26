@@ -184,6 +184,13 @@ var userSchema = new Schema({
         },
         profile_content: [profileSchema],
         track: [new Schema({ time_taken: Number })],				// in seconds
+		eachSectionTrack: {
+			timeBelief: [new Schema({ time_taken: Number })],
+			timeValue: [new Schema({ time_taken: Number })],
+			timeStrength: [new Schema({ time_taken: Number })],
+			timeLearning: [new Schema({ time_taken: Number })],
+			timeGrowth: [new Schema({ time_taken: Number })]
+		},
 		old: [new Schema({ pro: [profileSchema], pro_num: Number })],
 		growth_recommendations: [new Schema({ sID: String, statement: String, selected: Boolean })],
 		beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String })],
@@ -249,7 +256,7 @@ var userSchema = new Schema({
 			type: Array,
 			default: []
 		},
-		recommendations_for_manager: [new Schema({typeID: String, title: String, statements: [new Schema({sID: {type: String, default: "P__N__S__"}, statement: String, selected: {type: Boolean, default: false}})]})]
+		recommendations_for_manager: [new Schema({ sID: String, statement: String, selected: Boolean })]
 	}
 });
 

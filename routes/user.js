@@ -465,6 +465,47 @@ router.route('/profile/insertProfile')                          // will use req.
     });
 });
 
+router.route('/profile/insertProfileByFacilitator/:id')                          // will use req.decoded._id later
+.post(Verify.verifyOrdinaryUser, function(req, res, next){
+    var id = sanitize(req.params.id);
+    var body = sanitize(req.body);
+    
+    //console.log(body);
+    if(!(body.profile_number > 0 && body.profile_number < 10))                    //profile_num is string here
+        return res.status(501).send({message: "Invalid Request !", success: false});
+    
+    var pr_num = parseInt(body.profile_number);
+    body.profile_number = 'P0' + body.profile_number;
+        
+    Keyword.find({keyword_id: { $regex: body.profile_number }}/*, {'comment': false, 'mini_descriptions.relate': false}*/).sort({ keyword_id: 1 })
+    .exec(function(err, keyword){
+        if(err)
+            next(err);
+        return keyword;
+    })
+    .then(function(key){
+        //console.log(key);
+        User.findOne({_id: id}, {profile: true})
+        .exec(function(err_u, user){
+            if(err_u)
+               return next(err_u);
+			
+			//saving old-profile
+			if(user.profile.profile_number)
+				user.profile.old.push({pro: user.profile.profile_content, pro_num: user.profile.profile_number});
+			
+            user.profile.profile_number = pr_num;
+            user.profile.profile_content = key;
+            user.save(function(e, us){
+                if(e)
+                    return next(e);
+                res.status(200).send({message: "success !", success: true});
+            });
+
+        });
+    });
+});
+
 //RESPONSES COULD CACHE HERE, SO TESTING NEEDED LATER, IF IT FAILS THEN WILL USE INDIVDUAL ROUTE OF EACH MODULE - /module1, /module2, /module3
 router.route('/profile/insertProfile/module/:m')                          // will use req.decoded._id later
 .put(function(req, res, next){
