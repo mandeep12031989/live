@@ -27,6 +27,44 @@
         <div id="page-content-wrapper">
             <div id="page-content-margin">
                     <div class="container" ng-if="!to_review">
+						
+						<script>
+							$(document).ready(function(){
+								$("#submit").click(function(){
+									$("#myModal").modal('hide');
+									$('body').removeClass('modal-open');
+									$('.modal-backdrop').remove();
+								});
+
+							});
+
+							$(document).ready(function() {
+								function disableBack() { window.history.forward() }
+								window.onload = disableBack();
+								window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+							});
+
+							$(document).ready(function(){
+								$(this).scrollTop(0);
+							});
+						</script>
+						
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title modal-color" id="myModalLabel">Interaction with Facilitator</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body modal-color">
+										<h2>Please do consult your Facilitator for further processes.</h2>
+									</div>
+									<div class="modal-footer">
+										<button type="button" id="submit" class="btn btn-danger" data-dismiss="modal">OK</button>
+									</div>
+								</div>
+							</div>
+						</div>
 
 						<div id="page-title">
 							<h2>Dashboard</h2>
@@ -127,7 +165,7 @@
 									</div>
 								</div>
 								<div class="col-sm-6">
-									<div class="card card-stats" ui-sref="select-profile" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
+									<div class="card card-stats" data-toggle="modal" data-target="#myModal" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
 										<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 2</div>
 										<div class="card-content">
 											<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>

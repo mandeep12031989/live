@@ -169,6 +169,13 @@
 		</div>
 	</div>
 	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="puttingType" class="w3-animate-top">
+		<div class="alert alert-info alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">cached</i>
+			<span data-notify="message">Profile Saving... Please Wait !</span>
+		</div>
+	</div>
+	
 	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-if="!online" class="w3-animate-top">
 		<div class="alert alert-danger alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">info</i>
@@ -239,14 +246,6 @@
 										<hr>
 										<b>Trueself Profile Information</b><br>
 										<div class="row col-xs-12 col-md-12" style="padding-bottom: 10px;">
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Profile:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.profile.profile_number}}</span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Profile:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.track | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
-											</span>
-											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill RQs:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.question.RQtrack | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
@@ -255,6 +254,40 @@
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Questionnaire:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.question.Questrack | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<br>
+											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Chosen Profile:</b></span>
+											<span class="col-xs-7 col-md-7" style="text-align: left;"><b>{{user.profile.profile_number}}</b></span>
+											<br>
+											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Profile:</b></span>
+											<span class="col-xs-7 col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.profile.track | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Briefs':</b></span>
+											<span class="col-xs-7 col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeBelief | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Values':</b></span>
+											<span class="col-xs-7 col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeValue | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Strengths':</b></span>
+											<span class="col-xs-7 col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeStrength | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Learnings':</b></span>
+											<span class="col-xs-7 col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeLearning | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+											</span>
+											<br>
+											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Growths':</b></span>
+											<span class="col-xs-7 col-md-7" style="text-align: left;">
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeGrowth | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-sm-5 col-md-5"></span>
@@ -512,19 +545,225 @@
 							
 							<!--		TAB 2		-->
 							
-							<div class="container" ng-show="menu == 2 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
-								<b>Profile Not Selected Yet !</b>
-							</div>
-							<div class="container" ng-show="menu == 2 && user.profile.profile_number != 0">
-					
-							<div class="row">
-								<div id="page-title" style="margin: 0px auto;">
-									<ul class="tab-slider--tabs">
-										<li class="tab-slider--trigger" ng-class="profile_selected == -1 ? 'active-profile' : ''" ng-click="profile_selected = -1">Profile {{user.profile.profile_number}}</li>
-										<li ng-repeat="op in user.profile.old" class="tab-slider--trigger" ng-class="profile_selected == chosenProfile($index) ? 'active-profile' : ''" ng-click="chooseProfile($index)">Profile {{op.pro_num}}</li>
-									</ul>
+							<div class="container" ng-show="menu == 2 && (user.profile.profile_number == 0 || wantNewProfile)">
+								<script>
+									$(document).ready(function(){
+
+										$("#submit").click(function(){
+
+											$("#myModal").modal('hide');
+											$('body').removeClass('modal-open');
+											$('.modal-backdrop').remove();
+										});
+
+									});
+
+									$(document).ready(function() {
+										function disableBack() { window.history.forward() }
+
+										window.onload = disableBack();
+										window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+									});
+
+									$(document).ready(function(){
+										$(this).scrollTop(0);
+									});
+								</script>
+
+								<style>
+									.doctors-marketing-top-div{
+										padding-top: 70px;
+									}
+
+									.doctors-marketing-top-div .container .row .circle-sect {
+										font-family: montserrat;
+										text-align: center;
+										font-size: 20px;
+										width: 100px;
+										height: 101px;
+										-webkit-transition: left .2s linear;
+										transition: left .2s linear;
+										-webkit-transition: right .2s linear;
+										transition: right .2s linear;
+										-webkit-transition: bottom .2s linear;
+										transition: bottom .2s linear;
+										z-index: 1;
+									}
+
+									.doctors-marketing-top-div .container .row .circle-sect:hover {
+										-webkit-transform: translate(1px,2px); 
+										opacity: 1;
+									}
+
+									.doctors-marketing-top-div .container .row .circle-sect a {
+										left: 0;
+										top: 0;
+										width: 100%;
+										height: 100%;
+										display: block
+									}
+
+									.doctors-marketing-top-div .container .row .premium-div {
+										background: url('./images/premium_bg.png') no-repeat center;
+										margin-top: 150px;
+										padding-top: 45px;
+									}
+
+									.doctors-marketing-top-div .container .row .acquisition-div {
+										background: url("./images/acquisition_bg.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+										padding-top: 45px
+									}
+
+									.doctors-marketing-top-div .container .row .hipaa-div {
+										background: url("./images/hipaa_bg.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+										margin-top: 150px;
+										padding-top: 45px
+									}
+
+									.doctors-marketing-top-div .container .row .smart-div {
+										background: url("./images/smart_bg.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+										padding-top: 45px;
+									}
+
+									.doctors-marketing-top-div .container .row .unlimited-div {
+										background: url('./images/unlimited_bg.png') no-repeat center;
+										margin-top: 150px;
+										padding-top: 45px;
+
+									}
+
+									.doctors-marketing-top-div .container .row .engagement-div {
+										background: url('./images/engagement_bg.png') no-repeat center;
+										margin-top: 150px;
+										padding-top: 45px
+									}
+
+									.doctors-marketing-top-div .container .row .social-div {
+										background: url('./images/social_bg.png') no-repeat center;
+										padding-top: 45px
+									}
+
+									.doctors-marketing-top-div .container .row .email-div {
+										background: url('./images/email_bg.png') no-repeat center;
+										margin-top: 150px;
+										padding-top: 45px
+									}
+
+									.doctors-marketing-top-div .container .row .cloud-div {
+										background: url('./images/cloud_bg.png') no-repeat center;
+										padding-top: 45px
+									}
+
+									.input-circle { 
+										left: 50px;
+										position:absolute;
+										opacity: 0;
+										transform: scale(10, 10); 
+										-moz-transform: scale(, 3); 
+										-ms-transform: scale(3, 3); 
+										-webkit-transform: scale(9, 9); 
+										-o-transform: scale(3, 3); 
+										 cursor:pointer;
+									}
+
+									.circle-sect {
+										margin-right: 10px;
+									}
+
+								</style>
+								<div>
+
+									
+
+									<div class="container">
+										
+										<div style="text-align: center;" ng-show="user.profile.profile_number != 0">
+											<button class="btn btn-danger" ng-click="wantNewProfile = false">Back</button>
+										</div>
+										
+										<form name="selectType" novalidate>
+
+											<h3 class="color">Choose Leadership Profile for candidate {{user.firstname + ' ' + user.lastname}}</h3>                
+
+											<div class="doctors-marketing-top-div">
+												<div class="container">
+													<div class="row">
+														<div class="col-sm-1">&nbsp;</div>
+
+														<div class="col-sm-1 circle-sect engagement-div">
+															<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal"  data-target="#myModal" autocomplete="off" ng-model="type_number" value="1" ng-click="select(1)">Profile 1
+														</div>
+
+														<div class="col-sm-1 circle-sect social-div">
+															<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal"autocomplete="off" ng-model="type_number" value="2" ng-click="select(2)"> Profile 2
+														</div>
+
+														<div class="col-sm-1 circle-sect email-div">
+															 <input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal"autocomplete="off" ng-model="type_number" value="3" ng-click="select(3)">Profile 3
+														</div>
+
+														<div class="col-sm-1 circle-sect cloud-div">
+															 <input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="4" ng-click="select(4)"> Profile 4
+														</div>
+
+														<div class="col-sm-1 circle-sect premium-div">
+															<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal"data-target="#myModal" autocomplete="off" ng-model="type_number" value="5" ng-click="select(5)"> Profile 5
+														</div>
+
+														<div class="col-sm-1 circle-sect acquisition-div">
+															<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="6" ng-click="select(6)"> Profile 6 
+														</div>
+
+														<div class="col-sm-1 circle-sect hipaa-div">
+															<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="7" ng-click="select(7)"> Profile 7
+														</div>
+
+														<div class="col-sm-1 circle-sect smart-div">
+															<input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="8" ng-click="select(8)">Profile 8
+														</div>
+
+														<div class="col-sm-1 circle-sect unlimited-div">
+															 <input type="radio" class="input-circle" name="options" id="options" data-toggle="modal" data-target="#myModal" autocomplete="off" ng-model="type_number" value="9" ng-click="select(9)">Profile 9
+														</div>
+
+														<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+														  <div class="modal-dialog" role="document">
+															<div class="modal-content">
+															  <div class="modal-header">
+																<h4 class="modal-title modal-color" id="myModalLabel">Are you sure?</h4>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+															  </div>
+															  <div class="modal-body modal-color">
+															   <h2>You have choosen Profile number {{type_number}}.</h2>
+																<p> &#42;Cancel to choose different profile number</p>
+															  </div>
+															  <div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+																<button type="submit" id="submit" class="btn btn-danger" data-dismiss="modal" ng-click="submitTypeByFacilitator()">Proceed</button>
+															  </div>
+															</div>
+														  </div>
+														</div>
+
+
+													</div>
+												</div>
+											</div>
+
+										</form>
+									</div>
 								</div>
 							</div>
+							<div class="container" ng-show="menu == 2 && user.profile.profile_number != 0 && !wantNewProfile">
+								
+								<div class="row">
+									<div id="page-title" style="margin: 0px auto;">
+										<ul class="tab-slider--tabs">
+											<li class="tab-slider--trigger" ng-class="profile_selected == -1 ? 'active-profile' : ''" ng-click="profile_selected = -1">Profile {{user.profile.profile_number}}</li>
+											<li ng-repeat="op in user.profile.old" class="tab-slider--trigger" ng-class="profile_selected == chosenProfile($index) ? 'active-profile' : ''" ng-click="chooseProfile($index)">Profile {{op.pro_num}}</li>
+										</ul>
+									</div>
+								</div>
 								
 								<div class="row">
 									<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="candidate_tab = 1">
@@ -1286,6 +1525,10 @@
 											</div>
 										</div>
 								
+								<div style="text-align: center;">
+									<button class="btn btn-danger" ng-click="wantNewProfile = true">Assign New Profile</button>
+								</div>
+								
 							</div>
 							
 							<!--		TAB 3		-->
@@ -1673,21 +1916,12 @@
 													</div>
 												</div>
 												
-												<div class="col-sm-12" ng-show="section_num == 6" ng-repeat="recs in user.assessor.recommendations_for_manager" style="margin-bottom: 20px;">
-													<div class="panel panel-primary">
-														<div class="panel-heading">
-															<h4 class="panel-title">{{recs.title}}</h4>
-														</div>
-														<div id="collapseOne" class="panel-collapse collapse in">
-															<div class="panel-body pad0B col-sm-12 row" ng-repeat="st in recs.statements" style="margin-bottom: 10px;">
-																<span class="col-sm-1">
-																	<input type="checkbox" class="form-control" id="{{st.sID}}" name="{{st.sID}}" ng-model="st.selected">
-																</span>
-																<span class="col-sm-11">
-																	<input type="text" class="form-control" id="{{st.sID}}s" name="{{st.sID}}s" ng-model="st.statement">
-																</span>
-															</div>
-														</div>
+												<div class="col-sm-12" ng-show="section_num == 6" style="margin-bottom: 20px; font-size: 16px;">
+													<div ng-repeat="mr in user.assessor.recommendations_for_manager">
+														<span class="col-sm-1" style="text-align: center;">
+															<input type="checkbox" ng-model="mr.selected" style="height: 16px; width: 16px;">
+														</span>
+														<span class="col-sm-11" style="margin-bottom: 10px;">{{mr.statement}}</span>
 													</div>
 												</div>
 												
@@ -2304,17 +2538,15 @@
 									</div>
 
 									<!--	section Recommendations		-->
-									<div class="row" style="padding: 20px;" ng-show="switchView == 1">
+									<div class="row" style="padding: 20px;">
 										<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>Recommendations for Manager</b></h4><br></div>
 										<ul>
-											<li ng-repeat="recs in user.assessor.recommendations_for_manager">
-												{{recs.title}}
-												<ul>
-													<li ng-repeat="st in recs.statements" ng-if="st.selected">
-														{{st.statement}}
-														<span class="btn" style="color: red;" ng-click="st.selected = false;"><i class="material-icons">clear</i></span>
-													</li>
-												</ul>
+											<li ng-repeat="mr in user.assessor.recommendations_for_manager" ng-if="mr.selected">
+												<span ng-show="switchView == 2">{{mr.statement}}</span>
+												<span ng-show="switchView == 1">
+													<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mr.statement" size="100%">
+													<span class="btn" style="color: red;" ng-click="mr.selected = false;"><i class="material-icons">clear</i></span>
+												</span>
 											</li>
 										</ul>
 									</div>

@@ -104,6 +104,8 @@
             <div id="page-content-wrapper">
                 <div id="page-content" style="margin-bottom: 30px;">
                 
+					<!--<button class="btn btn-success" ng-click="printPDF()">Download PDF</button>-->
+					
 					<div id="page-title">
 						<h2><b>{{profile_content.firstname}}'s Trueself Report</b></h2>
 					</div>
@@ -793,10 +795,10 @@
 					<!--									TABS END											-->
 					
 					<button class="btn btn-info" ng-show="(menu!=1)" ng-click="backMenu()">Back</button>
-					<button class="btn btn-info pull-right" ng-show="(menu!=5)" ng-click="nextMenu()">Next</button>
-					<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==5)" ui-sref="feedback">Proceed</button>
-					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==5)">Back to Dashboard</button>
-					
+					<button class="btn btn-info pull-right" ng-show="(menu!=4)" ng-click="nextMenu()">Next</button>
+					<!--<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==4)" ui-sref="feedback">Proceed</button>
+					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==4)">Back to Dashboard</button>-->
+					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="menu==4">Back to Dashboard</button>
                 </div>
             </div>
         </div>
