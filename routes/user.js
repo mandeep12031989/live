@@ -119,6 +119,8 @@ router.route('/name')
     .exec(function(err, user){
         if(err)
             return next(err);
+		else if(!user)
+				return res.status(200).send({ success: false, message: 'Not Found !' });
 		
 		var allDone = true;
 		if(user.profile.profile_content.length){
@@ -805,7 +807,9 @@ router.route('/completion')
     User.findOne({_id: id}, {'question': true, 'profile': true, 'are_you.facilitator': true, 'feedback': true})
     .exec(function(err, user){
         if(err)
-            next(err);
+            return next(err);
+		else if(!user)
+				return res.status(200).send({ success: false, message: 'Not Found !' });
         
         var per = 0;
         if(user.question.RQ1 != '' && user.question.RQ1 != undefined)
@@ -829,7 +833,20 @@ router.route('/completion')
 				}
 			}
 		}
-        
+        //console.log(user.profile.beliefs);
+        if(user.profile.beliefs.length){
+			var sec0 = true;
+			for(var k = 0; k < user.profile.beliefs.length; k++){
+				//console.log(user.profile.beliefs[k].how_much);
+				if(!user.profile.beliefs[k].how_much){
+					sec0 = false;
+					break;
+				}
+			}
+			if(sec0)
+                per += 14;
+		}
+		
         if(user.profile.profile_content.length){
             var sec1 = true, sec2 = true, sec3 = true, sec4 = true;
             for(var k = 0; k < user.profile.profile_content.length; k++){
@@ -857,20 +874,12 @@ router.route('/completion')
                     }
                 }
             }
-            /*if(sec1)
+			if(sec1)
                 per += 14;
             if(sec2)
-                per += 14;
+                per += 15;
             if(sec3)
                 per += 15;
-            if(sec4)
-                per += 15;*/
-			if(sec1)
-                per += 19;
-            if(sec2)
-                per += 19;
-            if(sec3)
-                per += 20;
         }
 		
 		//console.log(per);
@@ -899,7 +908,7 @@ router.route('/completion')
 			you_are_fac: user.are_you.facilitator
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);
-        res.status(200).json(final_obj);
+        return res.status(200).json(final_obj);
     });
 })
 ;

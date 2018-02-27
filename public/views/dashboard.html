@@ -12,6 +12,27 @@
 	}
 </style>
 
+<script>
+	$(document).ready(function(){
+		$("#submit").click(function(){
+			$("#myModal").modal('hide');
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();
+		});
+
+	});
+	
+	$(document).ready(function() {
+		function disableBack() { window.history.forward() }
+		window.onload = disableBack();
+		window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+	});
+
+	$(document).ready(function(){
+		$(this).scrollTop(0);
+	});
+</script>
+
 <span ng-show="loading">
     <div class="spinner">
         <div class="bounce1"></div>
@@ -27,27 +48,6 @@
         <div id="page-content-wrapper">
             <div id="page-content-margin">
                     <div class="container" ng-if="!to_review">
-						
-						<script>
-							$(document).ready(function(){
-								$("#submit").click(function(){
-									$("#myModal").modal('hide');
-									$('body').removeClass('modal-open');
-									$('.modal-backdrop').remove();
-								});
-
-							});
-
-							$(document).ready(function() {
-								function disableBack() { window.history.forward() }
-								window.onload = disableBack();
-								window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
-							});
-
-							$(document).ready(function(){
-								$(this).scrollTop(0);
-							});
-						</script>
 						
 						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
