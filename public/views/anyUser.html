@@ -2136,7 +2136,57 @@
 											</div>
 										</div>
 									</div>
-									
+									<hr>
+									<br>
+									<br>
+									<div class="row">
+										<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
+											<h4><b>Responsive</b></h4>
+											<span style="font-size: 11px; color: grey;">(Higher personal mastery levels; driven by empowering beliefs)</span>
+										</div>
+										<div class="col-xs-12 col-md-10 col-lg-10 panel" style="background: #ddffa5;">
+											<div class="panel-body">
+												<div style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating == 0">
+														<input type="text" ng-model="keys.balancing_description[0].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+														<span ng-show="switchView == 2">{{keys.balancing_description[0].desc}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
+											<h4><b>Moderate</b></h4>
+											<span style="font-size: 11px; color: grey;">(Building capacity to self-observe; starting to question once limiting beliefs)</span>
+										</div>
+										<div class="col-xs-12 col-md-10 col-lg-10 panel" style="background: #f9ffaf;">
+											<div class="panel-body">
+												<div style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating > 0 && temp_content2[$index].assessor_key_rating < 1">
+														<input type="text" ng-model="keys.balancing_description[1].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+														<span ng-show="switchView == 2">{{keys.balancing_description[1].desc}}</span>
+													</div>
+												</div>
+											</div>	
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
+											<h4><b>Reactive</b></h4>
+											<span style="font-size: 11px; color: grey;">(Lower personal mastery levels; limiting beliefs remains unchallenged)</span>
+										</div>
+										<div class="col-xs-12 col-md-10 col-lg-10 panel" style="background: #ffe590;">
+											<div class="panel-body">
+												<div  style="text-align: center;">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating >= 1">
+														<input type="text" ng-model="keys.balancing_description[2].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+														<span ng-show="switchView == 2">{{keys.balancing_description[2].desc}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 								
 								<div class="container" ng-show="assessor_tab == 4">
@@ -2321,21 +2371,16 @@
 								</div>
 
 								<div class="container panel panel-body" ng-show="assessor_tab == 3">
+                					<div class="col-md-12" style="text-align: center; margin-bottom: 30px;">
+										<button class="btn btn-success" ng-click="printPDF()">Download Report</button>
+									</div>
 									
 									<div class="col-md-12" style="background: #ffd585; text-align: center; padding: 15px; border-radius: 10px;">
 										<div class="col-md-12">
-											<span style="font-size: 24px;"><b>{{user.firstname+' '+user.lastname}}</b></span><br>
-											<span style="font-size: 20px;">
-												Enneagram Assessment, result is <input type="text" ng-model="user.assessor.result" class="form-control" style="width: 10%; display: inline-block; text-align: center;" ng-show="switchView == 1"><b ng-show="switchView == 2">{{user.assessor.result}}</b>
-												<!--<b ng-show="user.assessor.result && switchView == 2">Positive</b><b ng-show="!user.assessor.result && switchView == 2">Negative</b>
-												<button class="btn btn-default" ng-show="switchView == 1" ng-click="user.assessor.result=!user.assessor.result">
-													<span ng-show="user.assessor.result">Positive</span>
-													<span ng-show="!user.assessor.result">Negative</span>
-												</button>-->
-											</span><br>
+											<span style="font-size: 24px;"><b>{{user.firstname+' '+user.lastname}}'s Values and Culture Assessment</b></span><br>
 										</div>
 										<div style="text-align: left; padding: 20px 20px 20px 20px; margin-left: 50px; font-size: 14px;" ng-show="switchView == 1" class="row">
-											<span class="col-md-3" style="text-align: right;">Candidate Experience:</span><span class="col-md-3"><b>{{user.work_details.experience}}</b></span>
+											<span class="col-md-3" style="text-align: right;">Experience:</span><span class="col-md-3"><b>{{user.work_details.experience}}</b></span>
 											<span class="col-md-3" style="text-align: right;">Enneagram Profile:</span><span class="col-md-3"><b>{{user.profile.profile_number}}</b></span>
 											<span class="col-md-3" style="text-align: right;">Position Applied for:</span><span class="col-md-3">
 												<input class="form-control" ng-model="user.assessor.position" style="text-align: center;">
@@ -2349,12 +2394,16 @@
 													<option value="Reactive">Reactive</option>
 												</select>
 											</span>
+											<span class="col-md-3" style="text-align: right;">Result:</span><span class="col-md-3">
+												<input class="form-control" ng-model="user.assessor.result" style="text-align: center;">
+											</span>
 										</div>
 										<div style="text-align: left; padding: 20px 20px 20px 20px; margin-left: 50px; font-size: 14px;" ng-show="switchView == 2" class="row">
-											<span class="col-md-3" style="text-align: right;">Candidate Experience:</span><span class="col-md-3"><b>{{user.work_details.experience}}</b></span>
+											<span class="col-md-3" style="text-align: right;">Experience:</span><span class="col-md-3"><b>{{user.work_details.experience}}</b></span>
 											<span class="col-md-3" style="text-align: right;">Enneagram Profile:</span><span class="col-md-3"><b>{{user.profile.profile_number}}</b></span>
 											<span class="col-md-3" style="text-align: right;">Position Applied for:</span><span class="col-md-3"><b>{{user.assessor.position}}</b></span>
 											<span class="col-md-3" style="text-align: right;">Personal Mastery Level:</span><span class="col-md-3"><b>{{user.assessor.per_mast_lvl}}</b></span>
+											<span class="col-md-3" style="text-align: right;">Result:</span><span class="col-md-3"><b>{{user.assessor.result}}</b></span>
 										</div>
 									</div>
 
@@ -2377,7 +2426,7 @@
 												</div>
 												 <div class="col-sm-8" style="margin-top: 7px; text-align: center;">
 													<div class="progress">
-														<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.slf_aware*33.3}}%" ng-class="(user.assessor.slf_aware>=0 && user.assessor.slf_aware<=1)?'progress-bar-danger':(user.assessor.slf_aware<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.slf_aware}}/3
+														<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.slf_aware*33.3}}%" ng-class="(user.assessor.slf_aware>=0 && user.assessor.slf_aware<=1)?'progress-bar-danger':(user.assessor.slf_aware<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.slf_aware}} / 3.0
 														</div>
 													</div>
 												</div>
@@ -2411,7 +2460,7 @@
 												</div>
 												 <div class="col-sm-8" style="margin-top: 7px;">
 													<div class="progress">
-														<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.openness*33.3}}%" ng-class="(user.assessor.openness>=0 && user.assessor.openness<=1)?'progress-bar-danger':(user.assessor.openness<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.openness}}/3
+														<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.openness*33.3}}%" ng-class="(user.assessor.openness>=0 && user.assessor.openness<=1)?'progress-bar-danger':(user.assessor.openness<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.openness}} / 3.0
 														</div>
 													</div>
 												</div>
@@ -2432,7 +2481,7 @@
 											</div>
 
 											<div class="form-group col-md-12">
-												<label class="col-sm-2 control-label">Personal masterly and Ability to learn</label>
+												<label class="col-sm-2 control-label">Personal Masterly and Ability to learn</label>
 												<div class="col-sm-2" style="text-align: center;">
 													<div class="input-group" ng-show="switchView == 1">
 														<div class="input-group-addon" ng-click="user.assessor.per_mast>0.5 || !user.assessor.per_mast ? user.assessor.per_mast = user.assessor.per_mast - 0.5 : user.assessor.per_mast = user.assessor.per_mast"><</div>
@@ -2445,7 +2494,7 @@
 												</div>
 												 <div class="col-sm-8" style="margin-top: 7px;">
 													<div class="progress">
-														<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.per_mast*33.3}}%" ng-class="(user.assessor.per_mast>=0 && user.assessor.per_mast<=1)?'progress-bar-danger':(user.assessor.per_mast<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.per_mast}}/3
+														<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.per_mast*33.3}}%" ng-class="(user.assessor.per_mast>=0 && user.assessor.per_mast<=1)?'progress-bar-danger':(user.assessor.per_mast<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.per_mast}} / 3.0
 														</div>
 													</div>
 												</div>
@@ -2464,8 +2513,12 @@
 													</span>
 												</div>
 											</div>
-											<div class="col-md-12" style="margin-bottom: 20px;">
-												<h4><b><div class="col-md-2" style="text-align: right;">Total Scores: </div><div class="col-md-2">{{user.assessor.slf_aware+user.assessor.openness+user.assessor.per_mast}} / 9</div></b></h4>
+											<div class="col-md-12" style="margin-bottom: 20px; font-size: 16px; font-weight: bold;">
+												<div class="col-md-2" style="text-align: right;">Total Scores: </div>
+												<div class="col-md-2">
+													{{user.assessor.slf_aware+user.assessor.openness+user.assessor.per_mast}} / 9.0
+												</div>
+												<div class="col-md-8" style="text-align: left;">{{user.assessor.per_mast_lvl}}</div>
 											</div>
 									</div>
 									<hr>
@@ -2478,6 +2531,7 @@
 									</div>
 									<div class="row col-md-12" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 2" style="padding: 10px;">
 										<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>{{r.title}}</b></h4><br></div>
+										<div class="col-md-12" style="margin-left: 20px; font-size: 15px;"><p ng-bind-html="r.desc | linebreaks"></p></div>
 										<div class="col-md-12" style="margin-left: 20px; font-size: 15px;"><p ng-bind-html="r.desc | linebreaks"></p></div>
 										<br>
 									</div>
@@ -2536,7 +2590,7 @@
 											</li>
 										</ul>
 									</div>
-
+									<hr>
 									<!--	section Recommendations		-->
 									<div class="row" style="padding: 20px;">
 										<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>Recommendations for Manager</b></h4><br></div>
