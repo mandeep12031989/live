@@ -23,7 +23,7 @@
             <div class="content-box border-top border-red clearfix" style="margin-top:20%; text-align: center;" ng-show="which_one == 1">
                <br><img src=".\assets/image-resources/logo%20blue.png" width="300px"><br>
 				
-				<div style="margin: 15px; padding: 15px;" ng-if="deviceDet == 'ie'">
+				<div style="margin: 15px; padding: 15px;" ng-show="deviceDet == 'ie'">
 					<div class="col-xs-12 col-sm-12 col-md-12">
 						<i class="material-icons" style="color: #aaa; font-size: 60px;">phonelink_off</i><br><br>
 						It seems your browser is not compatible with iDiscover.me.<br><br>
@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				
-                <div class="content-box-wrapper row" style="margin: 0 auto;" ng-if="deviceDet != 'ie'">
+                <div class="content-box-wrapper row" style="margin: 0 auto;" ng-show="deviceDet != 'ie'">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-xs-12 col-sm-12 col-md-8">
 							<h3> Log in to your iDiscover.me account</h3>

@@ -74,7 +74,7 @@ router.route('/removeNotiByNameAndFac')
 .delete(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
     var body = sanitize(req.body);      // NoSQL injection prevention
     
-    Noti.remove({who: body.name ,facilitator_name: body.facilitator_name})
+    Noti.remove({who: body.name, facilitator_name: body.facilitator_name})
     .exec(function(err, noti){
         if(err)
             return next(err);

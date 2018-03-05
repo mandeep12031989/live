@@ -183,13 +183,13 @@ var userSchema = new Schema({
             default: 0
         },
         profile_content: [profileSchema],
-        track: [new Schema({ time_taken: Number })],				// in seconds
+        track: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],				// in seconds
 		eachSectionTrack: {
-			timeBelief: [new Schema({ time_taken: Number })],
-			timeValue: [new Schema({ time_taken: Number })],
-			timeStrength: [new Schema({ time_taken: Number })],
-			timeLearning: [new Schema({ time_taken: Number })],
-			timeGrowth: [new Schema({ time_taken: Number })]
+			timeBelief: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
+			timeValue: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
+			timeStrength: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
+			timeLearning: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
+			timeGrowth: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })]
 		},
 		old: [new Schema({ pro: [profileSchema], pro_num: Number })],
 		growth_recommendations: [new Schema({ sID: String, statement: String, selected: Boolean })],
@@ -211,8 +211,8 @@ var userSchema = new Schema({
         RQ2: String,
         RQ3: String,
         questionnaire: Array,
-		RQtrack: [new Schema({ time_taken: Number })],				// in seconds
-		Questrack: [new Schema({ time_taken: Number })]				// in seconds
+		RQtrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],				// in seconds
+		Questrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })]				// in seconds
     },
 	last_modification: {
 		type: Date,
@@ -256,7 +256,12 @@ var userSchema = new Schema({
 			type: Array,
 			default: []
 		},
-		recommendations_for_manager: [new Schema({ sID: String, statement: String, selected: Boolean })]
+		recommendations_for_manager: [new Schema({ sID: String, statement: String, selected: Boolean })],
+		RRAddOns: {
+			responsive: [new Schema({ statement: String })],
+			moderate: [new Schema({ statement: String })],
+			reactive: [new Schema({ statement: String })]
+		}
 	}
 });
 

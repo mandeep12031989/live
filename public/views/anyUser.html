@@ -248,12 +248,12 @@
 										<div class="row col-xs-12 col-md-12" style="padding-bottom: 10px;">
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill RQs:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.question.RQtrack | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.question.RQtrack | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Questionnaire:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.question.Questrack | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.question.Questrack | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<br>
@@ -262,32 +262,32 @@
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Profile:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.track | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.track | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Briefs':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeBelief | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeBelief | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Values':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeValue | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeValue | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Strengths':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeStrength | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeStrength | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Learnings':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeLearning | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeLearning | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Growths':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeGrowth | orderBy:'':true">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeGrowth | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-sm-5 col-md-5"></span>
@@ -2144,15 +2144,23 @@
 											<h4><b>Responsive</b></h4>
 											<span style="font-size: 11px; color: grey;">(Higher personal mastery levels; driven by empowering beliefs)</span>
 										</div>
-										<div class="col-xs-12 col-md-10 col-lg-10 panel" style="background: #ddffa5;">
+										<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ddffa5;">
 											<div class="panel-body">
 												<div style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating == 0">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block; margin: 3px 7px;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating == 0">
 														<input type="text" ng-model="keys.balancing_description[0].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
 														<span ng-show="switchView == 2">{{keys.balancing_description[0].desc}}</span>
 													</div>
+													<div ng-repeat="keys in user.assessor.RRAddOns.responsive" style="display: inline-block; margin: 3px 7px;">
+														<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+														<span class="btn" style="color: red;" ng-click="removeResponsiveRR($index)" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
+														<span ng-show="switchView == 2">{{keys.statement}}</span>
+													</div>
 												</div>
 											</div>
+										</div>
+										<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
+											<button class="btn btn-info" style="width: 100%;" ng-click="pushResponsiveRR()" ng-show="switchView == 1">+Add</button>
 										</div>
 									</div>
 									<div class="row">
@@ -2160,15 +2168,23 @@
 											<h4><b>Moderate</b></h4>
 											<span style="font-size: 11px; color: grey;">(Building capacity to self-observe; starting to question once limiting beliefs)</span>
 										</div>
-										<div class="col-xs-12 col-md-10 col-lg-10 panel" style="background: #f9ffaf;">
+										<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #f9ffaf;">
 											<div class="panel-body">
 												<div style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating > 0 && temp_content2[$index].assessor_key_rating < 1">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block; margin: 3px 7px;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating > 0 && temp_content2[$index].assessor_key_rating < 1">
 														<input type="text" ng-model="keys.balancing_description[1].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
 														<span ng-show="switchView == 2">{{keys.balancing_description[1].desc}}</span>
 													</div>
+													<div ng-repeat="keys in user.assessor.RRAddOns.moderate" style="display: inline-block; margin: 3px 7px;">
+														<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+														<span class="btn" style="color: red;" ng-click="removeModerateRR($index)" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
+														<span ng-show="switchView == 2">{{keys.statement}}</span>
+													</div>
 												</div>
 											</div>	
+										</div>
+										<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
+											<button class="btn btn-info" style="width: 100%;" ng-click="pushModerateRR()" ng-show="switchView == 1">+Add</button>
 										</div>
 									</div>
 									<div class="row">
@@ -2176,15 +2192,23 @@
 											<h4><b>Reactive</b></h4>
 											<span style="font-size: 11px; color: grey;">(Lower personal mastery levels; limiting beliefs remains unchallenged)</span>
 										</div>
-										<div class="col-xs-12 col-md-10 col-lg-10 panel" style="background: #ffe590;">
+										<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ffe590;">
 											<div class="panel-body">
 												<div  style="text-align: center;">
-													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating >= 1">
+													<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block; margin: 3px 7px;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating >= 1">
 														<input type="text" ng-model="keys.balancing_description[2].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
 														<span ng-show="switchView == 2">{{keys.balancing_description[2].desc}}</span>
 													</div>
+													<div ng-repeat="keys in user.assessor.RRAddOns.reactive" style="display: inline-block; margin: 3px 7px;">
+														<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+														<span class="btn" style="color: red;" ng-click="removeReactiveRR($index)" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
+														<span ng-show="switchView == 2">{{keys.statement}}</span>
+													</div>
 												</div>
 											</div>
+										</div>
+										<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
+											<button class="btn btn-info" style="width: 100%;" ng-click="pushReactiveRR()" ng-show="switchView == 1">+Add</button>
 										</div>
 									</div>
 								</div>
