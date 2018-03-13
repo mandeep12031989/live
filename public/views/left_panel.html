@@ -28,7 +28,7 @@
                 <a ui-sref="reflective-questions" ng-class="current_state == 'reflective-questions' ? 'bg-tab':''">
                     <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.reflective_filled"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-file" ng-if="!percent.reflective_filled"></i>
-                    <span>3 Reflective Questions</span>
+                    <span>4 Reflective Questions</span>
                 </a>
             </li>
             <li>
@@ -66,7 +66,12 @@
 			<li class="header">Step 3: Building TrueSelf Profile </li>
             
             <li>
-                <a ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+                <a data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
+					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i class="material-icons">check_circle</i></span>
+					<i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
+                    <span>Create/Update</span>
+                </a>
+                <a ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
 					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i class="material-icons">check_circle</i></span>
 					<i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
                     <span>Create/Update</span>

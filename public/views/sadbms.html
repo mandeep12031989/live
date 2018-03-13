@@ -187,15 +187,18 @@
                             <center>Pie Chart</center>
                         </div>
                         
-                        <center><label for="profile_num" style="font-size: 20px; color: #6dadbd;">Registrations in Last 12 Months</label></center>
+                        <center><label for="reg12" style="font-size: 20px; color: #6dadbd;">Registrations in Last 12 Months</label></center>
                         <div class="col-sm-6" style="background-color:#fcfcfc;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9; margin: 20px auto; padding: 20px 10px;">
-                            <canvas class="chart chart-line" chart-data="data_reg_final" chart-labels="label_reg"></canvas>
+                            <canvas id="reg12" class="chart chart-line" chart-data="data_reg_final" chart-labels="label_reg"></canvas>
                             <center>Line Graph</center>
                         </div>
                         <div class="col-sm-6" style="background-color:#fcfcfc;border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9; margin: 20px auto; padding: 20px 10px;">
-                            <canvas id="profile_num" class="chart chart-bar" chart-data="data_reg_final" chart-labels="label_reg"></canvas>
+                            <canvas id="reg12" class="chart chart-bar" chart-data="data_reg_final" chart-labels="label_reg"></canvas>
                             <center>Bar Graph</center>
                         </div>
+                        <!--<div class="col-sm-6" style="margin: 20px auto; padding: 20px 10px;">
+                            <canvas id="birdsChart"></canvas>
+                        </div>-->
                         
                         <!--<div class="col-sm-6">
                             <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-series="series" chart-click="onClick"></canvas>

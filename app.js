@@ -87,6 +87,7 @@ var beliefs = require('./routes/beliefs');
 var facList = require('./routes/facList');
 var openQues = require('./routes/openQues');
 var openUser = require('./routes/openUser');
+var library = require('./routes/library');
 
 // linking callback function to route
 app.use('/', routes);
@@ -101,6 +102,7 @@ app.use('/growth_rec', growth_rec);
 app.use('/facList', facList);
 app.use('/openQues', openQues);
 app.use('/openUser', openUser);
+app.use('/library', library);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -248,12 +248,12 @@
 										<div class="row col-xs-12 col-md-12" style="padding-bottom: 10px;">
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill RQs:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.question.RQtrack | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.question.RQtrack | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Questionnaire:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.question.Questrack | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.question.Questrack | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<br>
@@ -262,32 +262,32 @@
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Profile:</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.track | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.track | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Briefs':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeBelief | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeBelief | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Values':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeValue | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeValue | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Strengths':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeStrength | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeStrength | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Learnings':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeLearning | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeLearning | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Growths':</b></span>
 											<span class="col-xs-7 col-md-7" style="text-align: left;">
-												<span ng-repeat="tk in user.profile.eachSectionTrack.timeGrowth | orderBy:'':true" title="Attempt {{tk.attempt}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
+												<span ng-repeat="tk in user.profile.eachSectionTrack.timeGrowth | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
 											<br>
 											<span class="col-xs-5 col-sm-5 col-md-5"></span>
@@ -339,10 +339,10 @@
 															   Q1. What kind of people you like? What qualities you like in them?
 															</h4>
 															<div class="content-box-wrapper" ng-if="user.question.RQ1">
-																<span>{{user.question.RQ1}}</span><br>
-																<!--<span class="row" style="margin-top: 10px; margin-left: 95%;">
-																	<button class="btn btn-info" copy-to-clipboard text-to-copy="user.question.RQ1">Copy</button>
-																</span>-->
+																<span>{{user.question.RQ1}}</span>
+																<br>
+																<br>
+																<span><b>Status:</b> <button class="btn btn-danger" ng-show="user.question.RQeditable[0]" ng-click="user.question.RQeditable[0] = false; updateUserProfile();">Blocked</button><button class="btn btn-success" ng-show="!user.question.RQeditable[0]" ng-click="user.question.RQeditable[0] = true; updateUserProfile();">Allowed</button></span>
 															</div>
 															<div class="content-box-wrapper" ng-if="!user.question.RQ1">
 																<span>Not Answered Yet !</span>
@@ -354,7 +354,10 @@
 																Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.
 															</h4>
 															<div class="content-box-wrapper" ng-if="user.question.RQ2">
-															   <span>{{user.question.RQ2}}</span>
+																<span>{{user.question.RQ2}}</span>
+																<br>
+																<br>
+																<span><b>Status:</b> <button class="btn btn-danger" ng-show="user.question.RQeditable[1]" ng-click="user.question.RQeditable[1] = false; updateUserProfile();">Blocked</button><button class="btn btn-success" ng-show="!user.question.RQeditable[1]" ng-click="user.question.RQeditable[1] = true; updateUserProfile();">Allowed</button></span>
 															</div>
 															<div class="content-box-wrapper" ng-if="!user.question.RQ2">
 																<span>Not Answered Yet !</span>
@@ -363,13 +366,30 @@
 
 														<div class="content-box">
 															<h4 class="content-box-header bg-blue">
-																Q3. Mention positive and negative qualities about yourself that are not covered in question 2. <br>
-																Please also mention negatives qualities that you have improved in last few years.
+																Q3. Mention positive and negative qualities about yourself that are not covered in question 2.
 															</h4>
 															<div class="content-box-wrapper" ng-if="user.question.RQ3">
 																<span>{{user.question.RQ3}}</span>
+																<br>
+																<br>
+																<span><b>Status:</b> <button class="btn btn-danger" ng-show="user.question.RQeditable[2]" ng-click="user.question.RQeditable[2] = false; updateUserProfile();">Blocked</button><button class="btn btn-success" ng-show="!user.question.RQeditable[2]" ng-click="user.question.RQeditable[2] = true; updateUserProfile();">Allowed</button></span>
 															</div>
 															<div class="content-box-wrapper" ng-if="!user.question.RQ3">
+																<span>Not Answered Yet !</span>
+															</div>
+														</div>
+
+														<div class="content-box">
+															<h4 class="content-box-header bg-blue">
+																Q4. Please mention negatives qualities that you have improved in last few years.
+															</h4>
+															<div class="content-box-wrapper" ng-if="user.question.RQ4">
+																<span>{{user.question.RQ4}}</span>
+																<br>
+																<br>
+																<span><b>Status:</b> <button class="btn btn-danger" ng-show="user.question.RQeditable[3]" ng-click="user.question.RQeditable[3] = false; updateUserProfile();">Blocked</button><button class="btn btn-success" ng-show="!user.question.RQeditable[3]" ng-click="user.question.RQeditable[3] = true; updateUserProfile();">Allowed</button></span>
+															</div>
+															<div class="content-box-wrapper" ng-if="!user.question.RQ4">
 																<span>Not Answered Yet !</span>
 															</div>
 														</div>
@@ -768,6 +788,7 @@
 								<div class="row">
 									<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="candidate_tab = 1">
 										<ul class="nav">
+											<li ng-class="candidate_tab == 0 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 0">Sections Status</a></li>
 											<li ng-class="candidate_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 1">Detailed View</a></li>
 											<li ng-class="candidate_tab == 5 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 5">Preicse View</a></li>
 											<li ng-class="candidate_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 2">Balancing Strengths</a></li>
@@ -777,6 +798,70 @@
 										</ul>
 									</div>
 								</div>
+								
+								<div ng-show="candidate_tab == 0" style="margin-bottom: 40px;">
+									<div class="row" style="text-align: center; font-size: 16px;">
+										<div class="col-sm-12" style="font-weight: bold; padding: 10px;">
+											<div class="col-sm-8" style="display: inline-block;">
+												Section Name
+											</div>
+											<div class="col-sm-4">
+												Status
+											</div>
+										</div>
+										
+										<div class="col-sm-12" style="padding: 10px;">
+											<div class="col-sm-8" style="display: inline-block;">
+												Beliefs
+											</div>
+											<div class="col-sm-4">
+												<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[0]" ng-click="user.profile.eachSectionEditable[0] = false; updateUserSection();">Blocked</button>
+												<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[0]" ng-click="user.profile.eachSectionEditable[0] = true; updateUserSection();">Allowed</button>
+											</div>
+										</div>
+										
+										<div class="col-sm-12" style="padding: 10px;">
+											<div class="col-sm-8" style="display: inline-block;">
+												Professional Values and Work<br>Culture Preferences
+											</div>
+											<div class="col-sm-4">
+												<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[1]" ng-click="user.profile.eachSectionEditable[1] = false; updateUserSection();">Blocked</button>
+												<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[1]" ng-click="user.profile.eachSectionEditable[1] = true; updateUserSection();">Allowed</button>
+											</div>
+										</div>
+										
+										<div class="col-sm-12" style="padding: 10px;">
+											<div class="col-sm-8" style="display: inline-block;">
+												Professional Strengths
+											</div>
+											<div class="col-sm-4">
+												<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[2]" ng-click="user.profile.eachSectionEditable[2] = false; updateUserSection();">Blocked</button>
+												<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[2]" ng-click="user.profile.eachSectionEditable[2] = true; updateUserSection();">Allowed</button>
+											</div>
+										</div>
+										
+										<div class="col-sm-12" style="padding: 10px;">
+											<div class="col-sm-8" style="display: inline-block;">
+												Learning Needs
+											</div>
+											<div class="col-sm-4">
+												<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[3]" ng-click="user.profile.eachSectionEditable[3] = false; updateUserSection();">Blocked</button>
+												<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[3]" ng-click="user.profile.eachSectionEditable[3] = true; updateUserSection();">Allowed</button>
+											</div>
+										</div>
+										
+										<div class="col-sm-12" style="padding: 10px;">
+											<div class="col-sm-8" style="display: inline-block;">
+												Growth Recommendations
+											</div>
+											<div class="col-sm-4">
+												<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[4]" ng-click="user.profile.eachSectionEditable[4] = false; updateUserSection();">Blocked</button>
+												<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[4]" ng-click="user.profile.eachSectionEditable[4] = true; updateUserSection();">Allowed</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								
 								<div ng-show="candidate_tab == 1">
 									<div class="row">
 										<div class="col-md-offset-2 col-sm-2">
@@ -1762,25 +1847,54 @@
 														<b ng-show="section_num == 1">Professional Values and Work Culture Preferences</b>
 														<b ng-show="section_num == 2">Professional Strengths</b>
 														<b ng-show="section_num == 3">Learning Needs</b>
-														<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;">
+														<!--<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;">
 															{{sectionDescs[user.profile.profile_number-1][section_num-1]}}
-														</div>
+														</div>-->
 														<!--<b ng-show="section_num == 4">Communication Style</b>-->
 														<b ng-show="section_num == 5">Growth Recommendations</b>
 														<b ng-show="section_num == 6">Recommendations for Manager</b>
 														
-														<div ng-show="section_num == 1" style="font-size: 15px; padding: 10px 6% 10px 0;">
+														<div ng-show="section_num == 0" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
+															Beliefs are deeply rooted convictions about the world and about ourselves. Please select how strongly you relate with the following belief statements and answer the associated questions.
+														</div>
+														<div ng-show="section_num == 1" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Values you exhibit and ideal work culture you prefer or strive to create for others.
 														</div>
-														<div ng-show="section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0;">
+														<div ng-show="section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Strengths you bring to workplace in your role or while working with others.
 														</div>
-														<div ng-show="section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0;">
+														<div ng-show="section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Choose your Areas for Development as seen by you or others. Your authentic selection will assist the manager in your professional development further.
 														</div>
 													</a>
 													
 												</h2>
+												
+												<div class="row" style="padding: 10px 50px;" ng-show="section_num>=1 && section_num<=3">
+													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px; font-size: 15px; margin-bottom: 10px;">
+														<b>Stop and Reflect:</b><br>
+														Take a couple of minutes to think and reflect on the following question.<br><br>
+														"What kind of work culture and work environment do you prefer?"<br>
+														<i>Trigger: <span ng-show="section_num == 1">Think about what is a must for you in an ideal work culture</span><span ng-show="section_num == 2">Think about what is it - in your work or while working with others</span><span ng-show="section_num == 3">learning needs</span>.</i>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #efefef;">
+														{{user.profile.eachSectionStopReflect[section_num-1]}}
+													</div>
+												</div>
+														
+												<!-- SAMPLE -->
+												<div style="padding: 5px 0; border: 2px solid #33b5e5; margin-top: 10px; text-align: left; border-radius: 7px;" ng-show="section_num == 0">
+													<b style="font-size: 15px; margin-left: 15px;">For your reference, see a sample below :</b>
+													<img src="./images/sec0.png" style="width: 100%; padding: 0% 2%;">
+												</div>
+														
+												<div style="padding: 5px 0; border: 2px solid #33b5e5; margin-top: 10px; text-align: left; border-radius: 7px;" ng-show="section_num >= 1 && section_num <= 3">
+													<b style="font-size: 15px; margin-left: 15px;">For your reference, see a sample below :</b>
+													<img src="./images/sec1.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 1">
+													<img src="./images/sec2.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 2">
+													<img src="./images/sec3.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 3">
+												</div>
+												<!-- SAMPLE END -->
 											</div>
 											<div class="row" style="width: 98%; margin: auto;">
 
@@ -1958,11 +2072,199 @@
 								<div class="row">
 									<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="assessor_tab = 1">
 										<ul class="nav">
+											<li ng-class="assessor_tab == 0 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 0">Assessor Library</a></li>
 											<li ng-class="assessor_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 1">Assessed Balancing Strengths</a></li>
 											<li ng-class="assessor_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 2">Assessed Personal Mastery Levels</a></li>
 											<li ng-class="assessor_tab == 4 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 4">Leadership Competencies</a></li>
 											<li ng-class="assessor_tab == 3 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 3">Assessor Template</a></li>
 										</ul>
+									</div>
+								</div>
+								
+								<div ng-show="assessor_tab == 0">
+									<div class="panel panel-body row">
+										<!--	Assessor Add-ons	-->
+										<div class="col-sm-12 row" style="margin: 0 auto;">
+											<div class="panel-heading col-sm-12">
+												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0; background: #efefef;">
+													<a data-toggle="collapse" data-parent="#accordion5">
+														<b>Assessor Add-ons</b>
+													</a>
+												</h2>
+											</div>
+										</div>
+										
+										<div class="col-sm-12 row" style="margin: 0 auto;">
+											<div class="col-sm-12">
+												<ol style="font-size: 16px; margin-top: 5px;">
+													<li class="col-sm-12 row" ng-repeat="rc in lib" style="margin-bottom: 5px;">
+														<div class="col-sm-11" style="display: inline-block;">{{($index+1)+'. '+rc.statement}}</div>
+														<div class="col-sm-1" style="margin-top: auto; margin-bottom: auto;"><span class="btn" style="color: red;" ng-click="removeLib($index, rc.sID)"><i class="material-icons">clear</i></span></div>
+														<br>
+													</li>
+												</ol>
+											</div>
+											<div class="col-sm-12" style="text-align: center; padding: 10px;" ng-show="!addInProgress">
+												<button class="btn btn-info" ng-click="addInProgress=true">+ ADD</button>
+											</div>
+											<div class="col-sm-12" style="text-align: center; padding: 10px;" ng-show="addInProgress">
+												<div class="col-md-11">
+													<input type="text" class="form-control" ng-model="structureLib.statement">
+												</div>
+												<div class="col-md-1">
+													<button class="btn btn-danger" ng-click="addInProgress=false; addToLib();">Done</button>
+												</div>
+											</div>
+										</div>
+										
+										<!--	BELIEFS		-->
+										<!--<div class="panel-heading col-sm-12">
+											<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0; background: #efefef;">
+												<a data-toggle="collapse" data-parent="#accordion5">
+													<b>Beliefs</b>
+												</a>
+											</h2>
+										</div>
+										<div class="col-sm-12 row">
+											<ul style="font-size: 16px;">
+												<li ng-repeat="rc in user.profile.beliefs" style="padding: 4px;">{{rc.statement}}</li>
+											</ul>
+										</div>-->
+										
+										<!--	VALUES		-->
+										<!--<div class="panel-heading col-sm-12">
+											<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0; background: #efefef;">
+												<a data-toggle="collapse" data-parent="#accordion5">
+													<b>Professional Values and Work Culture Preferences</b>
+												</a>
+											</h2>
+										</div>
+										<div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="keys in user.profile.profile_content" ng-show="keys.keyword_id[5] == 1" style="padding: 10px; padding-bottom: 0px;">
+											<div class="panel panel-primary">
+												<div class="panel-heading" style="text-align: center;">
+													<h4 class="panel-title"><b>{{keys.keyword}}</b></h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body pad0B col-sm-12">
+														<div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
+															<div class="col-sm-12">
+																{{$index+1}}.&nbsp;&nbsp;&nbsp; <h5><b>{{mini.mini_description}}</b></h5>  
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>-->
+										
+										<!--	STRENGTHS - LEARNING NEEDS	-->
+										<div class="col-sm-12 row" style="margin: 0 auto;">
+											<div class="panel-heading col-sm-6">
+												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0; background: #efefef;">
+													<a data-toggle="collapse" data-parent="#accordion5">
+														<b>Strengths</b>
+													</a>
+												</h2>
+											</div>
+											<div class="panel-heading col-sm-6">
+												<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0; background: #efefef;">
+													<a data-toggle="collapse" data-parent="#accordion5">
+														<b><i style="font-size: 15px;">linked</i> Learning Needs</b>
+													</a>
+												</h2>
+											</div>
+										</div>
+										
+										<div class="col-sm-12 row" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 2" style="margin: 0 auto;">
+											<!-- LEFT SIDE -->
+											<div class="col-sm-6" style="padding: 15px; padding-bottom: 0px;">
+												<div class="panel panel-primary">
+													<div class="panel-heading" style="text-align: center;">
+														<h4 class="panel-title"><b>{{keys.keyword}}</b></h4>
+													</div>
+													<div id="collapseOne" class="panel-collapse collapse in">
+														<div class="panel-body pad0B col-sm-12">
+															<div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
+																<div class="col-sm-12">
+																	<h5><b>{{$index+1}}.&nbsp;&nbsp;&nbsp; {{mini.mini_description}}</b></h5>  
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- RIGHT SIDE -->
+											<div class="col-sm-6" style="padding: 15px; padding-bottom: 0px;" ng-show="keys.linked_keyword">
+												<div class="panel panel-primary">
+													<div class="panel-heading" style="text-align: center; background: #e3e3e3;">
+														<h4 class="panel-title"><b>{{temp_content[$index].keyword}}</b></h4>
+													</div>
+													<div id="collapseOne" class="panel-collapse collapse in">
+														<div class="panel-body pad0B col-sm-12">
+															<div class="row" ng-repeat="mini in temp_content[$index].mini_descriptions" style="margin-bottom: 10px;">
+																<div class="col-sm-12">
+																	<h5><b>{{$index+1}}.&nbsp;&nbsp;&nbsp; {{mini.mini_description}}</b></h5>  
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-6" style="padding: 15px;" ng-show="!keys.linked_keyword"></div>
+											<br>
+											<div class="col-md-12" style="border-bottom: 2px dashed #ddd;"></div>
+										</div>
+										
+										<div class="col-sm-12 row" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && checkRemainingKeys(keys.keyword_id)" style="margin: 0 auto;">
+											<!-- LEFT SIDE -->
+											<div class="col-sm-6" style="padding: 15px;" ng-show="keys.keyword_id[5] == 3"></div>
+											<!-- RIGHT SIDE -->
+											<div class="col-sm-6" style="padding: 15px;" ng-show="keys.keyword_id[5] == 3">
+												<div class="panel panel-primary">
+													<div class="panel-heading" style="text-align: center; background: #e3e3e3;">
+														<h4 class="panel-title"><b>{{keys.keyword}}</b></h4>
+													</div>
+													<div id="collapseOne" class="panel-collapse collapse in">
+														<div class="panel-body pad0B col-sm-12">
+															<div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px;">
+																<div class="col-sm-12">
+																	<h5><b>{{$index+1}}.&nbsp;&nbsp;&nbsp; {{mini.mini_description}}</b></h5>  
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br>
+											<div class="col-md-12" style="border-bottom: 2px dashed #ddd;"></div>
+										</div>
+										
+										<!--	GROWTH REC		-->
+										<!--<div class="panel-heading col-sm-12">
+											<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0; background: #efefef;">
+												<a data-toggle="collapse" data-parent="#accordion5">
+													<b>Growth Recommendations</b>
+												</a>
+											</h2>
+										</div>
+										<div class="col-sm-12" style="margin-bottom: 20px;">
+											<ul style="font-size: 16px;">
+												<li ng-repeat="rc in user.profile.growth_recommendations" style="padding: 4px;">{{rc.statement}}</li>
+											</ul>
+										</div>-->
+										
+										<!--	REC FOR MANAGER		-->
+										<!--<div class="panel-heading col-sm-12">
+											<h2 class="panel-title" style="text-align:center; font-size:1.8em; padding: 10px 0; background: #efefef;">
+												<a data-toggle="collapse" data-parent="#accordion5">
+													<b>Recommendations for Manager</b>
+												</a>
+											</h2>
+										</div>
+										<div class="col-sm-12" style="margin-bottom: 20px;">
+											<ul style="font-size: 16px;">
+												<li ng-repeat="rc in user.assessor.recommendations_for_manager" style="padding: 4px;">{{rc.statement}}</li>
+											</ul>
+										</div>-->
 									</div>
 								</div>
 								
@@ -2161,6 +2463,7 @@
 										</div>
 										<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
 											<button class="btn btn-info" style="width: 100%;" ng-click="pushResponsiveRR()" ng-show="switchView == 1">+Add</button>
+											<h4 ng-show="switchView == 2"><b>{{(sectionKeysCount_2nd[0]/total_mini_2nd)*100 | number: 2}} %</b></h4>
 										</div>
 									</div>
 									<div class="row">
@@ -2185,6 +2488,7 @@
 										</div>
 										<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
 											<button class="btn btn-info" style="width: 100%;" ng-click="pushModerateRR()" ng-show="switchView == 1">+Add</button>
+											<h4 ng-show="switchView == 2"><b>{{(sectionKeysCount_2nd[1]/total_mini_2nd)*100 | number: 2}} %</b></h4>
 										</div>
 									</div>
 									<div class="row">
@@ -2209,6 +2513,7 @@
 										</div>
 										<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
 											<button class="btn btn-info" style="width: 100%;" ng-click="pushReactiveRR()" ng-show="switchView == 1">+Add</button>
+											<h4 ng-show="switchView == 2"><b>{{(sectionKeysCount_2nd[2]/total_mini_2nd)*100 | number: 2}} %</b></h4>
 										</div>
 									</div>
 								</div>

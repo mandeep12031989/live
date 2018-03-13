@@ -35,7 +35,7 @@
 						<div class="panel">
 							<div class="panel-body">
 								<h1 style="text-align:center; font-weight:bold;" class="title-hero">
-								   <span style="font-size: 18px;">3 </span> Reflective Questions
+								   <span style="font-size: 18px;">4 </span> Reflective Questions
 								</h1>
 								<div class="example-box-wrapper">
 									<div id="form-wizard-3" class="form-wizard">
@@ -67,6 +67,15 @@
 											  </span>
 												</a>
 											</li>
+											<li ng-click="RQ_num = 4;" ng-class="RQ_num == 4 ? 'active':''">
+												<a data-toggle="tab">
+													<label class="wizard-step bg_progress">4</label>
+											  <span class="wizard-description">
+												 Question 4
+												 <small>Growth Over Time</small>
+											  </span>
+												</a>
+											</li>
 										</ul>
 										
 										<div class="tab-content">
@@ -81,7 +90,7 @@
 2.
 3.
 4.
-5."></textarea>
+5." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
 													</div>
 												</div>
 
@@ -102,7 +111,7 @@ Negatives
 2.
 3.
 4.
-5."></textarea>
+5." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
 													</div>
 												</div>
 
@@ -116,23 +125,37 @@ Negatives
 2.
 Negatives - Please also mention qualities which you have improved in past sometime
 1.
-2."></textarea>
+2." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
+													</div>
+												</div>
+
+												<div class="content-box" ng-show="RQ_num == 4">
+													<h4 class="content-box-header bg-blue">
+														Q4. Please mention negative qualities that you have improved in last few years.
+													</h4>
+													<div class="content-box-wrapper">
+														<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ4" placeholder="Negatives
+1.
+2.
+3.
+4." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
 													</div>
 												</div>
 										
-										<div class="tab-content" style="margin-bottom: 20px;">
+										<div class="tab-content" style="margin-bottom: 20px;" ng-show="RQ_num >= 1 && RQ_num <= 4">
 											<h4 style="font-weight:bold; margin-bottom: 20px;">
 											   For your reference, see a sample answer below:
 											</h4>
 											<img src="./images/q1.svg" ng-show="RQ_num == 1">
 											<img src="./images/q2.svg" ng-show="RQ_num == 2">
 											<img src="./images/q3.svg" ng-show="RQ_num == 3">
+											<img src="./images/q4.svg" ng-show="RQ_num == 4">
 										</div>
 
 												<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Previous</a>
-												<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 3" style="color: white;">Next</a>
-												<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 3" style="color: white;">Save</a>
-												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 3" style="color: white;" ng-disabled="!(quesDetails.question.RQ1 && quesDetails.question.RQ2 && quesDetails.question.RQ3)">Submit</a>
+												<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 4" style="color: white;">Next</a>
+												<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 4" style="color: white;">Save</a>
+												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 4" style="color: white;" ng-disabled="!(quesDetails.question.RQ1 && quesDetails.question.RQ2 && quesDetails.question.RQ3 && quesDetails.question.RQ4)">Submit</a>
 
 										</div>
 									</div>

@@ -25,7 +25,7 @@ var mailOptions, link, token;
 exports.custom_mail = function(data, callback){
     mailOptions = {
 		from : '"iDiscover.me" info@idiscover.me',
-        to : data.to,
+        bcc : data.to,
         subject : data.subject,
         html : data.html
     };

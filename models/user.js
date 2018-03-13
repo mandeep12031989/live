@@ -183,19 +183,22 @@ var userSchema = new Schema({
             default: 0
         },
         profile_content: [profileSchema],
-        track: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],				// in seconds
+        track: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],				// in seconds
 		eachSectionTrack: {
-			timeBelief: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
-			timeValue: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
-			timeStrength: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
-			timeLearning: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],
-			timeGrowth: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })]
+			timeBelief: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],
+			timeValue: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],
+			timeStrength: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],
+			timeLearning: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],
+			timeGrowth: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })]
 		},
 		old: [new Schema({ pro: [profileSchema], pro_num: Number })],
 		growth_recommendations: [new Schema({ sID: String, statement: String, selected: Boolean })],
 		beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String })],
 		eachSectionRelate: Array,
-		eachSectionShareMore: Array
+		eachSectionShareMore: Array,
+		eachSectionEditable: Array,
+		eachSectionStopReflect: Array,
+		eachSectionStopReflectDone: Array
     },
     age: Number,
     sex: String,
@@ -210,9 +213,11 @@ var userSchema = new Schema({
         RQ1: String,
         RQ2: String,
         RQ3: String,
+        RQ4: String,
+        RQeditable: Array,
         questionnaire: Array,
-		RQtrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })],				// in seconds
-		Questrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 } })]				// in seconds
+		RQtrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],				// in seconds
+		Questrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })]				// in seconds
     },
 	last_modification: {
 		type: Date,

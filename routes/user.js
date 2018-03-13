@@ -813,11 +813,13 @@ router.route('/completion')
         
         var per = 0;
         if(user.question.RQ1 != '' && user.question.RQ1 != undefined)
-            per += 4;
+            per += 3;
         if(user.question.RQ2 != '' && user.question.RQ2 != undefined)
-            per += 5;
+            per += 4;
         if(user.question.RQ3 != '' && user.question.RQ3 != undefined)
-            per += 5;
+            per += 4;
+        if(user.question.RQ4 != '' && user.question.RQ4 != undefined)
+            per += 3;
         
         //console.log(user.question.RQ1 + ' | ' + user.question.RQ2 + ' | ' + user.question.RQ3 + ' | ' + user.feedback.submitted + ' = ' + per);
         
@@ -882,6 +884,10 @@ router.route('/completion')
                 per += 15;
         }
 		
+		var blocking = false;
+		if(user.profile.eachSectionEditable.length)
+		   blocking = user.profile.eachSectionEditable[0] && user.profile.eachSectionEditable[1] && user.profile.eachSectionEditable[2] && user.profile.eachSectionEditable[3] && user.profile.eachSectionEditable[4]
+		
 		//console.log(per);
 		if(user.feedback.q1)
 			per += 2;
@@ -901,10 +907,11 @@ router.route('/completion')
 		
         var final_obj = {
             percentage: per,
-            reflective_filled: user.question.RQ1!='' && user.question.RQ1 != undefined && user.question.RQ2!='' && user.question.RQ2 != undefined && user.question.RQ3!='' && user.question.RQ3 != undefined,
+            reflective_filled: user.question.RQ1!='' && user.question.RQ1 != undefined && user.question.RQ2!='' && user.question.RQ2 != undefined && user.question.RQ3!='' && user.question.RQ3 != undefined && user.question.RQ4!='' && user.question.RQ4 != undefined,
             questionnaire_filled: que_filled,
 			selected_profile: user.profile.profile_number,
             profile_filled: sec1 && sec2 && sec3,// && sec4,
+            profile_blocked: blocking,
 			you_are_fac: user.are_you.facilitator
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);

@@ -65,6 +65,23 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title modal-color" id="myModalLabel">Trueself Profile Locked</h4>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body modal-color">
+										<h2>Please do consult your Facilitator for further action.</h2>
+									</div>
+									<div class="modal-footer">
+										<button type="button" id="submit" class="btn btn-danger" data-dismiss="modal">OK</button>
+									</div>
+								</div>
+							</div>
+						</div>
 
 						<div id="page-title">
 							<h2>Dashboard</h2>
@@ -149,8 +166,8 @@
 										<div class="card-content">
 											<p class="category" style="font-size: 16px;">Reflective Questions</p>
 											<h3 class="title">
-												<small style="font-size: 14px" ng-if="percent.questionnaire_filled">COMPLETED</small>
-												<small style="font-size: 14px" ng-if="!percent.questionnaire_filled">PROCEED</small>
+												<small style="font-size: 14px" ng-if="percent.questionnaire_filled && percent.reflective_filled">COMPLETED</small>
+												<small style="font-size: 14px" ng-if="!percent.questionnaire_filled || !percent.reflective_filled">PROCEED</small>
 											</h3>
 										</div>
 									</div>
@@ -194,7 +211,18 @@
 									</div>
 								</div>
 								<div class="col-sm-6">
-									<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+									<div class="card card-stats" data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
+										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
+										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
+										<div class="card-content">
+											<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
+											<h3 class="title">
+												<small style="font-size: 14px" ng-if="percent.profile_filled">COMPLETED</small>
+												<small style="font-size: 14px" ng-if="!percent.profile_filled">PROCEED</small>
+											</h3>
+										</div>
+									</div>
+									<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
 										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
 										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
 										<div class="card-content">
@@ -247,7 +275,7 @@
 									<div class="card card-stats" ui-sref="feedback">
 										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">View</div>
 										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Feedback</p>
+											<p class="category" style="font-size: 16px;">Profile Synthesis</p>
 											<h3 class="title">
 												<small style="font-size: 14px"></small>
 											</h3>
