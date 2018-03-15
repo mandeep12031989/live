@@ -198,7 +198,12 @@ var userSchema = new Schema({
 		eachSectionShareMore: Array,
 		eachSectionEditable: Array,
 		eachSectionStopReflect: Array,
-		eachSectionStopReflectDone: Array
+		eachSectionStopReflectDone: Array,
+		eachSectionCombineComment: {
+			value: Array,
+			strength: Array,
+			learning: Array
+		}
     },
     age: Number,
     sex: String,

@@ -257,52 +257,54 @@
 														<!--<b ng-show="section_num == 4">Communication Style</b>-->
 														<b ng-show="section_num == 5">Growth Recommendations</b>
 														
-														<!--<div ng-show="section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;  font-weight: bold;">
+														<div class="row" style="padding: 15px 6% 15px 3%; text-align: left;" ng-show="!profile_content.profile.eachSectionStopReflectDone[section_num-1] && section_num>=1 && section_num<=3" ng-class="(!profile_content.profile.eachSectionStopReflect[section_num-1] && checkRel[section_num])?'bg_uncomp':''">
+															<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px; font-size: 14px; margin-bottom: 10px; font-weight: bold;">
+																<span class="col-sm-12"><i class="material-icons" style="color: #33b5e5; font-size: 20px; vertical-align: middle;">event_note</i> <b style="font-size: 16px;">Stop and Reflect:</b></span>
+																<br><br>
+																Take a couple of minutes to think and reflect on the following question.<br><br>
+																<span ng-show="section_num == 1">"What kind of work culture and work environment do you prefer?"</span><span ng-show="section_num == 2">"What are your strengths?"</span><span ng-show="section_num == 3">"What kind of feedback do you get from people for your improvement?"</span><br>
+																<!--<i>Trigger: <span ng-show="section_num == 1">Think about what is a must for you in an ideal work culture</span><span ng-show="section_num == 2">Think about what is it - in your work or while working with others</span><span ng-show="section_num == 3">learning needs</span>.</i>-->
+															</div>
+															<div class="col-xs-12 col-sm-12 col-md-12">
+																<textarea class="form-control" style="text-align: center; font-weight: bold;" ng-model="profile_content.profile.eachSectionStopReflect[section_num-1]"></textarea>
+															</div>
+															<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; margin-top: 10px;">
+																<button class="btn btn-info" ng-click="profile_content.profile.eachSectionStopReflectDone[section_num-1] = true; checkRel[section_num]=false; saveProfile(1);" ng-disabled="!profile_content.profile.eachSectionStopReflect[section_num-1]">Proceed</button>
+															</div>
+														</div>
+
+														<div class="row" style="padding: 15px 6% 15px 3%; text-align: left;" ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] && section_num>=1 && section_num<=3">
+															<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px; font-size: 14px; margin-bottom: 10px; font-weight: bold;">
+																<span class="col-sm-12"><i class="material-icons" style="color: #33b5e5; font-size: 20px; vertical-align: middle;">event_note</i> <b style="font-size: 16px;">Stop and Reflect:</b></span>
+																<br><br>
+																Take a couple of minutes to think and reflect on the following question.<br><br>
+																<span ng-show="section_num == 1">"What kind of work culture and work environment do you prefer?"</span><span ng-show="section_num == 2">"What are your strengths?"</span><span ng-show="section_num == 3">"What kind of feedback do you get from people for your improvement?"</span><br>
+																<!--<i>Trigger: <span ng-show="section_num == 1">Think about what is a must for you in an ideal work culture</span><span ng-show="section_num == 2">Think about what is it - in your work or while working with others</span><span ng-show="section_num == 3">learning needs</span>.</i>-->
+															</div>
+															<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #f3f3f3; font-size: 14px;">
+																<b>{{profile_content.profile.eachSectionStopReflect[section_num-1]}}</b>
+															</div>
+														</div>
+														
+														<div ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] && section_num >= 1 && section_num <= 3" style="font-size: 14px; padding: 10px 6% 10px 0;  font-weight: bold;">
 															{{sectionDescs[profile_content.profile.profile_number-1][section_num-1]}}
-														</div>-->
+														</div>
 														
 														<div ng-show="section_num == 0" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Beliefs are deeply rooted convictions about the world and about ourselves. Please select how strongly you relate with the following belief statements and answer the associated questions.
 														</div>
-														<div ng-show="section_num == 1" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
+														<div ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] &&section_num == 1" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Please select values you exhibit and ideal work culture you prefer or strive to create for others.
 														</div>
-														<div ng-show="section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
+														<div ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] &&section_num == 2" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Please select strengths you bring to workplace in your role or while working with others.
 														</div>
-														<div ng-show="section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
+														<div ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] &&section_num == 3" style="font-size: 15px; padding: 10px 6% 10px 0; font-weight: bold;">
 															Choose your Areas for Development as seen by you or others. Your authentic selection will assist the manager in your professional development further.
 														</div>
 													</a>
 													
 												</h2>
-												
-												<div class="row" style="padding: 10px 50px;" ng-show="!profile_content.profile.eachSectionStopReflectDone[section_num-1] && section_num>=1 && section_num<=3" ng-class="(!profile_content.profile.eachSectionStopReflect[section_num-1] && checkRel[section_num])?'bg_uncomp':''">
-													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px; font-size: 15px; margin-bottom: 10px;">
-														<b>Stop and Reflect:</b><br>
-														Take a couple of minutes to think and reflect on the following question.<br><br>
-														"What kind of work culture and work environment do you prefer?"<br>
-														<i>Trigger: <span ng-show="section_num == 1">Think about what is a must for you in an ideal work culture</span><span ng-show="section_num == 2">Think about what is it - in your work or while working with others</span><span ng-show="section_num == 3">learning needs</span>.</i>
-													</div>
-													<div class="col-xs-12 col-sm-12 col-md-12">
-														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionStopReflect[section_num-1]"></textarea>
-													</div>
-													<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; margin-top: 10px;">
-														<button class="btn btn-info" ng-click="profile_content.profile.eachSectionStopReflectDone[section_num-1] = true" ng-disabled="!profile_content.profile.eachSectionStopReflect[section_num-1]">Proceed</button>
-													</div>
-												</div>
-												
-												<div class="row" style="padding: 10px 50px;" ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] && section_num>=1 && section_num<=3">
-													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px; font-size: 15px; margin-bottom: 10px;">
-														<b>Stop and Reflect:</b><br>
-														Take a couple of minutes to think and reflect on the following question.<br><br>
-														"What kind of work culture and work environment do you prefer?"<br>
-														<i>Trigger: <span ng-show="section_num == 1">Think about what is a must for you in an ideal work culture</span><span ng-show="section_num == 2">Think about what is it - in your work or while working with others</span><span ng-show="section_num == 3">learning needs</span>.</i>
-													</div>
-													<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #efefef;">
-														{{profile_content.profile.eachSectionStopReflect[section_num-1]}}
-													</div>
-												</div>
 														
 												<!-- SAMPLE -->
 												<div style="padding: 5px 0; border: 2px solid #33b5e5; margin-top: 10px; text-align: left; border-radius: 7px;" ng-show="section_num == 0">
@@ -310,12 +312,12 @@
 													<img src="./images/sec0.png" style="width: 100%; padding: 0% 2%;">
 												</div>
 														
-												<div style="padding: 5px 0; border: 2px solid #33b5e5; margin-top: 10px; text-align: left; border-radius: 7px;" ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] && section_num >= 1 && section_num <= 3">
+												<!--<div style="padding: 5px 0; border: 2px solid #33b5e5; margin-top: 10px; text-align: left; border-radius: 7px;" ng-show="profile_content.profile.eachSectionStopReflectDone[section_num-1] && section_num >= 1 && section_num <= 3">
 													<b style="font-size: 15px; margin-left: 15px;">For your reference, see a sample below :</b>
 													<img src="./images/sec1.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 1">
 													<img src="./images/sec2.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 2">
 													<img src="./images/sec3.png" style="width: 100%; padding: 0% 10%;" ng-show="section_num == 3">
-												</div>
+												</div>-->
 												<!-- SAMPLE END -->
 											</div>
 											<div class="row" style="width: 98%; margin: auto;">
@@ -350,7 +352,8 @@
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
-															   <div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;" ng-class="((!mini.relate) && checkRel[section_num])?'bg_uncomp':''">
+																<div style="position: absolute; margin-top: -24px; margin-left: -5px; background: white; font-size: 11px; font-weight: bold;">Can you come across to others as</div>
+																<div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;" ng-class="((!mini.relate) && checkRel[section_num])?'bg_uncomp':''">
 																	<div class="col-md-6" ng-if="section_num != 3">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
 																	</div>
@@ -396,10 +399,10 @@
 																	<!--<div style="color: red; text-align: center;" ng-show="(!mini.relate) && checkRel[section_num]">How much do you relate ?</div>-->
 																</div>
 																
-																<br ng-if="section_num >= 1 && section_num <= 3">
+																<!--<br ng-if="section_num >= 1 && section_num <= 3">
 																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Why is this value it important to you?" ng-if="section_num == 1" style="text-align: center;"></textarea>
 																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How can an excess use of this strength turn into a weakness for you?" ng-if="section_num == 2" style="text-align: center;"></textarea>
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How does this learning need hold you back?" ng-if="section_num == 3" style="text-align: center;"></textarea>
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How does this learning need hold you back?" ng-if="section_num == 3" style="text-align: center;"></textarea>-->
 															</div>
 															<br>
 														</div>
@@ -433,6 +436,39 @@
 												</div>
 												
 											</div>
+											
+											<div style="text-align: center;" ng-show="section_num==2 && profile_content.profile.eachSectionStopReflectDone[section_num-1]">
+												<div class="row" style="font-size: 13px; color: grey; margin: 0 auto 10px auto;" ng-class="((!profile_content.profile.eachSectionCombineComment.strength[0]) && checkRel[section_num])?'bg_uncomp':''">
+													<div class="col-xs-12 col-sm-12 col-md-7" style="text-align: right; margin-top: 6px;">
+														<b>Out of the above mentioned strengths, which one do you value the most?</b>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-5" style="margin: auto 0; text-align: center;">
+														<input class="form-control" ng-model="profile_content.profile.eachSectionCombineComment.strength[0]">
+													</div>
+												</div>
+											</div>
+											<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="section_num>=1 && section_num<=3 && profile_content.profile.eachSectionStopReflectDone[section_num-1]">
+												<div class="col-xs-12 col-sm-12 col-md-12 row" ng-class="((!profile_content.profile.eachSectionCombineComment.learning[0]) && checkRel[section_num])?'bg_uncomp':''" ng-show="section_num == 3" style="margin-bottom: 10px; padding-bottom: 10px;">
+													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px;">
+														<b>Which learning need do you need to work on the most? How has it affected you in the past?</b>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-12">
+														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionCombineComment.learning[0]"></textarea>
+													</div>
+												</div>
+												<br>
+												<div class="col-xs-12 col-sm-12 col-md-12 row" ng-class="(((section_num==1 && !profile_content.profile.eachSectionCombineComment.value[0])||(section_num==2 && !profile_content.profile.eachSectionCombineComment.strength[1])||(section_num==3 && !profile_content.profile.eachSectionCombineComment.learning[1])) && checkRel[section_num])?'bg_uncomp':''" style="padding-bottom: 10px;">
+													<div class="col-xs-12 col-sm-12 col-md-12">
+														<b><span ng-show="section_num == 1">What is the most important value to you? Why is this important?</span><span ng-show="section_num == 2">How did you discover that this is your strength?</span><span ng-show="section_num == 3">What concrete steps can you take to overcome it?</span></b>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-12">
+														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionCombineComment.value[0]" ng-show="section_num==1"></textarea>
+														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionCombineComment.strength[1]" ng-show="section_num==2"></textarea>
+														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionCombineComment.learning[1]" ng-show="section_num==3"></textarea>
+													</div>
+												</div>
+											</div>
+											
 											<div style="text-align: center;" ng-show="section_num>=1 && section_num<=3 && profile_content.profile.eachSectionStopReflectDone[section_num-1]">
 												<div class="row" style="font-size: 13px; color: grey; margin: 0 auto 10px auto;" ng-class="((!profile_content.profile.eachSectionRelate[section_num-1]) && checkRel[section_num])?'bg_uncomp':''">
 													<div class="col-xs-12 col-sm-12 col-md-7" style="text-align: right; margin-top: 6px;">
@@ -448,14 +484,14 @@
 													</div>
 												</div>
 												
-												<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
+												<!--<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
 													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px;">
 														<b>Please share your <span ng-show="section_num == 1">values or work culture preferences</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> not covered above.</b>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-12">
 														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionShareMore[section_num-1]"></textarea>
 													</div>
-												</div>
+												</div>-->
 												
 												<!--	BUTTON ADD
 												<div class="col-xs-12 col-sm-12 col-md-12" style="font-size: 13px; padding: 10px 0 10px 0; color: grey;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
