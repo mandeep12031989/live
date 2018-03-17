@@ -457,6 +457,7 @@ router.route('/profile/insertProfile')                          // will use req.
 			
             user.profile.profile_number = pr_num;
             user.profile.profile_content = key;
+			user.profile.eachSectionEditable = new Array(5).fill(false);
             user.save(function(e, us){
                 if(e)
                     return next(e);

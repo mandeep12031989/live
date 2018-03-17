@@ -236,11 +236,16 @@ var userSchema = new Schema({
         },
 		q1: String,
 		q2: String,
+		q2_detailed: String,
 		q3: {
 			a1: Boolean,
 			a2: Boolean,
 			a3: Boolean,
-			a4: Boolean
+			a4: Boolean,
+			s1: String,
+			s2: String,
+			s3: String,
+			s4: String
 		},
 		q4: String,
 		q5: String,
