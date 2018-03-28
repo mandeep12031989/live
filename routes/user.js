@@ -10,6 +10,8 @@ var child_process = require('child_process');
 
 var User = require('../models/user.js');
 var Keyword = require('../models/keyword.js');
+var Belief = require('../models/beliefs.js');
+var GrRec = require('../models/growth_rec.js');
 var Verify = require('./verify.js');
 var authe = require('../authenticate.js');
 var mailer = require('../mailer.js');
@@ -458,12 +460,30 @@ router.route('/profile/insertProfile')                          // will use req.
             user.profile.profile_number = pr_num;
             user.profile.profile_content = key;
 			user.profile.eachSectionEditable = new Array(5).fill(false);
-            user.save(function(e, us){
-                if(e)
-                    return next(e);
-                res.status(200).send({message: "success !", success: true});
-            });
-
+			
+			Belief.find({ sID: { $regex: body.profile_number } }).sort('sID')
+			.exec(function(err, rec){
+				if(err)
+					return next(err);
+				
+				user.profile.beliefs = rec;
+				
+				GrRec.find({ sID: { $regex: body.profile_number } }).sort('sID')
+				.exec(function(err, gr){
+					if(err)
+						return next(err);
+					
+					user.profile.growth_recommendations = gr;
+					
+					user.save(function(e, us){
+						if(e)
+							return next(e);
+						res.status(200).send({message: "success !", success: true});
+					});
+				});
+				
+			});
+			
         });
     });
 });
@@ -494,16 +514,40 @@ router.route('/profile/insertProfileByFacilitator/:id')                         
                return next(err_u);
 			
 			//saving old-profile
-			if(user.profile.profile_number)
+			if(user.profile.profile_number){
 				user.profile.old.push({pro: user.profile.profile_content, pro_num: user.profile.profile_number});
+				if(user.profile.old_growth_recommendations.length != 0)
+					user.profile.old_growth_recommendations.push({gr: user.profile.growth_recommendations, pro_num: user.profile.profile_number});
+				if(user.profile.old_beliefs.length != 0)
+					user.profile.old_beliefs.push({gr: user.profile.beliefs, pro_num: user.profile.profile_number});
+			}
 			
             user.profile.profile_number = pr_num;
             user.profile.profile_content = key;
-            user.save(function(e, us){
-                if(e)
-                    return next(e);
-                res.status(200).send({message: "success !", success: true});
-            });
+            user.profile.eachSectionEditable = new Array(5).fill(false);
+			
+			Belief.find({ sID: { $regex: body.profile_number } }).sort('sID')
+			.exec(function(err, rec){
+				if(err)
+					return next(err);
+				
+				user.profile.beliefs = rec;
+				
+				GrRec.find({ sID: { $regex: body.profile_number } }).sort('sID')
+				.exec(function(err, gr){
+					if(err)
+						return next(err);
+					
+					user.profile.growth_recommendations = gr;
+					
+					user.save(function(e, us){
+						if(e)
+							return next(e);
+						res.status(200).send({message: "success !", success: true});
+					});
+				});
+				
+			});
 
         });
     });

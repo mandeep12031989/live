@@ -81,19 +81,7 @@
     </div>
 </span>
 
-<div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0 && (profile_content.profile.eachSectionEditable[0] && profile_content.profile.eachSectionEditable[1] && profile_content.profile.eachSectionEditable[2] && profile_content.profile.eachSectionEditable[3] && profile_content.profile.eachSectionEditable[4])">
-	<div id="page-wrapper">
-        <div id="page-content-wrapper">
-            <div>
-                <div class="container" style="text-align: center; margin-top: 40px;">
-					<h2>Kindly contact your facilitator for further actions.</h2>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0 && !(profile_content.profile.eachSectionEditable[0] && profile_content.profile.eachSectionEditable[1] && profile_content.profile.eachSectionEditable[2] && profile_content.profile.eachSectionEditable[3] && profile_content.profile.eachSectionEditable[4])">
+<div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0">
 	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="waitingQueue == true && !success.message" class="w3-animate-top">
 		<div class="alert alert-info alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">cached</i>
@@ -326,16 +314,16 @@
 													<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 row" ng-repeat="rc in profile_content.profile.beliefs" ng-class="((!rc.how_much) && checkRel[section_num])?'bg_uncomp':''" style="padding: 4px;">
 														<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">{{rc.statement}}</div>
 														<div class="input-prepend input-group col-xs-12 col-sm-12 col-md-6 col-lg-6" style="text-align: center;">
-															<span ng-click="rc.how_much = 1;" ng-class="(rc.how_much>=1)?'checked_rating':''" title="1" class="allRating">1</span>
-															<span ng-click="rc.how_much = 2;" ng-class="(rc.how_much>=2)?'checked_rating':''" title="2" class="allRating">2</span>
-															<span ng-click="rc.how_much = 3;" ng-class="(rc.how_much>=3)?'checked_rating':''" title="3" class="allRating">3</span>
-															<span ng-click="rc.how_much = 4;" ng-class="(rc.how_much>=4)?'checked_rating':''" title="4" class="allRating">4</span>
-															<span ng-click="rc.how_much = 5;" ng-class="(rc.how_much>=5)?'checked_rating':''" title="5" class="allRating">5</span>
-															<span ng-click="rc.how_much = 6;" ng-class="(rc.how_much>=6)?'checked_rating':''" title="6" class="allRating">6</span>
-															<span ng-click="rc.how_much = 7;" ng-class="(rc.how_much>=7)?'checked_rating':''" title="7" class="allRating">7</span>
-															<span ng-click="rc.how_much = 8;" ng-class="(rc.how_much>=8)?'checked_rating':''" title="8" class="allRating">8</span>
-															<span ng-click="rc.how_much = 9;" ng-class="(rc.how_much>=9)?'checked_rating':''" title="9" class="allRating">9</span>
-															<span ng-click="rc.how_much = 10;" ng-class="(rc.how_much==10)?'checked_rating':''" title="10" class="allRating">10</span>
+															<span ng-click="rc.how_much = 1;" ng-class="(rc.how_much>=1)?'checked_rating':''" title="1" class="allRating" onclick="void(0)">1</span>
+															<span ng-click="rc.how_much = 2;" ng-class="(rc.how_much>=2)?'checked_rating':''" title="2" class="allRating" onclick="void(0)">2</span>
+															<span ng-click="rc.how_much = 3;" ng-class="(rc.how_much>=3)?'checked_rating':''" title="3" class="allRating" onclick="void(0)">3</span>
+															<span ng-click="rc.how_much = 4;" ng-class="(rc.how_much>=4)?'checked_rating':''" title="4" class="allRating" onclick="void(0)">4</span>
+															<span ng-click="rc.how_much = 5;" ng-class="(rc.how_much>=5)?'checked_rating':''" title="5" class="allRating" onclick="void(0)">5</span>
+															<span ng-click="rc.how_much = 6;" ng-class="(rc.how_much>=6)?'checked_rating':''" title="6" class="allRating" onclick="void(0)">6</span>
+															<span ng-click="rc.how_much = 7;" ng-class="(rc.how_much>=7)?'checked_rating':''" title="7" class="allRating" onclick="void(0)">7</span>
+															<span ng-click="rc.how_much = 8;" ng-class="(rc.how_much>=8)?'checked_rating':''" title="8" class="allRating" onclick="void(0)">8</span>
+															<span ng-click="rc.how_much = 9;" ng-class="(rc.how_much>=9)?'checked_rating':''" title="9" class="allRating" onclick="void(0)">9</span>
+															<span ng-click="rc.how_much = 10;" ng-class="(rc.how_much==10)?'checked_rating':''" title="10" class="allRating" onclick="void(0)">10</span>
 														</div>
 														<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding: 5px;">
 															<textarea rows="2" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you select this rating? Why not less or why not more?
@@ -352,7 +340,7 @@
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
-																<div style="position: absolute; margin-top: -24px; margin-left: -5px; background: white; font-size: 11px; padding-left: 10px; padding-right: 10px;">Can you come across to others as</div>
+																<div style="position: absolute; margin-top: -24px; margin-left: -5px; background: white; font-size: 11px; padding-left: 10px; padding-right: 10px;" ng-if="section_num == 3">Can you come across to others as</div>
 																<div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;" ng-class="((!mini.relate) && checkRel[section_num])?'bg_uncomp':''">
 																	<div class="col-md-6" ng-if="section_num != 3">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
@@ -362,15 +350,15 @@
 																	</div>
 																   	<div class="col-md-6" ng-if="section_num != 3">
 																		<div id="radios">
-																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited">
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited" onclick="void(0)">
 																					 <input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
 																					 <span>&#xE612;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes">
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes" onclick="void(0)">
 																					<input type="radio" name="{{mini.mini_description_id}}relatepartially" id="{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
 																					<span>&#xE427;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly">
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly" onclick="void(0)">
 																					<input type="radio" name="{{mini.mini_description_id}}relatestrongly" id="{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.relate" ng-change="mini.mini_rating = 2"/>
 																					<span>&#xE3A6;</span>
 																				</label>
@@ -378,19 +366,19 @@
 																	</div>
 																	<div class="col-md-8" ng-if="section_num == 3">
 																		<div id="radios">
-																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time">
+																				<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time" onclick="void(0)">
 																					 <input type="radio" name="{{mini.mini_description_id}}donotexhibitanymore" id="{{mini.mini_description_id}}donotexhibitanymore" value="donotexhibitanymore" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
 																					 <span>&#xE15D;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited">
+																				<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited" onclick="void(0)">
 																					 <input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate" ng-model="mini.relate" ng-change="mini.mini_rating = 0" />
 																					 <span>&#xE612;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes">
+																				<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes" onclick="void(0)">
 																					<input type="radio" name="{{mini.mini_description_id}}relatepartially" id="{{mini.mini_description_id}}relatepartially" value="relatepartially" ng-model="mini.relate" ng-change="mini.mini_rating = 1" />
 																					<span>&#xE427;</span>
 																				</label>
-																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly">
+																				<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly" onclick="void(0)">
 																					<input type="radio" name="{{mini.mini_description_id}}relatestrongly" id="{{mini.mini_description_id}}relatestrongly" value="relatestrongly" ng-model="mini.relate" ng-change="mini.mini_rating = 2"/>
 																					<span>&#xE3A6;</span>
 																				</label>
@@ -401,8 +389,9 @@
 																
 																<!--<br ng-if="section_num >= 1 && section_num <= 3">
 																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Why is this value it important to you?" ng-if="section_num == 1" style="text-align: center;"></textarea>
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How can an excess use of this strength turn into a weakness for you?" ng-if="section_num == 2" style="text-align: center;"></textarea>
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How does this learning need hold you back?" ng-if="section_num == 3" style="text-align: center;"></textarea>-->
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How can an excess use of this strength turn into a weakness for you?" ng-if="section_num == 2" style="text-align: center;"></textarea>-->
+																<br ng-if="section_num == 3">
+																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="How does this learning need hold you back?" ng-if="section_num == 3" style="text-align: center;"></textarea>
 															</div>
 															<br>
 														</div>
@@ -437,20 +426,28 @@
 												
 											</div>
 											
-											<div style="text-align: center;" ng-show="section_num==2 && profile_content.profile.eachSectionStopReflectDone[section_num-1]">
-												<div class="row" style="font-size: 13px; color: grey; margin: 0 auto 10px auto;" ng-class="((!profile_content.profile.eachSectionCombineComment.strength[0]) && checkRel[section_num])?'bg_uncomp':''">
+											<div style="text-align: center;" ng-show="(section_num==2 || section_num==3) && profile_content.profile.eachSectionStopReflectDone[section_num-1]">
+												<div class="row" style="font-size: 13px; color: grey; margin: 0 auto 10px auto;" ng-class="((!profile_content.profile.eachSectionCombineComment.strength[0]) && checkRel[section_num])?'bg_uncomp':''" ng-show="section_num==2">
 													<div class="col-xs-12 col-sm-12 col-md-7" style="text-align: right; margin-top: 6px;">
 														<b>Out of the above mentioned strengths, which one do you value the most?</b>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-5" style="margin: auto 0; text-align: center;">
-														<input class="form-control" ng-model="profile_content.profile.eachSectionCombineComment.strength[0]">
+														<input type="text" class="form-control" ng-model="profile_content.profile.eachSectionCombineComment.strength[0]">
+													</div>
+												</div>
+												<div class="row" style="font-size: 13px; color: grey; margin: 0 auto 10px auto;" ng-class="((!profile_content.profile.eachSectionCombineComment.learning[2]) && checkRel[section_num])?'bg_uncomp':''" ng-show="section_num==3">
+													<div class="col-xs-12 col-sm-12 col-md-7" style="text-align: right; margin-top: 6px;">
+														<b>Which learning need do you need to work on the most?</b>
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-5" style="margin: auto 0; text-align: center;">
+														<input type="text" class="form-control" ng-model="profile_content.profile.eachSectionCombineComment.learning[2]">
 													</div>
 												</div>
 											</div>
 											<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="section_num>=1 && section_num<=3 && profile_content.profile.eachSectionStopReflectDone[section_num-1]">
 												<div class="col-xs-12 col-sm-12 col-md-12 row" ng-class="((!profile_content.profile.eachSectionCombineComment.learning[0]) && checkRel[section_num])?'bg_uncomp':''" ng-show="section_num == 3" style="margin-bottom: 10px; padding-bottom: 10px;">
 													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px;">
-														<b>Which learning need do you need to work on the most? How has it affected you in the past?</b>
+														<b>How has it affected you in the past?</b>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-12">
 														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionCombineComment.learning[0]"></textarea>
