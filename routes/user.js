@@ -15,6 +15,7 @@ var GrRec = require('../models/growth_rec.js');
 var Verify = require('./verify.js');
 var authe = require('../authenticate.js');
 var mailer = require('../mailer.js');
+var config = require('../config.js');
 
 router.route('/list')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
@@ -1024,7 +1025,7 @@ router.route('/resetpsw/:email/:token')                            // Client Sid
 				var token = sanitize(req.params.token); // Save user's token from parameters to variable
 				
 				// Function to verify token
-				var config = require('../config.js');
+				
 				//console.log(config.development.secretKey+token);
 				jwt.verify(token, config.development.secretKey, function(err, decoded) {
 					//console.log('2 success');
@@ -1036,8 +1037,8 @@ router.route('/resetpsw/:email/:token')                            // Client Sid
 					else {//PSW START
 						user.password_reset_token = false;
 						
-						var scrt = 'portal\/\/\'*iD';
-						var decrypted = CryptoJS.AES.decrypt(body.password, scrt);
+						
+						var decrypted = CryptoJS.AES.decrypt(body.password, config.development.scrt);
 						//console.log(decrypted.toString(CryptoJS.enc.Utf8));
 						body.password = decrypted.toString(CryptoJS.enc.Utf8);
 						
@@ -1087,8 +1088,8 @@ router.route('/auth/register')
             body.lastname = body.lastname.charAt(0).toUpperCase() + body.lastname.slice(1);
 		
 			//console.log(body);
-			var scrt = 'portal\/\/\'*iD';
-			var decrypted = CryptoJS.AES.decrypt(body.password, scrt);
+			
+			var decrypted = CryptoJS.AES.decrypt(body.password, config.development.scrt);
 			//console.log(decrypted.toString(CryptoJS.enc.Utf8));
 			body.password = decrypted.toString(CryptoJS.enc.Utf8);
             
@@ -1115,8 +1116,8 @@ router.route('/auth/login')
             return res.status(501).json({ message: 'Incorrect Email-ID !' });
 		
 		//console.log(body);
-		var scrt = 'portal\/\/\'*iD';
-		var decrypted = CryptoJS.AES.decrypt(body.password, scrt);
+		
+		var decrypted = CryptoJS.AES.decrypt(body.password, config.development.scrt);
 		//console.log(decrypted.toString(CryptoJS.enc.Utf8));
 		body.password = decrypted.toString(CryptoJS.enc.Utf8);
 

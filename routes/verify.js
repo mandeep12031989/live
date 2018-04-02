@@ -3,13 +3,14 @@
 var User = require('../models/user');
 var jwt = require('jsonwebtoken');                  // used to create, sign, and verify tokens
 var config = require('../config.js');
+var CryptoJS = require('node-cryptojs-aes').CryptoJS;
 
 // Load environment
 const _ENV_NAME = process.env.NAME || 'development';
 config = config[_ENV_NAME];
 
 exports.getToken = function(user) {
-    return jwt.sign(user, config.secretKey/*, { expiresIn: 14400 }*/);
+    return CryptoJS.AES.encrypt(jwt.sign(user, config.secretKey/*, { expiresIn: 14400 }*/), config.scrt).toString();
 };
 
 exports.getHourToken = function(user) {
@@ -23,7 +24,7 @@ exports.verifyOrdinaryUser = function(req, res, next) {
       // decode token
       if(token){
             // verifies secret and checks exp
-            jwt.verify(token, config.secretKey, function(err, decoded) {
+            jwt.verify(CryptoJS.AES.decrypt(token, config.scrt).toString(CryptoJS.enc.Utf8), config.secretKey, function(err, decoded) {
                   if (err) {
                         var err = new Error('You are not authenticated!');
                         err.status = 401;
