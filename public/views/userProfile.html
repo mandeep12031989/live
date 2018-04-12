@@ -218,12 +218,14 @@
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>-->
+<!--
 								<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[4]) ? (checkSectionFill(0) && checkSectionFill(1) && checkSectionFill(2) && checkSectionFill(3)?(section_num>5 ? '':section_num=5):''):'');">
 									<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
 										Growth Recommendations
 										<i class="glyph-icon icon-angle-right mrg0A"></i>
 									</a>
 								</li>
+-->
 							</ul>
 						</div>
 						<div class="col-xs-12 col-md-9">
@@ -481,14 +483,14 @@
 													</div>
 												</div>
 												
-												<!--<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
+												<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
 													<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px;">
 														<b>Please share your <span ng-show="section_num == 1">values or work culture preferences</span><span ng-show="section_num == 2">strengths</span><span ng-show="section_num == 3">learning needs</span> not covered above.</b>
 													</div>
 													<div class="col-xs-12 col-sm-12 col-md-12">
 														<textarea class="form-control" style="text-align: center;" ng-model="profile_content.profile.eachSectionShareMore[section_num-1]"></textarea>
 													</div>
-												</div>-->
+												</div>
 												
 												<!--	BUTTON ADD
 												<div class="col-xs-12 col-sm-12 col-md-12" style="font-size: 13px; padding: 10px 0 10px 0; color: grey;" ng-show="profile_content.profile.eachSectionRelate[section_num-1] != 'Above 90%' && profile_content.profile.eachSectionRelate[section_num-1] != ''">
@@ -521,8 +523,8 @@
 										</div><br>
 										
 										<button type="button" class="btn btn-info" ng-click="(section_num == 5)? section_num = section_num - 2 : section_num = section_num - 1" ng-disabled="true">Back</button>
-										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num] = true; second3timer = true; (checkSectionFill(section_num) && (!profile_content.profile.eachSectionEditable[section_num+1])?((section_num == 3)?section_num = section_num+2:section_num = section_num+1):'');" ng-show="section_num != 5">Next</button>
-										<button type="button" class="btn btn-danger pull-right" ng-click="checkRel[section_num] = true; (checkSectionFill(section_num)?submitProfile():'');" ng-show="section_num == 5">Submit</button>
+										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num] = true; second3timer = true; (checkSectionFill(section_num) && (!profile_content.profile.eachSectionEditable[section_num+1])?(section_num = section_num+1):'');" ng-show="section_num != 3">Next</button>
+										<button type="button" class="btn btn-danger pull-right" ng-click="checkRel[section_num] = true; (checkSectionFill(section_num)?submitProfile():'');" ng-show="section_num == 3">Submit</button>
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
 											<button type="button" class="btn btn-warning" ng-click="saveProfile(1)">Save</button><br><br>
 										</span>

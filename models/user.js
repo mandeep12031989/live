@@ -192,7 +192,7 @@ var userSchema = new Schema({
 			timeGrowth: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })]
 		},
 		old: [new Schema({ pro: [profileSchema], pro_num: Number })],
-		growth_recommendations: [new Schema({ sID: String, statement: String, selected: Boolean })],
+		growth_recommendations: [new Schema({ sID: String, statement: String, linked_keyword: String, selected: Boolean })],
 		old_growth_recommendations: [new Schema({ gr: Array, pro_num: Number })],
 		beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String })],
 		old_beliefs: [new Schema({ bel: Array, pro_num: Number })],

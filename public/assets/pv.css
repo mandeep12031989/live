@@ -222,8 +222,20 @@
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+.c1002 {
+  position: relative;
+  font-size: 120px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  float: left;
+  margin: 0 0.1em 0.1em 0;
+  background-color: #eee;
+}
 .c100 {
   position: relative;
+	top: 5px;
+	left: 5px;
   font-size: 120px;
   width: 1em;
   height: 1em;
@@ -247,7 +259,10 @@
   font-size: 240px;
 }
 .c100.small {
-  font-size: 80px;
+  font-size: 60px;
+}
+.c1002.small {
+  font-size: 70px;
 }
 .c100 > span {
   position: absolute;

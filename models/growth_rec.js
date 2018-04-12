@@ -8,7 +8,11 @@ var growthRecommendSchema = new Schema({
         type: String,
         default: "P__N__"
     },
-	statement: String
+	statement: String,
+	linked_keyword: {                           //linked to which keyword ?
+        type: String,
+        default: "P__S__K__"
+    }
 });
 
 module.exports = mongoose.model('growthRecommendSchema', growthRecommendSchema);

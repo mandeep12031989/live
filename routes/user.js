@@ -260,7 +260,7 @@ router.route('/report/:id')
 .get(function(req, res, next){
     var id = sanitize(req.params.id);
     
-    User.findOne({_id: id}, {'profile.profile_content': true, 'firstname': true, 'lastname': true})
+    User.findOne({_id: id}, {'profile.profile_content': true, 'profile.eachSectionStopReflect': true, 'profile.growth_recommendations': true, 'firstname': true, 'lastname': true})
     .exec(function(err, user){
         if(err)
             next(err);

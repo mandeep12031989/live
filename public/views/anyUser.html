@@ -230,90 +230,113 @@
 										<hr>
 										<b>Personal Information</b><br>
 										<div class="row col-xs-12 col-md-12" style="padding-bottom: 10px;">
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Email-ID:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.username}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Email-ID:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.username}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Facilitator:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.facilitator_name}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Facilitator:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.facilitator_name}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Experience:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.work_details.experience}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Experience:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.work_details.experience}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Role & Responsibility:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.work_details.role_responsibility}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Role & Responsibility:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.work_details.role_responsibility}}</span>
 											<br>
 										</div>
 										<hr>
 										<b>Trueself Profile Information</b><br>
-										<div class="row col-xs-12 col-md-12" style="padding-bottom: 10px;">
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill RQs:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+										<div class="col-xs-12 col-sm-12 col-md-12 row" style="padding-bottom: 10px;">
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill RQs:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.question.RQtrack | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Questionnaire:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalRQ}}s">Total: {{(totalRQ)/60 | number:0}}m</span>
+											</span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Questionnaire:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.question.Questrack | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Chosen Profile:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;"><b>{{user.profile.profile_number}}</b></span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Profile:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalQues}}s">Total: {{(totalQues)/60 | number:0}}m</span>
+											</span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Chosen Profile:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;"><b>{{user.profile.profile_number}}</b></span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill Profile:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.profile.track | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Briefs':</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalProfile}}s">Total: {{(totalProfile)/60 | number:0}}m</span>
+											</span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Briefs':</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.profile.eachSectionTrack.timeBelief | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Values':</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalBelief}}s">Total: {{(totalBelief)/60 | number:0}}m</span>
+											</span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Values':</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.profile.eachSectionTrack.timeValue | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Strengths':</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalValue}}s">Total: {{(totalValue)/60 | number:0}}m</span>
+											</span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Strengths':</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.profile.eachSectionTrack.timeStrength | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Learnings':</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalStr}}s">Total: {{(totalStr)/60 | number:0}}m</span>
+											</span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Learnings':</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.profile.eachSectionTrack.timeLearning | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Growths':</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalLearn}}s">Total: {{(totalLearn)/60 | number:0}}m</span>
+											</span>
+											
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Time-taken to fill 'Growths':</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">
 												<span ng-repeat="tk in user.profile.eachSectionTrack.timeGrowth | orderBy:'':true" title="Attempt: {{tk.attempt}} | {{tk.when | date:'medium'}}">{{'('+($index+1) + ')'}} <b>{{(tk.time_taken)/60 | number:0}}m</b> &nbsp;</span>
 											</span>
-											<br>
+											<span class="col-xs-offset-5 col-sm-offset-5 col-md-offset-5 col-xs-7 col-sm-7 col-md-7" style="text-align: left; color: dodgerblue; font-weight: bold;">
+												<span title="{{totalGrowth}}s">Total: {{(totalGrowth)/60 | number:0}}m</span>
+											</span>
+											
 											<span class="col-xs-5 col-sm-5 col-md-5"></span>
 											<span class="col-xs-7 col-sm-7 col-md-7" style="color: #aaa; text-align: left;">--- latest to oldest --></span>
-											<br>
+											
 										</div>
 										<hr>
 										<b>Additional Information</b><br>
 										<div class="row col-xs-12 col-md-12" style="padding-bottom: 10px;">
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Modification:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.last_modification | date: 'medium'}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Modification:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.last_modification | date: 'medium'}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Last Login:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.important_date.last_login | date: 'medium'}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Last Login:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.important_date.last_login | date: 'medium'}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Registration:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.important_date.registration | date: 'medium'}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Registration:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.important_date.registration | date: 'medium'}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Browser:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.device_details.browser + ' ' + user.device_details.browser_version}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Browser:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.device_details.browser + ' ' + user.device_details.browser_version}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>Platform:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.device_details.os}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>Platform:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.device_details.os}}</span>
 											<br>
-											<span class="col-xs-5 col-md-5" style="text-align: right;"><b>OS:</b></span>
-											<span class="col-xs-7 col-md-7" style="text-align: left;">{{user.device_details.os_version}}</span>
+											<span class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;"><b>OS:</b></span>
+											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.device_details.os_version}}</span>
 											<br><br>
 										</div>
 									</div>
@@ -791,6 +814,7 @@
 											<li ng-class="candidate_tab == 0 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 0">Sections Status</a></li>
 											<li ng-class="candidate_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 1">Detailed View</a></li>
 											<li ng-class="candidate_tab == 5 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 5">Preicse View</a></li>
+											<li ng-class="candidate_tab == 7 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 7">Trueself View</a></li>
 											<li ng-class="candidate_tab == 2 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 2">Balancing Strengths</a></li>
 											<li ng-class="candidate_tab == 3 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 3">Personal Mastery Levels</a></li>
 											<li ng-class="candidate_tab == 6 ? 'active_tab' : '' "><a href="" ng-click="candidate_tab = 6">Leadership Competencies</a></li>
@@ -1196,6 +1220,118 @@
 											</div>
 										</div>
 									</div>
+								</div>
+								
+								<div class="container" ng-show="candidate_tab == 7">
+									<link rel="stylesheet" type="text/css" href="./assets/pv.css">
+			<!--                                                    SECTION 1                                                          -->
+									<div class="panel" style="width: 90%; margin: 20px auto;">
+										<div class="panel-body" style="text-align:center; padding: 15px 5%;">
+											<h2 id="page-title">
+												<b>Professional Values and Work Culture Preferences</b>
+											</h2>
+
+											<h5 style="color: #444; padding: 20px; font-weight: bold;">{{user.profile.eachSectionStopReflect[0]}}</h5>
+
+											<div class="row">
+												<div class="col-md-4" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 1 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+
+													<div class="col-xs-12 col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+
+														<div class="col-xs-12 col-md-3" style="margin: auto 0;">
+															<div class="c1002 small">
+																<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+																	<div class="slice">
+																		<div class="bar"></div>
+																		<div class="fill"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-xs-12 col-md-9" style="margin: auto 0;">
+															<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+															<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+			<!--                                                    SECTION 2                                                          -->
+									<div class="panel" style="width: 90%; margin: 20px auto;">
+										<div class="panel-body" style="text-align:center; padding: 15px 5%;">
+											<h2 id="page-title">
+												<b>Professional Strengths</b>
+											</h2>
+
+											<h5 style="color: #444; padding: 20px; font-weight: bold;">{{user.profile.eachSectionStopReflect[1]}}</h5>
+
+											<div class="row">
+												<div class="col-md-4" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+
+													<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+
+														<div class="col-md-3" style="margin: auto 0;">
+															<div class="c1002 small">
+																<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+																	<div class="slice">
+																		<div class="bar"></div>
+																		<div class="fill"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-9" style="margin: auto 0;">
+															<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+															<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+			<!--                                                    SECTION 3                                                          -->
+									<div class="panel" style="width: 90%; margin: 20px auto;">
+										<div class="panel-body" style="text-align:center; padding: 15px 5%;">
+											<h2 id="page-title">
+												<b>Learning Needs</b>
+											</h2>
+
+											<h5 style="color: #444; padding: 20px; font-weight: bold;">{{user.profile.eachSectionStopReflect[2]}}</h5>
+
+											<div class="row">
+												<div class="col-md-4" ng-repeat="keys in user.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+
+													<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+
+														<div class="col-md-3" style="margin: auto 0;">
+															<div class="c1002 small">
+																<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+																	<div class="slice">
+																		<div class="bar"></div>
+																		<div class="fill"></div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-9" style="margin: auto 0;">
+															<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+															<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+														</div>
+
+													</div>
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+
 								</div>
 								
 								<div class="container" ng-show="candidate_tab == 2">
@@ -1609,6 +1745,24 @@
 												</div>
 											</div>
 										</div>
+								
+								<div class="panel panel-body" style="margin: 0 65px 20px 65px;" ng-show="candidate_tab == 1 || candidate_tab == 5 || candidate_tab == 7">
+									<div class="row">
+										<div class="col-md-12">
+											<h2 style="text-align:center" id="page-title">
+												<b>Growth Recommendations</b>
+											</h2>
+										</div>
+										<div class="col-md-12" style="padding: 0 50px;">
+											<ul class="row" style="font-size: 16px;">
+												<li class="col-md-12" ng-repeat="rc in user.profile.growth_recommendations" ng-if="checkToShow(rc.linked_keyword)" style="padding: 10px 30px;">
+													{{rc.statement}}
+												</li>
+											</ul>
+										</div>
+
+									</div>
+								</div>
 								
 								<div style="text-align: center;">
 									<button class="btn btn-danger" ng-click="wantNewProfile = true">Assign New Profile</button>

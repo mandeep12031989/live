@@ -97,7 +97,7 @@
     </div>    
 </span>
 
-<div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0" ng-init="menu = 1">
+<div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0" ng-init="menu = 6">
 	
         <div id="page-wrapper">
             
@@ -107,7 +107,7 @@
 					<!--<button class="btn btn-success" ng-click="printPDF()">Download PDF</button>-->
 					
 					<div id="page-title">
-						<h2><b>{{profile_content.firstname}}'s Trueself Report</b></h2>
+						<h2><b>{{profile_content.firstname}}'s Trueself Profile</b></h2>
 					</div>
 					
 					<div class="row">
@@ -119,17 +119,20 @@
 						</div>
 					</div>
 					
+<!--
 					<div class="row">
 						<div id="page-title" style="margin: 0px auto; font-size: 18px;">
 							<ul class="nav">
 								<li ng-class="menu == 1 ? 'active_tab' : '' "><a href="" ng-click="menu = 1">Detailed View</a></li>
 								<li ng-class="menu == 2 ? 'active_tab' : '' "><a href="" ng-click="menu = 2">Precise View</a></li>
-								<!--<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balancing Strengths</a></li>
+								<li ng-class="menu == 3 ? 'active_tab' : '' "><a href="" ng-click="menu = 3">Balancing Strengths</a></li>
 								<li ng-class="menu == 4 ? 'active_tab' : '' "><a href="" ng-click="menu = 4">Personal Mastery Levels</a></li>
-								<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Leadership Competencies</a></li>-->
+								<li ng-class="menu == 5 ? 'active_tab' : '' "><a href="" ng-click="menu = 5">Leadership Competencies</a></li>
+								<li ng-class="menu == 6 ? 'active_tab' : '' "><a href="" ng-click="menu = 6">Report</a></li>
 							</ul>
 						</div>
 					</div>
+-->
                 
 <!--                                                    MENU 1                                                          -->
                     <div class="container" ng-show="menu == 1">
@@ -792,13 +795,145 @@
 						</div>
 					</div>
 					
+					<div class="container" ng-show="menu == 6">
+						<link rel="stylesheet" type="text/css" href="./assets/pv.css">
+<!--                                                    SECTION 1                                                          -->
+						<div class="panel" style="width: 90%; margin: 20px auto;">
+                            <div class="panel-body" style="text-align:center; padding: 15px 5%;">
+                                <h2 id="page-title">
+                                    <b>Professional Values and Work Culture Preferences</b>
+                                </h2>
+								
+								<h5 style="color: #444; padding: 20px; font-weight: bold;">{{profile_content.profile.eachSectionStopReflect[0]}}</h5>
+								
+								<div class="row">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+										
+										<div class="col-xs-12 col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+											
+											<div class="col-xs-12 col-md-3" style="margin: auto 0;">
+												<div class="c1002 small">
+													<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+														<div class="slice">
+															<div class="bar"></div>
+															<div class="fill"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-12 col-md-9" style="margin: auto 0;">
+												<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+												<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+											</div>
+											
+										</div>
+										
+									</div>
+								</div>
+								
+                            </div>
+                        </div>
+<!--                                                    SECTION 2                                                          -->
+                        <div class="panel" style="width: 90%; margin: 20px auto;">
+                            <div class="panel-body" style="text-align:center; padding: 15px 5%;">
+                                <h2 id="page-title">
+                                    <b>Professional Strengths</b>
+                                </h2>
+								
+								<h5 style="color: #444; padding: 20px; font-weight: bold;">{{profile_content.profile.eachSectionStopReflect[1]}}</h5>
+								
+								<div class="row">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+										
+										<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+											
+											<div class="col-md-3" style="margin: auto 0;">
+												<div class="c1002 small">
+													<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+														<div class="slice">
+															<div class="bar"></div>
+															<div class="fill"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-9" style="margin: auto 0;">
+												<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+												<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+											</div>
+											
+										</div>
+										
+									</div>
+								</div>
+                            </div>
+                        </div>
+<!--                                                    SECTION 3                                                          -->
+                        <div class="panel" style="width: 90%; margin: 20px auto;">
+                            <div class="panel-body" style="text-align:center; padding: 15px 5%;">
+                                <h2 id="page-title">
+                                    <b>Learning Needs</b>
+                                </h2>
+								
+								<h5 style="color: #444; padding: 20px; font-weight: bold;">{{profile_content.profile.eachSectionStopReflect[2]}}</h5>
+								
+								<div class="row">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+										
+										<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+											
+											<div class="col-md-3" style="margin: auto 0;">
+												<div class="c1002 small">
+													<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+														<div class="slice">
+															<div class="bar"></div>
+															<div class="fill"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-9" style="margin: auto 0;">
+												<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+												<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+											</div>
+											
+										</div>
+										
+									</div>
+								</div>
+                            </div>
+                        </div>
+						
+							
+					</div>
+					
 					<!--									TABS END											-->
 					
+					<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 style="text-align:center" id="page-title">
+                                    <b>Growth Recommendations</b>
+                                </h2>
+							</div>
+							<div class="col-md-12" style="padding: 0 50px;">
+								<ul class="row" style="font-size: 16px;">
+									<li class="col-md-12" ng-repeat="rc in profile_content.profile.growth_recommendations" ng-if="checkToShow(rc.linked_keyword)" style="padding: 10px 30px;">
+										{{rc.statement}}
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>
+					
+<!--
 					<button class="btn btn-info" ng-show="(menu!=1)" ng-click="backMenu()">Back</button>
 					<button class="btn btn-info pull-right" ng-show="(menu!=2)" ng-click="nextMenu()">Next</button>
-					<!--<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==4)" ui-sref="feedback">Proceed</button>
-					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==4)">Back to Dashboard</button>-->
-					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="menu==2">Back to Dashboard</button>
+					<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==4)" ui-sref="feedback">Proceed</button>
+					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==4)">Back to Dashboard</button>
+-->
+					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="menu==6">Back to Dashboard</button>
                 </div>
             </div>
         </div>
