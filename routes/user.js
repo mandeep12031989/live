@@ -263,7 +263,20 @@ router.route('/report/:id')
     User.findOne({_id: id}, {'profile.profile_content': true, 'profile.eachSectionStopReflect': true, 'profile.growth_recommendations': true, 'firstname': true, 'lastname': true})
     .exec(function(err, user){
         if(err)
-            next(err);
+            return next(err);
+		
+        res.status(200).json(user);
+    });
+});
+
+router.route('/assessor-report/:id')
+.get(function(req, res, next){
+    var id = sanitize(req.params.id);
+    
+    User.findOne({_id: id}, {'assessor': true, 'work_details.experience': true, 'profile.profile_number': true, 'firstname': true, 'lastname': true})
+    .exec(function(err, user){
+        if(err)
+            return next(err);
 		
         res.status(200).json(user);
     });
