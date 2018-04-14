@@ -14,6 +14,9 @@
         .left_border_dnt{
             border-left:10px solid #efebe9;
         }
+        .left_border_weak{
+            border-left:10px solid #999;
+        }
 		
 		.left_border_str2{
             border: 3px solid #00b0ff;
@@ -888,7 +891,7 @@
 								
 								<div ng-show="candidate_tab == 1">
 									<div class="row">
-										<div class="col-md-offset-2 col-sm-2">
+										<div class="col-md-offset-2 col-md-2">
 
 											<div class="panel">
 												<div class="panel-heading" ng-class="'left_border_str'">
@@ -898,7 +901,7 @@
 
 										</div>
 
-										<div class="col-md-offset-1 col-sm-2">
+										<div class="col-md-offset-1 col-md-2">
 
 											<div class="panel">
 												<div class="panel-heading" ng-class="'left_border_prt'">
@@ -908,7 +911,7 @@
 
 										</div>
 
-										<div class="col-md-offset-1 col-sm-2">
+										<div class="col-md-offset-1 col-md-2">
 
 											<div class="panel">
 												<div class="panel-heading" ng-class="'left_border_dnt'">
@@ -1224,6 +1227,39 @@
 								
 								<div class="container" ng-show="candidate_tab == 7">
 									<link rel="stylesheet" type="text/css" href="./assets/pv.css">
+									
+									<div class="row">
+										<div class="col-md-offset-2 col-md-2">
+
+											<div class="panel">
+												<div class="panel-heading" ng-class="'left_border_str'">
+													Exhibit Strongly
+												</div>
+											</div>
+
+										</div>
+
+										<div class="col-md-offset-1 col-md-2">
+
+											<div class="panel">
+												<div class="panel-heading" ng-class="'left_border_prt'">
+													Exhibit Partially
+												</div>
+											</div>
+
+										</div>
+
+										<div class="col-md-offset-1 col-md-2">
+
+											<div class="panel">
+												<div class="panel-heading" ng-class="'left_border_weak'">
+													Exhibit Weakly
+												</div>
+											</div>
+
+										</div>
+
+									</div>
 			<!--                                                    SECTION 1                                                          -->
 									<div class="panel" style="width: 90%; margin: 20px auto;">
 										<div class="panel-body" style="text-align:center; padding: 15px 5%;">
@@ -1753,6 +1789,12 @@
 												<b>Growth Recommendations</b>
 											</h2>
 										</div>
+										<div class="col-md-12" style="padding: 0px 50px;">
+											<h5 style="text-align:center" id="page-title">
+												<b>The following growth tips are selected keeping in mind your identified learning needs, to assist you in managing yourself, working with others more effectively.
+			We recommend to adopt a couple of them as a daily practice.</b>
+											</h5>
+										</div>
 										<div class="col-md-12" style="padding: 0 50px;">
 											<ul class="row" style="font-size: 16px;">
 												<li class="col-md-12" ng-repeat="rc in user.profile.growth_recommendations" ng-if="checkToShow(rc.linked_keyword)" style="padding: 10px 30px;">
@@ -2190,7 +2232,7 @@
 													<br>
 													<div class="col-xs-12 col-sm-12 col-md-12 row" style="padding-bottom: 10px;">
 														<div class="col-xs-12 col-sm-12 col-md-12">
-															<b><span ng-show="section_num == 1">What is the most important value to you? Why is this important?</span><span ng-show="section_num == 2">How did you discover that this is your strength?</span><span ng-show="section_num == 3">What concrete steps can you take to overcome it?</span></b>
+															<b><span ng-show="section_num == 1">What is the most important value to you? Why is this important?</span><span ng-show="section_num == 2">How are you exhibiting this strength in you personal or professional life?</span><span ng-show="section_num == 3">What concrete steps can you take to overcome it?</span></b>
 														</div>
 														<div class="col-xs-12 col-sm-12 col-md-12">
 															<textarea class="form-control" style="text-align: center;" ng-model="user.profile.eachSectionCombineComment.value[0]" ng-show="section_num==1" disabled></textarea>
@@ -3046,21 +3088,6 @@
 											</div>
 									</div>
 									<hr>
-									<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 1">
-										<input class="form-control" type="text" ng-model="r.title" placeholder="Title"><br>
-										<textarea class="form-control" ng-model="r.desc" placeholder="Description"></textarea><br>
-										<!--<button class="btn btn-danger" style="margin-bottom: 40px;" ng-click="addNewLine($index)">+ Add Line-break</button>-->
-										<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="remove_to_recommend($index)">Remove</button>
-										<br>
-									</div>
-									<div class="row col-md-12" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 2" style="padding: 10px;">
-										<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>{{r.title}}</b></h4><br></div>
-										<div class="col-md-12" style="margin-left: 20px; font-size: 15px;"><p ng-bind-html="r.desc | linebreaks"></p></div>
-										<div class="col-md-12" style="margin-left: 20px; font-size: 15px;"><p ng-bind-html="r.desc | linebreaks"></p></div>
-										<br>
-									</div>
-									<button class="btn btn-info" ng-click="add_to_recommend()" ng-show="switchView == 1">+ Add Section</button>
-									<hr>
 									<!--	section 1	-->
 									<div class="row" style="padding: 20px;">
 										<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>Professional Values and Work Culture Preferences</b></h4><br></div>
@@ -3070,9 +3097,9 @@
 												<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%" ng-show="switchView == 1">
 												<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
 												<ul>
-													<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
-														<span ng-show="switchView == 2" style="font-size: 15px; padding: 5px;">{{mini.mini_description}}</span>
-														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%" ng-show="switchView == 1">
+													<li>
+														<span ng-show="switchView == 2" style="font-size: 15px; padding: 5px;">{{keys.mini_descriptions[firstMD($index)].mini_description}}</span>
+														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.mini_descriptions[firstMD($index)].mini_description" size="50%" ng-show="switchView == 1">
 													</li>
 												</ul>
 											</li>
@@ -3088,9 +3115,9 @@
 												<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%" ng-show="switchView == 1">
 												<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
 												<ul>
-													<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
-														<span ng-show="switchView == 2" style="font-size: 15px; padding: 5px;">{{mini.mini_description}}</span>
-														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%" ng-show="switchView == 1">
+													<li>
+														<span ng-show="switchView == 2" style="font-size: 15px; padding: 5px;">{{keys.mini_descriptions[firstMD($index)].mini_description}}</span>
+														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.mini_descriptions[firstMD($index)].mini_description" size="50%" ng-show="switchView == 1">
 													</li>
 												</ul>
 											</li>
@@ -3106,14 +3133,29 @@
 												<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%" ng-show="switchView == 1">
 												<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;" ng-show="switchView == 1"><i class="material-icons">clear</i></span>
 												<ul>
-													<li ng-repeat="mini in keys.mini_descriptions" ng-if="mini.assessor_relate">
-														<span ng-show="switchView == 2" style="font-size: 15px; padding: 5px;">{{mini.mini_description}}</span>
-														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mini.mini_description" size="50%" ng-show="switchView == 1">
+													<li>
+														<span ng-show="switchView == 2" style="font-size: 15px; padding: 5px;">{{keys.mini_descriptions[firstMD($index)].mini_description}}</span>
+														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.mini_descriptions[firstMD($index)].mini_description" size="50%" ng-show="switchView == 1">
 													</li>
 												</ul>
 											</li>
 										</ul>
 									</div>
+									<hr>
+									<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 1">
+										<input class="form-control" type="text" ng-model="r.title" placeholder="Title"><br>
+										<textarea class="form-control" ng-model="r.desc" placeholder="Description"></textarea><br>
+										<!--<button class="btn btn-danger" style="margin-bottom: 40px;" ng-click="addNewLine($index)">+ Add Line-break</button>-->
+										<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="remove_to_recommend($index)">Remove</button>
+										<br>
+									</div>
+									<div class="row col-md-12" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 2" style="padding: 10px;">
+										<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>{{r.title}}</b></h4><br></div>
+										<div class="col-md-12" style="margin-left: 20px; font-size: 15px;"><p ng-bind-html="r.desc | linebreaks"></p></div>
+										<div class="col-md-12" style="margin-left: 20px; font-size: 15px;"><p ng-bind-html="r.desc | linebreaks"></p></div>
+										<br>
+									</div>
+									<button class="btn btn-info" ng-click="add_to_recommend()" ng-show="switchView == 1">+ Add Section</button>
 									<hr>
 									<!--	section Recommendations		-->
 									<div class="row" style="padding: 20px;">
