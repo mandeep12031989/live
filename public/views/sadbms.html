@@ -50,6 +50,13 @@
                             <span>View / Edit</span>
                         </a>
                     </li>
+					<li class="header"><span>Open MCQ</span></li>
+                    <li ng-click="tab_num = 15">
+                        <a href="" ng-class="tab_num == 15 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-cog"></i>
+                            <span>View / Edit</span>
+                        </a>
+                    </li>
                     
                     <li class="header" class="row"><span>Master Parent Keywords</span></li>
                     <li ng-click="tab_num = 3">
@@ -799,6 +806,75 @@
 													Profile: <input type="text" ng-model="q.keywords[1].from_profile">
 													</div>
 													<button class="btn btn-success" ng-click="updateQues2(q._id, q)" style="color: white; width: 100%;">Update</button>
+                                                </div>
+
+                                        </div>
+										
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+				
+                <!--                        TAB 15                           -->
+                <div class="container" ng-show="tab_num == 15">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <h1 style="text-align:center; font-weight:bold;" class="title-hero">
+                                   Open MCQ
+                                </h1>
+                                <div class="example-box-wrapper">
+                                    <div id="form-wizard-3" class="form-wizard">
+                                        
+                                        <div class="tab-content">
+
+                                                <div class="content-box" ng-repeat="q in mcqs">
+													<div class="content-box-header bg-blue row" style="font-size: 15px; margin: 10px;">
+														<div class="col-md-2" style="text-align: center; color: red; margin: auto 0;">
+															<input type="text" class="form-control" ng-model="q.qID" style="text-align: center;">
+														</div>
+														<div class="col-md-10">
+															<textarea class="form-control" ng-model="q.question" rows="3"></textarea>
+														</div>
+													</div>
+													<div class="row" style="font-size: 15px; margin: 10px;">
+														<div class="col-md-2" style="text-align: center; color: red; margin: auto 0;">
+															<input type="text" class="form-control" ng-model="q.choices[0].cID" style="text-align: center;">
+														</div>
+														<div class="col-md-10">
+															<textarea class="form-control" ng-model="q.choices[0].statement" rows="3"></textarea>
+														</div>
+													</div>
+													<div class="row" style="font-size: 15px; margin: 10px;">
+														<div class="col-md-2" style="text-align: center; color: red; margin: auto 0;">
+															<input type="text" class="form-control" ng-model="q.choices[1].cID" style="text-align: center;">
+														</div>
+														<div class="col-md-10">
+															<textarea class="form-control" ng-model="q.choices[1].statement" rows="3"></textarea>
+														</div>
+													</div>
+													<div class="row" style="font-size: 15px; margin: 10px;">
+														<div class="col-md-2" style="text-align: center; color: red; margin: auto 0;">
+															<input type="text" class="form-control" ng-model="q.choices[2].cID" style="text-align: center;">
+														</div>
+														<div class="col-md-10">
+															<textarea class="form-control" ng-model="q.choices[2].statement" rows="3"></textarea>
+														</div>
+													</div>
+													<div class="row" style="font-size: 15px; margin: 10px;">
+														<div class="col-md-2" style="text-align: center; color: red; margin: auto 0;">
+															<input type="text" class="form-control" ng-model="q.choices[3].cID" style="text-align: center;">
+														</div>
+														<div class="col-md-10">
+															<textarea class="form-control" ng-model="q.choices[3].statement" rows="3"></textarea>
+														</div>
+													</div>
+													<div class="row" style="margin: 10px;">
+														<div class="col-md-2" style="margin: auto 0; text-align: center; font-weight: bold;">Correct: </div>
+														<div class="col-md-4"><input type="text" ng-model="q.correct" class="form-control"></div>
+														<div class="col-md-6"></div>
+                                                    </div>
+													<button class="btn btn-success" ng-click="updateMCQ(q._id, q)" style="color: white; width: 100%;">Update</button>
                                                 </div>
 
                                         </div>

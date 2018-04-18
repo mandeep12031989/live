@@ -1,0 +1,185 @@
+<div class="row" ng-if="next == 0">
+	<div class="container row">
+						
+		<div id="page-title" style="margin-top: 5%;">
+			<h2>Kindly provide the following information to proceed</h2>
+		</div>
+		
+		<div class="col-md-offset-3 col-md-6">
+			<div class="panel">
+				<div class="panel-body">
+					<div class="example-box-wrapper">
+						
+						<form class="form-horizontal" role="form" ng-submit="nextStep()">
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Full Name</label>
+								<div class="col-sm-9">
+									<div class="input-prepend input-group">
+										<input type="text" class="form-control" placeholder="Enter You Full Name" ng-model="details.fullname" min="3" required>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Email-ID</label>
+								<div class="col-sm-9">
+									<div class="input-prepend input-group">
+										<input type="text" class="form-control" placeholder="Enter You Email-ID" ng-model="details.emailID" min="8" required>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="" class="col-sm-3 control-label">Contact</label>
+								<div class="col-sm-9">
+									<div class="input-prepend input-group">
+										<input type="number" class="form-control" placeholder="Enter Your Contact" ng-model="details.contact" min="10" required>
+									</div>
+								</div>
+							</div>
+							<input type="submit" value="Start" class="btn btn-danger pull-right" ng-disabled="details.fullname.length<5 || details.emailID.length<8 || details.contact<7000000000 || !details.fullname || !details.emailID || !details.contact">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row col-sm-offset-1 col-sm-10">
+			<div class="col-sm-12" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black; font-size: 14px; margin-top: 30px;">
+				<h3>Instructions for attempting below Aptitude Questions and Javascript-Basics</h3>
+				<ol>
+					<li>There will be <b>2 sections</b>, Aptitude Questions and Javascript-Basics.</li>
+					<li>Test will be of <b>40 mins</b> in total. You can traverse between these sections.</li>
+					<li>Test will consists of <b>30 questions (15 questions from each section)</b>, with +1 mark each, and -1/2 for each wrong answer.</li>
+					<li>In each question, choose <b>one</b> option that fits best.</li>
+					<li>Test will be conducted in <b>full-screen</b>. If it is closed, test will be submitted and you are not authorized to give the test again.</li>
+				</ol>
+			</div>                  
+                	       
+		</div>
+		
+	</div>
+</div>
+
+<span ng-show="loading && (next!=0)">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div class="col-md-offset-11 col-md-2 row" style="position: fixed; bottom: 150px; right: 100px; z-index: 1000;" ng-show="!loading && (next == 1 || next == 2)">
+	<div class="col-md-12 row" style="padding: 10px; background: white; border: 2px solid #555; text-align: center;">
+		<div class="col-md-12" style="font-size: 20px;" ng-style="hour > 34 ? {'color':'red'}:{'color':'blue'}">
+			{{hour}} : {{timer % 60}} min(s)
+		</div>
+		<div class="col-md-12">
+			Total time: 40 min(s)
+		</div>
+	</div>
+</div>
+
+<div id="sb-site" ng-show="!loading && (next!=0)">
+
+    <div id="page-wrapper">
+        
+        <div id="page-content-wrapper">
+            <div>
+				
+				<div class="container" ng-show="next == 3" style="margin-top: 13%;">
+					<div class="jumbotron">
+						<h1>Thank-you!</h1>
+						<p>For completing MCQs.</p>
+					</div>
+				</div>
+				
+				<div class="row col-sm-offset-1" ng-show="next == 1 || next == 2">
+					<!--  <div class="col-sm-1"><h2><span class="label label-danger">Imp.</span></h2></div>  -->   
+                    <div class="col-sm-10" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black; font-size: 14px; margin-top: 30px;">
+						<h3 ng-show="next == 1">Instructions for attempting below Aptitude Questions</h3>
+						<h3 ng-show="next == 2">Instructions for attempting below Javascript-Basics</h3>
+                        <ol>
+                            <li>Test will consists of 15 questions, with +1 mark each, and -1/2 for each wrong answer.</li>
+                            <li>In each question, choose one option that fits best.</li>
+                        </ol>
+					</div>                  
+                	       
+				</div>
+                <br><br>
+                    <div class="container" ng-show="next == 1 || next == 2">
+
+                        <div class="panel">
+                            <div class="panel-body">
+<!--
+                                <h1 style="text-align:center; font-weight:bold;" class="title-hero">
+                                   <b>MCQs</b>
+                                </h1>
+-->
+                                <div class="example-box-wrapper">
+                                    <div id="form-wizard-3" class="form-wizard">
+                                        
+                                        <div class="tab-content" ng-show="next == 1">
+
+                                                <div class="content-box" ng-repeat="q in questions | filter:'T02'">
+                                                    <span style="padding: 7px; font-size: 14px; color: white; background: #42a5f5;">
+														<b>{{$index + 1}}</b>
+													</span>
+													
+													<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
+														<span ng-bind-html="q.question | linebreaks"></span>
+													</div>
+													<div class="content-box-wrapper col-md-12 row" style="font-size: 15px; margin: 0 5px;">
+														<span ng-repeat="ch in q.choices" class="col-md-12 row">
+															<div class="col-md-1">
+																<input type="radio" ng-model="answers[$parent.$index]" value="{{ch.cID}}">
+															</div>
+															<div class="col-md-11" ng-style="ch.cID == answers[$parent.$index] ? {'background': '#ccff90'} : {}" ng-click="answers[$parent.$index] = ch.cID">
+																<span ng-bind-html="ch.statement | linebreaks"></span>
+															</div>
+														</span>
+													</div>
+                                                </div>
+                                            
+                                                <a class="btn btn-info pull-right" ng-click="next = 2" style="color: white;">Proceed to Javascript-Basics</a>
+<!--                                                <a class="btn btn-info pull-right" ng-click="saveQues()" style="color: white;">Proceed to Javascript-Basics</a>-->
+
+                                        </div>
+                                        
+                                        <div class="tab-content" ng-show="next == 2">
+
+                                                <div class="content-box" ng-repeat="q in questions | filter:'T01'">
+                                                    <span style="padding: 7px; font-size: 14px; color: white; background: #42a5f5;">
+														<b>{{$index + 1}}</b>
+													</span>
+													
+													<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
+														<span ng-show="(q.question | linebreaks)" ng-bind-html="q.question | linebreaks"></span>
+														<span ng-show="!(q.question | linebreaks)">{{q.question}}</span>
+													</div>
+													<div class="content-box-wrapper col-md-12 row" style="font-size: 15px; margin: 0 5px;">
+														<span ng-repeat="ch in q.choices" class="col-md-12 row">
+															<div class="col-md-1">
+																<input type="radio" ng-model="answers[15 + $parent.$index]" value="{{ch.cID}}">
+															</div>
+															<div class="col-md-11" ng-style="ch.cID == answers[15 + $parent.$index] ? {'background': '#ccff90'} : {}" ng-click="answers[15 + $parent.$index] = ch.cID">
+																<span ng-bind-html="ch.statement | linebreaks"></span>
+															</div>
+														</span>
+													</div>
+                                                </div>
+                                            
+                                                <a class="btn btn-info" ng-click="next = 1" style="color: white;">Back to Aptitude</a>
+                                                <a class="btn btn-success pull-right" ng-click="saveQues()" style="color: white;">Submit Test</a>
+
+                                        </div>
+										
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
