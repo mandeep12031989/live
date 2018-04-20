@@ -12,6 +12,7 @@ var descriptionSchema = new Schema({
         default: "P__S__K__M__"
     },
     mini_description: String,
+    mini_description_h: String,
     relate: {
         type: String,
         default: ""
@@ -77,6 +78,7 @@ var profileSchema = new Schema({
         default: "P__S__K__"
     },
     keyword: String,                        //keyword name
+    keyword_h: String,                        //keyword name
 	new_keyword: {
 		type: Boolean,
 		default: false
@@ -279,6 +281,10 @@ var userSchema = new Schema({
 			moderate: [new Schema({ statement: String })],
 			reactive: [new Schema({ statement: String })]
 		}
+	},
+	language: {
+		type: String,
+		default: 'eng'
 	}
 });
 

@@ -9,6 +9,7 @@ var descriptionSchema = new Schema({
         default: "P__S__K__M__"
     },
     mini_description: String,
+    mini_description_h: String,
     tag: {
         personal: {
             type: Boolean,
@@ -58,6 +59,7 @@ var keywordSchema = new Schema({
         default: "P__S__K__"
     },
     keyword: String,                        //keyword name
+    keyword_h: String,                        //keyword name
     mini_descriptions: [descriptionSchema],     //keyword's different meanings/statements or say mini-descriptions
     linked_keyword: {                           //linked to which keyword ?
         type: String,

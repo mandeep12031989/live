@@ -35,7 +35,7 @@
 									</div>
 								</div>
 							</div>
-							<input type="submit" value="Start" class="btn btn-danger pull-right" ng-disabled="details.fullname.length<5 || details.emailID.length<8 || details.contact<7000000000 || !details.fullname || !details.emailID || !details.contact">
+							<input type="submit" value="Start Test" class="btn btn-danger pull-right" ng-disabled="details.fullname.length<5 || details.emailID.length<8 || details.contact<7000000000 || !details.fullname || !details.emailID || !details.contact">
 						</form>
 					</div>
 				</div>
@@ -46,11 +46,11 @@
 			<div class="col-sm-12" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black; font-size: 14px; margin-top: 30px;">
 				<h3>Instructions for attempting below Aptitude Questions and Javascript-Basics</h3>
 				<ol>
-					<li>There will be <b>2 sections</b>, Aptitude Questions and Javascript-Basics.</li>
-					<li>Test will be of <b>40 mins</b> in total. You can traverse between these sections.</li>
-					<li>Test will consists of <b>30 questions (15 questions from each section)</b>, with +1 mark each, and -1/2 for each wrong answer.</li>
+					<li>There will be <b>2 sections</b>, Aptitude Questions and Javascript-Basics. Keep <b>notebook and pen</b> with you.</li>
+					<li>Test will be of <b>40 mins</b> in total. You can traverse between those sections.</li>
+					<li>Test will consists of <b>30 questions (15 questions from each section)</b>, with +1 mark each, and -1/2 for each wrong answer. Maximum marks will be <b>+30</b>.</li>
 					<li>In each question, choose <b>one</b> option that fits best.</li>
-					<li>Test will be conducted in <b>full-screen</b>. If it is closed, test will be submitted and you are not authorized to give the test again.</li>
+					<li>Test will be conducted in <b>full-screen</b>. Do not press key <b>ESC</b>. If it is closed, test will be submitted and you are not authorized to give the test again.</li>
 				</ol>
 			</div>                  
                 	       
@@ -76,6 +76,14 @@
 			Total time: 40 min(s)
 		</div>
 	</div>
+	<div class="col-md-12 row" style="text-align: center;">
+		<div class="col-md-6" style="padding: 5px; cursor: pointer;" ng-style="next == 1 ? {'background':'#ddd'}:{'background':'#00C851', 'color': 'white'}" ng-click="next=1">
+			Prev
+		</div>
+		<div class="col-md-6" style="padding: 5px; cursor: pointer;" ng-style="next == 2 ? {'background':'#ddd'}:{'background':'#00C851', 'color': 'white'}" ng-click="next=2">
+			Next
+		</div>
+	</div>
 </div>
 
 <div id="sb-site" ng-show="!loading && (next!=0)">
@@ -95,11 +103,12 @@
 				<div class="row col-sm-offset-1" ng-show="next == 1 || next == 2">
 					<!--  <div class="col-sm-1"><h2><span class="label label-danger">Imp.</span></h2></div>  -->   
                     <div class="col-sm-10" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black; font-size: 14px; margin-top: 30px;">
-						<h3 ng-show="next == 1">Instructions for attempting below Aptitude Questions</h3>
-						<h3 ng-show="next == 2">Instructions for attempting below Javascript-Basics</h3>
+						<h3 ng-show="next == 1">Instructions for attempting below Section 1: Aptitude Questions</h3>
+						<h3 ng-show="next == 2">Instructions for attempting below Section 2: Javascript-Basics</h3>
                         <ol>
-                            <li>Test will consists of 15 questions, with +1 mark each, and -1/2 for each wrong answer.</li>
+                            <li>This section consists of 15 questions, with +1 mark each, and -1/2 for each wrong answer.</li>
                             <li>In each question, choose one option that fits best.</li>
+                            <li>Manage yourself to attempt other section's questions.</li>
                         </ol>
 					</div>                  
                 	       
@@ -140,7 +149,6 @@
                                                 </div>
                                             
                                                 <a class="btn btn-info pull-right" ng-click="next = 2" style="color: white;">Proceed to Javascript-Basics</a>
-<!--                                                <a class="btn btn-info pull-right" ng-click="saveQues()" style="color: white;">Proceed to Javascript-Basics</a>-->
 
                                         </div>
                                         

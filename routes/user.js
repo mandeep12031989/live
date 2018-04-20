@@ -666,7 +666,7 @@ router.route('/profile/getProfile')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'firstname': true, 'lastname': true, 'profile': true, 'feedback': true})
+    User.findOne({_id: id}, {'firstname': true, 'lastname': true, 'profile': true, 'feedback': true, 'language': true})
     .exec(function(err, user){
         if(err)
             return next(err);

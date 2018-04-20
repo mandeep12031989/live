@@ -246,6 +246,21 @@
 											<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.work_details.role_responsibility}}</span>
 											<br>
 										</div>
+										
+										<hr>
+										<b>Language to User</b><br>
+										<div class="col-xs-12 col-sm-12 col-md-12 row" style="padding-bottom: 10px; font-weight: bold; margin: 20px 0;">
+											<div class="col-md-6" style="text-align: center;">
+												<a style="cursor: pointer; padding: 10px 20px;" ng-style="user.language == 'eng' ? {'color':'white', 'background':'#00C851'}:{'color':'black', 'background':'#eee'}" ng-click="user.language == 'eng' ? '':languageUpdate();">English</a>
+											</div>
+											<div class="col-md-6">
+												<a style="cursor: pointer; padding: 10px 20px;" ng-style="user.language == 'eng+hin' ? {'color':'white', 'background':'#00C851'}:{'color':'black', 'background':'#eee'}" ng-click="user.language == 'eng+hin' ? '':languageUpdate();">English + Hindi</a>
+											</div>
+											<div class="col-md-12" style="text-align: center; font-weight: normal; color: #aaa; margin-top: 15px;">
+												click on button to change language
+											</div>
+										</div>
+										
 										<hr>
 										<b>Trueself Profile Information</b><br>
 										<div class="col-xs-12 col-sm-12 col-md-12 row" style="padding-bottom: 10px;">

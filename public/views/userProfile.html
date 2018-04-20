@@ -339,16 +339,22 @@
 													<div class="panel panel-primary">
 														<div class="panel-heading">
 															<h4 class="panel-title"><b>{{keys.keyword}}</b></h4>
+															<br ng-show="profile_content.language == 'eng+hin' && keys.keyword_h">
+															<h4 class="panel-title" ng-show="profile_content.language == 'eng+hin' && keys.keyword_h"><b>{{keys.keyword_h}}</b></h4>
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
 																<div style="position: absolute; margin-top: -24px; margin-left: -5px; background: white; font-size: 11px; padding-left: 10px; padding-right: 10px;" ng-if="section_num == 3">Can you come across to others as</div>
 																<div class="row" ng-repeat="mini in keys.mini_descriptions" style="margin-bottom: 10px; color: #757575;" ng-class="((!mini.relate) && checkRel[section_num])?'bg_uncomp':''">
 																	<div class="col-md-6" ng-if="section_num != 3">
-																		<h5><b>{{mini.mini_description}}</b></h5>  
+																		<h5><b>{{mini.mini_description}}</b></h5>
+																		<br ng-show="profile_content.language == 'eng+hin' && mini.mini_description_h">
+																		<h5 ng-show="profile_content.language == 'eng+hin' && mini.mini_description_h"><b>{{mini.mini_description_h}}</b></h5>
 																	</div>
 																	<div class="col-md-4" ng-if="section_num == 3">
 																		<h5><b>{{mini.mini_description}}</b></h5>  
+																		<br ng-show="profile_content.language == 'eng+hin' && mini.mini_description_h">
+																		<h5 ng-show="profile_content.language == 'eng+hin' && mini.mini_description_h"><b>{{mini.mini_description_h}}</b></h5>  
 																	</div>
 																   	<div class="col-md-6" ng-if="section_num != 3">
 																		<div id="radios">

@@ -329,15 +329,13 @@
                         <div class="panel" ng-repeat="pk in master" ng-show="pk.keyword_id[5] == section_num">
                             <div class="panel-body">
                                 <h2 style="text-align:center" id="page-title">
-                                    <b>
-										<input type="text" ng-model="pk.section_id" style="text-align:center; color: #FF0000;"> - <input type="text" ng-model="pk.keyword_id" style="text-align:center; color: #FF0000;"> - <input type="text" ng-model="pk.keyword" style="text-align:center; color: #FF0000;">
-									</b>
+									<input type="text" ng-model="pk.section_id" style="text-align:center; color: #FF0000;"> - <input type="text" ng-model="pk.keyword_id" style="text-align:center; color: #FF0000;"> - <input type="text" ng-model="pk.keyword" style="text-align:center; color: #FF0000;"> - <input type="text" ng-model="pk.keyword_h" style="text-align:center; color: #FF0000;">
                                 </h2>
                                 <div class="example-box-wrapper">
                                     <div class="row">
                                         
-                                        <div class="col-sm-12">
-                                            <div class="col-md-12" style="text-align:center;">
+                                        <div class="col-sm-12 row">
+                                            <div class="col-md-12 row" style="text-align:center;">
 												<div class="col-md-2">
 													Version: <input type="text" ng-model="pk.key_version" size="3%">
 												</div>
@@ -348,7 +346,7 @@
 													Linked Keyword: <input type="text" ng-model="pk.linked_keyword">
 												</div>
 											</div><br><br>
-											<div class="col-md-12">
+											<div class="col-md-12 row">
 												<div class="col-md-4" style="text-align: right;">
 													Balancing Description (Score equals 0):
 												</div>
@@ -356,7 +354,7 @@
 													<input type="text" ng-model="pk.balancing_description[0].desc" style="width: 100%">
 												</div>
 											</div><br>
-											<div class="col-md-12">
+											<div class="col-md-12 row">
 												<div class="col-md-4" style="text-align: right;">
 													Balancing Description (0 greater Score less 1):
 												</div>
@@ -364,7 +362,7 @@
 													<input type="text" ng-model="pk.balancing_description[1].desc" style="width: 100%">
 												</div>
 											</div><br>
-											<div class="col-md-12">
+											<div class="col-md-12 row">
 												<div class="col-md-4" style="text-align: right;">
 													Balancing Description (Score greater 1):
 												</div>
@@ -372,7 +370,7 @@
 													<input type="text" ng-model="pk.balancing_description[2].desc" style="width: 100%">
 												</div>
 											</div><br><br><br>
-											<div class="col-md-12">
+											<div class="col-md-12 row">
 												<div class="col-md-4" style="text-align: right;">
 													Comment Placeholder (Score equals 0):
 												</div>
@@ -380,7 +378,7 @@
 													<input type="text" ng-model="pk.comment_placeholder[0].question" style="width: 100%">
 												</div>
 											</div><br>
-											<div class="col-md-12">
+											<div class="col-md-12 row">
 												<div class="col-md-4" style="text-align: right;">
 													Comment Placeholder (0 greater Score less 1):
 												</div>
@@ -388,7 +386,7 @@
 													<input type="text" ng-model="pk.comment_placeholder[1].question" style="width: 100%">
 												</div>
 											</div><br>
-											<div class="col-md-12">
+											<div class="col-md-12 row">
 												<div class="col-md-4" style="text-align: right;">
 													Comment Placeholder (Score greater 1):
 												</div>
@@ -396,17 +394,18 @@
 													<input type="text" ng-model="pk.comment_placeholder[2].question" style="width: 100%">
 												</div>
 											</div><br><br><br>
-                                            <div class="panel-layout" ng-repeat="md in pk.mini_descriptions">
-                                                <div class="panel-box">
-													
-													<i class="material-icons" style="float: right;" ng-click="removeMD($parent.$index, $index)">clear</i>
+                                            <div class="col-md-12 row panel-layout" ng-repeat="md in pk.mini_descriptions">
+                                                <div class="col-md-12 row panel-box">
+													<div class="col-md-offset-11 col-md-1">
+														<i class="material-icons" style="float: right;" ng-click="removeMD($parent.$index, $index)">clear</i>
+													</div>
                                                     
-                                                    <div class="panel-content image-box">
+                                                    <div class="col-md-12 row panel-content image-box">
 
-                                                        <div class="image-content">
+                                                        <div class="col-md-12 row image-content">
                                                             
-                                                            <div class="meta-box meta-box-bottom">
-                                                                <h3><input type="text" ng-model="md.mini_description_id" style="text-align:center;"> - <input type="text" ng-model="md.mini_description" style="text-align:center;"></h3>                                           
+                                                            <div class="col-md-12 meta-box meta-box-bottom">
+                                                                <h3><input type="text" ng-model="md.mini_description_id" style="text-align:center; color: #FF0000;"> - <input type="text" ng-model="md.mini_description" style="text-align:center; color: #FF0000;"> - <input type="text" ng-model="md.mini_description_h" style="text-align:center; color: #FF0000;"></h3>                                           
                                                             </div>
                             
                                                         </div>
@@ -414,7 +413,7 @@
 
                                                     </div>
 													
-													<div class="col-md-12">
+													<div class="col-md-12 row">
 														<div class="col-md-offset-2 col-md-2" style="text-align: right;">
 															Responsive Statement:
 														</div>
@@ -422,28 +421,32 @@
 															<input type="text" ng-model="md.responsive_statement" style="width: 100%">
 														</div>
 													</div>
-                                                    <br><br>
-                                                    <ul class="list-group list-group-separator mrg0A row list-group-icons">
-                                                        
-                                                        <li class="list-group-item">                              
-                                                                Personal - <input type="checkbox" ng-model="md.tag.personal">
-                                                                Professional - <input type="checkbox" ng-model="md.tag.professional">
-                                                                Competency - <input type="checkbox" ng-model="md.tag.competency">
-                                                                Company - <input type="checkbox" ng-model="md.tag.company">
-                                                        </li>
-                                                        <li class="list-group-item">                              
-                                                                P - <input type="checkbox" ng-model="md.paei_tag.p"> &nbsp;&nbsp;
-                                                                A - <input type="checkbox" ng-model="md.paei_tag.a"> &nbsp;&nbsp;
-                                                                E - <input type="checkbox" ng-model="md.paei_tag.e"> &nbsp;&nbsp;
-                                                                I - <input type="checkbox" ng-model="md.paei_tag.i">
-                                                        </li>
-                                    
-                                                    </ul>
-                           
+													
+                                                    <div class="col-md-12 row">
+														<ul class="col-md-12 row list-group list-group-separator mrg0A row list-group-icons">
+
+															<li class="list-group-item">                              
+																	Personal - <input type="checkbox" ng-model="md.tag.personal">
+																	Professional - <input type="checkbox" ng-model="md.tag.professional">
+																	Competency - <input type="checkbox" ng-model="md.tag.competency">
+																	Company - <input type="checkbox" ng-model="md.tag.company">
+															</li>
+															<li class="list-group-item">                              
+																	P - <input type="checkbox" ng-model="md.paei_tag.p"> &nbsp;&nbsp;
+																	A - <input type="checkbox" ng-model="md.paei_tag.a"> &nbsp;&nbsp;
+																	E - <input type="checkbox" ng-model="md.paei_tag.e"> &nbsp;&nbsp;
+																	I - <input type="checkbox" ng-model="md.paei_tag.i">
+															</li>
+
+														</ul>
+													</div>
+													
                                                 </div>
                                             </div>
-											<button class="btn btn-info pull-right" ng-click="addMoreMini($index)">+ Add Mini</button>
-
+											<div class="col-md-12" style="text-align: center;">
+												<button class="btn btn-info pull-right" ng-click="addMoreMini($index)">+ Add Mini</button>
+											</div>
+											
                                         </div>
                                         
                                     </div>
