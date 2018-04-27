@@ -50,7 +50,7 @@
 								</div>
 							</div><br><br>
 							<!-- Search End -->
-							<table class="table">
+							<table class="table" style="overflow: visible">
 								<thead class="text-primary">
 									<th>#</th>
 									<th ng-click="sort('emailID')">Email-ID <span class="glyph-icon icon-sort" ng-show="sortKey=='emailID'" ng-class="{'glyph-icon-chevron-up':reverse,'glyph-icon-chevron-down':!reverse}"></span></th>
@@ -61,7 +61,7 @@
 								</thead>
 								<tbody ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">
 									<tr ng-click="user.openBox = !user.openBox">
-										<td>{{$index + 1}}.</td>
+										<td style="font-weight: bold; text-align: center;" ng-style="user.status == 'Reject' ? {'background':'#f44336', 'color':'white'}:(user.status == 'Not yet' ? {'background':'#FF8800', 'color':'white'}:{'background':'#00C851', 'color':'white'})">{{$index + 1}}.</td>
 										<td>{{user.emailID}}</td>
 										<td>{{user.fullname}}</td>
 										<td>{{user.contact}}</td>
@@ -72,7 +72,7 @@
 										<td colspan="6" style="text-align: center;">
 											<div class="row">
 												<div style="margin: 0 auto;">
-													<table width="80%">
+													<table>
 														<tr>
 															<th>Section</th>
 															<td>Aptitude Questions</td>
@@ -95,6 +95,32 @@
 														</tr>
 													</table>
 												</div>
+											</div>
+										</td>
+									</tr>
+									<tr ng-show="user.openBox">
+										<td colspan="6" style="text-align: center;">
+											<div class="row">
+												<div class="col-md-offset-3 col-md-2" style="cursor: pointer; padding: 10px;" ng-style="user.status == 'Reject' ? {'background':'#f44336', 'color':'white'}:{'background':'#ddd'}" ng-click="user.status = 'Reject'; updateStatus($index)">
+													Reject
+												</div>
+												<div class="col-md-2" style="cursor: pointer; padding: 10px;" ng-style="user.status == 'Not yet' ? {'background':'#FF8800', 'color':'white'}:{'background':'#ddd'}" ng-click="user.status = 'Not yet'; updateStatus($index)">
+													|
+												</div>
+												<div class="col-md-2" style="cursor: pointer; padding: 10px;" ng-style="user.status == 'Shortlist' ? {'background':'#00C851', 'color':'white'}:{'background':'#ddd'}" ng-click="user.status = 'Shortlist'; updateStatus($index)">Shortlist</div>
+											</div>
+										</td>
+									</tr>
+									<tr ng-show="user.openBox">
+										<td colspan="6" style="text-align: center;">
+											<div class="row">
+												<div class="col-md-4" style="padding: 10px;" title="browser">
+													{{user.device_details.browser + ' ' + user.device_details.browser_version}}
+												</div>
+												<div class="col-md-4" style="padding: 10px;" title="platform">
+													{{user.device_details.os}}
+												</div>
+												<div class="col-md-4" style="padding: 10px;" title="os">{{user.device_details.os_version}}</div>
 											</div>
 										</td>
 									</tr>

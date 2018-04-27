@@ -8,7 +8,11 @@ var openMCQUser = new Schema({
 	MCQs: Array,
 	date: Date,
 	sDate: Date,
-	device_details: Object
+	device_details: Object,
+	status: {
+		type: String,
+		default: "Not yet"
+	}
 });
 
 module.exports = mongoose.model('openMCQUser', openMCQUser);
