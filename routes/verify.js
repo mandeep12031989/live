@@ -46,6 +46,23 @@ exports.verifyOrdinaryUser = function(req, res, next) {
       }
 };
 
+exports.verifyManager = function (req, res, next){
+    if(!req.decoded){
+        var err = new Error('You are not authorised to do so!');
+        err.status = 403;
+        return next(err);
+    }
+    else{
+        if(!req.decoded.manager) {
+            var err = new Error('You are not authorised to do so!');
+            err.status = 403;
+            return next(err);
+        }
+        else
+            next();
+    }
+};
+
 exports.verifyFacilitator = function (req, res, next){
     if(!req.decoded){
         var err = new Error('You are not authorised to do so!');

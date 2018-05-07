@@ -1,0 +1,112 @@
+<style>
+	.bg-tab {
+		background-color: white;
+	}
+	
+	.bg-member:hover {
+		background-color: #ede7f6;
+	}
+</style>
+
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading" style="background-color: #fff;">
+   
+    <div id="page-wrapper">
+        
+        <div id="page-sidebar">
+            <div class="scroll-sidebar">
+        
+                <ul id="sidebar-menu">
+                    <li class="header"><span>Analysis</span></li>
+                    <li ng-click="tab_num = 1">
+                        <a href="" ng-class="tab_num == 1 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+					
+                    <li class="header"><span>Teams</span></li>
+                    <li ng-repeat="tm in mData.teams" ng-click="assignTab($index)">
+                        <a href="" ng-class="tab_num == checkTab($index) ? 'bg-tab':''">
+                            <i class="glyph-icon icon-fire"></i>
+                            <span>{{tm.teamName}}</span>
+                        </a>
+                    </li>
+
+					<li class="divider"></li>
+
+					<li>
+						<a ui-sref="dashboard">
+							<i class="glyph-icon icon-arrow-right"></i>
+							<span>Go to Profile</span>
+						</a>
+					</li>
+                </ul>
+
+
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <div id="page-content-margin">
+                <!--                        TAB 1                           -->
+                <div class="container" ng-show="tab_num == 1">
+					
+                    <div class="row row-bg">
+                        <div class="col-sm-6 col-md-4">
+							<div class="card card-stats" ng-click="tab_num = 2">
+                                <div class="card-header" data-background-color="blue">
+                                    <i class="material-icons">group</i>
+                                </div>
+                                <div class="card-content">
+                                    <p class="category">Total Teams</p>
+                                    <h3 class="title">{{mData.teams.length}}
+                                        <small>TEAM(S)</small>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+						
+                    </div>
+                    
+                </div>
+				
+                <!--                        TAB TEAMS                           -->
+                <div class="container" ng-repeat="tm in mData.teams" ng-show="tab_num == checkTab($index)">
+					
+                    <div class="panel panel-body row">
+						<div class="col-md-12" style="text-align: center; margin-bottom: 10px;">
+							<p style="float: right; color: #aaa;">{{tm.date | date:'medium'}}</p>
+							<h3>{{tm.teamName}}</h3>
+						</div>
+						<div class="col-md-12 row">
+							<div class="col-md-12" style="text-align: center; margin: 10px auto; padding: 10px 0px; font-weight: bold; background: #6a1b9a; color: white;">
+								<div class="col-md-1">S.No.</div>
+								<div class="col-md-3">Email-Id</div>
+								<div class="col-md-3">Candidate Name</div>
+								<div class="col-md-2">Trueself Report</div>
+							</div>
+							<div class="col-md-12 bg-member" ng-repeat="mem in tm.members" style="text-align: center; padding: 10px 0px;">
+								<div class="col-md-1">{{$index+1}}</div>
+								<div class="col-md-3">{{mem.emailID}}</div>
+								<div class="col-md-3">{{mem.name}}</div>
+								<div class="col-md-2"><a ui-sref="trueself-report-share({id: mem.userID})" target="_blank" ng-show="mem.userID">Open</a></div>
+							</div>
+						</div>
+					</div>
+                    
+                </div>
+				
+				<!--                        END                           -->
+            </div>
+        </div>
+		
+		
+    </div>
+</div>

@@ -53,6 +53,15 @@
 							<span>Go to Profile</span>
 						</a>
 					</li>
+
+					<li class="divider" ng-if="analysis_content.managerAuth"></li>
+
+					<li ng-if="analysis_content.managerAuth">
+						<a ui-sref="manPanel">
+							<i class="glyph-icon icon-arrow-right"></i>
+							<span>Go to Manager Panel</span>
+						</a>
+					</li>
                 </ul>
 
 

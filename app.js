@@ -10,38 +10,6 @@ var session = require('express-session');
 //var fs = require('fs');
 var logger = require('morgan');                     //HTTP request logger - will show requests in Command Prompt
 
-//importing required header file - Help to make logs in a file 'logs.json'
-/*
-var bunyan = require('bunyan');
-
-var bunyanOpts = {
-    name: 'IDM Logs',
-    streams: [
-    {
-        level: 'info',
-        //stream: process.stdout          // log INFO to stdout
-        path: 'info-logs.json'               // log INFO to stdout and to a file
-    },
-    {
-        level: 'error',
-        path: 'error-logs.json'               // log ERROR to stdout and to a file
-    }
-  ]
-};
-
-var blog = bunyan.createLogger(bunyanOpts);*/
-//nowonwards we can create logs using blog.info() and blog.error()  ***
-
-//Retrieving log and showing to stdout
-/*
-var obj;
-fs.readFile('logs.json', 'utf8', function (err, data) {
-  if (err) throw err;
-  obj = data;
-    console.log(obj);
-});
-*/
-
 var config = require('./config');
 
 // Load environment
@@ -90,6 +58,7 @@ var openMCQ = require('./routes/openMCQ');
 var openUser = require('./routes/openUser');
 var openMCQUser = require('./routes/openMCQUser');
 var library = require('./routes/library');
+var team = require('./routes/team');
 
 // linking callback function to route
 app.use('/', routes);
@@ -107,6 +76,7 @@ app.use('/openMCQ', openMCQ);
 app.use('/openUser', openUser);
 app.use('/openMCQUser', openMCQUser);
 app.use('/library', library);
+app.use('/team', team);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

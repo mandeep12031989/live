@@ -3253,6 +3253,13 @@
 									</div>
 									<hr>
 									<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 1">
+										<div style="margin: 0px auto;">
+											<ul class="tab-slider--tabs">
+												<li class="tab-slider--trigger" ng-class="r.page == 1 ? 'active-profile' : ''" ng-click="r.page = 1">Page 1</li>
+												<li class="tab-slider--trigger" ng-class="r.page == 2 ? 'active-profile' : ''" ng-click="r.page = 2">Page 2</li>
+												<li class="tab-slider--trigger" ng-class="r.page == 3 ? 'active-profile' : ''" ng-click="r.page = 3">Page 3</li>
+											</ul>
+										</div>
 										<input class="form-control" type="text" ng-model="r.title" placeholder="Title"><br>
 										<textarea class="form-control" ng-model="r.desc" placeholder="Description"></textarea><br>
 										<!--<button class="btn btn-danger" style="margin-bottom: 40px;" ng-click="addNewLine($index)">+ Add Line-break</button>-->

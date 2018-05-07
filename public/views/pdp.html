@@ -1,0 +1,163 @@
+<style>
+	.row_hover:hover{
+		background: #e3f2fd;
+		color: #333;
+	}
+</style>
+
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading">
+	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="waitingQueue == false" class="w3-animate-top">
+		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">check_circle</i>
+			<span data-notify="message">Saving Progress !</span>
+		</div>
+	</div>
+	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-if="!online" class="w3-animate-top">
+		<div class="alert alert-danger alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">info</i>
+			<span data-notify="message">Connection Error !</span>
+		</div>
+	</div>
+
+    <div id="page-wrapper">
+        
+        <div id="page-content-wrapper">
+            <div id="page-content-margin">
+				
+				<div class="container">
+					<div class="panel panel-body">
+						<div class="col-md-12" style="margin-bottom: 30px;">
+							<h3 style="text-align: center; font-weight: bold;">Professional Development Plan (PDP)</h3>
+						</div>
+						<div class="col-md-12 table-responsive" style="margin: 20px 0px;">
+							
+							<table class="table">
+								<thead class="text-primary">
+									<tr>
+										<th style="text-align: center;">S.No.</th>
+										<th style="text-align: center;">Learning Need</th>
+										<th style="text-align: center;">Commitment</th>
+										<th style="text-align: center;">TimeFrame</th>
+										<th style="text-align: center;">Monitoring</th>
+										<th style="text-align: center;">Evaluation</th>
+										<th style="text-align: center;">Edit</th>
+										<th style="text-align: center;">Remove</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="row_hover" ng-repeat="rw in pdpData.pdp.planTable">
+										<td style="text-align: center;">{{$index+1}}</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.learning_need}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.learning_need" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.commitment}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.commitment" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.timeframe}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.timeframe" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.monitoring}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.monitoring" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.evaluation}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.evaluation" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit" ng-click="rw.edit = true"><a style="cursor: pointer;"><i class="material-icons">create</i></a></span>
+											<span ng-show="rw.edit" ng-click="rw.edit = false; saveProgress()"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
+										</td>
+										<td style="text-align: center;"><i class="material-icons" ng-click="removeRowFromPlan($index)" style="cursor: pointer;">clear</i></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="row">
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Learning Need" ng-model="planObj.learning_need"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Commitment" ng-model="planObj.commitment"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="TimeFrame" ng-model="planObj.timeframe"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Monitoring" ng-model="planObj.monitoring"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Evaluation" ng-model="planObj.evaluation"></div>
+								<div class="col-xs-2" style="text-align: center;"><button class="btn btn-danger" ng-click="addRowToPlan()" ng-disabled="block_btn">Add Row</button></div>
+							</div>
+						</div>
+						
+						<div class="col-md-12" style="margin: 40px 0 20px 0;">
+							<h4 style="font-weight: bold;">Weekly Follow-up:</h4>
+						</div>
+						
+						<div class="col-md-12 table-responsive" style="margin: 20px 0px;">
+							<table class="table">
+								<thead class="text-primary">
+									<tr>
+										<th style="text-align: center;">S.No.</th>
+										<th style="text-align: center;">Date</th>
+										<th style="text-align: center;">Commitment</th>
+										<th style="text-align: center;">What Worked?</th>
+										<th style="text-align: center;">What Didn't Work?</th>
+										<th style="text-align: center;">What Was I Being?</th>
+										<th style="text-align: center;">Edit</th>
+										<th style="text-align: center;">Remove</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="row_hover" ng-repeat="rw in pdpData.pdp.weekTable">
+										<td style="text-align: center;">{{$index+1}}</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.date | date:'fullDate' }}</span>
+											<span ng-show="rw.edit"><input type="date" class="form-control" ng-model="rw.date"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.commitment}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.commitment" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.what_worked}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.what_worked" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.what_didnt}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.what_didnt" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.was_being}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.was_being" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit" ng-click="rw.edit = true"><a style="cursor: pointer;"><i class="material-icons">create</i></a></span>
+											<span ng-show="rw.edit" ng-click="rw.edit = false; saveProgress()"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
+										</td>
+										<td style="text-align: center;"><i class="material-icons" ng-click="removeRowFromWeek($index)" style="cursor: pointer;">clear</i></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="row">
+								<div class="col-xs-2"><input class="form-control" type="date" placeholder="Learning Need" ng-model="weekObj.date"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Commitment" ng-model="weekObj.commitment"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="TimeFrame" ng-model="weekObj.what_worked"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Monitoring" ng-model="weekObj.what_didnt"></div>
+								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Evaluation" ng-model="weekObj.was_being"></div>
+								<div class="col-xs-2" style="text-align: center;"><button class="btn btn-danger" ng-click="addRowToWeek()" ng-disabled="block_btn">Add Row</button></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+            </div>
+        </div>
+    </div>
+
+</div>

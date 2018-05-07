@@ -167,6 +167,10 @@ var userSchema = new Schema({
         facilitator: {
             type: Boolean,
             default: false
+        },
+        manager: {
+            type: Boolean,
+            default: false
         }
     },
     important_date: {
@@ -270,7 +274,7 @@ var userSchema = new Schema({
 			type: String,
 			default: '<name>\'s enneagram assessment results are <positive/negative>. <He/She> is at Moderate moving to higher personal mastery levels. <He/She> is enneagram type <type>.'
 		},
-		recommend: [new Schema({title: String, desc: String})],
+		recommend: [new Schema({title: String, desc: String, page: {type: Number, default: 1}})],
 		rubric: {
 			type: Array,
 			default: []
@@ -285,6 +289,23 @@ var userSchema = new Schema({
 	language: {
 		type: String,
 		default: 'eng'
+	},
+	teams: Array,
+	pdp: {
+		planTable: [new Schema({
+			learning_need: String,
+			commitment: String,
+			timeframe: String,
+			monitoring: String,
+			evaluation: String
+		})],
+		weekTable: [new Schema({
+			date: Date,
+			commitment: String,
+			what_worked: String,
+			what_didnt: String,
+			was_being: String
+		})]
 	}
 });
 

@@ -10,6 +10,7 @@ var child_process = require('child_process');
 
 var User = require('../models/user.js');
 var Keyword = require('../models/keyword.js');
+var Team = require('../models/team.js');
 var Belief = require('../models/beliefs.js');
 var GrRec = require('../models/growth_rec.js');
 var Verify = require('./verify.js');
@@ -164,6 +165,19 @@ router.route('/personal')
         if(err)
             next(err);
         res.status(200).json(user);
+    });
+});
+
+router.route('/fetchId/:emailID')
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
+    User.findOne({username: sanitize(req.params.emailID)}, {'username': true})
+    .exec(function(err, user){
+        if(err)
+            return next(err);
+		if(user)
+			return res.status(200).json({id: user._id});
+		else
+			return res.status(200).json({id: null});
     });
 });
 
@@ -769,12 +783,13 @@ router.route('/fac_analysis')
                   };
     var child = child_process.fork(__dirname + '/analysis.js', [], {});
 	
-	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true, 'are_you.admin': true})
+	User.findOne({_id: req.decoded._id}, {firstname: true, lastname: true, 'are_you.admin': true, 'are_you.manager': true})
 		.exec(function(e, u){
 			if(e)
 				return next(e);
 
 			to_send.fullAuth = u.are_you.admin;
+			to_send.managerAuth = u.are_you.manager;
 		
 			User.aggregate([{$match: {facilitator_name: u.firstname + ' ' + u.lastname}}, {$group : {_id : "$profile.profile_number", total : {$sum : 1}}}]).sort('_id')
 				.exec(function(e, r){
@@ -859,11 +874,100 @@ router.route('/analysis')
     
 });
 
+router.route('/pdp')
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
+	var id = req.decoded._id;
+    
+    User.findOne({_id: id}, {'_id': 0, 'pdp': 1})
+	.exec(function(err, user){
+		if(err)
+			return next(err);
+
+		return res.status(200).json(user);
+	});
+});
+
+router.route('/manager-list')
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
+	User.find({'are_you.manager': true}, {'username': 1, 'firstname': 1, 'lastname': 1, 'teams': 1})
+	.exec(function(err, user){
+		if(err)
+			return next(err);
+//		console.log(user);
+		return res.status(200).json(user);
+	});
+});
+
+router.route('/verifyMembers')
+.put(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
+	
+	var body = sanitize(req.body);
+	for(let k=0; k < body.length; k++){
+		(function(uID){
+			User.find({'username': uID}, {'_id': 0, 'username': 1})
+			.exec(function(err, user){
+				if(err)
+					return next(err);
+				
+				if(!user.length)
+					body[k].found = false;
+				else
+					body[k].found = true;
+				
+				if(k == (body.length-1)){
+//					console.log(body);
+					return res.status(200).json({members: body});
+				}
+			});
+			
+			
+		})(body[k].emailID);
+	}
+	
+});
+
+router.route('/managerData')
+.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
+	var id = req.decoded._id;
+    
+    User.findOne({_id: id}, {'teams': 1})
+	.exec(function(err, user){
+		if(err)
+			return next(err);
+		
+		if(user.teams.length){
+			let tID;
+			for(let i=0; i < user.teams.length; i++){
+				tID = user.teams[i].teamID;
+				
+				Team.findOne({'teamID': tID})
+					.exec(function(err, team){
+						if(err)
+							return next(err);
+						
+						user.teams[i] = team;
+						return;
+					})
+					.then(function(){
+						if(i == (user.teams.length-1)){
+//							console.log(user);
+							return res.status(200).json(user);
+						}
+					});
+				
+			}
+		}
+		else
+			return res.status(200).json({success: false});
+//		return res.status(200).json(user);
+	});
+});
+
 router.route('/completion')
 .get(Verify.verifyOrdinaryUser, function(req, res, next){
     var id = req.decoded._id;
     
-    User.findOne({_id: id}, {'question': true, 'profile': true, 'are_you.facilitator': true, 'feedback': true})
+    User.findOne({_id: id}, {'question': true, 'profile': true, 'are_you.facilitator': true, 'are_you.manager': true, 'feedback': true})
     .exec(function(err, user){
         if(err)
             return next(err);
@@ -971,7 +1075,8 @@ router.route('/completion')
 			selected_profile: user.profile.profile_number,
             profile_filled: sec1 && sec2 && sec3,// && sec4,
             profile_blocked: blocking,
-			you_are_fac: user.are_you.facilitator
+			you_are_fac: user.are_you.facilitator,
+			you_are_man: user.are_you.manager
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);
         return res.status(200).json(final_obj);
@@ -990,7 +1095,7 @@ router.route('/resetpsw/:email')                            // Client Side Neede
         if(!user)
             return res.status(501).json({ success: false, message: 'Incorrect Email-ID !' });
         
-		var token = Verify.getHourToken({"username":user.username, "_id":user._id, "admin":user.are_you.admin, "facilitator":user.are_you.facilitator});
+		var token = Verify.getHourToken({"username":user.username, "_id":user._id, "admin":user.are_you.admin, "facilitator":user.are_you.facilitator, "manager":user.are_you.manager});
         
 		user.password_reset_token = token;
 		
@@ -1121,7 +1226,7 @@ router.route('/auth/login')
 .post(function(req, res, next) {
     var body = sanitize(req.body);
     
-    User.findOne({ username: body.username }, function(err, user) {      
+    User.findOne({ username: body.username }, {username: true, password: true, are_you: true}, function(err, user) {      
         if(err)
             return next(err);
 
@@ -1140,7 +1245,7 @@ router.route('/auth/login')
                     if (err)
                         return res.status(500).send({ "message": 'Could not log in user !'+err });
                     
-                    var token = Verify.getToken({"username":user.username, "_id":user._id, "admin":user.are_you.admin, "facilitator":user.are_you.facilitator});
+                    var token = Verify.getToken({"username":user.username, "_id":user._id, "admin":user.are_you.admin, "facilitator":user.are_you.facilitator, "manager":user.are_you.manager});
                     res.status(200).json({ "message": 'Login successful !', "success": true, "token": token });
                 });
                   

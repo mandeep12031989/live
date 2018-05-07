@@ -104,6 +104,17 @@
                 </a>
             </li>
 			
+			<!--	ONLY FOR MANAGER	-->
+
+            <li class="divider" ng-if="percent.you_are_man"></li>
+			
+            <li ng-if="percent.you_are_man">
+                <a ui-sref="manPanel">
+					<i class="glyph-icon icon-arrow-right"></i>
+                    <span>Go to Manager Panel</span>
+                </a>
+            </li>
+			
 			<!--		END FAC		-->
 		
 		</ul><!-- #sidebar-menu -->

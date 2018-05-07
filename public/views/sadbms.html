@@ -122,6 +122,20 @@
                         </a>
                     </li>
                     
+                    <li class="header"><span>Teams & Managers</span></li>
+                    <li ng-click="tab_num = 16">
+                        <a href="" ng-class="tab_num == 16 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-cog"></i>
+                            <span>Create / Edit Team</span>
+                        </a>
+                    </li>
+                    <li ng-click="tab_num = 17">
+                        <a href="" ng-class="tab_num == 17 ? 'bg-tab':''">
+                            <i class="glyph-icon icon-cog"></i>
+                            <span>Team Allotment</span>
+                        </a>
+                    </li>
+                    
                     <li class="header"><span>Notifications</span></li>
                     <li ng-click="tab_num = 5">
                         <a href="" ng-class="tab_num == 5 ? 'bg-tab':''">
@@ -264,6 +278,7 @@
 											<th ng-click="sort('work_details.department')">Dept. <span class="glyph-icon icon-sort" ng-show="sortKey=='work_details.department'"></span></th>
 											<th ng-click="sort('are_you.admin')">Admin<span class="glyph-icon icon-sort" ng-show="sortKey=='are_you.admin'"></span></th>
 											<th ng-click="sort('are_you.facilitator')">Facilitator <span class="glyph-icon icon-sort" ng-show="sortKey=='are_you.facilitator'"></span></th>
+											<th ng-click="sort('are_you.manager')">Manager <span class="glyph-icon icon-sort" ng-show="sortKey=='are_you.manager'"></span></th>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="user in userList | orderBy:sortKey:reverse | filter:search">  
@@ -277,6 +292,7 @@
 												<td>{{user.work_details.department}}</td>
 												<td><input type="checkbox" ng-model="user.are_you.admin" ng-click="save_admfac(user._id, user.are_you)"></td>
 												<td><input type="checkbox" ng-model="user.are_you.facilitator" ng-click="save_admfac(user._id, user.are_you)"></td>
+												<td><input type="checkbox" ng-model="user.are_you.manager" ng-click="save_admfac(user._id, user.are_you)"></td>
 											</tr>
                                         </tbody>
                                     </table>
@@ -693,6 +709,132 @@
 							<button style="width: 100%;" class="btn btn-info" ng-click="addFacToList()">Add</button>
 						</div>
 					</div>
+				</div>
+				
+                <!--                        TAB 16                           -->
+				<div class="container" ng-show="tab_num == 16">
+					
+					<h3>Teams List</h3><br>
+					
+					<!-- Search Here -->
+					<div class="input-group">
+						<div class="input-group-addon" style="background-color: #fafafa;">
+							<i class="glyph-icon icon-search"></i>
+						</div>
+						<input type="search" class="form-control col-md-11" placeholder="Search" ng-model="searchTeam">
+						<div class="input-group-addon">
+							<b>Found {{(teamList | filter:searchTeam).length}} of {{teamList.length}}</b>
+						</div>			
+					</div><br><br>
+									<!-- Search End -->
+					
+					<div class="container">
+						<div class="panel panel-body row" ng-repeat="teamL in teamList | filter: {teamName: searchTeam}">
+							<div class="col-md-12" style="color: #dd8888;">{{teamL.date | date: 'medium'}}</div>
+							<div class="col-md-1">
+								<a ui-sref="anyUser({id: teamL.teamID})" target="_blank" style="width: 100%;" class="btn btn-default">{{$index+1}}</a>
+							</div>
+							<div class="col-md-3">
+								<input type="text" class="form-control" size="100%" placeholder="teamID" style="text-align: center;" ng-model="teamL.teamID">
+							</div>
+							<div class="col-md-7">
+								<input type="text" class="form-control" size="100%" placeholder="Team Name" style="text-align: center;" ng-model="teamL.teamName">
+							</div>
+							<div class="col-md-1">
+								<button style="width: 100%;" class="btn btn-danger" ng-click="teamDeletion($index, teamL._id)">X</button>
+							</div>
+							<div class="col-md-12" style="padding: 10px 0px; font-weight: bold;">Team Members:</div>
+							<div class="col-md-12" style="padding: 10px 0px; color: red; text-align: center;" ng-show="!teamL.members.length">-- None --</div>
+							<div class="col-md-12" ng-repeat="me in teamL.members" style="padding: 10px 0px;" ng-show="teamL.members.length">
+								<div class="col-md-1">
+									<button style="width: 100%;" class="btn btn-info">{{$index+1}}</button>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" size="100%" placeholder="Email-id" style="text-align: center;" ng-model="me.emailID">
+								</div>
+								<div class="col-md-2" style="text-align: center; margin: auto 0;">
+									<i class="material-icons" style="color: lightgreen;" ng-show="teamL.verified && me.found">check</i>
+									<i class="material-icons" style="color: red;" ng-show="teamL.verified && !me.found">close</i>
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" size="100%" placeholder="Name" style="text-align: center;" ng-model="me.name">
+								</div>
+								<div class="col-md-1">
+									<button style="width: 100%;" class="btn btn-danger" ng-click="memberDeletion($parent.$index, $index)">X</button>
+								</div>
+							</div>
+							<div class="col-md-12" style="margin: 5px 0px;" ng-show="teamL.members.length > 0">
+								<button style="width: 100%;" class="btn btn-default" ng-click="verifyAllMembersOfTeam($index)">Verify All Members</button>
+							</div>
+							<div class="col-md-12" style="padding: 10px 0px; background: #eee;">
+								<div class="col-md-4">
+									<input type="text" class="form-control" size="100%" placeholder="Enter Email-id" style="text-align: center;" ng-model="memberObj.emailID">
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" size="100%" placeholder="Enter Name" style="text-align: center;" ng-model="memberObj.name">
+								</div>
+								<div class="col-md-4">
+									<button style="width: 100%;" class="btn btn-info" ng-click="addMemberToTeam($index)">Push</button>
+								</div>
+							</div>
+							<div class="col-md-12" style="margin: 5px 0px;">
+								<button style="width: 100%;" class="btn btn-success" ng-click="teamUpdation(teamL)">Update</button>
+							</div>
+						</div>
+					</div>
+					<div class="row" style="padding: 10px 0px; background: #eee;">
+						<div class="col-md-10">
+							<input type="text" class="form-control" size="100%" placeholder="Team Name" style="text-align: center;" ng-model="teamObj.teamName">
+						</div>
+						<div class="col-md-2">
+							<button style="width: 100%;" class="btn btn-info" ng-click="addTeamToList()">Add</button>
+						</div>
+					</div>
+				</div>
+				
+                <!--                        TAB 17                           -->
+				<div class="container" ng-show="tab_num == 17">
+					
+					<div class="row panel panel-body">
+						<div class="col-md-12" style="margin-bottom: 10px;">
+							<h3>Click on team-name to consider below</h3>
+						</div>
+						<div class="col-md-12 row">
+							<div class="col-md-3" ng-repeat="teamL in teamList" ng-click="addSelectedToTeams({teamID: teamL.teamID, teamName: teamL.teamName})" style="margin: 0 auto;">
+								<div class="col-md-12" style="padding: 10px 5px; margin: 5px; text-align: center;" ng-style="checkSelectedTeams(teamL.teamID) ? {'background': '#0277bd', 'color': 'white'}:{'background': '#f5f5f5', 'color': 'black'}">
+									<span>{{teamL.teamID}} - {{teamL.teamName}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row panel panel-body" ng-show="selectedTeams.length > 0">
+						<div class="col-md-12" style="margin-bottom: 10px;">
+							<h3>Manager List</h3>
+						</div>
+						<div class="col-md-12 row">
+							<div class="panel panel-body col-md-12 row" ng-repeat="ml in managerList" style="text-align: center;" title="{{getManagerTeams($index)}}">
+								<div class="col-md-1">
+									{{$index+1}}.
+								</div>
+								<div class="col-md-5">
+									{{ml.username}}
+								</div>
+								<div class="col-md-6">
+									{{ml.firstname + ' ' + ml.lastname}}
+								</div>
+								<div class="col-md-12" style="font-weight: bold;">
+									TEAMS
+								</div>
+								<div class="col-md-3" ng-repeat="st in selectedTeams" ng-click="addSelectedTeamsToManager($parent.$index, {teamID: st.teamID, teamName: st.teamName})" style="margin: 0 auto;">
+									<div class="col-md-12" style="padding: 10px 5px; margin: 5px; text-align: center;" ng-style="checkSelectedTeamsInManager($parent.$index, st.teamID) ? {'background': 'orange', 'color': 'white'}:{'background': '#f5f5f5', 'color': 'black'}">
+										{{st.teamName}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+<!--					{{managerList}}-->
 				</div>
 				
 				<!--                        TAB 13                           -->
