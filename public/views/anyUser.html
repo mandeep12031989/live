@@ -1797,7 +1797,69 @@
 											</div>
 										</div>
 								
-								<div class="panel panel-body" style="margin: 0 65px 20px 65px;" ng-show="candidate_tab == 1 || candidate_tab == 5 || candidate_tab == 7">
+								<div class="panel panel-body" style="margin: 0 auto 20px auto;"ng-show="candidate_tab == 1 || candidate_tab == 5 || candidate_tab == 7">
+									<div class="row">
+										<div class="col-md-12">
+											<h2 style="text-align:center" id="page-title">
+												<b>Leadership Competencies</b>
+											</h2>
+										</div>
+										<div class="col-md-12 row">
+											<div class="col-md-offset-3 col-md-6" style="margin: 0 auto; text-align: center;">
+												<div class="col-md-1"></div>
+
+												<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
+												<div class="col-md-2">Responsive</div>
+												<div class="col-md-1"></div>
+
+												<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
+												<div class="col-md-2">Moderate</div>
+												<div class="col-md-1"></div>
+
+												<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
+												<div class="col-md-2">Reactive</div>
+											</div>
+										</div>
+										<div class="col-md-offset-4 col-md-4" style="padding-bottom: 30px; margin-top: 20px; margin-left: auto; margin-right: auto;">
+											<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] < -1) || (countCompetencies[0][2] >= 0 && countCompetencies[0][2] <= 0.5)">
+											<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] >= -1 && countCompetencies[0][2] < -0.5) || (countCompetencies[0][2] > 0.5 && countCompetencies[0][2] <= 1)">
+											<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] >= -0.5 && countCompetencies[0][2] < 0) || (countCompetencies[0][2] > 1)">
+
+											<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] < -1) || (countCompetencies[1][2] >= 0 && countCompetencies[1][2] <= 0.5)">
+											<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] >= -1 && countCompetencies[1][2] < -0.5) || (countCompetencies[1][2] > 0.5 && countCompetencies[1][2] <= 1)">
+											<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] >= -0.5 && countCompetencies[1][2] < 0) || (countCompetencies[1][2] > 1)">
+
+											<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] < -1) || (countCompetencies[2][2] >= 0 && countCompetencies[2][2] <= 0.5)">
+											<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] >= -1 && countCompetencies[2][2] < -0.5) || (countCompetencies[2][2] > 0.5 && countCompetencies[2][2] <= 1)">
+											<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] >= -0.5 && countCompetencies[2][2] < 0) || (countCompetencies[2][2] > 1)">
+
+											<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] < -1) || (countCompetencies[3][2] >= 0 && countCompetencies[3][2] <= 0.5)">
+											<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] >= -1 && countCompetencies[3][2] < -0.5) || (countCompetencies[3][2] > 0.5 && countCompetencies[3][2] <= 1)">
+											<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] >= -0.5 && countCompetencies[3][2] < 0) || (countCompetencies[3][2] > 1)">
+
+											<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] < -1) || (countCompetencies[4][2] >= 0 && countCompetencies[4][2] <= 0.5)">
+											<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] >= -1 && countCompetencies[4][2] < -0.5) || (countCompetencies[4][2] > 0.5 && countCompetencies[4][2] <= 1)">
+											<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] >= -0.5 && countCompetencies[4][2] < 0) || (countCompetencies[4][2] > 1)">
+
+											<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] < -1) || (countCompetencies[5][2] >= 0 && countCompetencies[5][2] <= 0.5)">
+											<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] >= -1 && countCompetencies[5][2] < -0.5) || (countCompetencies[5][2] > 0.5 && countCompetencies[5][2] <= 1)">
+											<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] >= -0.5 && countCompetencies[5][2] < 0) || (countCompetencies[5][2] > 1)">
+
+											<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] < -1) || (countCompetencies[6][2] >= 0 && countCompetencies[6][2] <= 0.5)">
+											<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] >= -1 && countCompetencies[6][2] < -0.5) || (countCompetencies[6][2] > 0.5 && countCompetencies[6][2] <= 1)">
+											<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] >= -0.5 && countCompetencies[6][2] < 0) || (countCompetencies[6][2] > 1)">
+
+											<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] < -1) || (countCompetencies[7][2] >= 0 && countCompetencies[7][2] <= 0.5)">
+											<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] >= -1 && countCompetencies[7][2] < -0.5) || (countCompetencies[7][2] > 0.5 && countCompetencies[7][2] <= 1)">
+											<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] >= -0.5 && countCompetencies[7][2] < 0) || (countCompetencies[7][2] > 1)">
+
+											<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
+											<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+										</div>
+									</div>
+								</div>
+								
+								<div class="panel panel-body" style="margin: 0 auto 20px auto;" ng-show="candidate_tab == 1 || candidate_tab == 5 || candidate_tab == 7">
 									<div class="row">
 										<div class="col-md-12">
 											<h2 style="text-align:center" id="page-title">
@@ -3251,6 +3313,183 @@
 										</div>
 										<div class="col-md-12" style="color: red;" ng-show="switchView == 1">* NOTE: highlighted area will not be visible in non-editable view as RATING = 0</div>
 									</div>
+									<hr>
+									
+									<div class="panel panel-body" style="margin: 0 auto 20px auto;">
+										<div class="row">
+											<div class="col-md-12">
+												<h2 style="text-align:center" id="page-title">
+													<b>Leadership Competencies</b>
+												</h2>
+											</div>
+											<div class="col-md-12 row">
+												<div class="col-md-offset-3 col-md-6" style="margin: 0 auto 30px auto; text-align: center;">
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
+													<div class="col-md-2">Responsive</div>
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
+													<div class="col-md-2">Moderate</div>
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
+													<div class="col-md-2">Reactive</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<h4 style="text-align:center" id="page-title">
+													<b>Assessor - Profile Analysis</b>
+												</h4>
+											</div>
+											<div class="col-md-6">
+												<h4 style="text-align:center" id="page-title">
+													<b>Assessor - Editable Analysis</b>
+												</h4>
+											</div>
+											<div class="col-md-offset-2 col-md-4" style="padding-bottom: 30px; margin-top: 20px; margin-left: auto; margin-right: auto;">
+												<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[0][2] < -1) || (countCompetenciesA[0][2] >= 0 && countCompetenciesA[0][2] <= 0.5)">
+												<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[0][2] >= -1 && countCompetenciesA[0][2] < -0.5) || (countCompetenciesA[0][2] > 0.5 && countCompetenciesA[0][2] <= 1)">
+												<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[0][2] >= -0.5 && countCompetenciesA[0][2] < 0) || (countCompetenciesA[0][2] > 1)">
+
+												<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[1][2] < -1) || (countCompetenciesA[1][2] >= 0 && countCompetenciesA[1][2] <= 0.5)">
+												<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[1][2] >= -1 && countCompetenciesA[1][2] < -0.5) || (countCompetenciesA[1][2] > 0.5 && countCompetenciesA[1][2] <= 1)">
+												<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[1][2] >= -0.5 && countCompetenciesA[1][2] < 0) || (countCompetenciesA[1][2] > 1)">
+
+												<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[2][2] < -1) || (countCompetenciesA[2][2] >= 0 && countCompetenciesA[2][2] <= 0.5)">
+												<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[2][2] >= -1 && countCompetenciesA[2][2] < -0.5) || (countCompetenciesA[2][2] > 0.5 && countCompetenciesA[2][2] <= 1)">
+												<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[2][2] >= -0.5 && countCompetenciesA[2][2] < 0) || (countCompetenciesA[2][2] > 1)">
+
+												<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[3][2] < -1) || (countCompetenciesA[3][2] >= 0 && countCompetenciesA[3][2] <= 0.5)">
+												<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[3][2] >= -1 && countCompetenciesA[3][2] < -0.5) || (countCompetenciesA[3][2] > 0.5 && countCompetenciesA[3][2] <= 1)">
+												<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[3][2] >= -0.5 && countCompetenciesA[3][2] < 0) || (countCompetenciesA[3][2] > 1)">
+
+												<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[4][2] < -1) || (countCompetenciesA[4][2] >= 0 && countCompetenciesA[4][2] <= 0.5)">
+												<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[4][2] >= -1 && countCompetenciesA[4][2] < -0.5) || (countCompetenciesA[4][2] > 0.5 && countCompetenciesA[4][2] <= 1)">
+												<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[4][2] >= -0.5 && countCompetenciesA[4][2] < 0) || (countCompetenciesA[4][2] > 1)">
+
+												<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[5][2] < -1) || (countCompetenciesA[5][2] >= 0 && countCompetenciesA[5][2] <= 0.5)">
+												<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[5][2] >= -1 && countCompetenciesA[5][2] < -0.5) || (countCompetenciesA[5][2] > 0.5 && countCompetenciesA[5][2] <= 1)">
+												<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[5][2] >= -0.5 && countCompetenciesA[5][2] < 0) || (countCompetenciesA[5][2] > 1)">
+
+												<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[6][2] < -1) || (countCompetenciesA[6][2] >= 0 && countCompetenciesA[6][2] <= 0.5)">
+												<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[6][2] >= -1 && countCompetenciesA[6][2] < -0.5) || (countCompetenciesA[6][2] > 0.5 && countCompetenciesA[6][2] <= 1)">
+												<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[6][2] >= -0.5 && countCompetenciesA[6][2] < 0) || (countCompetenciesA[6][2] > 1)">
+
+												<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[7][2] < -1) || (countCompetenciesA[7][2] >= 0 && countCompetenciesA[7][2] <= 0.5)">
+												<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[7][2] >= -1 && countCompetenciesA[7][2] < -0.5) || (countCompetenciesA[7][2] > 0.5 && countCompetenciesA[7][2] <= 1)">
+												<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[7][2] >= -0.5 && countCompetenciesA[7][2] < 0) || (countCompetenciesA[7][2] > 1)">
+
+												<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
+												<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+											</div>
+											
+											<div class="col-md-4" style="padding-bottom: 30px; margin-top: 20px; margin-left: auto; margin-right: auto;">
+												<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[0][2] < -1) || (countCompetenciesA2[0][2] >= 0 && countCompetenciesA2[0][2] <= 0.5)">
+												<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[0][2] >= -1 && countCompetenciesA2[0][2] < -0.5) || (countCompetenciesA2[0][2] > 0.5 && countCompetenciesA2[0][2] <= 1)">
+												<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[0][2] >= -0.5 && countCompetenciesA2[0][2] < 0) || (countCompetenciesA2[0][2] > 1)">
+
+												<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[1][2] < -1) || (countCompetenciesA2[1][2] >= 0 && countCompetenciesA2[1][2] <= 0.5)">
+												<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[1][2] >= -1 && countCompetenciesA2[1][2] < -0.5) || (countCompetenciesA2[1][2] > 0.5 && countCompetenciesA2[1][2] <= 1)">
+												<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[1][2] >= -0.5 && countCompetenciesA2[1][2] < 0) || (countCompetenciesA2[1][2] > 1)">
+
+												<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[2][2] < -1) || (countCompetenciesA2[2][2] >= 0 && countCompetenciesA2[2][2] <= 0.5)">
+												<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[2][2] >= -1 && countCompetenciesA2[2][2] < -0.5) || (countCompetenciesA2[2][2] > 0.5 && countCompetenciesA2[2][2] <= 1)">
+												<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[2][2] >= -0.5 && countCompetenciesA2[2][2] < 0) || (countCompetenciesA2[2][2] > 1)">
+
+												<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[3][2] < -1) || (countCompetenciesA2[3][2] >= 0 && countCompetenciesA2[3][2] <= 0.5)">
+												<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[3][2] >= -1 && countCompetenciesA2[3][2] < -0.5) || (countCompetenciesA2[3][2] > 0.5 && countCompetenciesA2[3][2] <= 1)">
+												<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[3][2] >= -0.5 && countCompetenciesA2[3][2] < 0) || (countCompetenciesA2[3][2] > 1)">
+
+												<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[4][2] < -1) || (countCompetenciesA2[4][2] >= 0 && countCompetenciesA2[4][2] <= 0.5)">
+												<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[4][2] >= -1 && countCompetenciesA2[4][2] < -0.5) || (countCompetenciesA2[4][2] > 0.5 && countCompetenciesA2[4][2] <= 1)">
+												<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[4][2] >= -0.5 && countCompetenciesA2[4][2] < 0) || (countCompetenciesA2[4][2] > 1)">
+
+												<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[5][2] < -1) || (countCompetenciesA2[5][2] >= 0 && countCompetenciesA2[5][2] <= 0.5)">
+												<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[5][2] >= -1 && countCompetenciesA2[5][2] < -0.5) || (countCompetenciesA2[5][2] > 0.5 && countCompetenciesA2[5][2] <= 1)">
+												<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[5][2] >= -0.5 && countCompetenciesA2[5][2] < 0) || (countCompetenciesA2[5][2] > 1)">
+
+												<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[6][2] < -1) || (countCompetenciesA2[6][2] >= 0 && countCompetenciesA2[6][2] <= 0.5)">
+												<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[6][2] >= -1 && countCompetenciesA2[6][2] < -0.5) || (countCompetenciesA2[6][2] > 0.5 && countCompetenciesA2[6][2] <= 1)">
+												<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[6][2] >= -0.5 && countCompetenciesA2[6][2] < 0) || (countCompetenciesA2[6][2] > 1)">
+
+												<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[7][2] < -1) || (countCompetenciesA2[7][2] >= 0 && countCompetenciesA2[7][2] <= 0.5)">
+												<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[7][2] >= -1 && countCompetenciesA2[7][2] < -0.5) || (countCompetenciesA2[7][2] > 0.5 && countCompetenciesA2[7][2] <= 1)">
+												<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA2[7][2] >= -0.5 && countCompetenciesA2[7][2] < 0) || (countCompetenciesA2[7][2] > 1)">
+
+												<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
+												<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+											</div>
+											
+											<div class="col-md-6"></div>
+											
+											<div class="col-md-6" style="color: white; font-weight: bold; margin: 0 auto;">
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[0][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[0][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[0][2]=countCompetenciesA2[0][2]-0.1">-</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Planning</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[0][2]=countCompetenciesA2[0][2]+0.1">+</div>
+												</div>
+												
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[1][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[1][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[1][2]=countCompetenciesA2[1][2]-0.1">-</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Evaluative</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[1][2]=countCompetenciesA2[1][2]+0.1">+</div>
+												</div>
+												
+												<div class="col-md-12"></div>
+													
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[2][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[2][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[2][2]=countCompetenciesA2[2][2]-0.1">+</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Collaborative</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[2][2]=countCompetenciesA2[2][2]+0.1">+</div>
+												</div>
+													
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[3][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[3][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[3][2]=countCompetenciesA2[3][2]-0.1">+</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Trusting</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[3][2]=countCompetenciesA2[3][2]+0.1">+</div>
+												</div>
+												
+												<div class="col-md-12"></div>
+													
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[4][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[4][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[4][2]=countCompetenciesA2[4][2]-0.1">+</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Innovating</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[4][2]=countCompetenciesA2[4][2]+0.1">+</div>
+												</div>
+													
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[5][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[5][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[5][2]=countCompetenciesA2[5][2]-0.1">+</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Risk-taking</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[5][2]=countCompetenciesA2[5][2]+0.1">+</div>
+												</div>
+												
+												<div class="col-md-12"></div>
+													
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[6][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[6][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[6][2]=countCompetenciesA2[6][2]-0.1">+</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Assertive</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[6][2]=countCompetenciesA2[6][2]+0.1">+</div>
+												</div>
+													
+												<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[7][2]}}">
+													<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[7][2] | number:2}}</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[7][2]=countCompetenciesA2[7][2]-0.1">+</div>
+													<div class="col-md-8" style="text-align: center; background: #9933CC;">Industrious</div>
+													<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[7][2]=countCompetenciesA2[7][2]+0.1">+</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
 									<hr>
 									<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 1">
 										<div style="margin: 0px auto;">

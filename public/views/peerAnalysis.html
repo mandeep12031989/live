@@ -1,0 +1,197 @@
+<style>
+	.row_hover:hover{
+		background: #e3f2fd;
+		color: #333;
+	}
+	
+	.arc_res {
+		border: 7px solid #4caf50;
+		min-width: 4em;
+		min-height: 4em;
+		padding: 1em;
+		border-radius: 50%;
+		border-left-color: transparent;
+		border-right-color: transparent;
+		border-bottom-color: transparent;
+	}
+	
+	.arc_mod {
+		border: 7px solid #ffc400;
+		min-width: 4em;
+		min-height: 4em;
+		padding: 1em;
+		border-radius: 50%;
+		border-left-color: transparent;
+		border-right-color: transparent;
+		border-bottom-color: transparent;
+	}
+	
+	.arc_reac {
+		border: 7px solid #f57f17;
+		min-width: 4em;
+		min-height: 4em;
+		padding: 1em;
+		border-radius: 50%;
+		border-left-color: transparent;
+		border-right-color: transparent;
+		border-bottom-color: transparent;
+	}
+</style>
+
+<span ng-show="loading">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>    
+</span>
+
+<div id="sb-site" ng-show="!loading">
+	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-if="!online" class="w3-animate-top">
+		<div class="alert alert-danger alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">info</i>
+			<span data-notify="message">Connection Error !</span>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div>
+<!--
+			<div class="row">
+				<div class="col-md-3">ID</div>
+				<div class="col-md-3">Sum</div>
+				<div class="col-md-3">Count</div>
+				<div class="col-md-3">Avg</div>
+			</div>
+			<div class="row" ng-repeat="an in avgPeer">
+				<div class="col-md-3">{{avgPeer[$index][0]}}</div>
+				<div class="col-md-3">{{avgPeer[$index][1]}}</div>
+				<div class="col-md-3">{{avgPeer[$index][2]}}</div>
+				<div class="col-md-3">{{avgPeer[$index][3]}}</div>
+			</div>
+-->
+			<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 style="text-align:center" id="page-title">
+                                    <b>Leadership Competencies</b>
+                                </h2>
+							</div>
+							<div class="col-md-12">
+								<h4 style="text-align:center" id="page-title">
+                                    <b>{{user.firstname}}'s Leadership Competencies</b>
+                                </h4>
+							</div>
+							<div class="col-md-12 row">
+								<div class="col-md-offset-3 col-md-6" style="margin: 0 auto; text-align: center;">
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
+									<div class="col-md-2">Responsive</div>
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
+									<div class="col-md-2">Moderate</div>
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
+									<div class="col-md-2">Reactive</div>
+								</div>
+							</div>
+							<div class="col-md-12" style="margin-top: 20px;">
+								<h4 style="text-align:center" id="page-title">
+                                    <b>Peers Leadership Competencies</b>
+                                </h4>
+							</div>
+							<div class="col-md-12 row">
+								<div class="col-md-offset-3 col-md-6" style="margin: 0px auto 0px auto; text-align: center;">
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="margin-left: -11px; margin-top: 20px;"><span class="arc_res"></span></div>
+									<div class="col-md-2">Responsive</div>
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="margin-left: 0px; margin-top: 20px;"><span class="arc_mod"></span></div>
+									<div class="col-md-2">Moderate</div>
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="margin-left: 11px; margin-top: 20px;"><span class="arc_reac"></span></div>
+									<div class="col-md-2">Reactive</div>
+								</div>
+							</div>
+							<div class="col-md-offset-4 col-md-4" style="padding-bottom: 30px; margin-top: 20px; margin-left: auto; margin-right: auto;">
+								<!--	CANDIDATE	-->
+								<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] < -1) || (countCompetencies[0][2] >= 0 && countCompetencies[0][2] <= 0.5)">
+								<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] >= -1 && countCompetencies[0][2] < -0.5) || (countCompetencies[0][2] > 0.5 && countCompetencies[0][2] <= 1)">
+								<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] >= -0.5 && countCompetencies[0][2] < 0) || (countCompetencies[0][2] > 1)">
+								
+								<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] < -1) || (countCompetencies[1][2] >= 0 && countCompetencies[1][2] <= 0.5)">
+								<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] >= -1 && countCompetencies[1][2] < -0.5) || (countCompetencies[1][2] > 0.5 && countCompetencies[1][2] <= 1)">
+								<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] >= -0.5 && countCompetencies[1][2] < 0) || (countCompetencies[1][2] > 1)">
+								
+								<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] < -1) || (countCompetencies[2][2] >= 0 && countCompetencies[2][2] <= 0.5)">
+								<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] >= -1 && countCompetencies[2][2] < -0.5) || (countCompetencies[2][2] > 0.5 && countCompetencies[2][2] <= 1)">
+								<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] >= -0.5 && countCompetencies[2][2] < 0) || (countCompetencies[2][2] > 1)">
+								
+								<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] < -1) || (countCompetencies[3][2] >= 0 && countCompetencies[3][2] <= 0.5)">
+								<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] >= -1 && countCompetencies[3][2] < -0.5) || (countCompetencies[3][2] > 0.5 && countCompetencies[3][2] <= 1)">
+								<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] >= -0.5 && countCompetencies[3][2] < 0) || (countCompetencies[3][2] > 1)">
+								
+								<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] < -1) || (countCompetencies[4][2] >= 0 && countCompetencies[4][2] <= 0.5)">
+								<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] >= -1 && countCompetencies[4][2] < -0.5) || (countCompetencies[4][2] > 0.5 && countCompetencies[4][2] <= 1)">
+								<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] >= -0.5 && countCompetencies[4][2] < 0) || (countCompetencies[4][2] > 1)">
+								
+								<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] < -1) || (countCompetencies[5][2] >= 0 && countCompetencies[5][2] <= 0.5)">
+								<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] >= -1 && countCompetencies[5][2] < -0.5) || (countCompetencies[5][2] > 0.5 && countCompetencies[5][2] <= 1)">
+								<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] >= -0.5 && countCompetencies[5][2] < 0) || (countCompetencies[5][2] > 1)">
+								
+								<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] < -1) || (countCompetencies[6][2] >= 0 && countCompetencies[6][2] <= 0.5)">
+								<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] >= -1 && countCompetencies[6][2] < -0.5) || (countCompetencies[6][2] > 0.5 && countCompetencies[6][2] <= 1)">
+								<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] >= -0.5 && countCompetencies[6][2] < 0) || (countCompetencies[6][2] > 1)">
+								
+								<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] < -1) || (countCompetencies[7][2] >= 0 && countCompetencies[7][2] <= 0.5)">
+								<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] >= -1 && countCompetencies[7][2] < -0.5) || (countCompetencies[7][2] > 0.5 && countCompetencies[7][2] <= 1)">
+								<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] >= -0.5 && countCompetencies[7][2] < 0) || (countCompetencies[7][2] > 1)">
+								
+								<!--	PEER	-->
+								<img src="./images/paei/q1a1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[0][2] < -1) || (countCompetencies2[0][2] >= 0 && countCompetencies2[0][2] <= 0.5)">
+								<img src="./images/paei/q1a1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[0][2] >= -1 && countCompetencies2[0][2] < -0.5) || (countCompetencies2[0][2] > 0.5 && countCompetencies2[0][2] <= 1)">
+								<img src="./images/paei/q1a1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[0][2] >= -0.5 && countCompetencies2[0][2] < 0) || (countCompetencies2[0][2] > 1)">
+								
+								<img src="./images/paei/q1a2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[1][2] < -1) || (countCompetencies2[1][2] >= 0 && countCompetencies2[1][2] <= 0.5)">
+								<img src="./images/paei/q1a2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[1][2] >= -1 && countCompetencies2[1][2] < -0.5) || (countCompetencies2[1][2] > 0.5 && countCompetencies2[1][2] <= 1)">
+								<img src="./images/paei/q1a2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[1][2] >= -0.5 && countCompetencies2[1][2] < 0) || (countCompetencies2[1][2] > 1)">
+								
+								<img src="./images/paei/q2a1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[2][2] < -1) || (countCompetencies2[2][2] >= 0 && countCompetencies2[2][2] <= 0.5)">
+								<img src="./images/paei/q2a1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[2][2] >= -1 && countCompetencies2[2][2] < -0.5) || (countCompetencies2[2][2] > 0.5 && countCompetencies2[2][2] <= 1)">
+								<img src="./images/paei/q2a1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[2][2] >= -0.5 && countCompetencies2[2][2] < 0) || (countCompetencies2[2][2] > 1)">
+								
+								<img src="./images/paei/q2a2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[3][2] < -1) || (countCompetencies2[3][2] >= 0 && countCompetencies2[3][2] <= 0.5)">
+								<img src="./images/paei/q2a2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[3][2] >= -1 && countCompetencies2[3][2] < -0.5) || (countCompetencies2[3][2] > 0.5 && countCompetencies2[3][2] <= 1)">
+								<img src="./images/paei/q2a2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[3][2] >= -0.5 && countCompetencies2[3][2] < 0) || (countCompetencies2[3][2] > 1)">
+								
+								<img src="./images/paei/q3a1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[4][2] < -1) || (countCompetencies2[4][2] >= 0 && countCompetencies2[4][2] <= 0.5)">
+								<img src="./images/paei/q3a1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[4][2] >= -1 && countCompetencies2[4][2] < -0.5) || (countCompetencies2[4][2] > 0.5 && countCompetencies2[4][2] <= 1)">
+								<img src="./images/paei/q3a1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[4][2] >= -0.5 && countCompetencies2[4][2] < 0) || (countCompetencies2[4][2] > 1)">
+								
+								<img src="./images/paei/q3a2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[5][2] < -1) || (countCompetencies2[5][2] >= 0 && countCompetencies2[5][2] <= 0.5)">
+								<img src="./images/paei/q3a2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[5][2] >= -1 && countCompetencies2[5][2] < -0.5) || (countCompetencies2[5][2] > 0.5 && countCompetencies2[5][2] <= 1)">
+								<img src="./images/paei/q3a2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[5][2] >= -0.5 && countCompetencies2[5][2] < 0) || (countCompetencies2[5][2] > 1)">
+								
+								<img src="./images/paei/q4a1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[6][2] < -1) || (countCompetencies2[6][2] >= 0 && countCompetencies2[6][2] <= 0.5)">
+								<img src="./images/paei/q4a1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[6][2] >= -1 && countCompetencies2[6][2] < -0.5) || (countCompetencies2[6][2] > 0.5 && countCompetencies2[6][2] <= 1)">
+								<img src="./images/paei/q4a1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[6][2] >= -0.5 && countCompetencies2[6][2] < 0) || (countCompetencies2[6][2] > 1)">
+								
+								<img src="./images/paei/q4a2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies2[7][2] < -1) || (countCompetencies2[7][2] >= 0 && countCompetencies2[7][2] <= 0.5)">
+								<img src="./images/paei/q4a2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(110%);" ng-show="(countCompetencies2[7][2] >= -1 && countCompetencies2[7][2] < -0.5) || (countCompetencies2[7][2] > 0.5 && countCompetencies2[7][2] <= 1)">
+								<img src="./images/paei/q4a2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(125%);" ng-show="(countCompetencies2[7][2] >= -0.5 && countCompetencies2[7][2] < 0) || (countCompetencies2[7][2] > 1)">
+								
+								<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
+								<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+							</div>
+						</div>
+			</div>
+		</div>
+	</div>
+</div>

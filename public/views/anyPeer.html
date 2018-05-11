@@ -12,7 +12,7 @@
     </div>    
 </span>
 
-<div id="sb-site" ng-show="!loading && verified && !showBalancing">
+<div id="sb-site" ng-show="!loading && verified && !showBalancing && !doneReviewing">
 	
 	<style>
 		.back_panel {
@@ -297,6 +297,18 @@
         </div>
         
     </div>
+</div>
+
+<div class="container" ng-show="doneReviewing" style="margin-top: 100px;">
+      
+					<div class="jumbotron">
+						<h1>Thank-you!</h1>
+						<p>&nbsp;&nbsp;For <strong>Reviewing</strong>.</p>
+
+					</div>
+                
+					<button ng-click="doneReviewing = false;" class="btn btn-danger">Back</button>
+    
 </div>
 
 <div class="container" ng-show="showBalancing">

@@ -296,6 +296,19 @@ router.route('/assessor-report/:id')
     });
 });
 
+router.route('/peers_data/:id')
+.get(function(req, res, next){
+    var id = sanitize(req.params.id);
+    
+    User.findOne({_id: id}, {'firstname': true, 'profile.profile_content.mini_descriptions.paei_tag': true, 'profile.profile_content.mini_descriptions.mini_rating': true, 'profile.profile_content.keyword_id': true, 'peer_reviews.emailid': true, 'peer_reviews.reviews.key_rating': true, 'peer_reviews.reviews.keyword_id': true, 'peer_reviews.reviews.mini_descriptions.relate': true, 'peer_reviews.reviews.mini_descriptions.paei_tag': true, 'peer_reviews.reviews.mini_descriptions.mini_rating': true})
+    .exec(function(err, user){
+        if(err)
+            return next(err);
+		
+		return res.status(200).json(user);
+    });
+});
+
 router.route('/peer_check/:id')
 .post(function(req, res, next){
     var id = sanitize(req.params.id);
@@ -304,7 +317,7 @@ router.route('/peer_check/:id')
     User.findOne({_id: id}, {'peer_reviewers': true})
     .exec(function(err, user){
         if(err)
-            next(err);
+            return next(err);
 		//console.log("inside");
 		var found = true;
 		if(user.peer_reviewers.length != 0){
@@ -362,7 +375,8 @@ router.route('/peer/:id/:eid')
 				var mini = [];
 				for(var m=0; m<user.profile.profile_content[s].mini_descriptions.length; m++){
 					mini.push({
-						mini_description_id: user.profile.profile_content[s].mini_descriptions[m].mini_description_id
+						mini_description_id: user.profile.profile_content[s].mini_descriptions[m].mini_description_id,
+						paei_tag: user.profile.profile_content[s].mini_descriptions[m].paei_tag
 					});
 				}
 				revs.push({
@@ -423,7 +437,7 @@ router.route('/specific/:id')
 .get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
     var id = sanitize(req.params.id);
     
-    User.findOne({_id: id})
+    User.findOne({_id: id}, {'peer_reviews': false, 'peer_reviewers': false})
     .exec(function(err, user){
         if(err)
             next(err);
@@ -1076,7 +1090,8 @@ router.route('/completion')
             profile_filled: sec1 && sec2 && sec3,// && sec4,
             profile_blocked: blocking,
 			you_are_fac: user.are_you.facilitator,
-			you_are_man: user.are_you.manager
+			you_are_man: user.are_you.manager,
+			userID: id
         };
         //console.log(sec1 + ' | ' + sec2 + ' | ' + sec3 + ' | ' + sec4 + ' = ' + per);
         return res.status(200).json(final_obj);
@@ -1183,7 +1198,12 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
     //console.log(res);
 	
 	var tkn = authe.makeToken();
-    //console.log("THIS IS TOKEN: "+tkn);
+//    console.log("THIS IS TOKEN: "+tkn);
+	
+	tkn = CryptoJS.AES.decrypt(tkn, config.development.scrt).toString(CryptoJS.enc.Utf8);
+	
+//    console.log("AFTER: "+tkn);
+	
     res.redirect('http://app.idiscover.me/#/oauth/google/'+tkn);
 });
 

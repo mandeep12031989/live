@@ -87,7 +87,7 @@ exports = passport.use(new GoogleStrategy({
     }));
 
 exports.makeToken = function() {
-	//console.log("in fn: " +getDetails._id);
+//	console.log("in fn: " +getDetails._id);
 	return Verify.getToken(getDetails);
 };
 

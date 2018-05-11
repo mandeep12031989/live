@@ -842,8 +842,34 @@
 								
 								<h5 style="color: #444; padding: 20px; font-weight: bold;">{{profile_content.profile.eachSectionStopReflect[0]}}</h5>
 								
-								<div class="row">
-									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+								<!--			default profile			-->
+								<div class="row" ng-show="profile_selected == -1">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 1 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;">
+										
+										<div class="col-xs-12 col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+											
+											<div class="col-xs-12 col-md-3" style="margin: auto 0;">
+												<div class="c1002 small" style="margin-left: auto; margin-right: auto;">
+													<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+														<div class="slice">
+															<div class="bar"></div>
+															<div class="fill"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-12 col-md-9" style="margin: auto 0;">
+												<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+												<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+											</div>
+											
+										</div>
+										
+									</div>
+								</div>
+								<!--			rest profiles			-->
+								<div class="row" ng-show="profile_selected != -1">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 1 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;">
 										
 										<div class="col-xs-12 col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
 											
@@ -866,7 +892,6 @@
 										
 									</div>
 								</div>
-								
                             </div>
                         </div>
 <!--                                                    SECTION 2                                                          -->
@@ -878,8 +903,9 @@
 								
 								<h5 style="color: #444; padding: 20px; font-weight: bold;">{{profile_content.profile.eachSectionStopReflect[1]}}</h5>
 								
-								<div class="row">
-									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+								<!--			default profile			-->
+								<div class="row" ng-show="profile_selected == -1">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;">
 										
 										<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
 											
@@ -902,6 +928,32 @@
 										
 									</div>
 								</div>
+								<!--			rest profiles			-->
+								<div class="row" ng-show="profile_selected != -1">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 2 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;">
+										
+										<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+											
+											<div class="col-md-3" style="margin: auto 0;">
+												<div class="c1002 small">
+													<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+														<div class="slice">
+															<div class="bar"></div>
+															<div class="fill"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-9" style="margin: auto 0;">
+												<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+												<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+											</div>
+											
+										</div>
+										
+									</div>
+								</div>
+								
                             </div>
                         </div>
 <!--                                                    SECTION 3                                                          -->
@@ -913,8 +965,9 @@
 								
 								<h5 style="color: #444; padding: 20px; font-weight: bold;">{{profile_content.profile.eachSectionStopReflect[2]}}</h5>
 								
-								<div class="row">
-									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="profile_selected == -1">
+								<!--			default profile			-->
+								<div class="row" ng-show="profile_selected == -1">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;">
 										
 										<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
 											
@@ -937,6 +990,32 @@
 										
 									</div>
 								</div>
+								<!--			rest profiles			-->
+								<div class="row" ng-show="profile_selected != -1">
+									<div class="col-md-4" ng-repeat="keys in profile_content.profile.old[profile_selected].pro" ng-if="keys.keyword_id[5] == 3 && keys.key_rating != 0" style="margin: 10px auto; padding: 10px; display: inline-block;">
+										
+										<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+											
+											<div class="col-md-3" style="margin: auto 0;">
+												<div class="c1002 small">
+													<div class="c100 small" ng-class="(keys.key_rating >= 0 && keys.key_rating <= 0.5) ? 'p33 grey' : ((keys.key_rating > 0.5 && keys.key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
+														<div class="slice">
+															<div class="bar"></div>
+															<div class="fill"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-9" style="margin: auto 0;">
+												<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
+												<div class="col-md-12">{{keys.mini_descriptions[0].mini_description}}</div>
+											</div>
+											
+										</div>
+										
+									</div>
+								</div>
+								
                             </div>
                         </div>
 						
@@ -944,6 +1023,72 @@
 					</div>
 					
 					<!--									TABS END											-->
+					
+					<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
+						<div class="row">
+							<div class="col-md-12">
+								<h2 style="text-align:center" id="page-title">
+                                    <b>Leadership Competencies</b>
+                                </h2>
+							</div>
+							<div class="col-md-12 row">
+								<div class="col-md-offset-3 col-md-6" style="margin: 0 auto; text-align: center;">
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
+									<div class="col-md-2">Responsive</div>
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
+									<div class="col-md-2">Moderate</div>
+									<div class="col-md-1"></div>
+									
+									<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
+									<div class="col-md-2">Reactive</div>
+								</div>
+							</div>
+							<div class="col-md-offset-4 col-md-4" style="padding-bottom: 30px; margin-top: 20px; margin-left: auto; margin-right: auto;">
+								<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] < -1) || (countCompetencies[0][2] >= 0 && countCompetencies[0][2] <= 0.5)">
+								<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] >= -1 && countCompetencies[0][2] < -0.5) || (countCompetencies[0][2] > 0.5 && countCompetencies[0][2] <= 1)">
+								<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[0][2] >= -0.5 && countCompetencies[0][2] < 0) || (countCompetencies[0][2] > 1)">
+								
+								<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] < -1) || (countCompetencies[1][2] >= 0 && countCompetencies[1][2] <= 0.5)">
+								<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] >= -1 && countCompetencies[1][2] < -0.5) || (countCompetencies[1][2] > 0.5 && countCompetencies[1][2] <= 1)">
+								<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[1][2] >= -0.5 && countCompetencies[1][2] < 0) || (countCompetencies[1][2] > 1)">
+								
+								<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] < -1) || (countCompetencies[2][2] >= 0 && countCompetencies[2][2] <= 0.5)">
+								<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] >= -1 && countCompetencies[2][2] < -0.5) || (countCompetencies[2][2] > 0.5 && countCompetencies[2][2] <= 1)">
+								<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[2][2] >= -0.5 && countCompetencies[2][2] < 0) || (countCompetencies[2][2] > 1)">
+								
+								<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] < -1) || (countCompetencies[3][2] >= 0 && countCompetencies[3][2] <= 0.5)">
+								<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] >= -1 && countCompetencies[3][2] < -0.5) || (countCompetencies[3][2] > 0.5 && countCompetencies[3][2] <= 1)">
+								<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[3][2] >= -0.5 && countCompetencies[3][2] < 0) || (countCompetencies[3][2] > 1)">
+								
+								<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] < -1) || (countCompetencies[4][2] >= 0 && countCompetencies[4][2] <= 0.5)">
+								<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] >= -1 && countCompetencies[4][2] < -0.5) || (countCompetencies[4][2] > 0.5 && countCompetencies[4][2] <= 1)">
+								<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[4][2] >= -0.5 && countCompetencies[4][2] < 0) || (countCompetencies[4][2] > 1)">
+								
+								<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] < -1) || (countCompetencies[5][2] >= 0 && countCompetencies[5][2] <= 0.5)">
+								<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] >= -1 && countCompetencies[5][2] < -0.5) || (countCompetencies[5][2] > 0.5 && countCompetencies[5][2] <= 1)">
+								<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[5][2] >= -0.5 && countCompetencies[5][2] < 0) || (countCompetencies[5][2] > 1)">
+								
+								<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] < -1) || (countCompetencies[6][2] >= 0 && countCompetencies[6][2] <= 0.5)">
+								<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] >= -1 && countCompetencies[6][2] < -0.5) || (countCompetencies[6][2] > 0.5 && countCompetencies[6][2] <= 1)">
+								<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[6][2] >= -0.5 && countCompetencies[6][2] < 0) || (countCompetencies[6][2] > 1)">
+								
+								<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] < -1) || (countCompetencies[7][2] >= 0 && countCompetencies[7][2] <= 0.5)">
+								<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] >= -1 && countCompetencies[7][2] < -0.5) || (countCompetencies[7][2] > 0.5 && countCompetencies[7][2] <= 1)">
+								<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetencies[7][2] >= -0.5 && countCompetencies[7][2] < 0) || (countCompetencies[7][2] > 1)">
+								
+								<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
+								<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+							</div>
+							
+							<div class="col-md-12" style="margin: 30px 0px; text-align: center;">
+								<span style="padding: 10px 20px; background: orange; color: white; font-weight: bold; border-radius: 15px; cursor: pointer;" ui-sref="peerAnalysis({id: profile_content._id})">Get Peer Analysis</span>
+							</div>
+						</div>
+					</div>
 					
 					<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
 						<div class="row">
