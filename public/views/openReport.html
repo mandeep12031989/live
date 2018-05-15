@@ -27,9 +27,9 @@
 			</div>
 			
 			<div style="text-align: left; padding: 20px 20px 20px 20px; margin-left: 50px; font-size: 14px;" class="row">
+				<span class="col-md-3" style="text-align: right;">Position Applied for:</span><span class="col-md-3"><b>{{user.assessor.position}}</b></span>
 				<span class="col-md-3" style="text-align: right;">Experience:</span><span class="col-md-3"><b>{{user.work_details.experience}}</b></span>
 				<span class="col-md-3" style="text-align: right;">Enneagram Profile:</span><span class="col-md-3"><b>{{user.profile.profile_number}}</b></span>
-				<span class="col-md-3" style="text-align: right;">Position Applied for:</span><span class="col-md-3"><b>{{user.assessor.position}}</b></span>
 				<span class="col-md-3" style="text-align: right;">Personal Mastery Level:</span><span class="col-md-3"><b>{{user.assessor.per_mast_lvl}}</b></span>
 				<span class="col-md-3" style="text-align: right;">Result:</span><span class="col-md-3"><b>{{user.assessor.result}}</b></span>
 			</div>
@@ -188,6 +188,7 @@
 		<!--	section 3	-->
 		<div class="row" style="padding: 20px;">
 			<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>Learning Needs</b></h4><br></div>
+			
 			<div class="col-md-4" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_key_rating != 0 && keys.assessor_checkbox" style="margin: 10px auto; padding: 10px; display: inline-block;">
 										
 				<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
@@ -214,24 +215,71 @@
 		
 		<hr>
 		
+		<div class="col-md-12">
+			<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>Leadership Competencies</b></h4><br></div>
+			
+			<div class="col-md-12 row">
+												<div class="col-md-offset-3 col-md-6" style="margin: 0 auto 30px auto; text-align: center;">
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
+													<div class="col-md-2">Responsive</div>
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
+													<div class="col-md-2">Moderate</div>
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
+													<div class="col-md-2">Reactive</div>
+												</div>
+			</div>
+			
+			<div class="col-md-offset-4 col-md-4">
+				<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2]< -1) || (user.assessor.score_competencies[0][2]>= 0 && user.assessor.score_competencies[0][2]<= 0.5)">
+				<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2]>= -1 && user.assessor.score_competencies[0][2]< -0.5) || (user.assessor.score_competencies[0][2]> 0.5 && user.assessor.score_competencies[0][2]<= 1)">
+				<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2]>= -0.5 && user.assessor.score_competencies[0][2]< 0) || (user.assessor.score_competencies[0][2]> 1)">
+
+												<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2]< -1) || (user.assessor.score_competencies[1][2]>= 0 && user.assessor.score_competencies[1][2]<= 0.5)">
+												<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2]>= -1 && user.assessor.score_competencies[1][2]< -0.5) || (user.assessor.score_competencies[1][2]> 0.5 && user.assessor.score_competencies[1][2]<= 1)">
+												<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2]>= -0.5 && user.assessor.score_competencies[1][2]< 0) || (user.assessor.score_competencies[1][2]> 1)">
+
+												<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2]< -1) || (user.assessor.score_competencies[2][2]>= 0 && user.assessor.score_competencies[2][2]<= 0.5)">
+												<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2]>= -1 && user.assessor.score_competencies[2][2]< -0.5) || (user.assessor.score_competencies[2][2]> 0.5 && user.assessor.score_competencies[2][2]<= 1)">
+												<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2]>= -0.5 && user.assessor.score_competencies[2][2]< 0) || (user.assessor.score_competencies[2][2]> 1)">
+
+												<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2]< -1) || (user.assessor.score_competencies[3][2]>= 0 && user.assessor.score_competencies[3][2]<= 0.5)">
+												<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2]>= -1 && user.assessor.score_competencies[3][2]< -0.5) || (user.assessor.score_competencies[3][2]> 0.5 && user.assessor.score_competencies[3][2]<= 1)">
+												<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2]>= -0.5 && user.assessor.score_competencies[3][2]< 0) || (user.assessor.score_competencies[3][2]> 1)">
+
+												<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[4][2]< -1) || (user.assessor.score_competencies[4][2]>= 0 && user.assessor.score_competencies[4][2]<= 0.5)">
+												<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[4][2]>= -1 && user.assessor.score_competencies[4][2]< -0.5) || (user.assessor.score_competencies[4][2]> 0.5 && user.assessor.score_competencies[4][2]<= 1)">
+												<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[4][2]>= -0.5 && user.assessor.score_competencies[4][2]< 0) || (user.assessor.score_competencies[4][2]> 1)">
+
+												<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[5][2]< -1) || (user.assessor.score_competencies[5][2]>= 0 && user.assessor.score_competencies[5][2]<= 0.5)">
+												<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[5][2]>= -1 && user.assessor.score_competencies[5][2]< -0.5) || (user.assessor.score_competencies[5][2]> 0.5 && user.assessor.score_competencies[5][2]<= 1)">
+												<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[5][2]>= -0.5 && user.assessor.score_competencies[5][2]< 0) || (user.assessor.score_competencies[5][2]> 1)">
+
+												<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[6][2]< -1) || (user.assessor.score_competencies[6][2]>= 0 && user.assessor.score_competencies[6][2]<= 0.5)">
+												<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[6][2]>= -1 && user.assessor.score_competencies[6][2]< -0.5) || (user.assessor.score_competencies[6][2]> 0.5 && user.assessor.score_competencies[6][2]<= 1)">
+												<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[6][2]>= -0.5 && user.assessor.score_competencies[6][2]< 0) || (user.assessor.score_competencies[6][2]> 1)">
+
+												<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[7][2]< -1) || (user.assessor.score_competencies[7][2]>= 0 && user.assessor.score_competencies[7][2]<= 0.5)">
+												<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[7][2]>= -1 && user.assessor.score_competencies[7][2]< -0.5) || (user.assessor.score_competencies[7][2]> 0.5 && user.assessor.score_competencies[7][2]<= 1)">
+												<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[7][2]>= -0.5 && user.assessor.score_competencies[7][2]< 0) || (user.assessor.score_competencies[7][2]> 1)">
+
+												<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
+												<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+			</div>
+		</div>
+		
+		<hr ng-show="user.assessor.recommend.length > 0">
 		
 		<div class="row col-md-12" ng-repeat="r in user.assessor.recommend" style="padding: 10px;">
 			<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>{{r.title}}</b></h4><br></div>
 			<div class="col-md-12" style="margin-left: 20px; font-size: 15px;"><p ng-bind-html="r.desc | linebreaks"></p></div>
 			
 			<br>
-		</div>
-		
-		<hr>
-		
-		<!--	section Recommendations		-->
-		<div class="row" style="padding: 20px;">
-			<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>Recommendations for Manager</b></h4><br></div>
-			<ul>
-				<li ng-repeat="mr in user.assessor.recommendations_for_manager" ng-if="mr.selected">
-					<span>{{mr.statement}}</span>
-				</li>
-			</ul>
 		</div>
 	</div>
 </div>

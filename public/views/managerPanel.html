@@ -20,7 +20,7 @@
    
     <div id="page-wrapper">
         
-        <div id="page-sidebar">
+        <div id="page-sidebar" style="height: 100%;">
             <div class="scroll-sidebar">
         
                 <ul id="sidebar-menu">
@@ -42,6 +42,15 @@
 
 					<li class="divider"></li>
 
+					<li ng-click="tab_num = 2">
+						<a href="" ng-class="tab_num == 2 ? 'bg-tab':''">
+							<i class="glyph-icon icon-users"></i>
+							<span>Team Health Levels</span>
+						</a>
+					</li>
+
+					<li class="divider"></li>
+
 					<li>
 						<a ui-sref="dashboard">
 							<i class="glyph-icon icon-arrow-right"></i>
@@ -60,7 +69,7 @@
 					
                     <div class="row row-bg">
                         <div class="col-sm-6 col-md-4">
-							<div class="card card-stats" ng-click="tab_num = 2">
+							<div class="card card-stats">
                                 <div class="card-header" data-background-color="blue">
                                     <i class="material-icons">group</i>
                                 </div>
@@ -96,9 +105,91 @@
 								<div class="col-md-1">{{$index+1}}</div>
 								<div class="col-md-3">{{mem.emailID}}</div>
 								<div class="col-md-3">{{mem.name}}</div>
-								<div class="col-md-2"><a ui-sref="trueself-report-share({id: mem.userID})" target="_blank" ng-show="mem.userID">Open</a></div>
+								<div class="col-md-2"><a ui-sref="openAssessorReport({id: mem.userID})" target="_blank" ng-show="mem.userID">Open</a></div>
 							</div>
 						</div>
+					</div>
+                    
+                </div>
+				
+                <!--                        TAB 2                           -->
+                <div class="container" ng-show="tab_num == 2">
+					
+                    <div class="row">
+						<div class="col-md-12" style="margin-bottom: 30px;">
+							<h3 style="text-align: center; font-weight: bold;">Team Health Levels</h3>
+						</div>
+			
+						<div class="col-md-12 row">
+							<div class="col-md-offset-3 col-md-6" style="margin: 0 auto 30px auto; text-align: center;">
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
+													<div class="col-md-2">Responsive</div>
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
+													<div class="col-md-2">Moderate</div>
+													<div class="col-md-1"></div>
+
+													<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
+													<div class="col-md-2">Reactive</div>
+							</div>
+						</div>
+						
+						<div class="col-md-6 row" ng-repeat="cmp in combineComp" style="text-align: center; margin: 20px auto;">
+							<div class="col-md-12" style="margin: 10px auto;">
+								<h4 style="text-align: center; font-weight: bold;">{{mData.teams[$index].teamName}}</h4>
+							</div>
+							
+							<div class="col-md-offset-2 col-md-8">
+								
+								<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[0] < -1) || (cmp[0] >= 0 && cmp[0] <= 0.5)">
+								<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[0] >= -1 && cmp[0] < -0.5) || (cmp[0] > 0.5 && cmp[0] <= 1)">
+								<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[0] >= -0.5 && cmp[0] < 0) || (cmp[0] > 1)">
+
+								<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[1] < -1) || (cmp[1] >= 0 && cmp[1] <= 0.5)">
+								<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[1] >= -1 && cmp[1] < -0.5) || (cmp[1] > 0.5 && cmp[1] <= 1)">
+								<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[1] >= -0.5 && cmp[1] < 0) || (cmp[1] > 1)">
+
+								<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[2] < -1) || (cmp[2] >= 0 && cmp[2] <= 0.5)">
+								<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[2] >= -1 && cmp[2] < -0.5) || (cmp[2] > 0.5 && cmp[2] <= 1)">
+								<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[2] >= -0.5 && cmp[2] < 0) || (cmp[2] > 1)">
+
+								<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[3] < -1) || (cmp[3] >= 0 && cmp[3] <= 0.5)">
+								<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[3] >= -1 && cmp[3] < -0.5) || (cmp[3] > 0.5 && cmp[3] <= 1)">
+								<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[3] >= -0.5 && cmp[3] < 0) || (cmp[3] > 1)">
+
+								<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[4] < -1) || (cmp[4] >= 0 && cmp[4] <= 0.5)">
+								<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[4] >= -1 && cmp[4] < -0.5) || (cmp[4] > 0.5 && cmp[4] <= 1)">
+								<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[4] >= -0.5 && cmp[4] < 0) || (cmp[4] > 1)">
+
+								<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[5] < -1) || (cmp[5] >= 0 && cmp[5] <= 0.5)">
+								<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[5] >= -1 && cmp[5] < -0.5) || (cmp[5] > 0.5 && cmp[5] <= 1)">
+								<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[5] >= -0.5 && cmp[5] < 0) || (cmp[5] > 1)">
+
+								<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[6] < -1) || (cmp[6] >= 0 && cmp[6] <= 0.5)">
+								<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[6] >= -1 && cmp[6] < -0.5) || (cmp[6] > 0.5 && cmp[6] <= 1)">
+								<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[6] >= -0.5 && cmp[6] < 0) || (cmp[6] > 1)">
+
+								<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[7] < -1) || (cmp[7] >= 0 && cmp[7] <= 0.5)">
+								<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[7] >= -1 && cmp[7] < -0.5) || (cmp[7] > 0.5 && cmp[7] <= 1)">
+								<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[7] >= -0.5 && cmp[7] < 0) || (cmp[7] > 1)">
+
+								<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
+								<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+							</div>
+							<div class="col-md-4"></div>
+							
+							<div class="col-md-12" style="margin: 30px auto 10px auto;">
+								<h4 style="text-align: center;">Total Members in Team: <b>{{mData.teams[$index].members.length}}</b></h4>
+							</div>
+							
+							<div class="col-md-12" style="margin: 10px auto;">
+								<h4 style="text-align: center;">Total Assessed Candidates: <b>{{cmp[8]}}</b></h4>
+							</div>
+						</div>
+						
 					</div>
                     
                 </div>

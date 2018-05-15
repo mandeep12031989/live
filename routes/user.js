@@ -287,7 +287,7 @@ router.route('/assessor-report/:id')
 .get(function(req, res, next){
     var id = sanitize(req.params.id);
     
-    User.findOne({_id: id}, {'assessor': true, 'work_details.experience': true, 'profile.profile_number': true, 'firstname': true, 'lastname': true})
+    User.findOne({_id: id}, {'assessor': true, 'work_details.experience': true, 'profile.profile_number': true, 'firstname': true, 'lastname': true, 'assessor': true})
     .exec(function(err, user){
         if(err)
             return next(err);
@@ -940,6 +940,35 @@ router.route('/verifyMembers')
 	
 });
 
+router.route('/assessor-competencies')
+.put(Verify.verifyOrdinaryUser, Verify.verifyManager, function(req, res, next){
+	var body = sanitize(req.body);
+	
+	for(let k=0; k < body.teams.length; k++){
+		for(let m=0; m < body.teams[k].members.length; m++){
+//			console.log('* '+body.teams[k].members[m].userID);
+			if(body.teams[k].members[m].userID){
+				User.findOne({_id: body.teams[k].members[m].userID}, {'_id': false, 'assessor.score_competencies': true})
+				.exec(function(err, user){
+					if(err)
+						return next(err);
+
+					body.teams[k].members[m].comp = user.assessor.score_competencies;
+//					console.log(body.teams[k].members[m]);
+				});
+			}
+			
+			if((k == (body.teams.length-1)) && (m == (body.teams[k].members.length-1))){
+				setTimeout(function(){
+					res.status(200).json(body);
+				}, 500*(body.teams.length-1));
+			}
+		}
+	}
+	
+	
+});
+
 router.route('/managerData')
 .get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
 	var id = req.decoded._id;
@@ -949,26 +978,28 @@ router.route('/managerData')
 		if(err)
 			return next(err);
 		
-		if(user.teams.length){
+		if(user.teams || user.teams.length > 0){
 			let tID;
 			for(let i=0; i < user.teams.length; i++){
 				tID = user.teams[i].teamID;
-				
-				Team.findOne({'teamID': tID})
+//				console.log(tID);
+				Team.findOne({'teamID': tID}, {'_id': false, 'date': false})
 					.exec(function(err, team){
 						if(err)
 							return next(err);
-						
-						user.teams[i] = team;
+					
 						return;
 					})
-					.then(function(){
+					.then(function(m){
+						user.teams[i] = m;
+//						console.log(m);
 						if(i == (user.teams.length-1)){
 //							console.log(user);
-							return res.status(200).json(user);
+							setTimeout(function(){
+								res.status(200).json(user);
+							}, 500*(user.teams.length-1));
 						}
 					});
-				
 			}
 		}
 		else

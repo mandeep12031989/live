@@ -75,12 +75,12 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h2 style="text-align:center" id="page-title">
-                                    <b>Leadership Competencies</b>
+                                    <b>{{user.firstname}}'s Leadership Competencies</b>
                                 </h2>
 							</div>
 							<div class="col-md-12">
 								<h4 style="text-align:center" id="page-title">
-                                    <b>{{user.firstname}}'s Leadership Competencies</b>
+                                    <b>Self Assessment</b>
                                 </h4>
 							</div>
 							<div class="col-md-12 row">
@@ -101,7 +101,7 @@
 							</div>
 							<div class="col-md-12" style="margin-top: 20px;">
 								<h4 style="text-align:center" id="page-title">
-                                    <b>Peers Leadership Competencies</b>
+                                    <b>Peer Assessment</b>
                                 </h4>
 							</div>
 							<div class="col-md-12 row">
@@ -189,6 +189,11 @@
 								
 								<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
 								<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
+							</div>
+							<div class="col-md-12" style="margin-top: 20px;">
+								<h4 style="text-align:center" id="page-title">
+                                    No. of Peers Who Assessed: <b>{{user.peer_reviews.length}}</b>
+                                </h4>
 							</div>
 						</div>
 			</div>
