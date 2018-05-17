@@ -2841,7 +2841,7 @@
 												<div class="col-sm-12" ng-repeat="keys in user.assessor.profile_content" ng-show="section_num == keys.keyword_id[5]" style="margin-bottom: 20px;">
 													<div class="panel panel-primary">
 														<div class="panel-heading" style="text-align: center;">
-															<h4 class="panel-title"><b>{{keys.keyword}}-{{keys.keyword_id}}</b></h4>
+															<h4 class="panel-title"><b>{{keys.keyword}} ( {{keys.keyword_id}} )</b></h4>
 															<span class="material-switch pull-right" style="margin-top: -15px;">
 																<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox"/>
 																<label for="{{keys.keyword_id}}" class="label-success"></label>
@@ -2875,7 +2875,7 @@
 																		</div>
 																	</div>
 																	<div class="col-sm-5">
-																		<h5><b>{{mini.mini_description}}</b></h5>  
+																		<h5><b>{{mini.mini_description}} - {{mini.paei_tag}}</b></h5>  
 																	</div>
 																
 																
