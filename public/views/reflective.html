@@ -82,7 +82,8 @@
 
 												<div class="content-box" ng-show="RQ_num == 1">
 													<h4 class="content-box-header bg-blue">
-													   Q1. What kind of people you like? What qualities you like in them?
+													   Q1. What kind of people you like? What qualities you like in them?<br><br>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपको किस तरह के लोग पसंद हैं? आप उनमें कौन से गुण पसंद करते हैं ?
 													</h4>
 													<div class="content-box-wrapper">
 														<textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ1" placeholder="Please write in adjectives, keyword or one-liner sentence
@@ -96,7 +97,8 @@
 
 												<div class="content-box" ng-show="RQ_num == 2">
 													<h4 class="content-box-header bg-blue">
-														Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.
+														Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.<br><br>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपके करीबी दोस्त या रिश्तेदार आपका किस प्रकार का चित्रित बतातें हैं ? कृपया सकारात्मक और नकारात्मक दोनों गुणों का उल्लेख करें ।
 													</h4>
 													<div class="content-box-wrapper">
 													   <textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ2" placeholder="Please write both positive and negative qualities
@@ -117,7 +119,8 @@ Negatives
 
 												<div class="content-box" ng-show="RQ_num == 3">
 													<h4 class="content-box-header bg-blue">
-														Q3. Mention positive and negative qualities about yourself that are not covered in Question 2.
+														Q3. Mention positive and negative qualities about yourself that are not covered in Question 2.<br><br>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अपने बारे में सकारात्मक और नकारात्मक गुण बताएं जो	सवाल 2 में शामिल नहीं किए गए हैं ?
 													</h4>
 													<div class="content-box-wrapper">
 														<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ3" placeholder="Positives
@@ -131,7 +134,8 @@ Negatives
 
 												<div class="content-box" ng-show="RQ_num == 4">
 													<h4 class="content-box-header bg-blue">
-														Q4. Please mention negative qualities that you have improved in last few years.
+														Q4. Please mention negative qualities that you have improved in last few years.<br><br>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;कृपया उन नकारात्मक गुणों का उल्लेख करें जिन्हें आपने समय के साथ सुधार लिया है ?
 													</h4>
 													<div class="content-box-wrapper">
 														<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ4" placeholder="Qualitites improved over time
@@ -155,7 +159,7 @@ Negatives
 												<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Previous</a>
 												<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 4" style="color: white;">Next</a>
 												<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 4" style="color: white;">Save</a>
-												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 4" style="color: white;" ng-disabled="!(quesDetails.question.RQ1 && quesDetails.question.RQ2 && quesDetails.question.RQ3 && quesDetails.question.RQ4)">Submit</a>
+												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 4" style="color: white;" ng-disabled="!(quesDetails.question.RQ1 && quesDetails.question.RQ2 && quesDetails.question.RQ3 && quesDetails.question.RQ4)">Proceed to Questionnaire</a>
 
 										</div>
 									</div>
