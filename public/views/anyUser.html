@@ -3057,13 +3057,13 @@
 									
 									<div class="col-md-12" style="background: #ffd585; text-align: center; padding: 15px; border-radius: 10px;">
 										<div class="col-md-12">
-											<span style="font-size: 24px;"><b>{{user.firstname+' '+user.lastname}}'s Values and Culture Assessment</b></span><br>
+											<span style="font-size: 24px;"><b>{{user.firstname+' '+user.lastname}}'s Values, Culture and Leadership Assessment</b></span><br>
 										</div>
 										<div style="text-align: left; padding: 20px 20px 20px 20px; margin-left: 50px; font-size: 14px;" ng-show="switchView == 1" class="row">
 											<span class="col-md-3" style="text-align: right;">Position Applied for:</span><span class="col-md-3">
 												<input class="form-control" ng-model="user.assessor.position" style="text-align: center;">
 											</span>
-											<span class="col-md-3" style="text-align: right;">Experience:</span><span class="col-md-3"><b>{{user.work_details.experience}}</b></span>
+											<span class="col-md-3" style="text-align: right;">Experience:</span><span class="col-md-2"><input class="form-control" type="text" ng-model="user.work_details.experience"></span><span class="col-md-1" style="background: #00C851; color: white; width: 100%; text-align: center; margin: auto 0; cursor: pointer;" ng-click="updateExp()">Save</span>
 											<span class="col-md-3" style="text-align: right;">Enneagram Profile:</span><span class="col-md-3"><b>{{user.profile.profile_number}}</b></span>
 											<span class="col-md-3" style="text-align: right;">Personal Mastery Level:</span><span class="col-md-3">
 												<select ng-model="user.assessor.per_mast_lvl" class="form-control">
