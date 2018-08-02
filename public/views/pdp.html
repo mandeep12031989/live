@@ -36,25 +36,62 @@
 				
 				<div class="container">
 					<div class="panel panel-body">
+						
+						<div class="col-md-12" style="margin: 10px 0 20px 0;">
+							<h4 style="font-weight: bold;">Leadership Statement:</h4>
+						</div>
+						
+						<div class="col-md-12" style="margin: 20px 0px;">
+							<span style="font-size: 15px;">As a leader, I will be someone who…</span>
+							<textarea class="form-control" rows="2" ng-model="pdpData.pdp.leadership_statement" placeholder="What kind of a leader do you want to become ?"></textarea>
+							<button class="btn btn-danger" ng-click="saveProgress()" ng-disabled="block_btn" style="float: right;">Save</button>
+						</div>
+						
+<!--
 						<div class="col-md-12" style="margin-bottom: 30px;">
 							<h3 style="text-align: center; font-weight: bold;">Professional Development Plan (PDP)</h3>
 						</div>
+-->
+						<div class="col-md-12" style="margin: 10px 0 20px 0;">
+							<h4 style="font-weight: bold;">Professional Development Plan (PDP):</h4>
+						</div>
+						
 						<div class="col-md-12 table-responsive" style="margin: 20px 0px;">
+							<div class="col-md-12" style="border: 1px solid #ddd; padding: 10px; margin: 10px 0px; border-radius: 10px;">
+									<h5>Scale for Self-audit</h5>
+									<span><span style="font-weight: bold;">1</span> - I have almost no competence in this area</span><br>
+									<span><span style="font-weight: bold;">2</span> - I need to put in considerable work to develop in this area</span><br>
+									<span><span style="font-weight: bold;">3</span> - I demostrate good competence in this area, but some improvements can be made</span><br>
+									<span><span style="font-weight: bold;">4</span> - I demostrate excellent competence in this area</span><br>
+									<span><span style="font-weight: bold;">5</span> - I demonstrate consistent competence in this area that goes beyond expectation</span><br>
+							</div>
 							
-							<table class="table">
+							<table class="table" style="border: 1px solid #efefef;">
 								<thead class="text-primary">
 									<tr>
 										<th style="text-align: center;">S.No.</th>
 										<th style="text-align: center;">Learning Need</th>
 										<th style="text-align: center;">Commitment</th>
+<!--
 										<th style="text-align: center;">TimeFrame</th>
 										<th style="text-align: center;">Monitoring</th>
-										<th style="text-align: center;">Evaluation</th>
+-->
+										<th style="text-align: center;">Self-audit</th>
+										<th style="text-align: center;">Manager's Review</th>
 										<th style="text-align: center;">Edit</th>
 										<th style="text-align: center;">Remove</th>
 									</tr>
+									<tr>
+										<th style=""></th>
+										<th style="text-align: center;">What do I need to learn?</th>
+										<th style="text-align: center;">What do I commit to practise to learn this?</th>
+										<th style="text-align: center;">How do I rate myself this learning need? (use below scale)</th>
+										<th style=""></th>
+										<th style=""></th>
+										<th style=""></th>
+									</tr>
 								</thead>
-								<tbody>
+								<tbody ng-if="pdpData.pdp.planTable.length">
 									<tr class="row_hover" ng-repeat="rw in pdpData.pdp.planTable">
 										<td style="text-align: center;">{{$index+1}}</td>
 										<td style="text-align: center;">
@@ -65,6 +102,7 @@
 											<span ng-show="!rw.edit">{{rw.commitment}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.commitment" style="text-align: center;"></span>
 										</td>
+<!--
 										<td style="text-align: center;">
 											<span ng-show="!rw.edit">{{rw.timeframe}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.timeframe" style="text-align: center;"></span>
@@ -73,9 +111,13 @@
 											<span ng-show="!rw.edit">{{rw.monitoring}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.monitoring" style="text-align: center;"></span>
 										</td>
+-->
 										<td style="text-align: center;">
 											<span ng-show="!rw.edit">{{rw.evaluation}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.evaluation" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span>{{rw.manager_review}}</span>
 										</td>
 										<td style="text-align: center;">
 											<span ng-show="!rw.edit" ng-click="rw.edit = true"><a style="cursor: pointer;"><i class="material-icons">create</i></a></span>
@@ -85,13 +127,17 @@
 									</tr>
 								</tbody>
 							</table>
-							<div class="row">
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Learning Need" ng-model="planObj.learning_need"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Commitment" ng-model="planObj.commitment"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="TimeFrame" ng-model="planObj.timeframe"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Monitoring" ng-model="planObj.monitoring"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Evaluation" ng-model="planObj.evaluation"></div>
-								<div class="col-xs-2" style="text-align: center;"><button class="btn btn-danger" ng-click="addRowToPlan()" ng-disabled="block_btn">Add Row</button></div>
+							<div ng-if="!pdpData.pdp.planTable.length" style="text-align: center; margin-bottom: 20px;"> -- nothing to show --</div>
+							
+							<div class="row" style="background: #ffdeca; padding: 5px;">
+								<div class="col-md-3"><input class="form-control" type="text" style="text-align: center;" placeholder="Learning Need" ng-model="planObj.learning_need"></div>
+								<div class="col-md-4"><input class="form-control" type="text" style="text-align: center;" placeholder="Commitment" ng-model="planObj.commitment"></div>
+<!--
+								<div class="col-md-2"><input class="form-control" type="text" style="text-align: center;" placeholder="TimeFrame" ng-model="planObj.timeframe"></div>
+								<div class="col-md-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Monitoring" ng-model="planObj.monitoring"></div>
+-->
+								<div class="col-md-3"><input class="form-control" type="text" style="text-align: center;" placeholder="Self-audit ( 1 - 5 )" ng-model="planObj.evaluation"></div>
+								<div class="col-md-2" style="text-align: center;"><button class="btn btn-danger" ng-click="addRowToPlan()" ng-disabled="block_btn">+ Add Commitment</button></div>
 							</div>
 						</div>
 						
@@ -100,30 +146,33 @@
 						</div>
 						
 						<div class="col-md-12 table-responsive" style="margin: 20px 0px;">
-							<table class="table">
+							<table class="table" style="border: 1px solid #efefef;">
 								<thead class="text-primary">
 									<tr>
 										<th style="text-align: center;">S.No.</th>
-										<th style="text-align: center;">Date</th>
-										<th style="text-align: center;">Commitment</th>
+										<th style="text-align: center;">Date (dd/mm/yyyy)</th>
+<!--										<th style="text-align: center;">Commitment</th>-->
 										<th style="text-align: center;">What Worked?</th>
-										<th style="text-align: center;">What Didn't Work?</th>
-										<th style="text-align: center;">What Was I Being?</th>
+										<th style="text-align: center;">What Did Not Work?</th>
+										<th style="text-align: center;">What can be done better?</th>
+										<th style="text-align: center;">Manager's Review</th>
 										<th style="text-align: center;">Edit</th>
 										<th style="text-align: center;">Remove</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr class="row_hover" ng-repeat="rw in pdpData.pdp.weekTable">
+								<tbody ng-if="pdpData.pdp.weekTable.length">
+									<tr class="row_hover" ng-repeat="rw in pdpData.pdp.weekTable | orderBy:'-date'">
 										<td style="text-align: center;">{{$index+1}}</td>
 										<td style="text-align: center;">
-											<span ng-show="!rw.edit">{{rw.date | date:'fullDate' }}</span>
-											<span ng-show="rw.edit"><input type="date" class="form-control" ng-model="rw.date"></span>
+											<span>{{rw.date | date:'dd/MM/yyyy' }}</span>
+<!--											<span ng-show="rw.edit"><input type="date" class="form-control" ng-model="rw.date"></span>-->
 										</td>
+<!--
 										<td style="text-align: center;">
 											<span ng-show="!rw.edit">{{rw.commitment}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.commitment" style="text-align: center;"></span>
 										</td>
+-->
 										<td style="text-align: center;">
 											<span ng-show="!rw.edit">{{rw.what_worked}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.what_worked" style="text-align: center;"></span>
@@ -132,25 +181,39 @@
 											<span ng-show="!rw.edit">{{rw.what_didnt}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.what_didnt" style="text-align: center;"></span>
 										</td>
+<!--
 										<td style="text-align: center;">
 											<span ng-show="!rw.edit">{{rw.was_being}}</span>
 											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.was_being" style="text-align: center;"></span>
 										</td>
+-->
+										<td style="text-align: center;">
+											<span ng-show="!rw.edit">{{rw.what_better}}</span>
+											<span ng-show="rw.edit"><input type="text" class="form-control" ng-model="rw.what_better" style="text-align: center;"></span>
+										</td>
+										<td style="text-align: center;">
+											<span>{{rw.manager_review}}</span>
+										</td>
 										<td style="text-align: center;">
 											<span ng-show="!rw.edit" ng-click="rw.edit = true"><a style="cursor: pointer;"><i class="material-icons">create</i></a></span>
-											<span ng-show="rw.edit" ng-click="rw.edit = false; saveProgress()"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
+											<span ng-show="rw.edit" ng-click="rw.edit = false; saveProgress(rw)"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
 										</td>
 										<td style="text-align: center;"><i class="material-icons" ng-click="removeRowFromWeek($index)" style="cursor: pointer;">clear</i></td>
 									</tr>
 								</tbody>
 							</table>
-							<div class="row">
-								<div class="col-xs-2"><input class="form-control" type="date" placeholder="Learning Need" ng-model="weekObj.date"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Commitment" ng-model="weekObj.commitment"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="TimeFrame" ng-model="weekObj.what_worked"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Monitoring" ng-model="weekObj.what_didnt"></div>
-								<div class="col-xs-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Evaluation" ng-model="weekObj.was_being"></div>
-								<div class="col-xs-2" style="text-align: center;"><button class="btn btn-danger" ng-click="addRowToWeek()" ng-disabled="block_btn">Add Row</button></div>
+							<div ng-if="!pdpData.pdp.weekTable.length" style="text-align: center; margin-bottom: 20px;"> -- nothing to show --</div>
+							<div class="row" style="background: #ffdeca; padding: 5px;">
+								
+<!--								<div class="col-md-2"><input class="form-control" type="date" ng-model="weekObj.date"></div>-->
+<!--								<div class="col-md-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Commitment" ng-model="weekObj.commitment"></div>-->
+								<div class="col-md-3"><input class="form-control" type="text" style="text-align: center;" placeholder="What Worked?" ng-model="weekObj.what_worked"></div>
+								<div class="col-md-3"><input class="form-control" type="text" style="text-align: center;" placeholder="What Did Not Work?" ng-model="weekObj.what_didnt"></div>
+<!--								<div class="col-md-2"><input class="form-control" type="text" style="text-align: center;" placeholder="Evaluation" ng-model="weekObj.was_being"></div>
+-->
+								<div class="col-md-4"><input class="form-control" type="text" style="text-align: center;" placeholder="What can be done better?" ng-model="weekObj.what_better"></div>
+								<div class="col-md-2" style="text-align: center;"><button class="btn btn-danger" ng-click="addRowToWeek()" ng-disabled="block_btn">+ Add Entry</button></div>
+								
 							</div>
 						</div>
 					</div>

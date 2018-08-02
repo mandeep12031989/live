@@ -17,6 +17,20 @@
 </span>
 
 <div id="sb-site" ng-show="!loading" style="background-color: #fff;">
+	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="showNoti" class="w3-animate-top">
+		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">check_circle</i>
+			<span data-notify="message">Saving Progress !</span>
+		</div>
+	</div>
+	
+	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-if="!online" class="w3-animate-top">
+		<div class="alert alert-danger alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+			<i data-notify="icon" class="material-icons">info</i>
+			<span data-notify="message">Connection Error !</span>
+		</div>
+	</div>
    
     <div id="page-wrapper">
         
@@ -46,6 +60,15 @@
 						<a href="" ng-class="tab_num == 2 ? 'bg-tab':''">
 							<i class="glyph-icon icon-users"></i>
 							<span>Team Health Levels</span>
+						</a>
+					</li>
+
+					<li class="divider"></li>
+
+					<li ng-click="tab_num = 3">
+						<a href="" ng-class="tab_num == 3 ? 'bg-tab':''">
+							<i class="glyph-icon icon-users"></i>
+							<span>PDP</span>
 						</a>
 					</li>
 
@@ -96,15 +119,15 @@
 						</div>
 						<div class="col-md-12 row">
 							<div class="col-md-12" style="text-align: center; margin: 10px auto; padding: 10px 0px; font-weight: bold; background: #6a1b9a; color: white;">
-								<div class="col-md-1">S.No.</div>
-								<div class="col-md-3">Email-Id</div>
-								<div class="col-md-3">Candidate Name</div>
+								<div class="col-md-2">S.No.</div>
+								<div class="col-md-4">Email-Id</div>
+								<div class="col-md-4">Candidate Name</div>
 								<div class="col-md-2">Trueself Report</div>
 							</div>
 							<div class="col-md-12 bg-member" ng-repeat="mem in tm.members" style="text-align: center; padding: 10px 0px;">
-								<div class="col-md-1">{{$index+1}}</div>
-								<div class="col-md-3">{{mem.emailID}}</div>
-								<div class="col-md-3">{{mem.name}}</div>
+								<div class="col-md-2">{{$index+1}}</div>
+								<div class="col-md-4">{{mem.emailID}}</div>
+								<div class="col-md-4">{{mem.name}}</div>
 								<div class="col-md-2"><a ui-sref="openAssessorReport({id: mem.userID})" target="_blank" ng-show="mem.userID">Open</a></div>
 							</div>
 						</div>
@@ -190,6 +213,158 @@
 							</div>
 						</div>
 						
+					</div>
+                    
+                </div>
+				
+				<!--                        TAB 3                           -->
+                <div class="container" ng-if="tab_num == 3">
+					
+                    <div class="col-md-12">
+						<div class="row">
+							<div id="page-title" style="margin: 0px auto;">
+								<ul class="tab-slider--tabs">
+									<li ng-repeat="tms in mData.teams" class="tab-slider--trigger" ng-class="team_selected == chosenTeam($index) ? 'active-profile' : ''" ng-click="chooseTeam($index)">Team {{tms.teamName}}</li>
+								</ul>
+							</div>
+							
+						</div>
+						
+						<div class="col-md-12" style="border: 1px solid #ddd; padding: 10px; margin: 10px 0px; border-radius: 10px;">
+							<h5>Scale for Self-audit</h5>
+							<span><span style="font-weight: bold;">1</span> - I have almost no competence in this area</span><br>
+							<span><span style="font-weight: bold;">2</span> - I need to put in considerable work to develop in this area</span><br>
+							<span><span style="font-weight: bold;">3</span> - I demostrate good competence in this area, but some improvements can be made</span><br>
+							<span><span style="font-weight: bold;">4</span> - I demostrate excellent competence in this area</span><br>
+							<span><span style="font-weight: bold;">5</span> - I demonstrate consistent competence in this area that goes beyond 	expectation</span><br>
+						</div>
+						
+						<div class="panel panel-body row">
+							<div class="row" style="margin: 0 auto;">
+								<div class="col-md-12 row" style="text-align: center; margin: 10px auto; padding: 10px 0px; font-weight: bold; background: #6a1b9a; color: white;">
+									<div class="col-md-1">S.No.</div>
+									<div class="col-md-4">Email-Id</div>
+									<div class="col-md-4">Candidate Name</div>
+									<div class="col-md-3">PDP</div>
+								</div>
+								<div class="col-md-12 row bg-member" ng-repeat="mem in mData.teams[team_selected].members" ng-init="mem.opened = false" style="text-align: center; padding: 10px 0px; margin: 2px auto;" ng-style="mem.opened?($even?{'background': '#e3f2fd'}:{'background': '#fce4ec'}):''">
+									<div class="col-md-1" style="font-weight: bold;">{{$index+1}}</div>
+									<div class="col-md-4">{{mem.emailID}}</div>
+									<div class="col-md-4">{{mem.name}}</div>
+									<div class="col-md-3" style="cursor: pointer;" ng-click="mem.opened = !mem.opened">
+										<span ng-show="!mem.opened && mem.pdp">
+											Expand <i class="material-icons" style="display: inline-block; vertical-align: middle;">keyboard_arrow_down</i>
+										</span>
+										<span ng-show="mem.opened">
+											Close <i class="material-icons" style="display: inline-block; vertical-align: middle;">keyboard_arrow_up</i>
+										</span>
+									</div>
+									<div class="col-md-12" ng-show="mem.opened" style="margin: 5px auto;">
+										<div class="col-md-12" style="margin: 10px 0 20px 0;">
+											<h4 style="font-weight: bold;">Leadership Statement</h4>
+										</div>
+
+										<div class="col-md-12" style="margin: 20px 0px; text-align: left;">
+											<span style="font-size: 15px;">As a leader, I will be someone who…</span>
+											<textarea class="form-control" rows="2" ng-bind="mem.pdp.leadership_statement" placeholder="What kind of a leader do you want to become ?" disabled></textarea> 
+										</div>
+										
+										<div class="col-md-12" style="margin: 10px 0 20px 0;">
+											<h4 style="font-weight: bold;">Professional Development Plan (PDP)</h4>
+										</div>
+										<table class="table" style="border: 1px solid #efefef;">
+											<thead class="text-primary">
+												<tr>
+													<th style="text-align: center;">S.No.</th>
+													<th style="text-align: center;">Learning Need</th>
+													<th style="text-align: center;">Commitment</th>
+													<th style="text-align: center;">Self-audit</th>
+													<th style="text-align: center;">Manager's Audit</th>
+													<th style="text-align: center;">Manager's Review</th>
+													<th style="text-align: center;">Save</th>
+												</tr>
+												<tr>
+													<th style=""></th>
+													<th style="text-align: center;">What do I need to learn?</th>
+													<th style="text-align: center;">What do I commit to practise to learn this?</th>
+													<th style="text-align: center;">How do I rate myself this learning need? (use below scale)</th>
+													<th style=""></th>
+													<th style=""></th>
+													<th style=""></th>
+												</tr>
+											</thead>
+											<tbody ng-if="mem.pdp.planTable.length">
+												<tr class="row_hover" ng-repeat="rw in mem.pdp.planTable">
+													<td style="text-align: center;">{{$index+1}}</td>
+													<td style="text-align: center;">
+														<span>{{rw.learning_need}}</span>
+													</td>
+													<td style="text-align: center;">
+														<span>{{rw.commitment}}</span>
+													</td>
+													<td style="text-align: center;">
+														<span>{{rw.evaluation}}</span>
+													</td>
+													<td style="text-align: center;">
+														<span><input class="form-control" type="text" ng-model="rw.manager_audit" placeholder=" 1 - 5" style="text-align: center;"></span>
+													</td>
+													<td style="text-align: center;">
+														<span><input class="form-control" type="text" ng-model="rw.manager_review" placeholder="Manager's Review"></span>
+													</td>
+													<td style="text-align: center;">
+														<span ng-click="saveProgress(mem)"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div ng-if="!mem.pdp.planTable.length" style="text-align: center; margin-bottom: 20px;"> -- nothing to show --</div>
+										
+										<div class="col-md-12" style="margin: 40px 0 20px 0;">
+											<h4 style="font-weight: bold;">Weekly Follow-up</h4>
+										</div>
+										<table class="table" style="border: 1px solid #efefef;">
+											<thead class="text-primary">
+												<tr>
+													<th style="text-align: center;">S.No.</th>
+													<th style="text-align: center;">Date (dd/mm/yyyy)</th>
+													<th style="text-align: center;">What Worked?</th>
+													<th style="text-align: center;">What Did Not Work?</th>
+													<th style="text-align: center;">What can be done better?</th>
+													<th style="text-align: center;">Manager's Review</th>
+													<th style="text-align: center;">Save</th>
+												</tr>
+											</thead>
+											<tbody ng-if="mem.pdp.weekTable.length">
+												<tr class="row_hover" ng-repeat="rw in mem.pdp.weekTable | orderBy:'-date'">
+													<td style="text-align: center;">{{$index+1}}</td>
+													<td style="text-align: center;">
+														<span>{{rw.date | date:'dd/MM/yyyy' }}</span>
+													</td>
+													<td style="text-align: center;">
+														<span ng-show="!rw.edit">{{rw.what_worked}}</span>
+													</td>
+													<td style="text-align: center;">
+														<span ng-show="!rw.edit">{{rw.what_didnt}}</span>
+													</td>
+													<td style="text-align: center;">
+														<span ng-show="!rw.edit">{{rw.what_better}}</span>
+													</td>
+													<td style="text-align: center;">
+														<span><input class="form-control" type="text" ng-model="rw.manager_review" placeholder="Manager's Review"></span>
+													</td>
+													<td style="text-align: center;">
+														<span ng-click="saveProgress(mem)"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div ng-if="!mem.pdp.weekTable.length" style="text-align: center; margin-bottom: 20px;"> -- nothing to show --</div>
+									</div>
+									
+								</div>
+								
+							</div>
+						</div>
 					</div>
                     
                 </div>

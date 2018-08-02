@@ -18,14 +18,27 @@ var authe = require('../authenticate.js');
 var mailer = require('../mailer.js');
 var config = require('../config.js');
 
-router.route('/list')
+router.route('/list/:pg')
 .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function(req, res, next){
-    User.find({}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true}).sort('-important_date.registration')
-    .exec(function(err, user){
-        if(err)
-            next(err);
-        res.status(200).json(user);
-    });
+	var page = req.params.pg, pglm=0, lm=0;
+	if(page == 0){
+		lm = 0;
+		pglm = 0;
+	}
+	else{
+		lm = 100;
+		pglm = 100*(page-1);
+	}
+	
+    User.find({}, {username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true})
+		.sort('-important_date.registration')
+		.limit(lm)
+		.skip(pglm)
+		.exec(function(err, user){
+			if(err)
+				next(err);
+			res.status(200).json(user);
+		});
 });
 
 router.route('/fac_list')
@@ -452,7 +465,7 @@ router.route('/specific/:id')
     .exec(function(err, user){
         if(err)
             return next(err);
-		
+//		console.log(user);
         return res.status(200).json({success: true, message: "Done"});
     });
 });
@@ -889,7 +902,7 @@ router.route('/analysis')
 });
 
 router.route('/pdp')
-.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
+.get(Verify.verifyOrdinaryUser, function(req, res, next){
 	var id = req.decoded._id;
     
     User.findOne({_id: id}, {'_id': 0, 'pdp': 1})
@@ -979,32 +992,86 @@ router.route('/managerData')
 			return next(err);
 		
 		if(user.teams || user.teams.length > 0){
-			let tID;
-			for(let i=0; i < user.teams.length; i++){
-				tID = user.teams[i].teamID;
-//				console.log(tID);
-				Team.findOne({'teamID': tID}, {'_id': false, 'date': false})
-					.exec(function(err, team){
-						if(err)
-							return next(err);
-					
-						return;
-					})
-					.then(function(m){
-						user.teams[i] = m;
-//						console.log(m);
-						if(i == (user.teams.length-1)){
-//							console.log(user);
-							setTimeout(function(){
-								res.status(200).json(user);
-							}, 500*(user.teams.length-1));
+//			let tID;
+//			for(let i=0; i < user.teams.length; i++){
+//				tID = user.teams[i].teamID;
+////				console.log(tID);
+//				Team.findOne({'teamID': tID}, {'_id': false, 'date': false})
+//					.exec(function(err, team){
+//						if(err)
+//							return next(err);
+//					
+//						return;
+//					})
+//					.then(function(m){
+//						user.teams[i] = m;
+////						console.log(m);
+//						if(i == (user.teams.length-1)){
+////							console.log(user);
+//							setTimeout(function(){
+//								res.status(200).json(user);
+//							}, 500*(user.teams.length-1));
+//						}
+//					});
+//			}
+			
+			var tIDs = user.teams.map(function(item){
+				return item.teamID;
+			});
+			
+			Team.find({'teamID': {$in: tIDs}}, {'_id': false, 'date': false})
+				.exec(function(err, teams){
+					if(err)
+						return next(err);
+				
+					var userUniques = [];
+				
+					for(var i=0; i < teams.length; i++){
+						for(var j=0; j < user.teams.length; j++){
+							if(teams[i].teamID == user.teams[j].teamID){
+								user.teams[j] = JSON.parse(JSON.stringify(teams[i]));
+								
+								for(var k=0; k < teams[i].members.length; k++){
+									if(teams[i].members[k].userID && userUniques.indexOf(teams[i].members[k].userID) == -1){
+										userUniques.push(teams[i].members[k].userID);
+									}
+								}
+								break;
+							}
 						}
-					});
-			}
+					}
+					
+//					console.log(userUniques);
+				
+					User.find({_id: {$in: userUniques}}, {pdp: true})
+						.exec(function(er, users){
+							if(er)
+								return next(er);
+
+							for(var i=0; i < users.length; i++){
+								
+								for(var j=0; j < user.teams.length; j++){
+									for(var k=0; k < user.teams[j].members.length; k++){
+										if(user.teams[j].members[k].userID == users[i]['_id']){
+											console.log("found "+users[i]['_id']);
+//											user.teams[j].members[k]['pdp'] = {};
+											user.teams[j].members[k].pdp = users[i].pdp;
+//											console.log(user.teams[j].members[k]['pdp']);
+											
+										}
+									}
+								}
+								
+							}
+						console.log("sending");
+//							console.log(JSON.stringify(user));
+							res.status(200).json(user);
+						});
+				
+				});
 		}
 		else
 			return res.status(200).json({success: false});
-//		return res.status(200).json(user);
 	});
 });
 

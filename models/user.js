@@ -309,19 +309,24 @@ var userSchema = new Schema({
 	},
 	teams: Array,
 	pdp: {
+		leadership_statement: String,
 		planTable: [new Schema({
 			learning_need: String,
 			commitment: String,
-			timeframe: String,
-			monitoring: String,
-			evaluation: String
+//			timeframe: String,
+//			monitoring: String,
+			evaluation: String,
+			manager_audit: String,
+			manager_review: String
 		})],
 		weekTable: [new Schema({
 			date: Date,
 			commitment: String,
 			what_worked: String,
 			what_didnt: String,
-			was_being: String
+//			was_being: String
+			what_better: String,
+			manager_review: String
 		})]
 	}
 });

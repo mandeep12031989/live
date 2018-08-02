@@ -26,7 +26,7 @@
     "mongo-sanitize": "^1.0.0",
     "mongodb": "^2.2.31",
     "mongodb-promise": "0.0.4",
-    "mongoose": "^4.4.7",
+    "mongoose": "^4.12.2",
     "morgan": "^1.8.2",
     "mpromise": "^0.5.5",
     "node-cryptojs-aes": "^0.4.0",

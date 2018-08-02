@@ -261,10 +261,23 @@
 										</div>
 										<input type="search" class="form-control col-md-11" placeholder="Search" ng-model="search">
 										<div class="input-group-addon" style="border: 0px;">
-											<b>Found {{(userList | filter:search).length}} of {{userList.length}}</b>
+											<b>Found {{(userList | filter:search).length}} of {{analysis_content.u_len}}</b>
 										</div>
 										
-									</div><br><br>
+									</div><br>
+									<div class="row">
+										<div class="col-md-4">
+											<span style="background: red; color: white; font-weight: bold; padding: 2px 10px; border-radius: 10px;">Page {{userListPage}}</span>
+										</div>
+										<div class="col-md-8" style="float: right;">
+											<div style="float: right">
+												Pages: <span ng-repeat="pg in allUserListPages" style="margin-left: 5px; margin-right: 5px; padding: 3px 7px; background: #0d47a1; color: white; font-weight: bold; cursor: pointer;" ng-click="setNextPage($index + 1)">{{$index+1}}</span>
+												<span style="margin-left: 5px; margin-right: 5px; padding: 3px 7px; background: #FF8800; color: white; font-weight: bold; cursor: pointer;" ng-click="setNextPage(0)">Get All</span>
+											</div>
+										</div>
+										
+
+									</div><br>
 									<!-- Search End -->
                                     <table class="table">
                                         <thead class="text-primary">
