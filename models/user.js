@@ -36,35 +36,19 @@ var descriptionSchema = new Schema({
         }
     },
     paei_tag: {
-        tag1: {								//planning and organizing
+        ptag: {
             type: Boolean,
             default: false
         },
-        tag2: {								//evaluative and analyzing
+        atag: {
             type: Boolean,
             default: false
         },
-        tag3: {								//collaborative and accomodating
+        etag: {
             type: Boolean,
             default: false
         },
-        tag4: {								//trusting and supporting
-            type: Boolean,
-            default: false
-        },
-        tag5: {								//innovating and unconventional
-            type: Boolean,
-            default: false
-        },
-        tag6: {								//risk taking and opportunity-taking
-            type: Boolean,
-            default: false
-        },
-        tag7: {								//assertive and confident
-            type: Boolean,
-            default: false
-        },
-        tag8: {								//industrious and productive
+        itag: {
             type: Boolean,
             default: false
         }
@@ -301,7 +285,25 @@ var userSchema = new Schema({
 			moderate: [new Schema({ statement: String })],
 			reactive: [new Schema({ statement: String })]
 		},
-		score_competencies: Array
+		score_competencies: Array,
+		paei_desc: {
+			p: {
+				type: Array,
+				default: []
+			},
+			a: {
+				type: Array,
+				default: []
+			},
+			e: {
+				type: Array,
+				default: []
+			},
+			i: {
+				type: Array,
+				default: []
+			}
+		}
 	},
 	language: {
 		type: String,
