@@ -146,7 +146,7 @@
 					</div>
 					<div class="col-md-9" style="margin: auto 0;">
 						<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
-						<div class="col-md-12">{{keys.mini_descriptions[firstMD($index)].mini_description}}</div>
+						<div class="col-md-12">{{keys.assessor_report_keyword}}</div>
 					</div>
 
 				</div>
@@ -175,7 +175,7 @@
 					</div>
 					<div class="col-md-9" style="margin: auto 0;">
 						<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
-						<div class="col-md-12">{{keys.mini_descriptions[firstMD($index)].mini_description}}</div>
+						<div class="col-md-12">{{keys.assessor_report_keyword}}</div>
 					</div>
 
 				</div>
@@ -205,7 +205,7 @@
 					</div>
 					<div class="col-md-9" style="margin: auto 0;">
 						<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
-						<div class="col-md-12">{{keys.mini_descriptions[firstMD($index)].mini_description}}</div>
+						<div class="col-md-12">{{keys.assessor_report_keyword}}</div>
 					</div>
 
 				</div>
@@ -215,7 +215,7 @@
 		
 		<hr>
 		
-		<div class="col-md-12">
+		<div class="col-md-12 row">
 			<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"><h4><b>Leadership Competencies</b></h4><br></div>
 			
 			<div class="col-md-12 row">
@@ -235,42 +235,116 @@
 												</div>
 			</div>
 			
-			<div class="col-md-offset-4 col-md-4">
-				<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2]< -1) || (user.assessor.score_competencies[0][2]>= 0 && user.assessor.score_competencies[0][2]<= 0.5)">
-				<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2]>= -1 && user.assessor.score_competencies[0][2]< -0.5) || (user.assessor.score_competencies[0][2]> 0.5 && user.assessor.score_competencies[0][2]<= 1)">
-				<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2]>= -0.5 && user.assessor.score_competencies[0][2]< 0) || (user.assessor.score_competencies[0][2]> 1)">
+			<div class="col-md-offset-4 col-md-4" style="padding-bottom: 30px; margin: 20px auto; text-align: center;">
+												<img src="./images/paei/q1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2] < -1) || (user.assessor.score_competencies[0][2] >= 0 && user.assessor.score_competencies[0][2] <= 0.5)">
+												<img src="./images/paei/q1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2] >= -1 && user.assessor.score_competencies[0][2] < -0.5) || (user.assessor.score_competencies[0][2] > 0.5 && user.assessor.score_competencies[0][2] <= 1)">
+												<img src="./images/paei/q1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[0][2] >= -0.5 && user.assessor.score_competencies[0][2] < 0) || (user.assessor.score_competencies[0][2] > 1)">
 
-												<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2]< -1) || (user.assessor.score_competencies[1][2]>= 0 && user.assessor.score_competencies[1][2]<= 0.5)">
-												<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2]>= -1 && user.assessor.score_competencies[1][2]< -0.5) || (user.assessor.score_competencies[1][2]> 0.5 && user.assessor.score_competencies[1][2]<= 1)">
-												<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2]>= -0.5 && user.assessor.score_competencies[1][2]< 0) || (user.assessor.score_competencies[1][2]> 1)">
+												<img src="./images/paei/q2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2] < -1) || (user.assessor.score_competencies[1][2] >= 0 && user.assessor.score_competencies[1][2] <= 0.5)">
+												<img src="./images/paei/q2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2] >= -1 && user.assessor.score_competencies[1][2] < -0.5) || (user.assessor.score_competencies[1][2] > 0.5 && user.assessor.score_competencies[1][2] <= 1)">
+												<img src="./images/paei/q2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[1][2] >= -0.5 && user.assessor.score_competencies[1][2] < 0) || (user.assessor.score_competencies[1][2] > 1)">
 
-												<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2]< -1) || (user.assessor.score_competencies[2][2]>= 0 && user.assessor.score_competencies[2][2]<= 0.5)">
-												<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2]>= -1 && user.assessor.score_competencies[2][2]< -0.5) || (user.assessor.score_competencies[2][2]> 0.5 && user.assessor.score_competencies[2][2]<= 1)">
-												<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2]>= -0.5 && user.assessor.score_competencies[2][2]< 0) || (user.assessor.score_competencies[2][2]> 1)">
+												<img src="./images/paei/q3l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2] < -1) || (user.assessor.score_competencies[2][2] >= 0 && user.assessor.score_competencies[2][2] <= 0.5)">
+												<img src="./images/paei/q3m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2] >= -1 && user.assessor.score_competencies[2][2] < -0.5) || (user.assessor.score_competencies[2][2] > 0.5 && user.assessor.score_competencies[2][2] <= 1)">
+												<img src="./images/paei/q3h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[2][2] >= -0.5 && user.assessor.score_competencies[2][2] < 0) || (user.assessor.score_competencies[2][2] > 1)">
 
-												<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2]< -1) || (user.assessor.score_competencies[3][2]>= 0 && user.assessor.score_competencies[3][2]<= 0.5)">
-												<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2]>= -1 && user.assessor.score_competencies[3][2]< -0.5) || (user.assessor.score_competencies[3][2]> 0.5 && user.assessor.score_competencies[3][2]<= 1)">
-												<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2]>= -0.5 && user.assessor.score_competencies[3][2]< 0) || (user.assessor.score_competencies[3][2]> 1)">
-
-												<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[4][2]< -1) || (user.assessor.score_competencies[4][2]>= 0 && user.assessor.score_competencies[4][2]<= 0.5)">
-												<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[4][2]>= -1 && user.assessor.score_competencies[4][2]< -0.5) || (user.assessor.score_competencies[4][2]> 0.5 && user.assessor.score_competencies[4][2]<= 1)">
-												<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[4][2]>= -0.5 && user.assessor.score_competencies[4][2]< 0) || (user.assessor.score_competencies[4][2]> 1)">
-
-												<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[5][2]< -1) || (user.assessor.score_competencies[5][2]>= 0 && user.assessor.score_competencies[5][2]<= 0.5)">
-												<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[5][2]>= -1 && user.assessor.score_competencies[5][2]< -0.5) || (user.assessor.score_competencies[5][2]> 0.5 && user.assessor.score_competencies[5][2]<= 1)">
-												<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[5][2]>= -0.5 && user.assessor.score_competencies[5][2]< 0) || (user.assessor.score_competencies[5][2]> 1)">
-
-												<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[6][2]< -1) || (user.assessor.score_competencies[6][2]>= 0 && user.assessor.score_competencies[6][2]<= 0.5)">
-												<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[6][2]>= -1 && user.assessor.score_competencies[6][2]< -0.5) || (user.assessor.score_competencies[6][2]> 0.5 && user.assessor.score_competencies[6][2]<= 1)">
-												<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[6][2]>= -0.5 && user.assessor.score_competencies[6][2]< 0) || (user.assessor.score_competencies[6][2]> 1)">
-
-												<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[7][2]< -1) || (user.assessor.score_competencies[7][2]>= 0 && user.assessor.score_competencies[7][2]<= 0.5)">
-												<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[7][2]>= -1 && user.assessor.score_competencies[7][2]< -0.5) || (user.assessor.score_competencies[7][2]> 0.5 && user.assessor.score_competencies[7][2]<= 1)">
-												<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[7][2]>= -0.5 && user.assessor.score_competencies[7][2]< 0) || (user.assessor.score_competencies[7][2]> 1)">
+												<img src="./images/paei/q4l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2] < -1) || (user.assessor.score_competencies[3][2] >= 0 && user.assessor.score_competencies[3][2] <= 0.5)">
+												<img src="./images/paei/q4m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2] >= -1 && user.assessor.score_competencies[3][2] < -0.5) || (user.assessor.score_competencies[3][2] > 0.5 && user.assessor.score_competencies[3][2] <= 1)">
+												<img src="./images/paei/q4h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(user.assessor.score_competencies[3][2] >= -0.5 && user.assessor.score_competencies[3][2] < 0) || (user.assessor.score_competencies[3][2] > 1)">
 
 												<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
 												<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
 			</div>
+			
+			<div class="col-md-12 table">
+												<table style="margin: 10px auto; color: black; border: 1px solid #eee;">
+													<thead>
+														<tr>
+															<th><b>COMPETENCY</b></th>
+															<th><b>SCORE</b></th>
+															<th><b>DESCRIPTION</b></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<th>
+																<b>(P)roducing</b><br><br>
+																<span>[<b>Definition:</b> Focus on task; action;<br>execution; getting the job done; decide and act;<br>functional domain]</span>
+															</th>
+															<th style="text-align: center; background: #a6e74f;" ng-show="(user.assessor.score_competencies[3][2] >= -0.5 && user.assessor.score_competencies[3][2] < 0) || (user.assessor.score_competencies[3][2] > 1)">High</th>
+															<th style="text-align: center; background: #fff33b;" ng-show="(user.assessor.score_competencies[3][2] >= -1 && user.assessor.score_competencies[3][2] < -0.5) || (user.assessor.score_competencies[3][2] > 0.5 && user.assessor.score_competencies[3][2] <= 1)">Medium</th>
+															<th style="text-align: center; background: #fec772;" ng-show="(user.assessor.score_competencies[3][2] < -1) || (user.assessor.score_competencies[3][2] >= 0 && user.assessor.score_competencies[3][2] <= 0.5)">LOW</th>
+															<th>
+																<ul>
+																	<li ng-repeat="s in user.assessor.paei_desc.p">
+																		<span>
+																			{{s.statement}}
+																		</span>
+																	</li>
+																</ul>
+																<button class="btn btn-info" ng-click="addDescToTag('P')" ng-show="switchView == 1">+ Add</button>
+															</th>
+														</tr>
+														<tr>
+															<th>
+																<b>(A)dministering</b><br><br>
+																<span>[<b>Definition:</b> SOPs; systems; rules; procedures;<br>systemize and repeat things]</span>
+															</th>
+															<th style="text-align: center; background: #a6e74f;" ng-show="(user.assessor.score_competencies[0][2] >= -0.5 && user.assessor.score_competencies[0][2] < 0) || (user.assessor.score_competencies[0][2] > 1)">High</th>
+															<th style="text-align: center; background: #fff33b;" ng-show="(user.assessor.score_competencies[0][2] >= -1 && user.assessor.score_competencies[0][2] < -0.5) || (user.assessor.score_competencies[0][2] > 0.5 && user.assessor.score_competencies[0][2] <= 1)">Medium</th>
+															<th style="text-align: center; background: #fec772;" ng-show="(user.assessor.score_competencies[0][2] < -1) || (user.assessor.score_competencies[0][2] >= 0 && user.assessor.score_competencies[0][2] <= 0.5)">LOW</th>
+															<th>
+																<ul>
+																	<li ng-repeat="s in user.assessor.paei_desc.a">
+																		<span>
+																			{{s.statement}}
+																		</span>
+																	</li>
+																</ul>
+																<button class="btn btn-info" ng-click="addDescToTag('A')" ng-show="switchView == 1">+ Add</button>
+															</th>
+														</tr>
+														<tr>
+															<th>
+																<b>(E)ntrepreneuring</b><br><br>
+																<span>[<b>Definition:</b> Strategy; direction; vision; purpose;<br>change; systems thinking – seeing a whole]</span>
+															</th>
+															<th style="text-align: center; background: #a6e74f;" ng-show="(user.assessor.score_competencies[2][2] >= -0.5 && user.assessor.score_competencies[2][2] < 0) || (user.assessor.score_competencies[2][2] > 1)">High</th>
+															<th style="text-align: center; background: #fff33b;" ng-show="(user.assessor.score_competencies[2][2] >= -1 && user.assessor.score_competencies[2][2] < -0.5) || (user.assessor.score_competencies[2][2] > 0.5 && user.assessor.score_competencies[2][2] <= 1)">Medium</th>
+															<th style="text-align: center; background: #fec772;" ng-show="(user.assessor.score_competencies[2][2] < -1) || (user.assessor.score_competencies[2][2] >= 0 && user.assessor.score_competencies[2][2] <= 0.5)">LOW</th>
+															<th>
+																<ul>
+																	<li ng-repeat="s in user.assessor.paei_desc.e">
+																		<span>
+																			{{s.statement}}
+																		</span>
+																	</li>
+																</ul>
+																<button class="btn btn-info" ng-click="addDescToTag('E')" ng-show="switchView == 1">+ Add</button>
+															</th>
+														</tr>
+														<tr>
+															<th>
+																<b>(I)ntegrating</b><br><br>
+																<span>[<b>Definition:</b> Culture; values; collective ownership;<br>people development]</span>
+															</th>
+															<th style="text-align: center; background: #a6e74f;" ng-show="(user.assessor.score_competencies[1][2] >= -0.5 && user.assessor.score_competencies[1][2] < 0) || (user.assessor.score_competencies[1][2] > 1)">High</th>
+															<th style="text-align: center; background: #fff33b;" ng-show="(user.assessor.score_competencies[1][2] >= -1 && user.assessor.score_competencies[1][2] < -0.5) || (user.assessor.score_competencies[1][2] > 0.5 && user.assessor.score_competencies[1][2] <= 1)">Medium</th>
+															<th style="text-align: center; background: #fec772;" ng-show="(user.assessor.score_competencies[1][2] < -1) || (user.assessor.score_competencies[1][2] >= 0 && user.assessor.score_competencies[1][2] <= 0.5)">LOW</th>
+															<th>
+																<ul>
+																	<li ng-repeat="s in user.assessor.paei_desc.i">
+																		<span>
+																			{{s.statement}}
+																		</span>
+																	</li>
+																</ul>
+																<button class="btn btn-info" ng-click="addDescToTag('I')" ng-show="switchView == 1">+ Add</button>
+															</th>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 		</div>
 		
 		<hr ng-show="user.assessor.recommend.length > 0">

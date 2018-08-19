@@ -65,6 +65,10 @@ var descriptionSchema = new Schema({
     assessor_relate: {
         type: String,
         default: ""
+    },
+	assessor_report_mini_check: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -125,7 +129,11 @@ var profileSchema = new Schema({
 	assessor_bal_in_report: {
 		type: Boolean,
 		default: true
-	}
+	},
+	assessor_report_keyword: {
+        type: String,
+        default: ""
+    }
 });
 
 var userSchema = new Schema({
