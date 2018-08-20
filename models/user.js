@@ -215,6 +215,15 @@ var userSchema = new Schema({
 		eachSectionEditable: Array,
 		eachSectionStopReflect: Array,
 		eachSectionStopReflectDone: Array,
+		eachSectionStopReflectPAEI: Array,
+		StopReflectPAEIDropdown: {
+			strength: {
+				P: String,
+				A: String,
+				E: String,
+				I: String
+			}
+		},
 		eachSectionCombineComment: {
 			value: Array,
 			strength: Array,
