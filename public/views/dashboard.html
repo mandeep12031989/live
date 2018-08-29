@@ -1,375 +1,408 @@
 <style>
-	.info_box{
+	.info_box {
 		background: #fff3e0;
 		border: 2px dotted #ffe1A0;
 		margin: -20px 80px 20px 80px;
 		padding: 6px;
 		font-size: 15px;
 	}
-	
-	.card:hover{
+
+	.card:hover {
 		box-shadow: 4px 4px 30px #ccc;
 		cursor: pointer;
 	}
 </style>
 
 <script>
-	$(document).ready(function(){
-		$("#submit").click(function(){
+	$(document).ready(function () {
+		$("#submit").click(function () {
 			$("#myModal").modal('hide');
 			$('body').removeClass('modal-open');
 			$('.modal-backdrop').remove();
 		});
 
 	});
-	
-	$(document).ready(function() {
+
+	$(document).ready(function () {
 		function disableBack() { window.history.forward() }
 		window.onload = disableBack();
-		window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
+		window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
 	});
 
-	$(document).ready(function(){
+	$(document).ready(function () {
 		$(this).scrollTop(0);
 	});
 </script>
 
 <span ng-show="loading">
-    <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-    </div>    
+	<div class="spinner">
+		<div class="bounce1"></div>
+		<div class="bounce2"></div>
+		<div class="bounce3"></div>
+	</div>
 </span>
 
 <div id="sb-site" ng-show="!loading">
 
-    <div id="page-wrapper">
-        
-        <div id="page-content-wrapper">
-            <div id="page-content-margin">
-                    <div class="container" ng-if="!to_review">
-						
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title modal-color" id="myModalLabel">Interaction with Facilitator</h4>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<div id="page-wrapper">
+
+		<div id="page-content-wrapper">
+			<div id="page-content-margin">
+				<div class="container" ng-if="!to_review">
+
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title modal-color" id="myModalLabel">Interaction with Facilitator</h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body modal-color">
+									<h2>Please do consult your Facilitator for further processes.</h2>
+								</div>
+								<div class="modal-footer">
+									<button type="button" id="submit" class="btn btn-danger" data-dismiss="modal">OK</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title modal-color" id="myModalLabel">Trueself Profile Locked</h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body modal-color">
+									<h2>Please do consult your Facilitator for further action.</h2>
+								</div>
+								<div class="modal-footer">
+									<button type="button" id="submit" class="btn btn-danger" data-dismiss="modal">OK</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="page-title">
+						<h2>Dashboard</h2>
+					</div>
+					<br>
+					<div id="form-wizard-3" class="form-wizard" style="margin-bottom: 40px; margin-top: -30px;">
+						<ul>
+							<li>
+								<a>
+									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled) ?'bg_progress_completed':'bg_progress_active'">1</label>
+									<span class="wizard-description">
+										<small>Step 1</small>
+										Reflective Questions
+									</span>
+								</a>
+							</li>
+							<li>
+								<a>
+									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile) ?'bg_progress_completed':((percent.reflective_filled && percent.questionnaire_filled)?'bg_progress_active':'bg_progress')">2</label>
+									<span class="wizard-description">
+										<small>Step 2</small>
+										Interaction with Facilitator
+									</span>
+								</a>
+							</li>
+							<li>
+								<a>
+									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled) ?'bg_progress_completed':((percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile)?'bg_progress_active':'bg_progress')">3</label>
+									<span class="wizard-description">
+										<small>Step 3</small>
+										Building TrueSelf Profile
+									</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<!--	INFO BOX	-->
+					<div class="row info_box" ng-if="!percent.reflective_filled">
+						<i class="material-icons">info</i>
+						<span style="margin: 3px auto;">Kindly proceed with Step 1.</span>
+					</div>
+
+					<div class="row info_box" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
+						<i class="material-icons">info</i>
+						<span style="margin: 3px auto;">Kindly proceed to fill Questionnaire in Step 1.</span>
+					</div>
+
+					<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
+						<i class="material-icons">info</i>
+						<span style="margin: 3px auto;">Thank You for completing Step 1. Please consult your facilitator for further process.</span>
+					</div>
+
+					<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_filled">
+						<i class="material-icons">info</i>
+						<span style="margin: 3px auto;">Thank You for completing Step 2. Kindly proceed building your Trueself profile.</span>
+					</div>
+
+					<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+						<i class="material-icons">info</i>
+						<span style="margin: 3px auto;">Thank You for completing all 3 steps. You can now check your Trueself Profile.</span>
+					</div>
+					<!--	INFO BOX END	-->
+
+					<div class="row">
+
+						<div class="col-md-4" style="text-align: center;">
+							<div style="display: inline-block;">
+
+								<div class="c100 big" ng-class="'p'+percent.percentage">
+									<span>{{percent.percentage}}% </span>
+
+									<div class="slice">
+										<div class="bar"></div>
+										<div class="fill"></div>
 									</div>
-									<div class="modal-body modal-color">
-										<h2>Please do consult your Facilitator for further processes.</h2>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-sm-8">
+							<div class="col-sm-6">
+								<div class="card card-stats" ui-sref="reflective-questions" ng-if="!percent.reflective_filled || percent.questionnaire_filled">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">Step 1</div>
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.reflective_filled">Step 1</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Reflective Questions</p>
+										<h3 class="title">
+											<small style="font-size: 14px" ng-if="percent.questionnaire_filled && percent.reflective_filled">COMPLETED</small>
+											<small style="font-size: 14px" ng-if="!percent.questionnaire_filled || !percent.reflective_filled">PROCEED</small>
+										</h3>
 									</div>
-									<div class="modal-footer">
-										<button type="button" id="submit" class="btn btn-danger" data-dismiss="modal">OK</button>
+								</div>
+								<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 1</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Reflective Questions</p>
+										<h3 class="title">
+											<small style="font-size: 14px">PROCEED WITH QUESTIONNAIRE</small>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="card card-stats" data-toggle="modal" data-target="#myModal" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 2</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
+										<h3 class="title">
+											<small style="font-size: 14px">SELECT TRUESELF PROFILE</small>
+										</h3>
+									</div>
+								</div>
+								<div class="card card-stats" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Step 2</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
+										<h3 class="title">
+											<small style="font-size: 14px">COMPLETED</small>
+										</h3>
+									</div>
+								</div>
+								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
+									<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 2</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
+										<h3 class="title">
+											<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="card card-stats" data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
+										<h3 class="title">
+											<small style="font-size: 14px" ng-if="percent.profile_filled">COMPLETED</small>
+											<small style="font-size: 14px" ng-if="!percent.profile_filled">PROCEED</small>
+										</h3>
+									</div>
+								</div>
+								<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
+										<h3 class="title">
+											<small style="font-size: 14px" ng-if="percent.profile_filled">COMPLETED</small>
+											<small style="font-size: 14px" ng-if="!percent.profile_filled">PROCEED</small>
+										</h3>
+									</div>
+								</div>
+								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.selected_profile)">
+									<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 3</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
+										<h3 class="title">
+											<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="card card-stats" ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Trueself Profile</p>
+										<h3 class="title">
+											<small style="font-size: 14px">COMPLETED</small>
+										</h3>
+									</div>
+								</div>
+								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
+									<div class="card-header" data-background-color="grey" style="font-weight: bold;">Locked</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Trueself Profile</p>
+										<h3 class="title">
+											<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
+										</h3>
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title modal-color" id="myModalLabel">Trueself Profile Locked</h4>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									</div>
-									<div class="modal-body modal-color">
-										<h2>Please do consult your Facilitator for further action.</h2>
-									</div>
-									<div class="modal-footer">
-										<button type="button" id="submit" class="btn btn-danger" data-dismiss="modal">OK</button>
-									</div>
+					</div>
+
+					<div class="" style="margin: 20px auto -20px auto;">
+						<h1 class="title-hero" style="text-align:center; font-weight:bold;">
+							Add-on tools
+						</h1>
+
+						<div class="col-sm-4" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+							<div class="card card-stats" ui-sref="feedback">
+								<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">View</div>
+								<div class="card-content">
+									<p class="category" style="font-size: 16px;">Profile Synthesis</p>
+									<h3 class="title">
+										<small style="font-size: 14px"></small>
+									</h3>
 								</div>
 							</div>
 						</div>
 
-						<div id="page-title">
-							<h2>Dashboard</h2>
+						<div class="col-sm-4" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+							<div class="card card-stats" ng-click="changeView()">
+								<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
+								<div class="card-content">
+									<p class="category" style="font-size: 16px;">Peer Review</p>
+									<h3 class="title">
+										<small style="font-size: 14px"></small>
+									</h3>
+								</div>
+							</div>
 						</div>
-						<br>
-						<div id="form-wizard-3" class="form-wizard" style="margin-bottom: 40px; margin-top: -30px;">
-							<ul>
-								<li>
-									<a>
-										<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled) ?'bg_progress_completed':'bg_progress_active'">1</label>
-										<span class="wizard-description">
-											<small>Step 1</small>
-											Reflective Questions
-										</span>
-									</a>
-								</li>
-								<li>
-									<a>
-										<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile) ?'bg_progress_completed':((percent.reflective_filled && percent.questionnaire_filled)?'bg_progress_active':'bg_progress')">2</label>
-										<span class="wizard-description">
-											<small>Step 2</small>
-											Interaction with Facilitator
-										</span>
-									</a>
-								</li>
-								<li>
-									<a>
-										<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled) ?'bg_progress_completed':((percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile)?'bg_progress_active':'bg_progress')">3</label>
-										<span class="wizard-description">
-											<small>Step 3</small>
-											Building TrueSelf Profile
-										</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-						
-						<!--	INFO BOX	-->
-						<div class="row info_box" ng-if="!percent.reflective_filled">
-							<i class="material-icons">info</i> <span style="margin: 3px auto;">Kindly proceed with Step 1.</span>
-						</div>
-						
-						<div class="row info_box" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
-							<i class="material-icons">info</i> <span style="margin: 3px auto;">Kindly proceed to fill Questionnaire in Step 1.</span>
-						</div>
-						
-						<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
-							<i class="material-icons">info</i> <span style="margin: 3px auto;">Thank You for completing Step 1. Please consult your facilitator for further process.</span>
-						</div>
-						
-						<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_filled">
-							<i class="material-icons">info</i> <span style="margin: 3px auto;">Thank You for completing Step 2. Kindly proceed building your Trueself profile.</span>
-						</div>
-						
-						<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
-							<i class="material-icons">info</i> <span style="margin: 3px auto;">Thank You for completing all 3 steps. You can now check your Trueself Profile.</span>
-						</div>
-						<!--	INFO BOX END	-->
-						
-						<div class="row">
-							
-							<div class="col-md-4" style="text-align: center;">
-								<div style="display: inline-block;">
 
-									<div class="c100 big" ng-class="'p'+percent.percentage">
-										<span>{{percent.percentage}}% </span>
-										
-										<div class="slice">
-											<div class="bar"></div>
-											<div class="fill"></div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-							
-							<div class="col-sm-8">
-								<div class="col-sm-6">
-									<div class="card card-stats" ui-sref="reflective-questions" ng-if="!percent.reflective_filled || percent.questionnaire_filled">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">Step 1</div>
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.reflective_filled">Step 1</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Reflective Questions</p>
-											<h3 class="title">
-												<small style="font-size: 14px" ng-if="percent.questionnaire_filled && percent.reflective_filled">COMPLETED</small>
-												<small style="font-size: 14px" ng-if="!percent.questionnaire_filled || !percent.reflective_filled">PROCEED</small>
-											</h3>
-										</div>
-									</div>
-									<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 1</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Reflective Questions</p>
-											<h3 class="title">
-												<small style="font-size: 14px">PROCEED WITH QUESTIONNAIRE</small>
-											</h3>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="card card-stats" data-toggle="modal" data-target="#myModal" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 2</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
-											<h3 class="title">
-												<small style="font-size: 14px">SELECT TRUESELF PROFILE</small>
-											</h3>
-										</div>
-									</div>
-									<div class="card card-stats" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Step 2</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
-											<h3 class="title">
-												<small style="font-size: 14px">COMPLETED</small>
-											</h3>
-										</div>
-									</div>
-									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
-										<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 2</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
-											<h3 class="title">
-												<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
-											</h3>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="card card-stats" data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
-											<h3 class="title">
-												<small style="font-size: 14px" ng-if="percent.profile_filled">COMPLETED</small>
-												<small style="font-size: 14px" ng-if="!percent.profile_filled">PROCEED</small>
-											</h3>
-										</div>
-									</div>
-									<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
-										<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
-											<h3 class="title">
-												<small style="font-size: 14px" ng-if="percent.profile_filled">COMPLETED</small>
-												<small style="font-size: 14px" ng-if="!percent.profile_filled">PROCEED</small>
-											</h3>
-										</div>
-									</div>
-									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.selected_profile)">
-										<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 3</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
-											<h3 class="title">
-												<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
-											</h3>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="card card-stats" ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Trueself Profile</p>
-											<h3 class="title">
-												<small style="font-size: 14px">COMPLETED</small>
-											</h3>
-										</div>
-									</div>
-									<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
-										<div class="card-header" data-background-color="grey" style="font-weight: bold;">Locked</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Trueself Profile</p>
-											<h3 class="title">
-												<small style="font-size: 14px">COMPLETE PREVIOUS STEPS</small>
-											</h3>
-										</div>
-									</div>
+						<div class="col-sm-4">
+							<div class="card card-stats" ui-sref="pdp">
+								<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
+								<div class="card-content">
+									<p class="category" style="font-size: 16px;">Professional Development Plan</p>
+									<h3 class="title">
+										<small style="font-size: 14px"></small>
+									</h3>
 								</div>
 							</div>
 						</div>
-						
-						<div class="" style="margin: 20px auto -20px auto;">
-							<h1 class="title-hero" style="text-align:center; font-weight:bold;">
-								Add-on tools
-							</h1>
-								
-							<div class="col-sm-4" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
-									<div class="card card-stats" ui-sref="feedback">
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">View</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Profile Synthesis</p>
-											<h3 class="title">
-												<small style="font-size: 14px"></small>
-											</h3>
-										</div>
-									</div>
-							</div>
-								
-							<div class="col-sm-4" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
-									<div class="card card-stats" ng-click="changeView()">
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Peer Review</p>
-											<h3 class="title">
-												<small style="font-size: 14px"></small>
-											</h3>
-										</div>
-									</div>
-							</div>
-								
-							<div class="col-sm-4">
-									<div class="card card-stats" ui-sref="pdp">
-										<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
-										<div class="card-content">
-											<p class="category" style="font-size: 16px;">Professional Development Plan</p>
-											<h3 class="title">
-												<small style="font-size: 14px"></small>
-											</h3>
-										</div>
-									</div>
-							</div>
-						</div>
+					</div>
 				</div>
-<!-----------------------------------------------------------PEER REVIEW-------------------------------------------------------------------->
-						
-					<div class="container" ng-if="to_review">
-						<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.success == true" class="w3-animate-top">
-							<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
-								<i data-notify="icon" class="material-icons">info</i>
-								<span data-notify="message">{{success.message}}</span>
-							</div>
+				<!-----------------------------------------------------------PEER REVIEW-------------------------------------------------------------------->
+
+				<div class="container" ng-if="to_review">
+					<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.success == true" class="w3-animate-top">
+						<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
+							<i data-notify="icon" class="material-icons">info</i>
+							<span data-notify="message">{{success.message}}</span>
 						</div>
-						
-<!--
+					</div>
+
+					<!--
 						<div class="col-md-12" style="margin-bottom: 30px; text-align: center;">
 							<span style="padding: 10px 20px; background: orange; color: white; font-weight: bold; border-radius: 15px; cursor: pointer;" ui-sref="peerAnalysis({id: percent.userID})">Get Peer Analysis</span>
 						</div>
 -->
-						
-						<div id="page-title" style="text-align: center;">
-							<a href="" ng-click="changeView()"><h6>Back to Dashboard</h6></a><br>
-							<h2>Enter Details of Peer Reviewer(s)</h2>
-						</div>
-						
-						<div class="panel panel-body">
-							<div class="col-md-12 row" style="margin: 0 auto; text-align: center;">
-								<div class="col-md-2" style="text-align: right; margin: auto 0;">Name: </div>
-								<div class="col-md-2" style="text-align: left;"><input type="text" class="form-control" ng-model="reviewer.name"></div>
-								
-								<div class="col-md-2" style="text-align: right; margin: auto 0;">Relationship: </div>
-								<div class="col-md-2" style="text-align: left;"><input type="text" class="form-control" ng-model="reviewer.relationship"></div>
-								
-								<div class="col-md-2" style="text-align: right; margin: auto 0;">Email-ID: </div>
-								<div class="col-md-2" style="text-align: left;"><input type="text" class="form-control" ng-model="reviewer.emailid"></div>
-								
-								<div class="col-md-12" style="text-align: center; margin-top: 30px;"><button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add to List</button></div>
+
+					<div id="page-title" style="text-align: center;">
+						<a href="" ng-click="changeView()">
+							<h6>Back to Dashboard</h6>
+						</a>
+						<br>
+						<h2>Enter Details of Peer Reviewer(s)</h2>
+					</div>
+
+					<div class="panel panel-body">
+						<div class="col-md-12 row" style="margin: 0 auto; text-align: center;">
+							<div class="col-md-2" style="text-align: right; margin: auto 0;">Name: </div>
+							<div class="col-md-2" style="text-align: left;">
+								<input type="text" class="form-control" ng-model="reviewer.name">
 							</div>
-						</div>
-						
-						<div id="page-title" style="text-align: center;" ng-show="reviewers.length != 0">
-							<h2>Recipients to Review</h2>
-						</div>
-						<div class="panel panel-body" ng-show="reviewers.length != 0">
-							<div class="col-md-12 row" style="margin: 0 auto; text-align: center;">
-								
-								<div class="col-md-12 row" ng-repeat="rec in reviewers">
-									<div class="col-md-12" style="padding: 20px 0;"><h5><b>Reviewer #{{$index+1}}</b></h5></div>
-									<div class="col-md-2" style="text-align: right; margin: auto 0;">Name: </div>
-									<div class="col-md-2" style="text-align: left;"><input type="text" class="form-control" ng-model="rec.name"></div>
-									
-									<div class="col-md-2" style="text-align: right; margin: auto 0;">Relationship: </div>
-									<div class="col-md-2" style="text-align: left;"><input type="text" class="form-control" ng-model="rec.relationship"></div>
-									
-									<div class="col-md-2" style="text-align: right; margin: auto 0;">Email-ID: </div>
-									<div class="col-md-2" style="text-align: left;"><input type="text" class="form-control" ng-model="rec.emailid"></div>
-									<br><br>
-								</div>
-								
-								<div class="col-md-12" style="text-align: center; margin-top: 30px;"><button class="btn btn-danger" ng-click="submitReviewer()">Send Mail</button></div>
+
+							<div class="col-md-2" style="text-align: right; margin: auto 0;">Relationship: </div>
+							<div class="col-md-2" style="text-align: left;">
+								<input type="text" class="form-control" ng-model="reviewer.relationship">
+							</div>
+
+							<div class="col-md-2" style="text-align: right; margin: auto 0;">Email-ID: </div>
+							<div class="col-md-2" style="text-align: left;">
+								<input type="text" class="form-control" ng-model="reviewer.emailid">
+							</div>
+
+							<div class="col-md-12" style="text-align: center; margin-top: 30px;">
+								<button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add to List</button>
 							</div>
 						</div>
 					</div>
-            </div>
-        </div>
-    </div>
+
+					<div id="page-title" style="text-align: center;" ng-show="reviewers.length != 0">
+						<h2>Recipients to Review</h2>
+					</div>
+					<div class="panel panel-body" ng-show="reviewers.length != 0">
+						<div class="col-md-12 row" style="margin: 0 auto; text-align: center;">
+
+							<div class="col-md-12 row" ng-repeat="rec in reviewers">
+								<div class="col-md-12" style="padding: 20px 0;">
+									<h5>
+										<b>Reviewer #{{$index+1}}</b>
+									</h5>
+								</div>
+								<div class="col-md-2" style="text-align: right; margin: auto 0;">Name: </div>
+								<div class="col-md-2" style="text-align: left;">
+									<input type="text" class="form-control" ng-model="rec.name">
+								</div>
+
+								<div class="col-md-2" style="text-align: right; margin: auto 0;">Relationship: </div>
+								<div class="col-md-2" style="text-align: left;">
+									<input type="text" class="form-control" ng-model="rec.relationship">
+								</div>
+
+								<div class="col-md-2" style="text-align: right; margin: auto 0;">Email-ID: </div>
+								<div class="col-md-2" style="text-align: left;">
+									<input type="text" class="form-control" ng-model="rec.emailid">
+								</div>
+								<br>
+								<br>
+							</div>
+
+							<div class="col-md-12" style="text-align: center; margin-top: 30px;">
+								<button class="btn btn-danger" ng-click="submitReviewer()">Send Mail</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
