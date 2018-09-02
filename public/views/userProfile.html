@@ -135,7 +135,7 @@
 						<div class="col-xs-12 col-md-3" style="margin-top: 30px; font-size: 20px; text-align: center;">
 							Profile Sections
 						</div>
-						<div class="col-xs-12 col-md-9" ng-show="false"></div>
+						<div class="col-xs-12 col-md-9" ng-show="!((section_num == 1 && profile_content.profile.eachSectionStopReflectDone[0]) || (section_num == 2 && profile_content.profile.eachSectionStopReflectDone[1]) || (section_num == 3 && profile_content.profile.eachSectionStopReflectDone[2]))"></div>
 						<div class="col-xs-12 col-md-9" style="margin: 0 auto; padding: 0 50px;" ng-show="(section_num == 1 && profile_content.profile.eachSectionStopReflectDone[0]) || (section_num == 2 && profile_content.profile.eachSectionStopReflectDone[1]) || ((section_num == 3 && profile_content.profile.eachSectionStopReflectDone[2]))">
 							<div class="col-xs-12 col-md-12 col-lg-12" style="text-align: center; margin-bottom: 10px; font-size: 15px;">
 								In the statements below, kindly choose from the following options:
