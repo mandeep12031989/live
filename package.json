@@ -1,13 +1,14 @@
 {
   "name": "iDiscover.me",
-  "version": "v1.1.16c",
+  "version": "v1.1.20a",
   "description": "Assessment",
   "license": "UNLICENSED",
   "keywords": [],
-  "main": "IDM",
+  "main": "",
   "author": "Avinash Sharma",
   "scripts": {
-    "start": "node www"
+    "start": "node www",
+    "restart": "nodemon www"
   },
   "dependencies": {
     "async": "^2.5.0",
@@ -39,5 +40,8 @@
     "pause": "^0.1.0",
     "session": "^0.1.0"
   },
-  "repository": "NULL"
+  "repository": "NULL",
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
 }

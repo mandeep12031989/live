@@ -12,6 +12,8 @@ var logger = require('morgan');                     //HTTP request logger - will
 
 var config = require('./config');
 
+var fs = require('fs');
+
 // Load environment
 const _ENV_NAME = process.env.NAME || 'development';
 config = config[_ENV_NAME];
@@ -23,8 +25,8 @@ mongoose.connect(config.mongoUrl);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    // we're connected!
-    console.log("Connected correctly to server");
+  // we're connected!
+  console.log("Connected correctly to server");
 });
 
 var app = express();
@@ -32,16 +34,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-//CORS middleware
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', '*');
-
-    next();
-}
-app.use(allowCrossDomain);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -51,6 +43,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//CORS middleware
+var allowCrossDomain = function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', '*');
+
+  // fs.appendFile(__dirname + '/logs.txt', new Date() + '\r\n' + req.url + '\r\n' + JSON.stringify(req.body) + '\r\n\r\n');
+
+  next();
+}
+app.use(allowCrossDomain);
 
 // Importing Routing files
 var routes = require('./routes/index');
@@ -123,13 +127,13 @@ app.use(function (err, req, res, next) {
 });
 
 // Secure traffic only
-app.all('*', function(req, res, next){
-    console.log('req start: ',req.secure, req.hostname, req.url, app.get('port'));
+app.all('*', function (req, res, next) {
+  console.log('req start: ', req.secure, req.hostname, req.url, app.get('port'));
   if (req.secure) {
     return next();
   };
 
- res.redirect('https://'+req.hostname+':'+app.get('secPort')+req.url);
+  res.redirect('https://' + req.hostname + ':' + app.get('secPort') + req.url);
 });
 
 module.exports = app;

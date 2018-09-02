@@ -2623,6 +2623,7 @@
 								</div>
 								<hr>
 								<br>
+								<h3 style="text-align: center;">Measure 2</h3>
 								<br>
 								<div class="row">
 									<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
@@ -2634,10 +2635,6 @@
 									<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ddffa5;">
 										<div class="panel-body">
 											<div style="text-align: center;">
-												<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block; margin: 3px 7px;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating == 0">
-													<input type="text" ng-model="keys.balancing_description[0].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
-													<span ng-show="switchView == 2">{{keys.balancing_description[0].desc}}</span>
-												</div>
 												<div ng-repeat="keys in user.assessor.RRAddOns.responsive" style="display: inline-block; margin: 3px 7px;">
 													<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
 													<span class="btn" style="color: red;" ng-click="removeResponsiveRR($index)" ng-show="switchView == 1">
@@ -2649,7 +2646,7 @@
 										</div>
 									</div>
 									<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
-										<button class="btn btn-info" style="width: 100%;" ng-click="pushResponsiveRR()" ng-show="switchView == 1">+Add</button>
+										<button class="btn btn-info" style="width: 100%;" ng-click="pushResponsiveRR()" ng-show="switchView == 1 && button_show_2nd[0]">+Add</button>
 										<h4 ng-show="switchView == 2">
 											<b>{{(sectionKeysCount_2nd[0]/total_mini_2nd)*100 | number: 2}} %</b>
 										</h4>
@@ -2665,10 +2662,6 @@
 									<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #f9ffaf;">
 										<div class="panel-body">
 											<div style="text-align: center;">
-												<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block; margin: 3px 7px;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating > 0 && temp_content2[$index].assessor_key_rating < 1">
-													<input type="text" ng-model="keys.balancing_description[1].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
-													<span ng-show="switchView == 2">{{keys.balancing_description[1].desc}}</span>
-												</div>
 												<div ng-repeat="keys in user.assessor.RRAddOns.moderate" style="display: inline-block; margin: 3px 7px;">
 													<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
 													<span class="btn" style="color: red;" ng-click="removeModerateRR($index)" ng-show="switchView == 1">
@@ -2680,7 +2673,7 @@
 										</div>
 									</div>
 									<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
-										<button class="btn btn-info" style="width: 100%;" ng-click="pushModerateRR()" ng-show="switchView == 1">+Add</button>
+										<button class="btn btn-info" style="width: 100%;" ng-click="pushModerateRR()" ng-show="switchView == 1 && button_show_2nd[1]">+Add</button>
 										<h4 ng-show="switchView == 2">
 											<b>{{(sectionKeysCount_2nd[1]/total_mini_2nd)*100 | number: 2}} %</b>
 										</h4>
@@ -2696,10 +2689,6 @@
 									<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ffe590;">
 										<div class="panel-body">
 											<div style="text-align: center;">
-												<div ng-repeat="keys in user.assessor.profile_content" style="display: inline-block; margin: 3px 7px;" ng-if="keys.linked_keyword.length != 0 && keys.keyword_id[5] != 4 && temp_content2[$index].assessor_key_rating >= 1">
-													<input type="text" ng-model="keys.balancing_description[2].desc" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
-													<span ng-show="switchView == 2">{{keys.balancing_description[2].desc}}</span>
-												</div>
 												<div ng-repeat="keys in user.assessor.RRAddOns.reactive" style="display: inline-block; margin: 3px 7px;">
 													<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
 													<span class="btn" style="color: red;" ng-click="removeReactiveRR($index)" ng-show="switchView == 1">
@@ -2711,9 +2700,94 @@
 										</div>
 									</div>
 									<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
-										<button class="btn btn-info" style="width: 100%;" ng-click="pushReactiveRR()" ng-show="switchView == 1">+Add</button>
+										<button class="btn btn-info" style="width: 100%;" ng-click="pushReactiveRR()" ng-show="switchView == 1 && button_show_2nd[2]">+Add</button>
 										<h4 ng-show="switchView == 2">
 											<b>{{(sectionKeysCount_2nd[2]/total_mini_2nd)*100 | number: 2}} %</b>
+										</h4>
+									</div>
+								</div>
+								<hr>
+								<br>
+								<h3 style="text-align: center;">Measure 3</h3>
+								<br>
+								<div class="row">
+									<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
+										<h4>
+											<b>Responsive</b>
+										</h4>
+										<span style="font-size: 11px; color: grey;">(Higher personal mastery levels; driven by empowering beliefs)</span>
+									</div>
+									<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ddffa5;">
+										<div class="panel-body">
+											<div style="text-align: center;">
+												<div ng-repeat="keys in user.assessor.RRAddOns2.responsive" style="display: inline-block; margin: 3px 7px;">
+													<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+													<span class="btn" style="color: red;" ng-click="removeResponsiveRR2($index)" ng-show="switchView == 1">
+														<i class="material-icons">clear</i>
+													</span>
+													<span ng-show="switchView == 2">{{keys.statement}}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
+										<button class="btn btn-info" style="width: 100%;" ng-click="pushResponsiveRR2()" ng-show="switchView == 1 && button_show_3rd[0]">+Add</button>
+										<h4 ng-show="switchView == 2">
+											<b>{{(sectionKeysCount_3rd[0]/total_mini_3rd)*100 | number: 2}} %</b>
+										</h4>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
+										<h4>
+											<b>Moderate</b>
+										</h4>
+										<span style="font-size: 11px; color: grey;">(Building capacity to self-observe; starting to question once limiting beliefs)</span>
+									</div>
+									<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #f9ffaf;">
+										<div class="panel-body">
+											<div style="text-align: center;">
+												<div ng-repeat="keys in user.assessor.RRAddOns2.moderate" style="display: inline-block; margin: 3px 7px;">
+													<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+													<span class="btn" style="color: red;" ng-click="removeModerateRR2($index)" ng-show="switchView == 1">
+														<i class="material-icons">clear</i>
+													</span>
+													<span ng-show="switchView == 2">{{keys.statement}}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
+										<button class="btn btn-info" style="width: 100%;" ng-click="pushModerateRR2()" ng-show="switchView == 1 && button_show_3rd[1]">+Add</button>
+										<h4 ng-show="switchView == 2">
+											<b>{{(sectionKeysCount_3rd[1]/total_mini_3rd)*100 | number: 2}} %</b>
+										</h4>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12 col-md-2 col-lg-2 LHS_tab">
+										<h4>
+											<b>Reactive</b>
+										</h4>
+										<span style="font-size: 11px; color: grey;">(Lower personal mastery levels; limiting beliefs remains unchallenged)</span>
+									</div>
+									<div class="col-xs-12 col-md-9 col-lg-9 panel" style="background: #ffe590;">
+										<div class="panel-body">
+											<div style="text-align: center;">
+												<div ng-repeat="keys in user.assessor.RRAddOns2.reactive" style="display: inline-block; margin: 3px 7px;">
+													<input type="text" ng-model="keys.statement" style="text-align: center;" auto-grow-input ng-show="switchView == 1">
+													<span class="btn" style="color: red;" ng-click="removeReactiveRR2($index)" ng-show="switchView == 1">
+														<i class="material-icons">clear</i>
+													</span>
+													<span ng-show="switchView == 2">{{keys.statement}}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-1 LHS_tab" style="margin-top: auto; margin-bottom: auto;">
+										<button class="btn btn-info" style="width: 100%;" ng-click="pushReactiveRR2()" ng-show="switchView == 1 && button_show_3rd[2]">+Add</button>
+										<h4 ng-show="switchView == 2">
+											<b>{{(sectionKeysCount_3rd[2]/total_mini_3rd)*100 | number: 2}} %</b>
 										</h4>
 									</div>
 								</div>
@@ -3632,6 +3706,23 @@
 									<button class="btn btn-success" ng-click="printPDF()">Download Report</button>
 								</div>
 
+								<div class="col-md-12" style="text-align: center; margin-bottom: 30px;">
+									Below are the pages which must be shown in PDF report (by defalut, all are shown):
+									<br>
+									<div style="margin: 0px auto;">
+										<ul class="tab-slider--tabs">
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.scores ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.scores = !user.assessor.pdf_pages.scores">Scores</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.values_strengths ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.values_strengths = !user.assessor.pdf_pages.values_strengths">Values & strengths</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.learning_need ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.learning_need = !user.assessor.pdf_pages.learning_need">Learning Needs</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.pm_m1 ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.pm_m1 = !user.assessor.pdf_pages.pm_m1">PM: M1</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.pm_m2 ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.pm_m2 = !user.assessor.pdf_pages.pm_m2">PM: M2</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.pm_m3 ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.pm_m3 = !user.assessor.pdf_pages.pm_m3">PM: M3</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.paei ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.paei = !user.assessor.pdf_pages.paei">PAEI</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.extras ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.extras = !user.assessor.pdf_pages.extras">AddOns</li>
+										</ul>
+									</div>
+								</div>
+
 								<div class="col-md-12 row" style="text-align: center; margin-bottom: 30px;">
 									<div class="col-md-3" style="margin: auto 0;">Shareable Assessor Report:</div>
 									<div class="col-md-9">
@@ -3664,7 +3755,7 @@
 										</span>
 										<span class="col-md-3" style="text-align: right;">Personal Mastery Level:</span>
 										<span class="col-md-3">
-											<select ng-model="user.assessor.per_mast_lvl" class="form-control">
+											<select ng-model="user.assessor.per_mast_lvl" class="form-control" ng-change="manageRRButtonShow(user.assessor.per_mast_lvl)">
 												<option value="Responsive">Responsive</option>
 												<option value="Moderate moving towards Responsive">Moderate moving towards Responsive</option>
 												<option value="Moderate">Moderate</option>
