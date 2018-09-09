@@ -514,8 +514,18 @@ router.route('/profile/insertProfile')                          // will use req.
 							user.profile.old.push({ pro: user.profile.profile_content, pro_num: user.profile.profile_number });
 
 						user.profile.profile_number = pr_num;
-						user.profile.profile_content = key;
+						user.profile.profile_content = key.slice();
 						user.profile.eachSectionEditable = new Array(5).fill(false);
+
+						user.profile.profile_content.forEach(function (keys) {
+							if (keys.new_keyword)
+								keys.key_added_to_assessor_library = true;
+							keys.mini_descriptions.forEach(function (minis) {
+								if (minis.mini_by_assessor) {
+									minis.added_to_assessor_library = true;
+								}
+							});
+						});
 
 						Belief.find({ sID: { $regex: body.profile_number } }).sort('sID')
 							.exec(function (err, rec) {
@@ -545,7 +555,7 @@ router.route('/profile/insertProfile')                          // will use req.
 	});
 
 router.route('/profile/insertProfileByFacilitator/:id')                          // will use req.decoded._id later
-	.post(Verify.verifyOrdinaryUser, function (req, res, next) {
+	.post(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function (req, res, next) {
 		var id = sanitize(req.params.id);
 		var body = sanitize(req.body);
 
@@ -557,12 +567,11 @@ router.route('/profile/insertProfileByFacilitator/:id')                         
 		body.profile_number = 'P0' + body.profile_number;
 
 		Keyword.find({ keyword_id: { $regex: body.profile_number } }/*, {'comment': false, 'mini_descriptions.relate': false}*/).sort({ keyword_id: 1 })
-			.exec(function (err, keyword) {
-				if (err)
+			.exec(function (err, key) {
+				if (err) {
 					next(err);
-				return keyword;
-			})
-			.then(function (key) {
+					return;
+				}
 				//console.log(key);
 				User.findOne({ _id: id }, { profile: true })
 					.exec(function (err_u, user) {
@@ -579,8 +588,19 @@ router.route('/profile/insertProfileByFacilitator/:id')                         
 						}
 
 						user.profile.profile_number = pr_num;
-						user.profile.profile_content = key;
+						user.profile.profile_content = key.slice();
 						user.profile.eachSectionEditable = new Array(5).fill(false);
+
+						user.profile.profile_content.forEach(function (keys) {
+							console.log(keys.new_keyword);
+							if (keys.new_keyword)
+								keys.key_added_to_assessor_library = true;
+							keys.mini_descriptions.forEach(function (minis) {
+								if (minis.mini_by_assessor) {
+									minis.added_to_assessor_library = true;
+								}
+							});
+						});
 
 						Belief.find({ sID: { $regex: body.profile_number } }).sort('sID')
 							.exec(function (err, rec) {
@@ -708,7 +728,11 @@ router.route('/profile/getProfile')
 	.get(Verify.verifyOrdinaryUser, function (req, res, next) {
 		var id = req.decoded._id;
 
-		User.findOne({ _id: id }, { 'firstname': true, 'lastname': true, 'profile': true, 'feedback': true, 'language': true })
+		User.findOne({ _id: id },
+			{
+				'firstname': true, 'lastname': true, 'feedback': true, 'language': true,
+				'profile.profile_content': true, 'profile.profile_number': true, 'profile.track': true, 'profile.eachSectionTrack': true, 'profile.growth_recommendations': true, 'profile.beliefs': true, 'profile.eachSectionRelate': true, 'profile.eachSectionShareMore': true, 'profile.eachSectionEditable': true, 'profile.eachSectionStopReflect': true, 'profile.eachSectionStopReflectDone': true, 'profile.eachSectionStopReflectPAEI': true, 'profile.StopReflectPAEIDropdown': true, 'profile.eachSectionCombineComment': true
+			})
 			.exec(function (err, user) {
 				if (err)
 					return next(err);

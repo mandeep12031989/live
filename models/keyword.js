@@ -46,7 +46,11 @@ var descriptionSchema = new Schema({
             default: false
         }
     },
-	responsive_statement: String
+    responsive_statement: String,
+    mini_by_assessor: {
+        type: Boolean,
+        default: false
+    }
 });
 
 var keywordSchema = new Schema({
@@ -75,13 +79,17 @@ var keywordSchema = new Schema({
             default: false
         }
     },
-    balancing_description: [new Schema({desc: String})],
-    comment_placeholder: [new Schema({question: String})],
-	dummy_keyword: String,
-	key_version: {
-		type: String,
-		default: 'v1.1'
-	}
-});
+    balancing_description: [new Schema({ desc: String })],
+    comment_placeholder: [new Schema({ question: String })],
+    dummy_keyword: String,
+    key_version: {
+        type: String,
+        default: 'v1.1'
+    },
+    new_keyword: {
+        type: Boolean,
+        default: false
+    }
+}, { usePushEach: true });
 
 module.exports = mongoose.model('keywordSchema', keywordSchema);

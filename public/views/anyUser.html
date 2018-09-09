@@ -2189,9 +2189,9 @@
 											<a href="" ng-click="assessor_tab = 2">Assessed Personal Mastery Levels</a>
 										</li>
 										<!--											<li ng-class="assessor_tab == 4 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 4">Leadership Competencies</a></li>-->
-										<li ng-class="assessor_tab == 0 ? 'active_tab' : '' ">
+										<!-- <li ng-class="assessor_tab == 0 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 0">Assessor Library</a>
-										</li>
+										</li> -->
 										<li ng-class="assessor_tab == 5 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 5">Review Profile</a>
 										</li>
@@ -2202,7 +2202,7 @@
 								</div>
 							</div>
 
-							<div ng-show="assessor_tab == 0">
+							<div ng-show="assessor_tab == 0" ng-if="false">
 								<div class="panel panel-body row">
 									<!--	Assessor Add-ons	-->
 									<div class="col-sm-12 row" style="margin: 0 auto;">
@@ -3445,6 +3445,10 @@
 																				<div class="panel panel-primary">
 																					<div class="panel-heading" style="text-align: center;">
 																						<h4 class="panel-title">
+																							<i class="material-icons" ng-if="keys.new_keyword && !keys.key_added_to_assessor_library" style="float: left; margin-top: auto; cursor:pointer;"
+																							 ng-click="sendToAssessorLibrary('key', keys, null)" title="Click to Add in Assessor Library">person</i>
+																							<i class="material-icons" ng-if="keys.new_keyword && keys.key_added_to_assessor_library" style="float: left; margin-top: auto; cursor:pointer;color:#4285F4;"
+																							 title="Already Added in Assessor Library">how_to_reg</i>
 																							<b>{{keys.keyword}}
 																								<span style="color: #999;">( {{keys.keyword_id}} )</span>
 																							</b>
@@ -3466,26 +3470,28 @@
 																								<div class="col-sm-1">
 																									<div id="radios">
 																										<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time" ng-if="mini.relate == 'donotexhibitanymore'">
-
 																											<span class="icon">&#xE15D;</span>
 																										</label>
 																										<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited" ng-if="mini.relate == 'donotrelate'">
-
 																											<span class="icon">&#xE612;</span>
 																										</label>
 																										<label for="{{mini.mini_description_id}}relatepartially" class="material-icons" title="Exhibit Sometimes" ng-if="mini.relate == 'relatepartially'">
-
 																											<span class="icon">&#xE427;</span>
 																										</label>
 																										<label for="{{mini.mini_description_id}}relatestrongly" class="material-icons" title="Exhibit Strongly" ng-if="mini.relate == 'relatestrongly'">
-
 																											<span class="icon">&#xE3A6;</span>
 																										</label>
 																									</div>
 																								</div>
-																								<div class="col-sm-5" style="cursor: pointer;" ng-click="mini.assessor_report_mini_check=!mini.assessor_report_mini_check; makeAssessorKeyword($parent.$index)"
-																								 title="Click to append it in Assessor Report">
-																									<h5 ng-class="mini.assessor_report_mini_check ? 'selected-mini' : ''">
+																								<div class="col-sm-5">
+																									<span ng-if="mini.mini_by_assessor && !mini.added_to_assessor_library" title="Click to add in Assessor Library" ng-click="sendToAssessorLibrary('mini', keys, $index)">
+																										<i class="material-icons" style="float: left; margin-top: auto; cursor: pointer;">person</i>&nbsp;
+																									</span>
+																									<span ng-if="mini.mini_by_assessor && mini.added_to_assessor_library" title="Already added in Assessor Library">
+																										<i class="material-icons" style="float: left; margin-top: auto; color: #4285F4;">how_to_reg</i>&nbsp;
+																									</span>
+																									<h5 ng-class="mini.assessor_report_mini_check ? 'selected-mini' : ''" title="Click to append it in Assessor Report" ng-click="mini.assessor_report_mini_check=!mini.assessor_report_mini_check; makeAssessorKeyword($parent.$index)"
+																									 style="cursor: pointer;">
 																										<b>{{mini.mini_description}}</b>
 																									</h5>
 																								</div>
@@ -3545,7 +3551,20 @@
 
 																							<br>
 																							<div class="col-sm-6">
-																								<textarea contenteditable="true" rows="4" class="form-control" ng-model="keys.comment" disabled ng-if="keys.comment" style="text-align: center;"></textarea>
+																								<div class="row" ng-show="!keys.pushingMini">
+																									<button class="btn btn-info" ng-click="pushNewMini(keys);">+ Add</button>
+																								</div>
+																								<div class="row" ng-show="keys.pushingMini">
+																									<div class="col-md-10">
+																										<input type="text" class="form-control" ng-model="md.mini_description">
+																									</div>
+																									<div class="col-md-2">
+																										<button class="btn btn-success" ng-click="addNewMini(keys);">Push</button>
+																									</div>
+																								</div>
+																								<div class="row">
+																									<textarea contenteditable="true" rows="4" class="form-control" ng-model="keys.comment" disabled ng-if="keys.comment" style="text-align: center;"></textarea>
+																								</div>
 																							</div>
 																							<div class="col-sm-6">
 																								<textarea contenteditable="true" rows="4" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment"
@@ -3706,7 +3725,8 @@
 									<button class="btn btn-success" ng-click="printPDF()">Download Report</button>
 								</div>
 
-								<div class="col-md-12" style="text-align: center; margin-bottom: 30px;">
+								<div class="col-md-1"></div>
+								<div class="col-md-10" style="text-align: center; margin-bottom: 30px;">
 									Below are the pages which must be shown in PDF report (by defalut, all are shown):
 									<br>
 									<div style="margin: 0px auto;">
@@ -3722,6 +3742,7 @@
 										</ul>
 									</div>
 								</div>
+								<div class="col-md-1"></div>
 
 								<div class="col-md-12 row" style="text-align: center; margin-bottom: 30px;">
 									<div class="col-md-3" style="margin: auto 0;">Shareable Assessor Report:</div>

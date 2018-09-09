@@ -69,6 +69,14 @@ var descriptionSchema = new Schema({
     assessor_report_mini_check: {
         type: Boolean,
         default: false
+    },
+    mini_by_assessor: {
+        type: Boolean,
+        default: false
+    },
+    added_to_assessor_library: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -84,6 +92,10 @@ var profileSchema = new Schema({
     keyword: String,                        //keyword name
     keyword_h: String,                        //keyword name
     new_keyword: {
+        type: Boolean,
+        default: false
+    },
+    key_added_to_assessor_library: {
         type: Boolean,
         default: false
     },
@@ -387,7 +399,7 @@ var userSchema = new Schema({
             manager_review: String
         })]
     }
-});
+}, { usePushEach: true });
 
 // Methods
 /*userSchema.methods.getName = function(){
