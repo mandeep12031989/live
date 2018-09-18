@@ -228,6 +228,11 @@ var userSchema = new Schema({
         eachSectionStopReflect: Array,
         eachSectionStopReflectDone: Array,
         eachSectionStopReflectPAEI: Array,
+        eachSectionStopReflectElse: {
+            value: {
+                ques2: String
+            }
+        },
         StopReflectPAEIDropdown: {
             strength: {
                 P: String,

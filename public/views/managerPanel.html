@@ -2,57 +2,61 @@
 	.bg-tab {
 		background-color: white;
 	}
-	
+
 	.bg-member:hover {
 		background-color: #ede7f6;
 	}
 </style>
 
 <span ng-show="loading">
-    <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-    </div>    
+	<div class="spinner">
+		<div class="bounce1"></div>
+		<div class="bounce2"></div>
+		<div class="bounce3"></div>
+	</div>
 </span>
 
 <div id="sb-site" ng-show="!loading" style="background-color: #fff;">
-	
+
 	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="showNoti" class="w3-animate-top">
 		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">check_circle</i>
 			<span data-notify="message">Saving Progress !</span>
 		</div>
 	</div>
-	
+
 	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-if="!online" class="w3-animate-top">
 		<div class="alert alert-danger alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">info</i>
 			<span data-notify="message">Connection Error !</span>
 		</div>
 	</div>
-   
-    <div id="page-wrapper">
-        
-        <div id="page-sidebar" style="height: 100%;">
-            <div class="scroll-sidebar">
-        
-                <ul id="sidebar-menu">
-                    <li class="header"><span>Analysis</span></li>
-                    <li ng-click="tab_num = 1">
-                        <a href="" ng-class="tab_num == 1 ? 'bg-tab':''">
-                            <i class="glyph-icon icon-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-					
-                    <li class="header"><span>Teams</span></li>
-                    <li ng-repeat="tm in mData.teams" ng-click="assignTab($index)">
-                        <a href="" ng-class="tab_num == checkTab($index) ? 'bg-tab':''">
-                            <i class="glyph-icon icon-fire"></i>
-                            <span>{{tm.teamName}}</span>
-                        </a>
-                    </li>
+
+	<div id="page-wrapper">
+
+		<div id="page-sidebar" style="height: 100%;">
+			<div class="scroll-sidebar">
+
+				<ul id="sidebar-menu">
+					<li class="header">
+						<span>Analysis</span>
+					</li>
+					<li ng-click="tab_num = 1">
+						<a href="" ng-class="tab_num == 1 ? 'bg-tab':''">
+							<i class="glyph-icon icon-dashboard"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
+
+					<li class="header">
+						<span>Teams</span>
+					</li>
+					<li ng-repeat="tm in mData.teams" ng-click="assignTab($index)">
+						<a href="" ng-class="tab_num == checkTab($index) ? 'bg-tab':''">
+							<i class="glyph-icon icon-fire"></i>
+							<span>{{tm.teamName}}</span>
+						</a>
+					</li>
 
 					<li class="divider"></li>
 
@@ -68,7 +72,7 @@
 					<li ng-click="tab_num = 3">
 						<a href="" ng-class="tab_num == 3 ? 'bg-tab':''">
 							<i class="glyph-icon icon-users"></i>
-							<span>PDP</span>
+							<span>IDP</span>
 						</a>
 					</li>
 
@@ -80,39 +84,39 @@
 							<span>Go to Profile</span>
 						</a>
 					</li>
-                </ul>
+				</ul>
 
 
-            </div>
-        </div>
-        <div id="page-content-wrapper">
-            <div id="page-content-margin">
-                <!--                        TAB 1                           -->
-                <div class="container" ng-show="tab_num == 1">
-					
-                    <div class="row row-bg">
-                        <div class="col-sm-6 col-md-4">
+			</div>
+		</div>
+		<div id="page-content-wrapper">
+			<div id="page-content-margin">
+				<!--                        TAB 1                           -->
+				<div class="container" ng-show="tab_num == 1">
+
+					<div class="row row-bg">
+						<div class="col-sm-6 col-md-4">
 							<div class="card card-stats">
-                                <div class="card-header" data-background-color="blue">
-                                    <i class="material-icons">group</i>
-                                </div>
-                                <div class="card-content">
-                                    <p class="category">Total Teams</p>
-                                    <h3 class="title">{{mData.teams.length}}
-                                        <small>TEAM(S)</small>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-						
-                    </div>
-                    
-                </div>
-				
-                <!--                        TAB TEAMS                           -->
-                <div class="container" ng-repeat="tm in mData.teams" ng-show="tab_num == checkTab($index)">
-					
-                    <div class="panel panel-body row">
+								<div class="card-header" data-background-color="blue">
+									<i class="material-icons">group</i>
+								</div>
+								<div class="card-content">
+									<p class="category">Total Teams</p>
+									<h3 class="title">{{mData.teams.length}}
+										<small>TEAM(S)</small>
+									</h3>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<!--                        TAB TEAMS                           -->
+				<div class="container" ng-repeat="tm in mData.teams" ng-show="tab_num == checkTab($index)">
+
+					<div class="panel panel-body row">
 						<div class="col-md-12" style="text-align: center; margin-bottom: 10px;">
 							<p style="float: right; color: #aaa;">{{tm.date | date:'medium'}}</p>
 							<h3>{{tm.teamName}}</h3>
@@ -128,135 +132,179 @@
 								<div class="col-md-2">{{$index+1}}</div>
 								<div class="col-md-4">{{mem.emailID}}</div>
 								<div class="col-md-4">{{mem.name}}</div>
-								<div class="col-md-2"><a ui-sref="openAssessorReport({id: mem.userID})" target="_blank" ng-show="mem.userID">Open</a></div>
+								<div class="col-md-2">
+									<a ui-sref="openAssessorReport({id: mem.userID})" target="_blank" ng-show="mem.userID">Open</a>
+								</div>
 							</div>
 						</div>
 					</div>
-                    
-                </div>
-				
-                <!--                        TAB 2                           -->
-                <div class="container" ng-show="tab_num == 2">
-					
-                    <div class="row">
+
+				</div>
+
+				<!--                        TAB 2                           -->
+				<div class="container" ng-show="tab_num == 2">
+
+					<div class="row">
 						<div class="col-md-12" style="margin-bottom: 30px;">
 							<h3 style="text-align: center; font-weight: bold;">Team Health Levels</h3>
 						</div>
-			
+
 						<div class="col-md-12 row">
 							<div class="col-md-offset-3 col-md-6" style="margin: 0 auto 30px auto; text-align: center;">
-													<div class="col-md-1"></div>
+								<div class="col-md-1"></div>
 
-													<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
-													<div class="col-md-2">Responsive</div>
-													<div class="col-md-1"></div>
+								<div class="col-md-1" style="background: #a6e74f; padding: 10px;"></div>
+								<div class="col-md-2">Responsive</div>
+								<div class="col-md-1"></div>
 
-													<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
-													<div class="col-md-2">Moderate</div>
-													<div class="col-md-1"></div>
+								<div class="col-md-1" style="background: #fff33b; padding: 10px;"></div>
+								<div class="col-md-2">Moderate</div>
+								<div class="col-md-1"></div>
 
-													<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
-													<div class="col-md-2">Reactive</div>
+								<div class="col-md-1" style="background: #fec772; padding: 10px;"></div>
+								<div class="col-md-2">Reactive</div>
 							</div>
 						</div>
-						
+
 						<div class="col-md-6 row" ng-repeat="cmp in combineComp" style="text-align: center; margin: 20px auto;">
 							<div class="col-md-12" style="margin: 10px auto;">
 								<h4 style="text-align: center; font-weight: bold;">{{mData.teams[$index].teamName}}</h4>
 							</div>
-							
+
 							<div class="col-md-offset-2 col-md-8">
-								
-								<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[0] < -1) || (cmp[0] >= 0 && cmp[0] <= 0.5)">
-								<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[0] >= -1 && cmp[0] < -0.5) || (cmp[0] > 0.5 && cmp[0] <= 1)">
-								<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[0] >= -0.5 && cmp[0] < 0) || (cmp[0] > 1)">
 
-								<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[1] < -1) || (cmp[1] >= 0 && cmp[1] <= 0.5)">
-								<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[1] >= -1 && cmp[1] < -0.5) || (cmp[1] > 0.5 && cmp[1] <= 1)">
-								<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[1] >= -0.5 && cmp[1] < 0) || (cmp[1] > 1)">
+								<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[0] < -1) || (cmp[0] >= 0 && cmp[0] <= 0.5)">
+								<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[0] >= -1 && cmp[0] < -0.5) || (cmp[0] > 0.5 && cmp[0] <= 1)">
+								<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[0] >= -0.5 && cmp[0] < 0) || (cmp[0] > 1)">
 
-								<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[2] < -1) || (cmp[2] >= 0 && cmp[2] <= 0.5)">
-								<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[2] >= -1 && cmp[2] < -0.5) || (cmp[2] > 0.5 && cmp[2] <= 1)">
-								<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[2] >= -0.5 && cmp[2] < 0) || (cmp[2] > 1)">
+								<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[1] < -1) || (cmp[1] >= 0 && cmp[1] <= 0.5)">
+								<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[1] >= -1 && cmp[1] < -0.5) || (cmp[1] > 0.5 && cmp[1] <= 1)">
+								<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[1] >= -0.5 && cmp[1] < 0) || (cmp[1] > 1)">
 
-								<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[3] < -1) || (cmp[3] >= 0 && cmp[3] <= 0.5)">
-								<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[3] >= -1 && cmp[3] < -0.5) || (cmp[3] > 0.5 && cmp[3] <= 1)">
-								<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[3] >= -0.5 && cmp[3] < 0) || (cmp[3] > 1)">
+								<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[2] < -1) || (cmp[2] >= 0 && cmp[2] <= 0.5)">
+								<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[2] >= -1 && cmp[2] < -0.5) || (cmp[2] > 0.5 && cmp[2] <= 1)">
+								<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[2] >= -0.5 && cmp[2] < 0) || (cmp[2] > 1)">
 
-								<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[4] < -1) || (cmp[4] >= 0 && cmp[4] <= 0.5)">
-								<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[4] >= -1 && cmp[4] < -0.5) || (cmp[4] > 0.5 && cmp[4] <= 1)">
-								<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[4] >= -0.5 && cmp[4] < 0) || (cmp[4] > 1)">
+								<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[3] < -1) || (cmp[3] >= 0 && cmp[3] <= 0.5)">
+								<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[3] >= -1 && cmp[3] < -0.5) || (cmp[3] > 0.5 && cmp[3] <= 1)">
+								<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[3] >= -0.5 && cmp[3] < 0) || (cmp[3] > 1)">
 
-								<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[5] < -1) || (cmp[5] >= 0 && cmp[5] <= 0.5)">
-								<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[5] >= -1 && cmp[5] < -0.5) || (cmp[5] > 0.5 && cmp[5] <= 1)">
-								<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[5] >= -0.5 && cmp[5] < 0) || (cmp[5] > 1)">
+								<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[4] < -1) || (cmp[4] >= 0 && cmp[4] <= 0.5)">
+								<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[4] >= -1 && cmp[4] < -0.5) || (cmp[4] > 0.5 && cmp[4] <= 1)">
+								<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[4] >= -0.5 && cmp[4] < 0) || (cmp[4] > 1)">
 
-								<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[6] < -1) || (cmp[6] >= 0 && cmp[6] <= 0.5)">
-								<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[6] >= -1 && cmp[6] < -0.5) || (cmp[6] > 0.5 && cmp[6] <= 1)">
-								<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[6] >= -0.5 && cmp[6] < 0) || (cmp[6] > 1)">
+								<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[5] < -1) || (cmp[5] >= 0 && cmp[5] <= 0.5)">
+								<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[5] >= -1 && cmp[5] < -0.5) || (cmp[5] > 0.5 && cmp[5] <= 1)">
+								<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[5] >= -0.5 && cmp[5] < 0) || (cmp[5] > 1)">
 
-								<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[7] < -1) || (cmp[7] >= 0 && cmp[7] <= 0.5)">
-								<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[7] >= -1 && cmp[7] < -0.5) || (cmp[7] > 0.5 && cmp[7] <= 1)">
-								<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(cmp[7] >= -0.5 && cmp[7] < 0) || (cmp[7] > 1)">
+								<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[6] < -1) || (cmp[6] >= 0 && cmp[6] <= 0.5)">
+								<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[6] >= -1 && cmp[6] < -0.5) || (cmp[6] > 0.5 && cmp[6] <= 1)">
+								<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[6] >= -0.5 && cmp[6] < 0) || (cmp[6] > 1)">
+
+								<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[7] < -1) || (cmp[7] >= 0 && cmp[7] <= 0.5)">
+								<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[7] >= -1 && cmp[7] < -0.5) || (cmp[7] > 0.5 && cmp[7] <= 1)">
+								<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+								 ng-show="(cmp[7] >= -0.5 && cmp[7] < 0) || (cmp[7] > 1)">
 
 								<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
 								<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
 							</div>
 							<div class="col-md-4"></div>
-							
+
 							<div class="col-md-12" style="margin: 30px auto 10px auto;">
-								<h4 style="text-align: center;">Total Members in Team: <b>{{mData.teams[$index].members.length}}</b></h4>
+								<h4 style="text-align: center;">Total Members in Team:
+									<b>{{mData.teams[$index].members.length}}</b>
+								</h4>
 							</div>
-							
+
 							<div class="col-md-12" style="margin: 10px auto;">
-								<h4 style="text-align: center;">Total Assessed Candidates: <b>{{cmp[8]}}</b></h4>
+								<h4 style="text-align: center;">Total Assessed Candidates:
+									<b>{{cmp[8]}}</b>
+								</h4>
 							</div>
 						</div>
-						
+
 					</div>
-                    
-                </div>
-				
+
+				</div>
+
 				<!--                        TAB 3                           -->
-                <div class="container" ng-if="tab_num == 3">
-					
-                    <div class="col-md-12">
+				<div class="container" ng-if="tab_num == 3">
+
+					<div class="col-md-12">
 						<div class="row">
 							<div id="page-title" style="margin: 0px auto;">
 								<ul class="tab-slider--tabs">
-									<li ng-repeat="tms in mData.teams" class="tab-slider--trigger" ng-class="team_selected == chosenTeam($index) ? 'active-profile' : ''" ng-click="chooseTeam($index)">Team {{tms.teamName}}</li>
+									<li ng-repeat="tms in mData.teams" class="tab-slider--trigger" ng-class="team_selected == chosenTeam($index) ? 'active-profile' : ''"
+									 ng-click="chooseTeam($index)">Team {{tms.teamName}}</li>
 								</ul>
 							</div>
-							
+
 						</div>
-						
+
 						<div class="col-md-12" style="border: 1px solid #ddd; padding: 10px; margin: 10px 0px; border-radius: 10px;">
 							<h5>Scale for Self-audit</h5>
-							<span><span style="font-weight: bold;">1</span> - I have almost no competence in this area</span><br>
-							<span><span style="font-weight: bold;">2</span> - I need to put in considerable work to develop in this area</span><br>
-							<span><span style="font-weight: bold;">3</span> - I demostrate good competence in this area, but some improvements can be made</span><br>
-							<span><span style="font-weight: bold;">4</span> - I demostrate excellent competence in this area</span><br>
-							<span><span style="font-weight: bold;">5</span> - I demonstrate consistent competence in this area that goes beyond 	expectation</span><br>
+							<span>
+								<span style="font-weight: bold;">1</span> - I have almost no competence in this area</span>
+							<br>
+							<span>
+								<span style="font-weight: bold;">2</span> - I need to put in considerable work to develop in this area</span>
+							<br>
+							<span>
+								<span style="font-weight: bold;">3</span> - I demostrate good competence in this area, but some improvements can be made</span>
+							<br>
+							<span>
+								<span style="font-weight: bold;">4</span> - I demostrate excellent competence in this area</span>
+							<br>
+							<span>
+								<span style="font-weight: bold;">5</span> - I demonstrate consistent competence in this area that goes beyond expectation</span>
+							<br>
 						</div>
-						
+
 						<div class="panel panel-body row">
 							<div class="row" style="margin: 0 auto;">
 								<div class="col-md-12 row" style="text-align: center; margin: 10px auto; padding: 10px 0px; font-weight: bold; background: #6a1b9a; color: white;">
 									<div class="col-md-1">S.No.</div>
 									<div class="col-md-4">Email-Id</div>
 									<div class="col-md-4">Candidate Name</div>
-									<div class="col-md-3">PDP</div>
+									<div class="col-md-3">IDP</div>
 								</div>
-								<div class="col-md-12 row bg-member" ng-repeat="mem in mData.teams[team_selected].members" ng-init="mem.opened = false" style="text-align: center; padding: 10px 0px; margin: 2px auto;" ng-style="mem.opened?($even?{'background': '#e3f2fd'}:{'background': '#fce4ec'}):''">
+								<div class="col-md-12 row bg-member" ng-repeat="mem in mData.teams[team_selected].members" ng-init="mem.opened = false" style="text-align: center; padding: 10px 0px; margin: 2px auto;"
+								 ng-style="mem.opened?($even?{'background': '#e3f2fd'}:{'background': '#fce4ec'}):''">
 									<div class="col-md-1" style="font-weight: bold;">{{$index+1}}</div>
 									<div class="col-md-4">{{mem.emailID}}</div>
 									<div class="col-md-4">{{mem.name}}</div>
 									<div class="col-md-3" style="cursor: pointer;" ng-click="mem.opened = !mem.opened">
 										<span ng-show="!mem.opened && mem.pdp">
-											Expand <i class="material-icons" style="display: inline-block; vertical-align: middle;">keyboard_arrow_down</i>
+											Expand
+											<i class="material-icons" style="display: inline-block; vertical-align: middle;">keyboard_arrow_down</i>
 										</span>
 										<span ng-show="mem.opened">
-											Close <i class="material-icons" style="display: inline-block; vertical-align: middle;">keyboard_arrow_up</i>
+											Close
+											<i class="material-icons" style="display: inline-block; vertical-align: middle;">keyboard_arrow_up</i>
 										</span>
 									</div>
 									<div class="col-md-12" ng-show="mem.opened" style="margin: 5px auto;">
@@ -266,11 +314,12 @@
 
 										<div class="col-md-12" style="margin: 20px 0px; text-align: left;">
 											<span style="font-size: 15px;">As a leader, I will be someone who…</span>
-											<textarea class="form-control" rows="2" ng-bind="mem.pdp.leadership_statement" placeholder="What kind of a leader do you want to become ?" disabled></textarea> 
+											<textarea class="form-control" rows="2" ng-bind="mem.pdp.leadership_statement" placeholder="What kind of a leader do you want to become ?"
+											 disabled></textarea>
 										</div>
-										
+
 										<div class="col-md-12" style="margin: 10px 0 20px 0;">
-											<h4 style="font-weight: bold;">Professional Development Plan (PDP)</h4>
+											<h4 style="font-weight: bold;">Individual Development Plan (IDP)</h4>
 										</div>
 										<table class="table" style="border: 1px solid #efefef;">
 											<thead class="text-primary">
@@ -306,19 +355,27 @@
 														<span>{{rw.evaluation}}</span>
 													</td>
 													<td style="text-align: center;">
-														<span><input class="form-control" type="text" ng-model="rw.manager_audit" placeholder=" 1 - 5" style="text-align: center;"></span>
+														<span>
+															<input class="form-control" type="text" ng-model="rw.manager_audit" placeholder=" 1 - 5" style="text-align: center;">
+														</span>
 													</td>
 													<td style="text-align: center;">
-														<span><input class="form-control" type="text" ng-model="rw.manager_review" placeholder="Manager's Review"></span>
+														<span>
+															<input class="form-control" type="text" ng-model="rw.manager_review" placeholder="Manager's Review">
+														</span>
 													</td>
 													<td style="text-align: center;">
-														<span ng-click="saveProgress(mem)"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
+														<span ng-click="saveProgress(mem)">
+															<a style="cursor: pointer;">
+																<i class="material-icons">done</i>
+															</a>
+														</span>
 													</td>
 												</tr>
 											</tbody>
 										</table>
 										<div ng-if="!mem.pdp.planTable.length" style="text-align: center; margin-bottom: 20px;"> -- nothing to show --</div>
-										
+
 										<div class="col-md-12" style="margin: 40px 0 20px 0;">
 											<h4 style="font-weight: bold;">Weekly Follow-up</h4>
 										</div>
@@ -350,29 +407,35 @@
 														<span ng-show="!rw.edit">{{rw.what_better}}</span>
 													</td>
 													<td style="text-align: center;">
-														<span><input class="form-control" type="text" ng-model="rw.manager_review" placeholder="Manager's Review"></span>
+														<span>
+															<input class="form-control" type="text" ng-model="rw.manager_review" placeholder="Manager's Review">
+														</span>
 													</td>
 													<td style="text-align: center;">
-														<span ng-click="saveProgress(mem)"><a style="cursor: pointer;"><i class="material-icons">done</i></a></span>
+														<span ng-click="saveProgress(mem)">
+															<a style="cursor: pointer;">
+																<i class="material-icons">done</i>
+															</a>
+														</span>
 													</td>
 												</tr>
 											</tbody>
 										</table>
 										<div ng-if="!mem.pdp.weekTable.length" style="text-align: center; margin-bottom: 20px;"> -- nothing to show --</div>
 									</div>
-									
+
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
-                    
-                </div>
-				
+
+				</div>
+
 				<!--                        END                           -->
-            </div>
-        </div>
-		
-		
-    </div>
+			</div>
+		</div>
+
+
+	</div>
 </div>
