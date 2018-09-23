@@ -2013,22 +2013,31 @@
 													</div>
 													<div style="margin-top: 30px;">
 														<label for="q3">3. In what aspects do you think this exercise helped you (choose more than one option if applicable)?</label>
-														<ul ng-if="user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a4">
-															<li class="col-md-12 row" ng-if="user.feedback.q3.a1">
-																<span class="col-xs-12 col-sm-12 col-md-6">Awareness of my strengths and learning needs</span>
-																<textarea class="col-xs-12 col-sm-12 col-md-6" ng-if="user.feedback.q3.s1" disabled ng-model="user.feedback.q3.s1" rows="3"></textarea>
+														<ul ng-if="user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a5 || user.feedback.q3.a4">
+															<li ng-if="user.feedback.q3.a1">
+																<span class="col-xs-12 col-sm-12 col-md-12">Awareness of my strengths and learning needs</span>
+																<!-- <textarea class="col-xs-12 col-sm-12 col-md-12" ng-if="user.feedback.q3.s1" disabled ng-model="user.feedback.q3.s1" rows="3"></textarea> -->
 															</li>
-															<li class="col-md-12 row" ng-if="user.feedback.q3.a2">
-																<span class="col-xs-12 col-sm-12 col-md-6">Insight into working together in a team</span>
-																<textarea class="col-xs-12 col-sm-12 col-md-6" ng-if="user.feedback.q3.s2" disabled ng-model="user.feedback.q3.s2" rows="3"></textarea>
+															<li ng-if="user.feedback.q3.a2">
+																<span class="col-xs-12 col-sm-12 col-md-12">Insight into working together in a team</span>
+																<!-- <textarea class="col-xs-12 col-sm-12 col-md-12" ng-if="user.feedback.q3.s2" disabled ng-model="user.feedback.q3.s2" rows="3"></textarea> -->
 															</li>
-															<li class="col-md-12 row" ng-if="user.feedback.q3.a3">
-																<span class="col-xs-12 col-sm-12 col-md-6">Understanding how I have grown over last few years</span>
-																<textarea class="col-xs-12 col-sm-12 col-md-6" ng-if="user.feedback.q3.s3" disabled ng-model="user.feedback.q3.s3" rows="3"></textarea>
+															<li ng-if="user.feedback.q3.a3">
+																<span class="col-xs-12 col-sm-12 col-md-12">Understanding how I have grown over last few years</span>
+																<!-- <textarea class="col-xs-12 col-sm-12 col-md-12" ng-if="user.feedback.q3.s3" disabled ng-model="user.feedback.q3.s3" rows="3"></textarea> -->
 															</li>
-															<li ng-if="user.feedback.q3.a4"> All of these</li>
+															<li ng-if="user.feedback.q3.a5">
+																<span class="col-xs-12 col-sm-12 col-md-12">Insight into becoming a better leader</span>
+															</li>
+															<li ng-if="user.feedback.q3.a4">
+																<span class="col-xs-12 col-sm-12 col-md-12">All of these</span>
+															</li>
 														</ul>
-														<span style="margin-left: 14px; color: red;" ng-if="!(user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a4)">
+
+														<div ng-if="user.feedback.q3.detailed">
+															<textarea class="form-control" ng-bind="user.feedback.q3.detailed" disabled></textarea>
+														</div>
+														<span style="margin-left: 14px; color: red;" ng-if="!(user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a5 || user.feedback.q3.a4)">
 															<br>- Not Filled -</span>
 													</div>
 													<div style="margin-top: 30px;">
@@ -4329,8 +4338,16 @@
 																			<li ng-repeat="s in user.assessor.paei_desc.p">
 																				<span ng-show="switchView == 1">
 																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
-																					<select class="form-control" ng-options="j.mini_desciption as j.mini_desciption for j in allMD | filter: {paei_tag:{ptag: true}}"
-																					 ng-change="copyThis('P', $index, Pdata)" ng-model="Pdata"></select>
+																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{ptag: true}}"
+																					 ng-change="copyThis('P', $index, Pdata)" ng-model="Pdata"></select> -->
+																					<select class="form-control" ng-change="copyThis('P', $index, Pdata)" ng-model="Pdata">
+																						<optgroup label="Strengths">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{ptag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																						<optgroup label="Learning Needs">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{ptag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('P', $index)">
 																						<i class="material-icons">clear</i>
 																					</span>
@@ -4360,8 +4377,16 @@
 																			<li ng-repeat="s in user.assessor.paei_desc.a">
 																				<span ng-show="switchView == 1">
 																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
-																					<select class="form-control" ng-options="j.mini_desciption as j.mini_desciption for j in allMD | filter: {paei_tag:{atag: true}}"
-																					 ng-change="copyThis('A', $index, Adata)" ng-model="Adata"></select>
+																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{atag: true}}"
+																					 ng-change="copyThis('A', $index, Adata)" ng-model="Adata"></select> -->
+																					<select class="form-control" ng-change="copyThis('A', $index, Adata)" ng-model="Adata">
+																						<optgroup label="Strengths">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{atag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																						<optgroup label="Learning Needs">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{atag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('A', $index)">
 																						<i class="material-icons">clear</i>
 																					</span>
@@ -4391,8 +4416,16 @@
 																			<li ng-repeat="s in user.assessor.paei_desc.e">
 																				<span ng-show="switchView == 1">
 																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
-																					<select class="form-control" ng-options="j.mini_desciption as j.mini_desciption for j in allMD | filter: {paei_tag:{etag: true}}"
-																					 ng-change="copyThis('E', $index, Edata)" ng-model="Edata"></select>
+																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{etag: true}}"
+																					 ng-change="copyThis('E', $index, Edata)" ng-model="Edata"></select> -->
+																					<select class="form-control" ng-change="copyThis('E', $index, Edata)" ng-model="Edata">
+																						<optgroup label="Strengths">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{etag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																						<optgroup label="Learning Needs">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{etag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('E', $index)">
 																						<i class="material-icons">clear</i>
 																					</span>
@@ -4422,8 +4455,16 @@
 																			<li ng-repeat="s in user.assessor.paei_desc.i">
 																				<span ng-show="switchView == 1">
 																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
-																					<select class="form-control" ng-options="j.mini_desciption as j.mini_desciption for j in allMD | filter: {paei_tag:{itag: true}}"
-																					 ng-change="copyThis('I', $index, Idata)" ng-model="Idata"></select>
+																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{itag: true}}"
+																					 ng-change="copyThis('I', $index, Idata)" ng-model="Idata"></select> -->
+																					<select class="form-control" ng-change="copyThis('I', $index, Idata)" ng-model="Idata">
+																						<optgroup label="Strengths">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{itag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																						<optgroup label="Learning Needs">
+																							<option ng-repeat="j in allMD | filter: {paei_tag:{itag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																						</optgroup>
+																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('I', $index)">
 																						<i class="material-icons">clear</i>
 																					</span>

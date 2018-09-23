@@ -3,77 +3,120 @@
         <div class="bounce1"></div>
         <div class="bounce2"></div>
         <div class="bounce3"></div>
-    </div>    
+    </div>
 </span>
 
 <div id="sb-site" ng-show="!loading" ng-init="after_fill = false;">
 
     <div id="page-wrapper">
-        
+
         <div id="page-content-wrapper">
             <div id="page-content-margin">
-				
-				<div class="container" ng-show="after_fill">
-      
-					<div class="jumbotron">
-						<h1>Thank-you!</h1>
-						<p>For completing Step 1. <strong> Please do consult your Facilitator before you Proceed</strong></p>
-						<span style="font-size: 14px;">
-							<span style="color: darkorange;"><i class="material-icons" style="font-size: 20px; position: relative; top: 4px; margin-right: 5px;">warning</i></span>
-							<span><b>Caution - </b>Do not proceed with further steps, before consulting your Facilitator.</span>
-						</span>
 
-					</div>
-                
-					<button ng-click="after_fill = false;" class="btn btn-danger">Retake your Questionnaire</button>
-					<button ui-sref="dashboard" class="btn btn-success">Proceed</button>
-    
-				</div>
-				
-				<div class="row col-sm-offset-1" ng-show="!after_fill">
-					<!--  <div class="col-sm-1"><h2><span class="label label-danger">Imp.</span></h2></div>  -->   
+                <!-- Button to Open the Modal -->
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Open modal
+                </button> -->
+
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3 class="modal-title">Instructions for attempting below Questionnaire</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <ol style="font-size:17px;">
+                                    <li>All 36 questions are mandatory.</li>
+                                    <li>In each question, choose one option that best describes you.</li>
+                                    <li>In some questions you may relate equally with both options. In that case, choose the
+                                        one that has been true for most part of your life.</li>
+                                </ol>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" ng-show="after_fill">
+
+                    <div class="jumbotron">
+                        <h1>Thank-you!</h1>
+                        <p>For completing Step 1.
+                            <strong> Please do consult your Facilitator before you Proceed</strong>
+                        </p>
+                        <span style="font-size: 14px;">
+                            <span style="color: darkorange;">
+                                <i class="material-icons" style="font-size: 20px; position: relative; top: 4px; margin-right: 5px;">warning</i>
+                            </span>
+                            <span>
+                                <b>Caution - </b>Do not proceed with further steps, before consulting your Facilitator.</span>
+                        </span>
+
+                    </div>
+
+                    <button ng-click="after_fill = false;" class="btn btn-danger">Retake your Questionnaire</button>
+                    <button ui-sref="dashboard" class="btn btn-success">Proceed</button>
+
+                </div>
+
+                <div class="row col-sm-offset-1" ng-show="!after_fill">
+                    <!--  <div class="col-sm-1"><h2><span class="label label-danger">Imp.</span></h2></div>  -->
                     <div class="col-sm-10" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black; font-size: 14px;">
-						<h3>Instructions for attempting below Questionnaire</h3>
+                        <h3>Instructions for attempting below Questionnaire</h3>
                         <ol>
                             <li>All 36 questions are mandatory.</li>
                             <li>In each question, choose one option that best describes you.</li>
-                            <li>In some questions you may relate equally with both options. In that case, choose the one that has been true for most part of your life.</li>
+                            <li>In some questions you may relate equally with both options. In that case, choose the one that
+                                has been true for most part of your life.</li>
                         </ol>
-					</div>                  
-                	       
-				</div>
-                <br><br>
-                    <div class="container" ng-show="!after_fill">
+                    </div>
 
-                        <div class="panel">
-                            <div class="panel-body">
-                                <h1 style="text-align:center; font-weight:bold;" class="title-hero">
-                                   <b>Questionnaire</b>
-                                </h1>
-                                <div class="example-box-wrapper">
-                                    <div id="form-wizard-3" class="form-wizard">
-                                        
-                                        <div class="tab-content">
+                </div>
+                <br>
+                <br>
+                <div class="container" ng-show="!after_fill">
 
-                                                <div class="content-box" ng-repeat="q in questions">
-                                                    <h4 class="content-box-header bg-blue">
-                                                       <b>{{q.num + '. ' + q.desc}}</b>
-                                                    </h4>
-													<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
-                                                    <input type="radio" ng-model="answers[$index]" value="1"> {{q.keywords[0].keyword}}<br>
-													<input type="radio" ng-model="answers[$index]" value="2"> {{q.keywords[1].keyword}}
-													</div>
-                                                </div>
-                                            
-                                                <a class="btn btn-primary pull-right" ng-click="saveQues()" style="color: white;" ng-disabled="!checkQuestionnaire()">Submit</a>
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h1 style="text-align:center; font-weight:bold;" class="title-hero">
+                                <b>Questionnaire</b>
+                            </h1>
+                            <div class="example-box-wrapper">
+                                <div id="form-wizard-3" class="form-wizard">
 
+                                    <div class="tab-content">
+
+                                        <div class="content-box" ng-repeat="q in questions">
+                                            <h4 class="content-box-header bg-blue">
+                                                <b>{{q.num + '. ' + q.desc}}</b>
+                                            </h4>
+                                            <div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
+                                                <input type="radio" ng-model="answers[$index]" value="1"> {{q.keywords[0].keyword}}
+                                                <br>
+                                                <input type="radio" ng-model="answers[$index]" value="2"> {{q.keywords[1].keyword}}
+                                            </div>
                                         </div>
-										
+
+                                        <a class="btn btn-primary pull-right" ng-click="saveQues()" style="color: white;" ng-disabled="!checkQuestionnaire()">Submit</a>
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
             </div>
         </div>

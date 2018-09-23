@@ -21,6 +21,7 @@
     "fs": "0.0.1-security",
     "hooks-fixed": "^2.0.0",
     "jade": "^1.11.0",
+    "json2xls": "^0.1.2",
     "jsonwebtoken": "^8.0.1",
     "kareem": "^1.5.0",
     "math": "0.0.3",
@@ -38,7 +39,8 @@
     "passport-strategy": "^1.0.0",
     "path": "^0.12.7",
     "pause": "^0.1.0",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "xlsx": "^0.14.0"
   },
   "repository": "NULL",
   "devDependencies": {
