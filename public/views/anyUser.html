@@ -2193,11 +2193,11 @@
 							<div class="row">
 								<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="assessor_tab = 5">
 									<ul class="nav">
-										<!--											<li ng-class="assessor_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 1">Assessed Balancing Strengths</a></li>-->
+										<!-- <li ng-class="assessor_tab == 1 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 1">Assessed Balancing Strengths</a></li> -->
 										<li ng-class="assessor_tab == 2 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 2">Assessed Personal Mastery Levels</a>
 										</li>
-										<!--											<li ng-class="assessor_tab == 4 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 4">Leadership Competencies</a></li>-->
+										<!-- <li ng-class="assessor_tab == 4 ? 'active_tab' : '' "><a href="" ng-click="assessor_tab = 4">Leadership Competencies</a></li> -->
 										<!-- <li ng-class="assessor_tab == 0 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 0">Assessor Library</a>
 										</li> -->
@@ -3196,50 +3196,130 @@
 
 												<div class="row">
 													<div class="col-xs-12 col-md-3">
-														<ul class="list-group">
-															<li class="mrg10B" ng-click="checkRel[3] = true; section_num = 0">
-																<a class="list-group-item" href="" ng-class="section_num == 0 ? 'back_active_panel' : 'bg_white'">
-																	Beliefs
-																	<i class="glyph-icon icon-angle-right mrg0A"></i>
-																</a>
-															</li>
-															<li class="mrg10B" ng-click="section_num = 1">
-																<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
-																	Professional Values and Work
-																	<br>Culture Preferences
-																	<i class="glyph-icon icon-angle-right mrg0A"></i>
-																</a>
-															</li>
-															<li class="mrg10B" ng-click="section_num = 2">
-																<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
-																	Professional Strengths
-																	<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
-																</a>
-															</li>
-															<li class="mrg10B" ng-click="section_num = 3">
-																<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
-																	Learning Needs
-																	<i class="glyph-icon icon-angle-right mrg0A"></i>
-																</a>
-															</li>
-															<li class="mrg10B" ng-click="section_num = 5">
-																<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : 'bg_white'">
-																	Growth Recommendations
-																	<i class="glyph-icon icon-angle-right mrg0A"></i>
-																</a>
-															</li>
-															<li class="mrg10B" ng-click="section_num = 6">
-																<a class="list-group-item" href="" ng-class="section_num == 6 ? 'back_active_panel' : 'bg_white'">
-																	Recommendations for Manager
-																	<i class="glyph-icon icon-angle-right mrg0A"></i>
-																</a>
-															</li>
-															<li class="btn btn-info" ng-click="reUpdate()" style="text-align: center;">
-																Re-update user choices
-															</li>
-														</ul>
+														<div class="row">
+															<ul class="list-group" style="margin: 0 auto;">
+																<li class="mrg10B" ng-click="checkRel[3] = true; section_num = 0">
+																	<a class="list-group-item" href="" ng-class="section_num == 0 ? 'back_active_panel' : 'bg_white'">
+																		Beliefs
+																		<i class="glyph-icon icon-angle-right mrg0A"></i>
+																	</a>
+																</li>
+																<li class="mrg10B" ng-click="section_num = 1">
+																	<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
+																		Professional Values and Work
+																		<br>Culture Preferences
+																		<i class="glyph-icon icon-angle-right mrg0A"></i>
+																	</a>
+																</li>
+																<li class="mrg10B" ng-click="section_num = 2">
+																	<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
+																		Professional Strengths
+																		<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
+																	</a>
+																</li>
+																<li class="mrg10B" ng-click="section_num = 3">
+																	<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
+																		Learning Needs
+																		<i class="glyph-icon icon-angle-right mrg0A"></i>
+																	</a>
+																</li>
+																<li class="mrg10B" ng-click="section_num = 5">
+																	<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : 'bg_white'">
+																		Growth Recommendations
+																		<i class="glyph-icon icon-angle-right mrg0A"></i>
+																	</a>
+																</li>
+																<li class="mrg10B" ng-click="section_num = 6">
+																	<a class="list-group-item" href="" ng-class="section_num == 6 ? 'back_active_panel' : 'bg_white'">
+																		Recommendations for Manager
+																		<i class="glyph-icon icon-angle-right mrg0A"></i>
+																	</a>
+																</li>
+																<li class="btn btn-info" ng-click="reUpdate()" style="text-align: center;">
+																	Re-update user choices
+																</li>
+															</ul>
+														</div>
+														<br>
+														<hr>
+														<div class="row" style="background: #ffffdf; border: 1px dotted #ffec5c;" ng-show="section_num >= 0 && section_num <= 3">
+															<div class="col-xs-12" ng-show="section_num == 0" style="margin: 15px auto; text-align: center;">
+																<div class="row">
+																	<h4 style="text-align: center; margin: 0 auto 10px auto; color: black;">Belief's Analysis</h4>
+																</div>
+																<div class="row">
+																	<div class="col-xs-4">
+																		>
+																		<label title="6" style="color: skyblue;">
+																			<span class="allRating checked_rating">6</span>
+																		</label>
+																	</div>
+																	<div class="col-xs-4">{{dividedObj['s0']['6']/(dividedObj['s0']['6'] + dividedObj['s0']['7']) * 100 | number:2}} %</div>
+																	<div class="col-xs-4">{{dividedObj['s0']['6']}}</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-4">
+																		>
+																		<label title="7" style="color: skyblue;">
+																			<span class="allRating checked_rating">7</span>
+																		</label>
+																	</div>
+																	<div class="col-xs-4">{{dividedObj['s0']['7']/(dividedObj['s0']['6'] + dividedObj['s0']['7']) * 100 | number:2}} %</div>
+																	<div class="col-xs-4">{{dividedObj['s0']['7']}}</div>
+																</div>
+															</div>
+															<div class="col-xs-12" ng-show="section_num >= 1 && section_num <= 3" style="margin: 15px auto; text-align: center;">
+																<div class="row">
+																	<h4 style="text-align: center; margin: 0 auto 10px auto; color: black;">{{section_num == 1?'Value':(section_num==2?'Strength':'Learning Need')}}'s Analysis</h4>
+																</div>
+																<div class="row" ng-show="section_num == 3">
+																	<div class="col-xs-4">
+																		<label class="material-icons" title="Improved Over Time" style="color: skyblue;">
+																			<span>&#xE15D;</span>
+																		</label>
+																	</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotexhibitanymore']/(dividedObj['s'+section_num]['donotexhibitanymore']
+																		+ dividedObj['s'+section_num]['donotrelate'] + dividedObj['s'+section_num]['relatepartially'] + dividedObj['s'+section_num]['relatestrongly'])
+																		* 100 | number:2}} %</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotexhibitanymore']}}</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-4">
+																		<label class="material-icons" title="Never Exhibited" style="color: skyblue;">
+																			<span>&#xE612;</span>
+																		</label>
+																	</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotrelate']/(dividedObj['s'+section_num]['donotexhibitanymore'] + dividedObj['s'+section_num]['donotrelate']
+																		+ dividedObj['s'+section_num]['relatepartially'] + dividedObj['s'+section_num]['relatestrongly']) * 100
+																		| number:2}} %</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotrelate']}}</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-4">
+																		<label class="material-icons" title="Exhibit Sometimes" style="color: skyblue;">
+																			<span>&#xE427;</span>
+																		</label>
+																	</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatepartially']/(dividedObj['s'+section_num]['donotexhibitanymore'] + dividedObj['s'+section_num]['donotrelate']
+																		+ dividedObj['s'+section_num]['relatepartially'] + dividedObj['s'+section_num]['relatestrongly']) * 100
+																		| number:2}} %</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatepartially']}}</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-4">
+																		<label class="material-icons" title="Exhibit Strongly" style="color: skyblue;">
+																			<span>&#xE3A6;</span>
+																		</label>
+																	</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatestrongly']/(dividedObj['s'+section_num]['donotexhibitanymore'] + dividedObj['s'+section_num]['donotrelate']
+																		+ dividedObj['s'+section_num]['relatepartially'] + dividedObj['s'+section_num]['relatestrongly']) * 100
+																		| number:2}} %</div>
+																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatestrongly']}}</div>
+																</div>
+															</div>
+														</div>
 													</div>
-													<div class="col-md-9">
+													<div class="col-xs-12 col-md-9">
 														<div class="tab-content">
 
 															<div class="tab-pane fade active in pad0A" id="faq-tab-1">

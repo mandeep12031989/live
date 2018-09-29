@@ -22,6 +22,7 @@
     "hooks-fixed": "^2.0.0",
     "jade": "^1.11.0",
     "json2xls": "^0.1.2",
+    "json2xlsx": "^0.1.6",
     "jsonwebtoken": "^8.0.1",
     "kareem": "^1.5.0",
     "math": "0.0.3",
