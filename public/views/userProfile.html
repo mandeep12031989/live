@@ -197,48 +197,94 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-12 col-md-3">
-							<ul class="list-group">
-								<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true;">
-									<a class="list-group-item" href="" ng-class="section_num == 0 ? 'back_active_panel' : (checkSectionFill(0) ? 'back_panel':'bg_white')"
-									 ng-click="((!profile_content.profile.eachSectionEditable[0]) ? section_num=0:'');">
-										Beliefs
-										<i class="glyph-icon icon-angle-right mrg0A"></i>
-									</a>
-								</li>
-								<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[1]) ? (checkSectionFill(0)?(section_num>1 ? '':section_num=1):''):'');">
-									<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
-										Professional Values and Work
-										<br>Culture Preferences
-										<i class="glyph-icon icon-angle-right mrg0A"></i>
-									</a>
-								</li>
-								<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[2]) ? (checkSectionFill(0) && checkSectionFill(1)?(section_num>2 ? '':section_num=2):''):'');">
-									<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
-										Professional Strengths
-										<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
-									</a>
-								</li>
-								<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[3]) ? (checkSectionFill(0) && checkSectionFill(1) && checkSectionFill(2)?(section_num>3 ? '':section_num=3):''):'');">
-									<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
-										Learning Needs
-										<i class="glyph-icon icon-angle-right mrg0A"></i>
-									</a>
-								</li>
-								<!--<li class="mrg10B" ng-click="(checkSectionFill(1) && checkSectionFill(2) && checkSectionFill(3)?section_num=4:'');">
-									<a class="list-group-item" href="" ng-class="section_num == 4 ? 'back_active_panel' : (checkSectionFill(4) ? 'back_panel':'bg_white')">
-										Communication Style
-										<i class="glyph-icon icon-angle-right mrg0A"></i>
-									</a>
-								</li>-->
-								<!--
-								<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[4]) ? (checkSectionFill(0) && checkSectionFill(1) && checkSectionFill(2) && checkSectionFill(3)?(section_num>5 ? '':section_num=5):''):'');">
-									<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
-										Growth Recommendations
-										<i class="glyph-icon icon-angle-right mrg0A"></i>
-									</a>
-								</li>
--->
-							</ul>
+							<div class="row" style="display: block; margin: 0 auto;">
+								<ul class="list-group">
+									<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true;">
+										<a class="list-group-item" href="" ng-class="section_num == 0 ? 'back_active_panel' : (checkSectionFill(0) ? 'back_panel':'bg_white')"
+										 ng-click="((!profile_content.profile.eachSectionEditable[0]) ? section_num=0:'');">
+											Beliefs
+											<i class="glyph-icon icon-angle-right mrg0A"></i>
+										</a>
+									</li>
+									<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[1]) ? (checkSectionFill(0)?(section_num>1 ? '':section_num=1):''):'');">
+										<a class="list-group-item" href="" ng-class="section_num == 1 ? 'back_active_panel' : (checkSectionFill(1) ? 'back_panel':'bg_white')">
+											Professional Values and Work
+											<br>Culture Preferences
+											<i class="glyph-icon icon-angle-right mrg0A"></i>
+										</a>
+									</li>
+									<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[2]) ? (checkSectionFill(0) && checkSectionFill(1)?(section_num>2 ? '':section_num=2):''):'');">
+										<a class="list-group-item" href="" ng-class="section_num == 2 ? 'back_active_panel' : (checkSectionFill(2) ? 'back_panel':'bg_white')">
+											Professional Strengths
+											<i class="glyph-icon font-green icon-angle-right mrg0A"></i>
+										</a>
+									</li>
+									<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[3]) ? (checkSectionFill(0) && checkSectionFill(1) && checkSectionFill(2)?(section_num>3 ? '':section_num=3):''):'');">
+										<a class="list-group-item" href="" ng-class="section_num == 3 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
+											Learning Needs
+											<i class="glyph-icon icon-angle-right mrg0A"></i>
+										</a>
+									</li>
+									<!--<li class="mrg10B" ng-click="(checkSectionFill(1) && checkSectionFill(2) && checkSectionFill(3)?section_num=4:'');">
+												<a class="list-group-item" href="" ng-class="section_num == 4 ? 'back_active_panel' : (checkSectionFill(4) ? 'back_panel':'bg_white')">
+													Communication Style
+													<i class="glyph-icon icon-angle-right mrg0A"></i>
+												</a>
+											</li>-->
+									<!--
+											<li class="mrg10B" ng-click="checkRel[section_num] = true; second3timer = true; ((!profile_content.profile.eachSectionEditable[4]) ? (checkSectionFill(0) && checkSectionFill(1) && checkSectionFill(2) && checkSectionFill(3)?(section_num>5 ? '':section_num=5):''):'');">
+												<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : (checkSectionFill(3) ? 'back_panel':'bg_white')">
+													Growth Recommendations
+													<i class="glyph-icon icon-angle-right mrg0A"></i>
+												</a>
+											</li>
+			-->
+								</ul>
+							</div>
+							<hr>
+							<div class="d-none d-sm-block d-sm-none d-md-block row sticky-top" style="margin: 10px auto;">
+								<div class="col-md-12" style="margin: 15px auto;" ng-show="section_num == 0">
+									<div class="col-md-12" style="margin: 8px auto;">
+										<label title="Do not relate at all" style="color: skyblue; margin-right: 25px;">
+											<span class="allRating">1</span>
+										</label>
+										<div style="font-size: 15px; margin-top: -27px; margin-left: 35px;">Do not relate at all</div>
+									</div>
+									<div class="col-md-12" style="margin: 8px auto;">
+										<label title="Relate very strongly" style="color: skyblue;">
+											<span class="allRating">10</span>
+										</label>
+										<div style="font-size: 15px; margin-top: -27px; margin-left: 40px;">Relate very strongly</div>
+									</div>
+								</div>
+								<div class="col-md-12" style="margin: 15px auto;" ng-show="section_num >= 1 && section_num <= 3">
+									<div class="col-md-12" style="margin: 8px auto;" ng-show="section_num == 3">
+										<label class="material-icons" title="Improved Over Time" style="color: skyblue;">
+											<span>&#xE15D;</span>
+										</label>
+										<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Improved Over Time</div>
+									</div>
+									<div class="col-md-12" style="margin: 8px auto;">
+										<label class="material-icons" title="Never Exhibited" style="color: skyblue;">
+											<span>&#xE612;</span>
+										</label>
+										<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Never Exhibited</div>
+									</div>
+									<div class="col-md-12" style="margin: 8px auto;">
+										<label class="material-icons" title="Exhibit Sometimes" style="color: skyblue;">
+											<span>&#xE427;</span>
+										</label>
+										<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Exhibit Sometimes</div>
+									</div>
+									<div class="col-md-12" style="margin: 8px auto;">
+										<label class="material-icons" title="Exhibit Strongly" style="color: skyblue;">
+											<span>&#xE3A6;</span>
+										</label>
+										<div style="font-size: 15px; margin-top: -27px; margin-left: 25px;">Exhibit Strongly</div>
+									</div>
+								</div>
+							</div>
+
 						</div>
 						<div class="col-xs-12 col-md-9">
 							<div class="tab-content">
@@ -270,11 +316,24 @@
 																<br> Take a couple of minutes to think and reflect on the following question.
 																<br>
 																<br>
-																<span ng-show="section_num == 1">"What kind of work culture and work environment do you prefer?"</span>
-																<span ng-show="section_num == 2">"What are your strengths?"</span>
-																<span ng-show="section_num == 3">"What kind of feedback do you get from people for your improvement?"</span>
+																<span ng-show="section_num == 3">
+																	<span>"How often do you get genuine feedback from people for your improvement?"</span>
+																	<br>
+																	<select class="form-control" ng-model="profile_content.profile.eachSectionStopReflectElse.learning.ques2">
+																		<option disabled default>--Select--</option>
+																		<option value="Quite often">Quite often</option>
+																		<option value="Occasionally">Occasionally</option>
+																		<option value="Rarely">Rarely</option>
+																		<option value="Never">Never</option>
+																	</select>
+																</span>
 																<br>
-																<!--<i>Trigger: <span ng-show="section_num == 1">Think about what is a must for you in an ideal work culture</span><span ng-show="section_num == 2">Think about what is it - in your work or while working with others</span><span ng-show="section_num == 3">learning needs</span>.</i>-->
+																<span>
+																	<span ng-show="section_num == 1">"What kind of work culture and work environment do you prefer?"</span>
+																	<span ng-show="section_num == 2">"What are your strengths?"</span>
+																	<span ng-show="section_num == 3">"What kind of feedback do you get from people for your improvement?"</span>
+																	<br>
+																	<!--<i>Trigger: <span ng-show="section_num == 1">Think about what is a must for you in an ideal work culture</span><span ng-show="section_num == 2">Think about what is it - in your work or while working with others</span><span ng-show="section_num == 3">learning needs</span>.</i>-->
 															</div>
 															<div class="col-xs-12 col-sm-12 col-md-12">
 																<textarea class="form-control" style="text-align: center; font-weight: bold;" ng-model="profile_content.profile.eachSectionStopReflect[section_num-1]"></textarea>
@@ -393,6 +452,12 @@ In administrating:
 																<br>
 																<br> Take a couple of minutes to think and reflect on the following question.
 																<br>
+																<br>
+																<span ng-show="section_num == 3">"How often do you get genuine feedback from people for your improvement?"</span>
+																<br>
+																<div ng-show="section_num == 3" class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #f3f3f3; font-size: 14px; margin-top: 5px;">
+																	<b>{{ profile_content.profile.eachSectionStopReflectElse.learning.ques2}}</b>
+																</div>
 																<br>
 																<span ng-show="section_num == 1">"What kind of work culture and work environment do you prefer?"</span>
 																<span ng-show="section_num == 2">"What are your strengths?"</span>

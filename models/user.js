@@ -231,6 +231,9 @@ var userSchema = new Schema({
         eachSectionStopReflectElse: {
             value: {
                 ques2: String
+            },
+            learning: {
+                ques2: String
             }
         },
         StopReflectPAEIDropdown: {
