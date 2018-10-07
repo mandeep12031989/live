@@ -1317,9 +1317,9 @@ router.route('/resetpsw/:email/:token')                            // Client Sid
 			});
 	});
 
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'], session: false }));
 
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), function (err, res) {
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/', session: false }), function (err, res) {
 	//console.log(res);
 
 	var tkn = authe.makeToken();

@@ -978,6 +978,12 @@
 						<div class="container" ng-show="menu == 2 && user.profile.profile_number != 0 && !wantNewProfile">
 
 							<div class="row">
+								<div style="display: inline-block; margin: 0 auto 20px auto; text-align: center;">
+									<button class="btn btn-info" ng-click="printSD()">Download Short Description</button>
+								</div>
+							</div>
+
+							<div class="row">
 								<div id="page-title" style="margin: 0px auto;">
 									<ul class="tab-slider--tabs">
 										<li class="tab-slider--trigger" ng-class="profile_selected == -1 ? 'active-profile' : ''" ng-click="profile_selected = -1">Profile {{user.profile.profile_number}}</li>

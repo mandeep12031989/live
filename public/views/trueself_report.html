@@ -108,7 +108,7 @@
 </span>
 
 <div id="sb-site" ng-show="!loading && profile_content.profile.profile_number>0" ng-init="menu = 6">
-	<!-- <button ng-click="printSD()">CLICK TO D</button> -->
+
 	<div id="page-wrapper">
 
 		<div id="page-content-wrapper">
@@ -1133,7 +1133,7 @@
 
 				<!--									TABS END											-->
 
-				<div class="panel panel-body" style="margin: 0 65px 20px 65px;" ng-if="false">
+				<!-- <div class="panel panel-body" style="margin: 0 65px 20px 65px;" ng-if="false">
 					<div class="row">
 						<div class="col-md-12">
 							<h2 style="text-align:center" id="page-title">
@@ -1222,7 +1222,7 @@
 							 ui-sref="peerAnalysis({id: profile_content._id})">Get Peer Analysis</span>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
 					<div class="row">
@@ -1248,14 +1248,16 @@
 
 					</div>
 				</div>
-
+				<div style="padding: 5px 40px;">
+					<button class="btn btn-info" ng-click="printSD()">Download Short Description</button>
+					<button class="btn btn-success pull-right" ui-sref="dashboard">Back to Dashboard</button>
+				</div>
 				<!--
 					<button class="btn btn-info" ng-show="(menu!=1)" ng-click="backMenu()">Back</button>
 					<button class="btn btn-info pull-right" ng-show="(menu!=2)" ng-click="nextMenu()">Next</button>
 					<button class="btn btn-info pull-right" ng-show="(!profile_content.feedback.submitted) && (menu==4)" ui-sref="feedback">Proceed</button>
 					<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="(profile_content.feedback.submitted) && (menu==4)">Back to Dashboard</button>
 -->
-				<button class="btn btn-success pull-right" ui-sref="dashboard" ng-if="menu==6">Back to Dashboard</button>
 			</div>
 		</div>
 	</div>

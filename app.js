@@ -20,7 +20,7 @@ config = config[_ENV_NAME];
 
 // Mongoose Connection
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoUrl);
+mongoose.connect(config.mongoUrl, { useNewUrlParser: true, useCreateIndex: true });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

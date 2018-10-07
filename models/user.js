@@ -1,8 +1,6 @@
 'use strict';
 
 var bcrypt = require('bcrypt-nodejs');
-var passportLocalMongoose = require('passport-local-mongoose');
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -444,7 +442,5 @@ userSchema.pre('save', function (next) {
         });
     });
 });
-
-userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Users', userSchema);
