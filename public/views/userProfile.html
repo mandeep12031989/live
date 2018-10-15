@@ -634,7 +634,7 @@ In administrating:
 													</div>
 												</div>
 
-												<div class="col-md-6" ng-repeat="keys in profile_content.profile.profile_content | filter: {new_keyword:false}" ng-show="section_num == keys.keyword_id[5] && profile_content.profile.eachSectionStopReflectDone[section_num-1]"
+												<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content | filter: {new_keyword:false}" ng-show="section_num == keys.keyword_id[5] && profile_content.profile.eachSectionStopReflectDone[section_num-1]"
 												 style="margin-bottom: 20px;">
 													<div class="panel panel-primary">
 														<div class="panel-heading">
@@ -645,6 +645,10 @@ In administrating:
 															<h4 class="panel-title" ng-show="profile_content.language == 'eng+hin' && keys.keyword_h">
 																<b>{{keys.keyword_h}}</b>
 															</h4>
+															<!-- <span class="panel-title" style="float: right; margin-top: -21px; font-size: 12px; padding-right: 15px;" ng-if="section_num == 3"
+															 title="85% of people like you relate with this !">
+																<img src="./images/team.png"> 85%
+															</span> -->
 														</div>
 														<div id="collapseOne" class="panel-collapse collapse in">
 															<div class="panel-body pad0B">
@@ -652,7 +656,7 @@ In administrating:
 																 ng-if="section_num == 3">Can you come across to others as</div>
 																<div class="row" ng-repeat="mini in keys.mini_descriptions | filter: {mini_by_assessor:false}" style="margin-bottom: 10px; color: #757575;"
 																 ng-class="(!mini.relate) && (checkRel[section_num])?'bg_uncomp':''">
-																	<div class="col-md-6" ng-if="section_num != 3">
+																	<div class="col-xs-12 col-md-8" ng-if="section_num != 3">
 																		<h5>
 																			<b>{{mini.mini_description}}</b>
 																		</h5>
@@ -661,7 +665,7 @@ In administrating:
 																			<b>{{mini.mini_description_h}}</b>
 																		</h5>
 																	</div>
-																	<div class="col-md-4" ng-if="section_num == 3">
+																	<div class="col-xs-12 col-md-7" ng-if="section_num == 3">
 																		<h5>
 																			<b>{{mini.mini_description}}</b>
 																		</h5>
@@ -670,7 +674,7 @@ In administrating:
 																			<b>{{mini.mini_description_h}}</b>
 																		</h5>
 																	</div>
-																	<div class="col-md-6" ng-if="section_num != 3">
+																	<div class="col-xs-12 col-md-4" ng-if="section_num != 3">
 																		<div id="radios">
 																			<label for="{{mini.mini_description_id}}donotrelate" class="material-icons" title="Never Exhibited" onclick="void(0)">
 																				<input type="radio" name="{{mini.mini_description_id}}donotrelate" id="{{mini.mini_description_id}}donotrelate" value="donotrelate"
@@ -689,7 +693,7 @@ In administrating:
 																			</label>
 																		</div>
 																	</div>
-																	<div class="col-md-8" ng-if="section_num == 3">
+																	<div class="col-xs-12 col-md-5" ng-if="section_num == 3">
 																		<div id="radios">
 																			<label for="{{mini.mini_description_id}}donotexhibitanymore" class="material-icons" title="Improved Over Time" onclick="void(0)">
 																				<input type="radio" name="{{mini.mini_description_id}}donotexhibitanymore" id="{{mini.mini_description_id}}donotexhibitanymore"
@@ -713,6 +717,9 @@ In administrating:
 																			</label>
 																		</div>
 																	</div>
+																	<!-- <div class="col-xs-2 col-md-1" style="float: right;font-size: 12px; text-align:center;" ng-if="section_num == 3" title="85% of people like you relate with this !">
+																		85%
+																	</div> -->
 																	<!--<div style="color: red; text-align: center;" ng-show="(!mini.relate) && checkRel[section_num]">How much do you relate ?</div>-->
 																</div>
 

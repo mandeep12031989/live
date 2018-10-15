@@ -7,6 +7,7 @@ var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var CryptoJS = require('node-cryptojs-aes').CryptoJS;
 var child_process = require('child_process');
+var _ = require('lodash');
 
 var User = require('../models/user.js');
 var Keyword = require('../models/keyword.js');
@@ -470,20 +471,7 @@ router.route('/specific/:id')
 				return res.status(200).json({ success: true, message: "Done" });
 			});
 	});
-/*
-//FACILITATOR NAME OR ID
-router.route('/candidate/:fac_name')
-.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function(req, res, next){
-    var fac_name = sanitize(req.params.fac_name);
-    
-    User.find({'facilitator_name': fac_name}, {'firstname': true, 'lastname': true, 'facilitator_name': true})
-    .exec(function(err, user){
-        if(err)
-            next(err);
-        res.status(200).json(user);
-    });
-});
-*/
+
 router.route('/profile/insertProfile')                          // will use req.decoded._id later
 	.post(Verify.verifyOrdinaryUser, function (req, res, next) {
 		var id = req.decoded._id;
@@ -926,6 +914,36 @@ router.route('/analysis')
 			});
 
 
+	});
+
+router.route('/all_profile_analysis')
+	.get(async function (req, res, next) {
+		// var allUsers = await User.find({ 'profile.profile_number': { $ne: 0 }, 'profile.profile_content': { $ne: [] } }, { 'profile.profile_number': 1, 'profile.profile_content.keyword_id': 1, 'profile.profile_content.mini_descriptions.relate': 1, 'profile.profile_content.mini_descriptions.mini_description_id': 1 });
+
+		var allUsers = await User.aggregate([
+			{ $match: { 'profile.profile_number': { $ne: 0 }, 'profile.profile_content': { $ne: [] } } },
+			{ $project: { 'profile.profile_content.keyword_id': 1, 'profile.profile_content.mini_descriptions.relate': 1, 'profile.profile_content.mini_descriptions.mini_description_id': 1 } },
+			{ $project: { profile_content: '$profile.profile_content', _id: 0 } },
+			{ $unwind: '$profile_content' },
+			{ $project: { mini_descriptions: '$profile_content.mini_descriptions' } },
+			{ $unwind: '$mini_descriptions' },
+			{ $project: { relate: '$mini_descriptions.relate', mini_description_id: '$mini_descriptions.mini_description_id' } },
+			{ $match: { 'mini_description_id': /P0[0-9]S03/g } },
+			{ $group: { '_id': { relate: '$relate', mini_description_id: '$mini_description_id' }, count: { $sum: 1 } } },
+			{ $project: { relate: '$_id.relate', mini_description_id: '$_id.mini_description_id', count: '$count', _id: 0 } }
+		]);
+
+		allUsers = _.mapValues(_.groupBy(allUsers, 'mini_description_id'), function (item) { return item.map(function (it) { return _.omit(it, 'mini_description_id') }) });
+
+		// var keywords = await Keyword.aggregate([
+		// 	{ $match: { 'keyword_id': { $regex: /P0[0-9]S03/i } } },
+		// 	{ $unwind: '$mini_descriptions' },
+		// 	{ $project: { mini_description_id: '$mini_descriptions.mini_description_id', _id: 0 } }
+		// ]);
+
+		// keywords = _.mapValues(_.groupBy(keywords, 'mini_description_id'), function (item) { return { total: 0, tillNow: 0 } });
+
+		return res.status(200).json({ data: allUsers });
 	});
 
 router.route('/pdp')
