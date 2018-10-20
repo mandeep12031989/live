@@ -50,6 +50,10 @@ var descriptionSchema = new Schema({
     mini_by_assessor: {
         type: Boolean,
         default: false
+    },
+    relate_percentage: {
+        type: Number,
+        default: 70
     }
 });
 

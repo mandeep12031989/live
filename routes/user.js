@@ -580,7 +580,7 @@ router.route('/profile/insertProfileByFacilitator/:id')                         
 						user.profile.eachSectionEditable = new Array(5).fill(false);
 
 						user.profile.profile_content.forEach(function (keys) {
-							console.log(keys.new_keyword);
+							// console.log(keys.new_keyword);
 							if (keys.new_keyword)
 								keys.key_added_to_assessor_library = true;
 							keys.mini_descriptions.forEach(function (minis) {
@@ -935,6 +935,24 @@ router.route('/all_profile_analysis')
 
 		allUsers = _.mapValues(_.groupBy(allUsers, 'mini_description_id'), function (item) { return item.map(function (it) { return _.omit(it, 'mini_description_id') }) });
 
+		for (let mini_id in allUsers) {
+			console.log('----------------------------------------------------------');
+			console.log(mini_id);
+			var total = allUsers[mini_id].reduce(function (acc, it) { return acc + it.count; }, 0);
+			var per = Math.ceil((allUsers[mini_id].reduce(function (acc, it) {
+				if (it.relate == 'relatepartially' || it.relate == 'relatestrongly')
+					return acc;
+				else
+					return acc + it.count;
+			}, 0) / total) * 100);
+			if (per == 0)
+				per = 70;
+			console.log(per);
+			var data = await Keyword.update({ 'mini_descriptions.mini_description_id': mini_id },
+				{ $set: { 'mini_descriptions.$.relate_percentage': per } });
+			// console.log(data);
+		}
+
 		// var keywords = await Keyword.aggregate([
 		// 	{ $match: { 'keyword_id': { $regex: /P0[0-9]S03/i } } },
 		// 	{ $unwind: '$mini_descriptions' },
@@ -943,7 +961,7 @@ router.route('/all_profile_analysis')
 
 		// keywords = _.mapValues(_.groupBy(keywords, 'mini_description_id'), function (item) { return { total: 0, tillNow: 0 } });
 
-		return res.status(200).json({ data: allUsers });
+		return res.status(200).json({ message: "Done !" });
 	});
 
 router.route('/pdp')
