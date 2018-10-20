@@ -855,8 +855,8 @@ In administrating:
 
 											<div class="col-xs-12 col-sm-12 col-md-12 row" style="margin: 0 auto;" ng-show="section_num == 2 && profile_content.profile.sectionFillDone.strength">
 												<div class="col-md-12" style="margin: -15px auto 15px auto;">
-													<h4>You related with the following Strengths as 'Partially'. Please share the below
-														questions associated with it.</h4>
+													<h4>You related with the following Strengths as 'Partially'. Please answer the question associated with
+														it.</h4>
 												</div>
 												<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content | filter: {new_keyword:false}"
 												 ng-if="keys.keyword_id[5] == '2'">
@@ -871,11 +871,11 @@ In administrating:
 													</div>
 												</div>
 											</div>
-											{{checkMiniQuesFill(3)}}
+
 											<div class="col-xs-12 col-sm-12 col-md-12 row" style="margin: 0 auto;" ng-show="section_num == 3 && profile_content.profile.sectionFillDone.learning">
 												<div class="col-md-12" style="margin: -15px auto 15px auto;">
-													<h4>You related with the following Learning Needs as 'Improved Over Time'. Please share the below
-														questions associated with it.</h4>
+													<h4>You related with the following Learning Needs as 'Improved Over Time'. Please answer the questions
+														associated with it.</h4>
 												</div>
 												<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content | filter: {new_keyword:false}"
 												 ng-if="keys.keyword_id[5] == '3'">
@@ -886,20 +886,20 @@ In administrating:
 														<span>How much would you rate yourself earlier on this learning need on a scale of 1-5 ?</span><br>
 														<select class="form-control" ng-model="mini.questions.learning[0]" ng-class="!mini.questions.learning[0]?'bg_uncomp':''">
 															<option default disabled>-- SELECT --</option>
-															<option value="1">1</option>
+															<option value="1">1 (Not present at all)</option>
 															<option value="2">2</option>
 															<option value="3">3</option>
 															<option value="4">4</option>
-															<option value="5">5</option>
+															<option value="5">5 (Affected me strongly)</option>
 														</select>
 														<span>How much would you rate yourself now ?</span><br>
 														<select class="form-control" ng-model="mini.questions.learning[1]" ng-class="!mini.questions.learning[1]?'bg_uncomp':''">
 															<option default disabled>-- SELECT --</option>
-															<option value="1">1</option>
+															<option value="1">1 (Not present at all)</option>
 															<option value="2">2</option>
 															<option value="3">3</option>
 															<option value="4">4</option>
-															<option value="5">5</option>
+															<option value="5">5 (Affected me strongly)</option>
 														</select>
 														<br>
 														<textarea class="form-control" ng-model="mini.questions.learning[2]" placeholder="How did you improve upon it ?"
