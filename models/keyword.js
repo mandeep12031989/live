@@ -53,7 +53,7 @@ var descriptionSchema = new Schema({
     },
     relate_percentage: {
         type: Number,
-        default: 70
+        default: 0
     }
 });
 

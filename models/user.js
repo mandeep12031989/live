@@ -61,7 +61,7 @@ var descriptionSchema = new Schema({
         type: Boolean, default: false
     },
     relate_percentage: {
-        type: Number, default: 70
+        type: Number, default: 0
     },
     questions: {
         strength: { type: Array },

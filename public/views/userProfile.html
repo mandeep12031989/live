@@ -752,7 +752,7 @@ In administrating:
 																		</div>
 																	</div>
 																	<div class="col-xs-2 col-md-1" style="float: right;font-size: 12px; text-align:center;" ng-if="section_num == 3"
-																	 title="{{mini.relate_percentage}}% of people like you relate with this !">
+																	 title="{{mini.relate_percentage}}% of people like you relate with this !" ng-show="mini.relate_percentage != 0">
 																		{{mini.relate_percentage}}%
 																	</div>
 																	<!--<div style="color: red; text-align: center;" ng-show="(!mini.relate) && checkRel[section_num]">How much do you relate ?</div>-->
@@ -972,12 +972,12 @@ In administrating:
 
 										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[2] = true; second3timer = true; (checkSectionFill(2) && (!profile_content.profile.eachSectionEditable[2+1])?(profile_content.profile.sectionFillDone.strength=true):'');"
 										 ng-show="section_num == 2 && !profile_content.profile.sectionFillDone.strength">Next</button>
-										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num] = true; second3timer = true; (checkSectionFill(section_num) && checkMiniQuesFill(2) && (!profile_content.profile.eachSectionEditable[section_num+1])?(section_num = section_num+1):'');"
+										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[section_num] = true; second3timer = true; (checkSectionFill(section_num) && checkMiniQuesFill(section_num) && (!profile_content.profile.eachSectionEditable[section_num+1])?(section_num = section_num+1):'');"
 										 ng-show="section_num != 3 && !(section_num == 2 && !profile_content.profile.sectionFillDone.strength)">Next</button>
 
 										<button type="button" class="btn btn-success pull-right" ng-click="checkRel[3] = true; second3timer = true; (checkSectionFill(3)? (profile_content.profile.sectionFillDone.learning = true):'');"
 										 ng-show="section_num == 3 && !profile_content.profile.sectionFillDone.learning">Next</button>
-										<button type="button" class="btn btn-danger pull-right" ng-click="checkRel[section_num] = true; second3timer = true; (checkSectionFill(section_num) && checkMiniQuesFill(3)?submitProfile():'');"
+										<button type="button" class="btn btn-danger pull-right" ng-click="checkRel[section_num] = true; second3timer = true; (checkSectionFill(section_num) && checkMiniQuesFill(section_num)?submitProfile():'');"
 										 ng-show="section_num == 3 && profile_content.profile.sectionFillDone.learning">Submit</button>
 
 										<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">

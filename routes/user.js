@@ -719,7 +719,7 @@ router.route('/profile/getProfile')
 		User.findOne({ _id: id },
 			{
 				'firstname': true, 'lastname': true, 'feedback': true, 'language': true,
-				'profile.profile_content': true, 'profile.profile_number': true, 'profile.track': true, 'profile.eachSectionTrack': true, 'profile.growth_recommendations': true, 'profile.beliefs': true, 'profile.eachSectionRelate': true, 'profile.eachSectionShareMore': true, 'profile.eachSectionEditable': true, 'profile.eachSectionStopReflect': true, 'profile.eachSectionStopReflectDone': true, 'profile.eachSectionStopReflectPAEI': true, 'profile.StopReflectPAEIDropdown': true, 'profile.eachSectionCombineComment': true
+				'profile.profile_content': true, 'profile.profile_number': true, 'profile.track': true, 'profile.eachSectionTrack': true, 'profile.growth_recommendations': true, 'profile.beliefs': true, 'profile.eachSectionRelate': true, 'profile.eachSectionShareMore': true, 'profile.eachSectionEditable': true, 'profile.eachSectionStopReflect': true, 'profile.eachSectionStopReflectElse': true, 'profile.eachSectionStopReflectDone': true, 'profile.eachSectionStopReflectPAEI': true, 'profile.StopReflectPAEIDropdown': true, 'profile.eachSectionCombineComment': true
 			})
 			.exec(function (err, user) {
 				if (err)
