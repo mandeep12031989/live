@@ -14,6 +14,7 @@ var Keyword = require('../models/keyword.js');
 var Team = require('../models/team.js');
 var Belief = require('../models/beliefs.js');
 var GrRec = require('../models/growth_rec.js');
+var GrRecAss = require('../models/growth_rec_assessor.js');
 var Verify = require('./verify.js');
 var authe = require('../authenticate.js');
 var mailer = require('../mailer.js');
@@ -529,11 +530,19 @@ router.route('/profile/insertProfile')                          // will use req.
 
 										user.profile.growth_recommendations = gr;
 
-										user.save(function (e, us) {
-											if (e)
-												return next(e);
-											res.status(200).send({ message: "success !", success: true });
-										});
+										GrRecAss.find({ sID: { $regex: body.profile_number } }).sort('sID')
+											.exec(function (err, gra) {
+												if (err)
+													return next(err);
+
+												user.profile.growth_recommendations_assessor = gra;
+
+												user.save(function (e, us) {
+													if (e)
+														return next(e);
+													res.status(200).send({ message: "success !", success: true });
+												});
+											});
 									});
 
 							});
@@ -604,11 +613,19 @@ router.route('/profile/insertProfileByFacilitator/:id')                         
 
 										user.profile.growth_recommendations = gr;
 
-										user.save(function (e, us) {
-											if (e)
-												return next(e);
-											res.status(200).send({ message: "success !", success: true });
-										});
+										GrRecAss.find({ sID: { $regex: body.profile_number } }).sort('sID')
+											.exec(function (err, gra) {
+												if (err)
+													return next(err);
+
+												user.profile.growth_recommendations_assessor = gra;
+
+												user.save(function (e, us) {
+													if (e)
+														return next(e);
+													res.status(200).send({ message: "success !", success: true });
+												});
+											});
 									});
 
 							});

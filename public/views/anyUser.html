@@ -3282,7 +3282,7 @@
 																</li>
 																<li class="mrg10B" ng-click="section_num = 5">
 																	<a class="list-group-item" href="" ng-class="section_num == 5 ? 'back_active_panel' : 'bg_white'">
-																		Growth Recommendations
+																		(Assessor) Growth Recommendations
 																		<i class="glyph-icon icon-angle-right mrg0A"></i>
 																	</a>
 																</li>
@@ -3419,7 +3419,7 @@
 																					<b ng-show="section_num == 2">Professional Strengths</b>
 																					<b ng-show="section_num == 3">Learning Needs</b>
 																					<!--<b ng-show="section_num == 4">Communication Style</b>-->
-																					<b ng-show="section_num == 5">Growth Recommendations</b>
+																					<b ng-show="section_num == 5">(Assessor) Growth Recommendations</b>
 																					<b ng-show="section_num == 6">Recommendations for Manager</b>
 
 																					<div class="row" style="padding: 15px 6% 15px 3%; text-align: left;" ng-show="section_num>=1 && section_num<=3">
@@ -3615,7 +3615,10 @@
 																							<span ng-class="(rc.how_much==10)?'checked_rating':''" title="10" class="allRating">10</span>
 																						</div>
 																					</div>
-																					<div class="col-md-6" style="padding: 5px;">
+																					<div class="col-md-6" style="padding: 5px; text-align: center;">
+																						<span style="font-size: 11px; font-weight: bold; color:#999;">(Why did you selected this rating?
+																							Why not less
+																							or why not more?)</span><br>
 																						<textarea rows="4" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you selected this rating? Why not less or why not more?
 "
 																						 ng-model="rc.comment" disabled ng-show="rc.comment"></textarea>
@@ -3735,6 +3738,13 @@
 																							<br>
 																							<div class="col-sm-6">
 																								<div class="row">
+																									<span style="font-size: 11px; font-weight: bold; color:#999;" ng-if="section_num==2 && keys.comment">
+																										(Does an excess use of this strength turn into a weakness (learning need) for you? If yes,
+																										how?)
+																									</span><br>
+																									<span style="font-size: 11px; font-weight: bold; color:#999;" ng-if="section_num==3 && keys.comment">
+																										(How does this learning need hold you back?)
+																									</span><br>
 																									<textarea contenteditable="true" rows="4" class="form-control" ng-model="keys.comment"
 																									 disabled ng-if="keys.comment" style="text-align: center;"></textarea>
 																								</div>
@@ -3751,7 +3761,7 @@
 																								</div>
 																							</div>
 																							<div class="col-sm-6">
-																								<textarea contenteditable="true" rows="4" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment"
+																								<textarea contenteditable="true" rows="5" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment"
 																								 placeholder="Comment" style="text-align: center;">Comment</textarea>
 																							</div>
 
@@ -3925,11 +3935,60 @@
 																			</div>
 
 																			<div class="col-sm-12" ng-show="section_num == 5" style="margin-bottom: 20px; font-size: 16px;">
-																				<div ng-repeat="rc in user.profile.growth_recommendations">
+																				<div class="row" ng-repeat="rc in user.profile.growth_recommendations_assessor">
 																					<span class="col-sm-1" style="text-align: center;">
-																						<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;" disabled>
+																						<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;" ng-click="submitGrowthRecAssessor()">
 																					</span>
-																					<span class="col-sm-11" style="margin-bottom: 10px;">{{rc.statement}}</span>
+																					<span class="col-sm-11" style="margin-bottom: 10px;" ng-click="rc.selected = !rc.selected; submitGrowthRecAssessor()">
+																						<span style="font-weight: bold;">{{rc.brief}}</span><br>{{rc.statement}}
+																					</span>
+																				</div>
+																				<div ng-show="!addingGrowthRecAssessor" class="row">
+																					<div style="margin: 0 auto; text-align: center;">
+																						<button type="button" class="btn btn-warning" ng-click="addGrowthRecAssessor()">+ Add to Growth
+																							Recommendations</button>
+																					</div>
+																				</div>
+																				<div ng-show="addingGrowthRecAssessor" class="row" style="background-color: #fee; padding: 5px 0 10px 0;">
+																					<div class="col-md-8">
+																						Brief:<br>
+																						<input type="text" class="form-control" ng-model="addingGrowthRecAssessorObj.brief">
+																					</div>
+																					<div class="col-md-4">
+																						Linked Competency:<br>
+																						<!-- <input type="text" class="form-control" ng-model="addingGrowthRecAssessorObj.linked_competency"
+																						 placeholder="NA for nothing"> -->
+																						<select class="form-control" ng-model="addingGrowthRecAssessorObj.linked_competency">
+																							<optgroup label="P">
+																								<option ng-repeat="j in competencies | filter: {domain:'P' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="P">None</option>
+																							</optgroup>
+																							<optgroup label="A">
+																								<option ng-repeat="j in competencies | filter: {domain:'A' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="A">None</option>
+																							</optgroup>
+																							<optgroup label="E">
+																								<option ng-repeat="j in competencies | filter: {domain:'E' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="E">None</option>
+																							</optgroup>
+																							<optgroup label="I">
+																								<option ng-repeat="j in competencies | filter: {domain:'I' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="I">None</option>
+																							</optgroup>
+																							<optgroup label="PM">
+																								<option ng-repeat="j in competencies | filter: {domain:'PM' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="PM">None</option>
+																							</optgroup>
+																							<option value="NA">None</option>
+																						</select>
+																					</div>
+																					<div class="col-md-10">
+																						Statement:<br>
+																						<input type="text" class="form-control" ng-model="addingGrowthRecAssessorObj.statement">
+																					</div>
+																					<div class="col-md-2" style="text-align: center;"><br>
+																						<button type="button" class="btn btn-danger" ng-click="pushGrowthRecAssessor()">Done</button>
+																					</div>
 																				</div>
 																			</div>
 

@@ -73,6 +73,8 @@ var openUser = require('./routes/openUser');
 var openMCQUser = require('./routes/openMCQUser');
 var library = require('./routes/library');
 var team = require('./routes/team');
+var competency = require('./routes/competency');
+var growth_rec_assessor = require('./routes/growth_rec_assessor');
 
 // linking callback function to route
 app.use('/', routes);
@@ -91,6 +93,8 @@ app.use('/openUser', openUser);
 app.use('/openMCQUser', openMCQUser);
 app.use('/library', library);
 app.use('/team', team);
+app.use('/competency', competency);
+app.use('/growth_rec_assessor', growth_rec_assessor);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

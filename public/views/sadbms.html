@@ -131,6 +131,38 @@
 					</li>
 
 					<li class="header">
+						<span>Competency</span>
+					</li>
+					<li ng-click="tab_num = 18">
+						<a href="" ng-class="tab_num == 18 ? 'bg-tab':''">
+							<i class="glyph-icon icon-cog"></i>
+							<span>View / Edit</span>
+						</a>
+					</li>
+					<li ng-click="tab_num = 19">
+						<a href="" ng-class="tab_num == 19 ? 'bg-tab':''">
+							<i class="glyph-icon icon-cog"></i>
+							<span>Add NEW</span>
+						</a>
+					</li>
+
+					<li class="header">
+						<span>(Assessor) Growth Recommendations</span>
+					</li>
+					<li ng-click="tab_num = 20">
+						<a href="" ng-class="tab_num == 20 ? 'bg-tab':''">
+							<i class="glyph-icon icon-cog"></i>
+							<span>View / Edit</span>
+						</a>
+					</li>
+					<li ng-click="tab_num = 21">
+						<a href="" ng-class="tab_num == 21 ? 'bg-tab':''">
+							<i class="glyph-icon icon-upload"></i>
+							<span>Add NEW</span>
+						</a>
+					</li>
+
+					<li class="header">
 						<span>Master Facilitators List</span>
 					</li>
 					<li ng-click="tab_num = 9">
@@ -295,7 +327,8 @@
 							<br>
 							<div class="row">
 								<div class="col-md-4">
-									<span style="background: red; color: white; font-weight: bold; padding: 2px 10px; border-radius: 10px;">Page {{userListPage}}</span>
+									<span style="background: red; color: white; font-weight: bold; padding: 2px 10px; border-radius: 10px;">Page
+										{{userListPage}}</span>
 								</div>
 								<div class="col-md-8" style="float: right;">
 									<div style="float: right">
@@ -641,7 +674,8 @@
 					<div class="col-md-12" style="text-align:center;">
 						Balancing Statement -
 						<input type="text" style="width: 60%;" ng-model="structure_statement.desc">
-						<button type="button" class="btn btn-info" ng-click="push_statement()" ng-disabled="structure.dummy_keyword.length == 0 || structure.linked_keyword.length == 0">Push Statemnt</button>
+						<button type="button" class="btn btn-info" ng-click="push_statement()" ng-disabled="structure.dummy_keyword.length == 0 || structure.linked_keyword.length == 0">Push
+							Statemnt</button>
 						<br>
 						<br>
 					</div>
@@ -685,7 +719,8 @@
 					 style="float:right;">Pop Mini</button>
 					<br>
 					<br>
-					<button type="button" class="btn btn-danger" ng-click="push_keyword()" ng-disabled="structure_statement.desc.length != 0 || structure_mini.mini_description_id.length != 0 || structure_mini.mini_description.length != 0">Push Keyword</button>
+					<button type="button" class="btn btn-danger" ng-click="push_keyword()" ng-disabled="structure_statement.desc.length != 0 || structure_mini.mini_description_id.length != 0 || structure_mini.mini_description.length != 0">Push
+						Keyword</button>
 					<br>
 					<br>
 					<button type="button" class="btn btn-default" ng-click="undoData()" ng-show="add_array">Undo</button>
@@ -875,7 +910,8 @@
 								<input type="text" class="form-control" size="100%" placeholder="facID" style="text-align: center;" ng-model="fc.facID">
 							</div>
 							<div class="col-md-4">
-								<input type="text" class="form-control" size="100%" placeholder="Facilitator Name" style="text-align: center;" ng-model="fc.facName">
+								<input type="text" class="form-control" size="100%" placeholder="Facilitator Name" style="text-align: center;"
+								 ng-model="fc.facName">
 							</div>
 							<div class="col-md-2">
 								<button style="width: 100%;" class="btn btn-success" ng-click="facUpdation(fc)">Update</button>
@@ -893,7 +929,8 @@
 							<input type="text" class="form-control" size="100%" placeholder="facID" style="text-align: center;" ng-model="facObj.facID">
 						</div>
 						<div class="col-md-5">
-							<input type="text" class="form-control" size="100%" placeholder="Facilitator Name" style="text-align: center;" ng-model="facObj.facName">
+							<input type="text" class="form-control" size="100%" placeholder="Facilitator Name" style="text-align: center;"
+							 ng-model="facObj.facName">
 						</div>
 						<div class="col-md-2">
 							<button style="width: 100%;" class="btn btn-info" ng-click="addFacToList()">Add</button>
@@ -931,19 +968,22 @@
 								<input type="text" class="form-control" size="100%" placeholder="teamID" style="text-align: center;" ng-model="teamL.teamID">
 							</div>
 							<div class="col-md-7">
-								<input type="text" class="form-control" size="100%" placeholder="Team Name" style="text-align: center;" ng-model="teamL.teamName">
+								<input type="text" class="form-control" size="100%" placeholder="Team Name" style="text-align: center;"
+								 ng-model="teamL.teamName">
 							</div>
 							<div class="col-md-1">
 								<button style="width: 100%;" class="btn btn-danger" ng-click="teamDeletion($index, teamL._id)">X</button>
 							</div>
 							<div class="col-md-12" style="padding: 10px 0px; font-weight: bold;">Team Members:</div>
-							<div class="col-md-12" style="padding: 10px 0px; color: red; text-align: center;" ng-show="!teamL.members.length">-- None --</div>
+							<div class="col-md-12" style="padding: 10px 0px; color: red; text-align: center;" ng-show="!teamL.members.length">--
+								None --</div>
 							<div class="col-md-12" ng-repeat="me in teamL.members" style="padding: 10px 0px;" ng-show="teamL.members.length">
 								<div class="col-md-1">
 									<button style="width: 100%;" class="btn btn-info">{{$index+1}}</button>
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" size="100%" placeholder="Email-id" style="text-align: center;" ng-model="me.emailID">
+									<input type="text" class="form-control" size="100%" placeholder="Email-id" style="text-align: center;"
+									 ng-model="me.emailID">
 								</div>
 								<div class="col-md-2" style="text-align: center; margin: auto 0;">
 									<i class="material-icons" style="color: lightgreen;" ng-show="teamL.verified && me.found">check</i>
@@ -957,14 +997,17 @@
 								</div>
 							</div>
 							<div class="col-md-12" style="margin: 5px 0px;" ng-show="teamL.members.length > 0">
-								<button style="width: 100%;" class="btn btn-default" ng-click="verifyAllMembersOfTeam($index)">Verify All Members</button>
+								<button style="width: 100%;" class="btn btn-default" ng-click="verifyAllMembersOfTeam($index)">Verify All
+									Members</button>
 							</div>
 							<div class="col-md-12" style="padding: 10px 0px; background: #eee;">
 								<div class="col-md-4">
-									<input type="text" class="form-control" size="100%" placeholder="Enter Email-id" style="text-align: center;" ng-model="memberObj.emailID">
+									<input type="text" class="form-control" size="100%" placeholder="Enter Email-id" style="text-align: center;"
+									 ng-model="memberObj.emailID">
 								</div>
 								<div class="col-md-4">
-									<input type="text" class="form-control" size="100%" placeholder="Enter Name" style="text-align: center;" ng-model="memberObj.name">
+									<input type="text" class="form-control" size="100%" placeholder="Enter Name" style="text-align: center;"
+									 ng-model="memberObj.name">
 								</div>
 								<div class="col-md-4">
 									<button style="width: 100%;" class="btn btn-info" ng-click="addMemberToTeam($index)">Push</button>
@@ -1109,7 +1152,8 @@
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-success" ng-click="updateGrowthRecommend(rec_num2, mr.sID[4], mr.sID[5], $index)" style="width:100%;">UPDATE</button>
+						<button type="button" class="btn btn-success" ng-click="updateGrowthRecommend(rec_num2, mr.sID[4], mr.sID[5], $index)"
+						 style="width:100%;">UPDATE</button>
 
 					</div>
 				</div>
@@ -1291,6 +1335,140 @@
 					<div style="margin: 30px auto 30px auto; text-align: center;">
 						<button class="btn btn-default" ng-click="removeDuplicates()">Remove Duplicates</button>
 					</div>
+
+				</div>
+
+
+
+				<!--                        TAB 18                           -->
+				<div class="container" ng-show="tab_num == 18">
+					<span>Domains: PM / P / A / E / I</span>
+					<div class="panel" ng-repeat="mr in compList">
+						<div class="panel-body" style="margin-bottom: 15px;">
+							<div class="col-md-1">
+								Domain:<br>
+								<input type="text" ng-model="mr.domain" style="text-align:center; color: #FF0000; width: 100%">
+							</div>
+							<div class="col-md-2">
+								ID:<br>
+								<input type="text" ng-model="mr.competency_id" style="text-align:center; color: #FF0000; width: 100%">
+							</div>
+							<div class="col-md-9">
+								Competency:<br>
+								<input type="text" ng-model="mr.competency" style="text-align:center; color: #FF0000; width: 100%">
+							</div>
+							<div class="col-md-12" style="margin-top: 10px;">
+								Description:<br>
+								<input type="text" ng-model="mr.description" style="text-align:center; color: #FF0000; width: 100%">
+							</div>
+							<!-- <div class="col-md-2" style="margin-top: 10px;">
+								Linked Growth Rec:<br>
+								<input type="text" ng-model="mr.growth_id" style="text-align:center; color: #FF0000; width: 100%">
+							</div> -->
+						</div>
+
+						<button type="button" class="btn btn-success" ng-click="updateGrowthRecommendAssessor($index)" style="width:100%; margin-top: 10px;">UPDATE</button>
+
+					</div>
+				</div>
+
+				<!--                        TAB 19                           -->
+				<div class="container" ng-show="tab_num == 19">
+					<span style="color:red;">*NOTE :- You can push only one statement at a time.</span>
+					<br>
+					<br>
+					<b>Structure:</b> {{compObj}}
+					<br>
+					<div class="col-md-12" style="text-align:center;">
+						<div class="col-md-6">
+							competency_id:
+							<input type="text" style="text-align: center;" ng-model="compObj.competency_id" placeholder="C__">
+						</div>
+						<div class="col-md-6">
+							competency:
+							<input type="text" ng-model="compObj.competency" style="width: 50%;">
+						</div>
+						<div class="col-md-6">
+							description:
+							<input type="text" ng-model="compObj.description" style="width: 50%;">
+						</div>
+						<div class="col-md-6">
+							domain:
+							<input type="text" ng-model="compObj.domain" style="width: 50%;" placeholder="P / A / E / I / PM">
+						</div>
+					</div>
+
+					<br>
+					<br>
+					<br>
+					<button type="button" class="btn btn-danger" ng-click="submitCompetency()" ng-disabled="!compObj.competency">Submit</button>
+					<br>
+					<br>
+
+				</div>
+
+				<!--                        TAB 20                           -->
+				<div class="container" ng-show="tab_num == 20">
+					<div>
+						Profile:
+						<input type="number" ng-model="rec_num2" min="1" max="9">
+						<br>
+						<br>
+						<button type="button" class="btn btn-danger" ng-click="getGrowthRecommendAssessor(rec_num2)" ng-disabled="!(rec_num2)">GET</button>
+					</div>
+					<br>
+					<div class="panel" ng-repeat="mr in growthRecommendAssessor">
+						<div class="panel-body row" style="margin-bottom: 15px;">
+							<div class="col-md-2">
+								<input type="text" ng-model="mr.sID" style="text-align:center; color: #FF0000; width: 100%" placeholder="ID">
+							</div>
+							<div class="col-md-10">
+								<input type="text" ng-model="mr.brief" style="text-align:center; color: #FF0000; width: 100%" placeholder="Brief">
+							</div>
+							<div class="col-md-12">
+								<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%" placeholder="Statement">
+							</div>
+							<div class="col-md-2" style="text-align: right; font-weight: bold;">Linked Competency: </div>
+							<div class="col-md-10">
+								<input type="text" ng-model="mr.linked_competency" style="text-align:center; color: #FF0000; width: 100%"
+								 placeholder="C__">
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-success" ng-click="updateGrowthRecommendAssessor(rec_num2, mr.sID[4], mr.sID[5], $index)"
+						 style="width:100%;">UPDATE</button>
+
+					</div>
+				</div>
+
+				<!--                        TAB 21                           -->
+				<div class="container" ng-show="tab_num == 21">
+					<span style="color:red;">*NOTE :- You can push only one statement at a time.</span>
+					<br>
+					<br>
+					<b>Structure:</b> {{structure_growth_assessor}}
+					<br>
+					<div class="col-md-12" style="text-align:center;">
+						<div class="col-md-6">
+							Statement-ID:
+							<input type="text" style="text-align: center;" ng-model="structure_growth_assessor.sID" placeholder="P__N__">
+						</div>
+						<div class="col-md-6">
+							Brief:
+							<input type="text" ng-model="structure_growth_assessor.brief" style="width: 80%;">
+						</div>
+						<div class="col-md-12">
+							Statement:
+							<input type="text" ng-model="structure_growth_assessor.statement" style="width: 80%;">
+						</div>
+					</div>
+
+					<br>
+					<br>
+					<br>
+					<button type="button" class="btn btn-danger" ng-click="push_growth_assessor()" ng-disabled="!structure_growth_assessor.statement">Submit</button>
+					<br>
+					<br>
 
 				</div>
 				<!--                        TABS END                           -->
