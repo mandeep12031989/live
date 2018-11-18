@@ -593,21 +593,35 @@
 												<div class="col-md-12 row">
 													<ul class="col-md-12 row list-group list-group-separator mrg0A row list-group-icons">
 
-														<li class="list-group-item">
+														<!-- <li class="list-group-item">
 															Personal -
 															<input type="checkbox" ng-model="md.tag.personal"> Professional -
 															<input type="checkbox" ng-model="md.tag.professional"> Competency -
 															<input type="checkbox" ng-model="md.tag.competency"> Company -
 															<input type="checkbox" ng-model="md.tag.company">
-														</li>
-														<li class="list-group-item">
+														</li> -->
+														<!-- <li class="list-group-item">
 															<span>PAEI Tags: </span>
 															<span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.ptag = !md.paei_tag.ptag" ng-style="md.paei_tag.ptag?{'background':'red', 'color':'white'}:{'background':'white'}">P</span>
 															<span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.atag = !md.paei_tag.atag" ng-style="md.paei_tag.atag?{'background':'red', 'color':'white'}:{'background':'white'}">A</span>
 															<span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.etag = !md.paei_tag.etag" ng-style="md.paei_tag.etag?{'background':'red', 'color':'white'}:{'background':'white'}">E</span>
 															<span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.itag = !md.paei_tag.itag" ng-style="md.paei_tag.itag?{'background':'red', 'color':'white'}:{'background':'white'}">I</span>
-														</li>
+														</li> -->
+														<li class="list-group-item">
+															<span><u>PAEI Tags</u></span><br>
+															<span class="row" style="margin: 10px; background: #efe;" ng-repeat="(key, value) in md.paei_tag">
+																<span style="padding: 2px 5px; background: #efefef;">{{key}}: </span>
+																<span style="margin: 10px; padding: 0px 10px; cursor: pointer; border-radius: 5px;" ng-repeat="(cID, cV) in md.paei_tag[key]"
+																 ng-click="md.paei_tag[key][cID]=!md.paei_tag[key][cID]" ng-style="cV?{'background':'red', 'color':'white'}:{'background':'white'}">
+																	{{getProfileCompetencyMapping(cID) +' ('+cID+')'}}
+																</span><br>
+															</span>
 
+															<!-- <span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.ptag = !md.paei_tag.ptag" ng-style="md.paei_tag.ptag?{'background':'red', 'color':'white'}:{'background':'white'}">P</span>
+															<span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.atag = !md.paei_tag.atag" ng-style="md.paei_tag.atag?{'background':'red', 'color':'white'}:{'background':'white'}">A</span>
+															<span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.etag = !md.paei_tag.etag" ng-style="md.paei_tag.etag?{'background':'red', 'color':'white'}:{'background':'white'}">E</span>
+															<span style="padding: 10px; cursor: pointer;" ng-click="md.paei_tag.itag = !md.paei_tag.itag" ng-style="md.paei_tag.itag?{'background':'red', 'color':'white'}:{'background':'white'}">I</span> -->
+														</li>
 													</ul>
 												</div>
 

@@ -191,7 +191,7 @@ var userSchema = new Schema({
         },
         old: [new Schema({ pro: [profileSchema], pro_num: Number })],
         growth_recommendations: [new Schema({ sID: String, statement: String, linked_keyword: String, selected: Boolean })],
-        growth_recommendations_assessor: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: true } })],
+        growth_recommendations_assessor: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: true }, growth_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
         old_growth_recommendations: [new Schema({ gr: Array, pro_num: Number })],
         beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String })],
         old_beliefs: [new Schema({ bel: Array, pro_num: Number })],

@@ -115,4 +115,20 @@ router.route('/:profile_num/:num')
             });
     });
 
+router.route('/growthByAssessor')
+    .post(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function (req, res, next) {
+        var body = sanitize(req.body);
+        // console.log(body);
+        delete body._id;
+
+        Recs.create(body, function (er, suc) {
+            if (er) {
+                console.log(er);
+                res.status(501).json({ success: false, message: er });
+                return;
+            }
+            res.status(200).json({ success: true, message: 'Growth Recommendation Added !' });
+        });
+    });
+
 module.exports = router;

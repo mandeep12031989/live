@@ -3940,7 +3940,18 @@
 																						<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;" ng-click="submitGrowthRecAssessor()">
 																					</span>
 																					<span class="col-sm-11" style="margin-bottom: 10px;" ng-click="rc.selected = !rc.selected; submitGrowthRecAssessor()">
-																						<span style="font-weight: bold;">{{rc.brief}}</span><br>{{rc.statement}}
+
+																						<span ng-if="rc.growth_by_assessor && !rc.added_to_assessor_library" title="Click to add in Assessor Library"
+																						 ng-click="sendToAssessorLibrary('growth_by_assessor', rc, $index)">
+																							<i class="material-icons" style="float: left; margin-top: auto; cursor: pointer;">person</i>&nbsp;
+																						</span>
+																						<span ng-if="rc.growth_by_assessor && rc.added_to_assessor_library" title="Already added in Assessor Library">
+																							<i class="material-icons" style="float: left; margin-top: auto; color: #4285F4;">how_to_reg</i>&nbsp;
+																						</span>
+
+																						<span style="font-weight: bold;">{{rc.brief}}</span><br>{{rc.statement}}<br>
+																						<i style="font-size: 12px;">Linked Competency -
+																							{{getProfileCompetencyMapping(rc.linked_competency)}}</i>
 																					</span>
 																				</div>
 																				<div ng-show="!addingGrowthRecAssessor" class="row">

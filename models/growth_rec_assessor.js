@@ -13,7 +13,8 @@ var growthRecommendSchema = new Schema({
     linked_competency: {                           //linked to which keyword ?
         type: String,
         default: "C__"
-    }
+    },
+    growth_by_assessor: { type: Boolean, default: false }
 }, { collection: 'assessorGrowthRecommendSchema' });
 
 module.exports = mongoose.model('assessorGrowthRecommendSchema', growthRecommendSchema);

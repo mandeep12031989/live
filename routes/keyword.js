@@ -86,8 +86,9 @@ router.route('/:profile_num')
         Keyword.find({ keyword_id: { $regex: profile_num } }, { '_id': false, 'mini_descriptions.relate': false }).sort('keyword_id')
             .exec(function (err, keyword) {
                 if (err)
-                    next(err);
-                res.status(200).json(keyword);
+                    return next(err);
+
+                return res.status(200).json(keyword);
             });
     })
 
@@ -145,8 +146,9 @@ router.route('/:profile_num/:section_num/:keyword_num')
         Keyword.findOneAndUpdate({ keyword_id: { $regex: num } }, { $set: sanitize(req.body) }, { new: true })
             .exec(function (err, keyword) {
                 if (err)
-                    next(err);
-                res.status(200).json(keyword);
+                    return next(err);
+
+                return res.status(200).json(keyword);
             });
     })
 
