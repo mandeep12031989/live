@@ -10,7 +10,7 @@ var growthRecommendSchema = new Schema({
     },
     brief: String,
     statement: String,
-    linked_competency: {                           //linked to which keyword ?
+    linked_competency: {                           //linked to which competency ?
         type: String,
         default: "C__"
     },

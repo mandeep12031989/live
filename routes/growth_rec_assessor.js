@@ -121,13 +121,35 @@ router.route('/growthByAssessor')
         // console.log(body);
         delete body._id;
 
-        Recs.create(body, function (er, suc) {
-            if (er) {
-                console.log(er);
-                res.status(501).json({ success: false, message: er });
+        var pno = body.sID[2];
+
+        Recs.aggregate([
+            { $match: { sID: { $regex: "P0" + pno } } },
+            { $group: { _id: null, max: { $max: "$sID" } } }
+        ], function (err, resp) {
+            if (err) {
+                console.log(err);
+                res.status(501).json({ success: false, message: err });
                 return;
             }
-            res.status(200).json({ success: true, message: 'Growth Recommendation Added !' });
+
+            var max = resp.length ? resp[0].max : "P0" + pno + "N00";
+
+            body.sID = parseInt(max.slice(4)) + 1;
+
+            if (body.sID > 9)
+                body.sID = 'P0' + pno + 'N' + body.sID;
+            else
+                body.sID = 'P0' + pno + 'N0' + body.sID;
+
+            Recs.create(body, function (er, suc) {
+                if (er) {
+                    console.log(er);
+                    res.status(501).json({ success: false, message: er });
+                    return;
+                }
+                res.status(200).json({ success: true, message: 'Recommendation Added !' });
+            });
         });
     });
 

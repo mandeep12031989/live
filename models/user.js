@@ -266,7 +266,7 @@ var userSchema = new Schema({
             type: Array,
             default: []
         },
-        recommendations_for_manager: [new Schema({ sID: String, statement: String, selected: Boolean })],
+        recommendations_for_manager: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: true }, recommendation_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
         RRAddOns: {
             responsive: [new Schema({ statement: String })],
             moderate: [new Schema({ statement: String })],

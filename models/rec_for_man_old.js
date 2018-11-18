@@ -8,13 +8,7 @@ var recommendSchema = new Schema({
         type: String,
         default: "P__N__"
     },
-    brief: String,
-    statement: String,
-    linked_competency: {                           //linked to which competency ?
-        type: String,
-        default: "C__"
-    },
-    recommendation_by_assessor: { type: Boolean, default: false }
+	statement: String
 });
 
 module.exports = mongoose.model('recommendSchema', recommendSchema);

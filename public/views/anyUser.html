@@ -2247,7 +2247,7 @@
 										<li ng-class="assessor_tab == 5 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 5">Review Profile</a>
 										</li>
-										<li ng-class="assessor_tab == 3 ? 'active_tab' : '' ">
+										<li ng-class="RecForManager ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 3">Assessor Template</a>
 										</li>
 									</ul>
@@ -4004,13 +4004,80 @@
 																			</div>
 
 																			<div class="col-sm-12" ng-show="section_num == 6" style="margin-bottom: 20px; font-size: 16px;">
+																				<div class="row" ng-repeat="rc in user.assessor.recommendations_for_manager">
+																					<span class="col-sm-1" style="text-align: center;">
+																						<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;" ng-click="submitGrowthRecAssessor()">
+																					</span>
+																					<span class="col-sm-11" style="margin-bottom: 10px;" ng-click="rc.selected = !rc.selected; submitGrowthRecAssessor()">
+
+																						<span ng-if="rc.recommendation_by_assessor && !rc.added_to_assessor_library" title="Click to add in Assessor Library"
+																						 ng-click="sendToAssessorLibrary('recommendations_for_manager', rc, $index)">
+																							<i class="material-icons" style="float: left; margin-top: auto; cursor: pointer;">person</i>&nbsp;
+																						</span>
+																						<span ng-if="rc.recommendation_by_assessor && rc.added_to_assessor_library" title="Already added in Assessor Library">
+																							<i class="material-icons" style="float: left; margin-top: auto; color: #4285F4;">how_to_reg</i>&nbsp;
+																						</span>
+
+																						<span style="font-weight: bold;">{{rc.brief}}</span><br>{{rc.statement}}<br>
+																						<i style="font-size: 12px;">Linked Competency -
+																							{{getProfileCompetencyMapping(rc.linked_competency)}}</i>
+																					</span>
+																				</div>
+																				<div ng-show="!addingRecForManager" class="row">
+																					<div style="margin: 0 auto; text-align: center;">
+																						<button type="button" class="btn btn-warning" ng-click="addRecForManager()">+ Add to
+																							Recommendations for Manager</button>
+																					</div>
+																				</div>
+																				<div ng-show="addingRecForManager" class="row" style="background-color: #fee; padding: 5px 0 10px 0;">
+																					<div class="col-md-8">
+																						Brief:<br>
+																						<input type="text" class="form-control" ng-model="addingRecForManagerObj.brief">
+																					</div>
+																					<div class="col-md-4">
+																						Linked Competency:<br>
+																						<select class="form-control" ng-model="addingRecForManagerObj.linked_competency">
+																							<optgroup label="P">
+																								<option ng-repeat="j in competencies | filter: {domain:'P' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="P">None</option>
+																							</optgroup>
+																							<optgroup label="A">
+																								<option ng-repeat="j in competencies | filter: {domain:'A' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="A">None</option>
+																							</optgroup>
+																							<optgroup label="E">
+																								<option ng-repeat="j in competencies | filter: {domain:'E' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="E">None</option>
+																							</optgroup>
+																							<optgroup label="I">
+																								<option ng-repeat="j in competencies | filter: {domain:'I' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="I">None</option>
+																							</optgroup>
+																							<optgroup label="PM">
+																								<option ng-repeat="j in competencies | filter: {domain:'PM' }" value="{{j.competency_id}}">{{j.competency}}</option>
+																								<option value="PM">None</option>
+																							</optgroup>
+																							<option value="NA">None</option>
+																						</select>
+																					</div>
+																					<div class="col-md-10">
+																						Statement:<br>
+																						<input type="text" class="form-control" ng-model="addingRecForManagerObj.statement">
+																					</div>
+																					<div class="col-md-2" style="text-align: center;"><br>
+																						<button type="button" class="btn btn-danger" ng-click="pushRecForManager()">Done</button>
+																					</div>
+																				</div>
+																			</div>
+
+																			<!-- <div class="col-sm-12" ng-show="section_num == 6" style="margin-bottom: 20px; font-size: 16px;">
 																				<div ng-repeat="mr in user.assessor.recommendations_for_manager">
 																					<span class="col-sm-1" style="text-align: center;">
 																						<input type="checkbox" ng-model="mr.selected" style="height: 16px; width: 16px;">
 																					</span>
 																					<span class="col-sm-11" style="margin-bottom: 10px;">{{mr.statement}}</span>
 																				</div>
-																			</div>
+																			</div> -->
 
 																		</div>
 																	</div>
@@ -4869,13 +4936,22 @@
 												</div>
 												<ul>
 													<li ng-repeat="mr in user.assessor.recommendations_for_manager" ng-if="mr.selected">
-														<span ng-show="switchView == 2">{{mr.statement}}</span>
+														<span ng-show="switchView == 2">
+															{{mr.brief}}<br>
+															{{mr.statement}}<br>
+															<i style="font-size: 12px;">Linked Competency -
+																{{getProfileCompetencyMapping(mr.linked_competency)}}</i>
+														</span>
 														<span ng-show="switchView == 1">
-															<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mr.statement" size="100%">
+															<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mr.brief" size="100%"><br>
+															<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mr.statement" size="100%"><br>
+															<i style="font-size: 12px;">Linked Competency -
+																{{getProfileCompetencyMapping(mr.linked_competency)}}</i>
 															<span class="btn" style="color: red;" ng-click="mr.selected = false;">
 																<i class="material-icons">clear</i>
 															</span>
 														</span>
+
 													</li>
 												</ul>
 											</div>

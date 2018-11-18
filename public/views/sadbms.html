@@ -851,12 +851,20 @@
 					</div>
 					<br>
 					<div class="panel" ng-repeat="mr in masterRecommend">
-						<div class="panel-body" style="margin-bottom: 15px;">
+						<div class="panel-body row" style="margin-bottom: 15px;">
 							<div class="col-md-2">
-								<input type="text" ng-model="mr.sID" style="text-align:center; color: #FF0000; width: 100%">
+								<input type="text" ng-model="mr.sID" style="text-align:center; color: #FF0000; width: 100%" placeholder="ID">
 							</div>
 							<div class="col-md-10">
-								<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%">
+								<input type="text" ng-model="mr.brief" style="text-align:center; color: #FF0000; width: 100%" placeholder="Brief">
+							</div>
+							<div class="col-md-12">
+								<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%" placeholder="Statement">
+							</div>
+							<div class="col-md-2" style="text-align: right; font-weight: bold;">Linked Competency: </div>
+							<div class="col-md-10">
+								<input type="text" ng-model="mr.linked_competency" style="text-align:center; color: #FF0000; width: 100%"
+								 placeholder="C__">
 							</div>
 						</div>
 
@@ -872,14 +880,16 @@
 					<b>Structure Statement:</b> {{structure_stat}}
 					<br>
 					<br>
-					<b>Statement =></b>
-					<br>
 					<div class="col-md-12" style="text-align:center;">
 						<div class="col-md-6">
 							Statement-ID:
-							<input type="text" ng-model="structure_stat.sID">
+							<input type="text" style="text-align: center;" ng-model="structure_stat.sID" placeholder="P__N__">
 						</div>
 						<div class="col-md-6">
+							Brief:
+							<input type="text" ng-model="structure_stat.brief" style="width: 80%;">
+						</div>
+						<div class="col-md-12">
 							Statement:
 							<input type="text" ng-model="structure_stat.statement" style="width: 80%;">
 						</div>
