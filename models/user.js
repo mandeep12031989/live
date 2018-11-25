@@ -81,17 +81,14 @@ var profileSchema = new Schema({
     keyword: String,                        //keyword name
     keyword_h: String,                        //keyword name
     new_keyword: {
-        type: Boolean,
-        default: false
+        type: Boolean, default: false
     },
     key_added_to_assessor_library: {
-        type: Boolean,
-        default: false
+        type: Boolean, default: false
     },
     mini_descriptions: [descriptionSchema],     //keyword's different meanings/statements or say mini-descriptions
     linked_keyword: {                           //linked to which keyword ?
-        type: String,
-        default: "P__S__K__"
+        type: String, default: "P__S__K__"
     },
     belongs_to: {
         personal: {
@@ -108,32 +105,25 @@ var profileSchema = new Schema({
     dummy_keyword: String,
     key_version: String,
     key_rating: {
-        type: Number,
-        default: 0
+        type: Number, default: 0
     },
     comment: {                              //comment to specific parent keyword
-        type: String,
-        default: ""
+        type: String, default: ""
     },
     assessor_checkbox: {
-        type: Boolean,
-        default: false
+        type: Boolean, default: false
     },
     assessor_key_rating: {
-        type: Number,
-        default: 0
+        type: Number, default: 0
     },
     assessor_comment: {                              //comment to specific parent keyword
-        type: String,
-        default: ""
+        type: String, default: ""
     },
     assessor_bal_in_report: {
-        type: Boolean,
-        default: true
+        type: Boolean, default: true
     },
     assessor_report_keyword: {
-        type: String,
-        default: ""
+        type: String, default: ""
     }
 });
 
@@ -177,9 +167,7 @@ var userSchema = new Schema({
         }
     },
     profile: {
-        profile_number: {
-            type: Number, default: 0
-        },
+        profile_number: { type: Number, default: 0 },
         profile_content: [profileSchema],
         track: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],				// in seconds
         eachSectionTrack: {
@@ -267,6 +255,22 @@ var userSchema = new Schema({
             default: []
         },
         recommendations_for_manager: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: true }, recommendation_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
+        role_fitment: {
+            suitable_work: [new Schema({
+                sID: { type: String, required: true, unique: true, trim: true },          //S _ _
+                statement: { type: String, required: true, trim: true },
+                selected: { type: Boolean, default: true },
+                added_to_assessor_library: { type: Boolean, default: false },
+                by_assessor: { type: Boolean, default: false }
+            })],
+            difficult_work: [new Schema({
+                sID: { type: String, required: true, unique: true, trim: true },          //S _ _
+                statement: { type: String, required: true, trim: true },
+                selected: { type: Boolean, default: true },
+                added_to_assessor_library: { type: Boolean, default: false },
+                by_assessor: { type: Boolean, default: false }
+            })]
+        },
         RRAddOns: {
             responsive: [new Schema({ statement: String })],
             moderate: [new Schema({ statement: String })],
@@ -297,38 +301,15 @@ var userSchema = new Schema({
             }
         },
         pdf_pages: {
-            scores: {
-                type: Boolean,
-                default: true
-            },
-            values_strengths: {
-                type: Boolean,
-                default: true
-            },
-            learning_need: {
-                type: Boolean,
-                default: true
-            },
-            pm_m1: {
-                type: Boolean,
-                default: true
-            },
-            pm_m2: {
-                type: Boolean,
-                default: true
-            },
-            pm_m3: {
-                type: Boolean,
-                default: true
-            },
-            paei: {
-                type: Boolean,
-                default: true
-            },
-            extras: {
-                type: Boolean,
-                default: true
-            }
+            scores: { type: Boolean, default: true },
+            values_strengths: { type: Boolean, default: true },
+            learning_need: { type: Boolean, default: true },
+            values_role_fitment: { type: Boolean, default: true },
+            pm_m1: { type: Boolean, default: true },
+            pm_m2: { type: Boolean, default: true },
+            pm_m3: { type: Boolean, default: true },
+            paei: { type: Boolean, default: true },
+            extras: { type: Boolean, default: true }
         }
     },
     language: {

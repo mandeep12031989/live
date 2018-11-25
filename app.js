@@ -75,6 +75,7 @@ var library = require('./routes/library');
 var team = require('./routes/team');
 var competency = require('./routes/competency');
 var growth_rec_assessor = require('./routes/growth_rec_assessor');
+var role_fitment = require('./routes/role_fitment');
 
 // linking callback function to route
 app.use('/', routes);
@@ -94,7 +95,7 @@ app.use('/openMCQUser', openMCQUser);
 app.use('/library', library);
 app.use('/team', team);
 app.use('/competency', competency);
-app.use('/growth_rec_assessor', growth_rec_assessor);
+app.use('/role_fitment', role_fitment);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

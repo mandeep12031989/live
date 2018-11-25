@@ -163,6 +163,16 @@
 					</li>
 
 					<li class="header">
+						<span>Role Fitment</span>
+					</li>
+					<li ng-click="tab_num = 22">
+						<a href="" ng-class="tab_num == 22 ? 'bg-tab':''">
+							<i class="glyph-icon icon-cog"></i>
+							<span>Add / View / Edit</span>
+						</a>
+					</li>
+
+					<li class="header">
 						<span>Master Facilitators List</span>
 					</li>
 					<li ng-click="tab_num = 9">
@@ -556,7 +566,7 @@
 										<br>
 										<div class="col-md-12 row panel-layout" ng-repeat="md in pk.mini_descriptions">
 											<div class="col-md-12 row panel-box">
-												<div class="col-md-2" style="backround: #efefef;">
+												<div class="col-md-2" style="background: #efefef;">
 													Hide Mini from Users:
 													<input type="checkbox" ng-model="md.mini_by_assessor">
 												</div>
@@ -609,7 +619,7 @@
 														</li> -->
 														<li class="list-group-item">
 															<span><u>PAEI Tags</u></span><br>
-															<span class="row" style="margin: 10px; background: #efe;" ng-repeat="(key, value) in md.paei_tag">
+															<span class="row" style="margin: 10px; background: #efe;" ng-repeat="(key, value) in md.paei_tag" ng-if="['ptag','atag','etag','itag'].indexOf(key)==-1">
 																<span style="padding: 2px 5px; background: #efefef;">{{key}}: </span>
 																<span style="margin: 10px; padding: 0px 10px; cursor: pointer; border-radius: 5px;" ng-repeat="(cID, cV) in md.paei_tag[key]"
 																 ng-click="md.paei_tag[key][cID]=!md.paei_tag[key][cID]" ng-style="cV?{'background':'red', 'color':'white'}:{'background':'white'}">
@@ -1494,6 +1504,51 @@
 					<br>
 					<br>
 
+				</div>
+
+				<!--                        TAB 22                           -->
+				<div class="container" ng-show="tab_num == 22">
+					<div ng-init="prof_num=0">
+						Profile:
+						<input type="number" ng-model="prof_num" min="1" max="9">
+						<br>
+						<br>
+						<button type="button" class="btn btn-danger" ng-click="getRoleFitments(prof_num)" ng-disabled="!prof_num">GET</button>
+					</div>
+					<br>
+					<br>Suitable Work: <br>
+					<div class="panel" ng-repeat="mr in roleFitments.suitable_work">
+						<div class="panel-body row" style="margin-bottom: 15px;">
+							<div class="col-md-2">
+								<input type="text" ng-model="mr.sID" style="text-align:center; color: #FF0000; width: 100%" placeholder="ID">
+							</div>
+							<div class="col-md-10">
+								<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%" placeholder="Statement">
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-success" ng-click="updateRoleFitment(prof_num, 'S', mr)" style="width:100%;">UPDATE</button>
+
+					</div>
+					<br>
+					<button type="button" class="btn btn-danger" ng-click="addRoleFitment('S')">+ Add Suitable Work Setting</button>
+					<br>
+					<br>Difficult Work: <br>
+					<div class="panel" ng-repeat="mr in roleFitments.difficult_work">
+						<div class="panel-body row" style="margin-bottom: 15px;">
+							<div class="col-md-2">
+								<input type="text" ng-model="mr.sID" style="text-align:center; color: #FF0000; width: 100%" placeholder="ID">
+							</div>
+							<div class="col-md-10">
+								<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%" placeholder="Statement">
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-success" ng-click="updateRoleFitment(prof_num, 'D', mr)" style="width:100%;">UPDATE</button>
+
+					</div>
+					<br>
+					<button type="button" class="btn btn-danger" ng-click="addRoleFitment('D')">+ Add Difficult Work Setting</button>
 				</div>
 				<!--                        TABS END                           -->
 			</div>
