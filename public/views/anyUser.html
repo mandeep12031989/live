@@ -2247,7 +2247,7 @@
 										<li ng-class="assessor_tab == 5 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 5">Review Profile</a>
 										</li>
-										<li ng-class="RecForManager ? 'active_tab' : '' ">
+										<li ng-class="assessor_tab == 3 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 3">Assessor Template</a>
 										</li>
 									</ul>
@@ -4202,6 +4202,9 @@
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.pm_m3 ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.pm_m3 = !user.assessor.pdf_pages.pm_m3">PM:
 												M3</li>
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.paei ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.paei = !user.assessor.pdf_pages.paei">PAEI</li>
+											<!-- <li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.rec_for_manager ? 'active-profile' : ''"
+											 ng-click="user.assessor.pdf_pages.rec_for_manager = !user.assessor.pdf_pages.rec_for_manager">Recommendations
+												for Manager</li> -->
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.extras ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.extras = !user.assessor.pdf_pages.extras">AddOns</li>
 										</ul>
 									</div>
@@ -4805,10 +4808,8 @@
 																		<b>(P)roducing</b>
 																		<br>
 																		<br>
-																		<span>[
-																			<b>Definition:</b> Focus on task; action;
-																			<br>execution; getting the job done; decide and act;
-																			<br>functional domain]</span>
+																		<span>[Action orientation; Result orientation;<br> Domain/ functional understanding;<br> Problem
+																			solving; Independent<br> decision making]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[3][2] >= -0.5 && countCompetenciesA2[3][2] < 0) || (countCompetenciesA2[3][2] > 1)">High</th>
 																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[3][2] >= -1 && countCompetenciesA2[3][2] < -0.5) || (countCompetenciesA2[3][2] > 0.5 && countCompetenciesA2[3][2] <= 1)">Medium</th>
@@ -4845,9 +4846,8 @@
 																		<b>(A)dministering</b>
 																		<br>
 																		<br>
-																		<span>[
-																			<b>Definition:</b> SOPs; systems; rules; procedures;
-																			<br>systemize and repeat things]</span>
+																		<span>[Time management/ Prioritization;<br> Process-orientation; Planning;<br> Delegating;
+																			Monitoring;<br> Attention to details;<br> Data orientation]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[0][2] >= -0.5 && countCompetenciesA2[0][2] < 0) || (countCompetenciesA2[0][2] > 1)">High</th>
 																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[0][2] >= -1 && countCompetenciesA2[0][2] < -0.5) || (countCompetenciesA2[0][2] > 0.5 && countCompetenciesA2[0][2] <= 1)">Medium</th>
@@ -4884,9 +4884,7 @@
 																		<b>(E)ntrepreneuring</b>
 																		<br>
 																		<br>
-																		<span>[
-																			<b>Definition:</b> Strategy; direction; vision; purpose;
-																			<br>change; systems thinking – seeing a whole]</span>
+																		<span>[Strategy; Big picture thinking;<br> Creativity/ Innovation;<br> Risk taking; Optimism]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[2][2] >= -0.5 && countCompetenciesA2[2][2] < 0) || (countCompetenciesA2[2][2] > 1)">High</th>
 																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[2][2] >= -1 && countCompetenciesA2[2][2] < -0.5) || (countCompetenciesA2[2][2] > 0.5 && countCompetenciesA2[2][2] <= 1)">Medium</th>
@@ -4923,9 +4921,7 @@
 																		<b>(I)ntegrating</b>
 																		<br>
 																		<br>
-																		<span>[
-																			<b>Definition:</b> Culture; values; collective ownership;
-																			<br>people development]</span>
+																		<span>[Giving and taking feedback;<br> Team player; Mentoring and<br> coaching; Conflict management]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[1][2] >= -0.5 && countCompetenciesA2[1][2] < 0) || (countCompetenciesA2[1][2] > 1)">High</th>
 																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[1][2] >= -1 && countCompetenciesA2[1][2] < -0.5) || (countCompetenciesA2[1][2] > 0.5 && countCompetenciesA2[1][2] <= 1)">Medium</th>
@@ -5085,3 +5081,6 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+</div>

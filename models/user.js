@@ -305,6 +305,7 @@ var userSchema = new Schema({
             values_strengths: { type: Boolean, default: true },
             learning_need: { type: Boolean, default: true },
             values_role_fitment: { type: Boolean, default: true },
+            rec_for_manager: { type: Boolean, default: true },
             pm_m1: { type: Boolean, default: true },
             pm_m2: { type: Boolean, default: true },
             pm_m3: { type: Boolean, default: true },
