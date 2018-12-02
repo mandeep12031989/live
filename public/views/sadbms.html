@@ -908,7 +908,7 @@
 					<br>
 					<br>
 					<br>
-					<button type="button" class="btn btn-danger" ng-click="push_rec()" ng-disabled="!structure_stat.statement">Submit</button>
+					<button type="button" class="btn btn-danger" ng-click="push_rec()" ng-disabled="!structure_stat.sID || !structure_stat.brief">Submit</button>
 					<br>
 					<br>
 
@@ -1178,11 +1178,12 @@
 								<input type="text" ng-model="mr.sID" style="text-align:center; color: #FF0000; width: 100%">
 							</div>
 							<div class="col-md-10">
-								<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%">
+								<input type="text" ng-model="mr.statement" style="text-align:center; color: #FF0000; width: 100%" placeholder="Statement">
 							</div>
 							<div class="col-md-2" style="text-align: right; font-weight: bold;">Linked Keyword: </div>
 							<div class="col-md-10">
-								<input type="text" ng-model="mr.linked_keyword" style="text-align:center; color: #FF0000; width: 100%">
+								<input type="text" ng-model="mr.linked_keyword" style="text-align:center; color: #FF0000; width: 100%"
+								 placeholder="P__S__K__">
 							</div>
 						</div>
 
@@ -1198,15 +1199,16 @@
 					<br>
 					<br>
 					<b>Structure:</b> {{structure_growth}}
-					<b>Statement =></b>
 					<br>
-					<div class="col-md-12" style="text-align:center;">
+					<br>
+					<br>
+					<div class="col-md-12" style="text-align:center; padding: 20px auto;">
 						<div class="col-md-6">
-							Statement-ID:
-							<input type="text" style="text-align: center;" ng-model="structure_growth.sID">
+							Statement-ID:<br>
+							<input type="text" style="text-align: center;" ng-model="structure_growth.sID" placeholder="P__N__">
 						</div>
 						<div class="col-md-6">
-							Statement:
+							Statement:<br>
 							<input type="text" ng-model="structure_growth.statement" style="width: 80%;">
 						</div>
 					</div>
@@ -1214,7 +1216,7 @@
 					<br>
 					<br>
 					<br>
-					<button type="button" class="btn btn-danger" ng-click="push_growth()" ng-disabled="!structure_growth.statement">Submit</button>
+					<button type="button" class="btn btn-danger" ng-click="push_growth()" ng-disabled="!structure_growth.sID || !structure_growth.brief">Submit</button>
 					<br>
 					<br>
 
@@ -1500,7 +1502,7 @@
 					<br>
 					<br>
 					<br>
-					<button type="button" class="btn btn-danger" ng-click="push_growth_assessor()" ng-disabled="!structure_growth_assessor.statement">Submit</button>
+					<button type="button" class="btn btn-danger" ng-click="push_growth_assessor()" ng-disabled="!structure_growth_assessor.sID || !structure_growth_assessor.brief">Submit</button>
 					<br>
 					<br>
 

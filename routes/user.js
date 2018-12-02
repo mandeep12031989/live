@@ -1398,10 +1398,8 @@ router.route('/auth/register')
 					return res.status(500).send({ "message": err });
 
 				if (!user) {
-					body.firstname = body.firstname.toLowerCase();
-					body.firstname = body.firstname.charAt(0).toUpperCase() + body.firstname.slice(1);
-					body.lastname = body.lastname.toLowerCase();
-					body.lastname = body.lastname.charAt(0).toUpperCase() + body.lastname.slice(1);
+					body.firstname = body.firstname.split(' ').map(function (word) { return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() }).join(' ');
+					body.lastname = body.lastname.split(' ').map(function (word) { return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() }).join(' ');
 
 					//console.log(body);
 

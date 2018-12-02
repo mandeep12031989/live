@@ -119,6 +119,7 @@ router.route('/growthByAssessor')
     .post(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function (req, res, next) {
         var body = sanitize(req.body);
         // console.log(body);
+
         delete body._id;
 
         var pno = body.sID[2];

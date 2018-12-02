@@ -97,6 +97,14 @@
 		margin-bottom: auto;
 		top: -15px;
 	}
+
+	.mini_color_donotrelate {
+		color: rgb(66, 133, 244);
+	}
+
+	.mini_color_donotexhibitanymore {
+		color: rgb(0, 200, 81);
+	}
 </style>
 
 <span ng-show="loading || profile_content.profile.profile_number==0">
@@ -150,7 +158,7 @@
 
 
 				<!-- MENU 1                                                          -->
-				<div class="container" ng-show="menu == 1">
+				<div class="container" ng-show="menu == 1 && false">
 					<div class="row">
 						<div class="col-md-offset-2 col-md-2">
 
@@ -419,7 +427,7 @@
 				</div>
 
 				<!--                                                    MENU 2                                                          -->
-				<div class="container" ng-show="menu == 2">
+				<div class="container" ng-show="menu == 2 && false">
 					<div class="row" style="text-align: center; margin: 0 auto;">
 						<div class="col-md-offset-2 col-md-2">
 							<div class="panel" ng-class="'left_border_str2'" style="font-size: 12px; width: 150px; padding: 5px 5px;">
@@ -495,7 +503,7 @@
 				</div>
 
 				<!--                                                    MENU 3                                                          -->
-				<div class="container" ng-show="menu == 3">
+				<div class="container" ng-show="menu == 3 && false">
 					<div style="text-align: center; color: grey;">
 						<div style="width: 70%; margin: 0 auto 30px auto;">
 							<h5>The following view helps you to see the balance between your strengths and learning needs (weaknesses). Our
@@ -595,7 +603,7 @@
 					</div>
 				</div>
 				<!--                                                    MENU 4                                                          -->
-				<div class="container" ng-show="menu == 4" style="width:80%; margin-right:auto; margin-left:auto;">
+				<div class="container" ng-show="menu == 4 && false" style="width:80%; margin-right:auto; margin-left:auto;">
 					<div style="text-align: center; margin-bottom: 30px; color: grey;">
 						<h5>Reactive-Responsive levels provides a measure of our growth trajectory. As we become more self-aware and
 							self-observing,
@@ -717,7 +725,7 @@
 				</div>
 
 				<!--                                                    MENU 5                                                          -->
-				<div class="container" ng-show="menu == 5">
+				<div class="container" ng-show="menu == 5 && false">
 					<div class="row" style="margin: 0 auto;">
 						<div class="panel panel-body row col-md-12" style="text-align: center;">
 							<!--					STRENGTHS					-->
@@ -912,7 +920,7 @@
 					</div>
 				</div>
 
-				<div class="container" ng-show="menu == 6">
+				<div class="container" ng-show="menu == 6 && false">
 					<link rel="stylesheet" type="text/css" href="./assets/pv.css">
 
 					<div class="row">
@@ -1234,6 +1242,107 @@
 						</div>
 					</div>
 				</div> -->
+
+				<div class="panel panel-body" style="margin: 0 65px 20px 65px; font-size: 15px;">
+					<div class="row container">
+						<div class="col-md-12">
+							<h4 style="font-weight: bold;">{{sub_heading[profile_content.profile.profile_number-1]}}</h4>
+						</div>
+						<div class="col-md-12" style="margin-top: 15px;">
+							<h4 style="font-weight: bold;">Basic Fear:</h4>
+							{{basic_fear[profile_content.profile.profile_number-1]}}
+						</div>
+						<div class="col-md-12" style="margin-top: 15px;">
+							<h4 style="font-weight: bold;">Basic Desire & Key Motivation: </h4>
+							{{key_motivation[profile_content.profile.profile_number-1]}}
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-body" style="margin: 0 65px 20px 65px; font-size: 15px;">
+					<div class="row container">
+						<div class="col-md-12">
+							<h2 style="text-align:center" id="page-title">
+								<b>Strengths</b>
+							</h2>
+						</div>
+						<div class="panel panel-body col-md-12" style="text-align: center; padding-bottom: 30px;">
+							<div class="col-md-4">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Relate Strongly/Partially
+							</div>
+							<div class="col-md-4 mini_color_donotexhibitanymore">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Improved Over Time
+							</div>
+							<div class="col-md-4 mini_color_donotrelate">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Never Exhibited
+							</div>
+						</div>
+						<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2"
+						 style="padding: 20px 0;">
+							<div class="col-md-3">
+								<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
+							</div>
+							<div class="col-md-9">
+								<span ng-repeat="mini in keys.mini_descriptions" ng-class="mini.relate=='donotexhibitanymore' ? 'mini_color_donotexhibitanymore':(mini.relate=='donotrelate'?'mini_color_donotrelate':'')">
+									<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+									{{mini.mini_description}}&nbsp;&nbsp;&nbsp;&nbsp;
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-body" style="margin: 0 65px 20px 65px; font-size: 15px;">
+					<div class="row container">
+						<div class="col-md-12">
+							<h2 style="text-align:center" id="page-title">
+								<b>Core Beliefs</b>
+							</h2>
+						</div>
+						<div class="col-md-6" ng-repeat="stat in profile_content.profile.beliefs" style="padding: 5px 0;">
+							<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i> {{stat.statement}}
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-body" style="margin: 0 65px 20px 65px; font-size: 15px;">
+					<div class="row container">
+						<div class="col-md-12">
+							<h2 style="text-align:center" id="page-title">
+								<b>Learning Needs</b>
+							</h2>
+						</div>
+						<div class="panel panel-body col-md-12" style="text-align: center; padding-bottom: 30px;">
+							<div class="col-md-4">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Relate Strongly/Partially
+							</div>
+							<div class="col-md-4 mini_color_donotexhibitanymore">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Improved Over Time
+							</div>
+							<div class="col-md-4 mini_color_donotrelate">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Never Exhibited
+							</div>
+						</div>
+						<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3"
+						 style="padding: 20px 0;">
+							<div class="col-md-3">
+								<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
+							</div>
+							<div class="col-md-9">
+								<span ng-repeat="mini in keys.mini_descriptions" ng-class="mini.relate=='donotexhibitanymore' ? 'mini_color_donotexhibitanymore':(mini.relate=='donotrelate'?'mini_color_donotrelate':'')">
+									<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+									{{mini.mini_description}}&nbsp;&nbsp;&nbsp;&nbsp;
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
 					<div class="row">

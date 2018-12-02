@@ -95,6 +95,7 @@ app.use('/openMCQUser', openMCQUser);
 app.use('/library', library);
 app.use('/team', team);
 app.use('/competency', competency);
+app.use('/growth_rec_assessor', growth_rec_assessor);
 app.use('/role_fitment', role_fitment);
 
 // catch 404 and forward to error handler

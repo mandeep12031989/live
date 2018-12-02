@@ -4821,12 +4821,13 @@
 																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{ptag: true}}"
 																					 ng-change="copyThis('P', $index, Pdata)" ng-model="Pdata"></select> -->
+
 																					<select class="form-control" ng-change="copyThis('P', $index, Pdata)" ng-model="Pdata">
 																						<optgroup label="Strengths">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{ptag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDp | filter: { sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																						<optgroup label="Learning Needs">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{ptag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDp | filter: {sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('P', $index)">
@@ -4861,10 +4862,10 @@
 																					 ng-change="copyThis('A', $index, Adata)" ng-model="Adata"></select> -->
 																					<select class="form-control" ng-change="copyThis('A', $index, Adata)" ng-model="Adata">
 																						<optgroup label="Strengths">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{atag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDa | filter: { sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																						<optgroup label="Learning Needs">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{atag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDa | filter: {sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('A', $index)">
@@ -4898,10 +4899,10 @@
 																					 ng-change="copyThis('E', $index, Edata)" ng-model="Edata"></select> -->
 																					<select class="form-control" ng-change="copyThis('E', $index, Edata)" ng-model="Edata">
 																						<optgroup label="Strengths">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{etag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDe | filter: { sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																						<optgroup label="Learning Needs">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{etag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDe | filter: {sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('E', $index)">
@@ -4935,10 +4936,10 @@
 																					 ng-change="copyThis('I', $index, Idata)" ng-model="Idata"></select> -->
 																					<select class="form-control" ng-change="copyThis('I', $index, Idata)" ng-model="Idata">
 																						<optgroup label="Strengths">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{itag: true}, sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDi | filter: { sctn:'2' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																						<optgroup label="Learning Needs">
-																							<option ng-repeat="j in allMD | filter: {paei_tag:{itag: true}, sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
+																							<option ng-repeat="j in allMDi | filter: {sctn:'3' }" value="{{j.mini_description}}">{{j.mini_description}}</option>
 																						</optgroup>
 																					</select>
 																					<span class="btn" style="color: red;" ng-click="removeDescFromTag('I', $index)">

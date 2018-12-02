@@ -28,17 +28,47 @@ var descriptionSchema = new Schema({
         }
     },
     paei_tag: {
-        ptag: {
-            type: Boolean, default: false
+        //old
+        // ptag: {
+        //     type: Boolean, default: false
+        // },
+        // atag: {
+        //     type: Boolean, default: false
+        // },
+        // etag: {
+        //     type: Boolean, default: false
+        // },
+        // itag: {
+        //     type: Boolean, default: false
+        // },
+        //new
+        pm: {
+            c01: { type: Boolean, default: false },
+            c02: { type: Boolean, default: false }
         },
-        atag: {
-            type: Boolean, default: false
+        p: {
+            c03: { type: Boolean, default: false },
+            c04: { type: Boolean, default: false },
+            c05: { type: Boolean, default: false }
         },
-        etag: {
-            type: Boolean, default: false
+        a: {
+            c06: { type: Boolean, default: false },
+            c07: { type: Boolean, default: false },
+            c08: { type: Boolean, default: false },
+            c09: { type: Boolean, default: false },
+            c10: { type: Boolean, default: false },
+            c11: { type: Boolean, default: false },
+            c12: { type: Boolean, default: false }
         },
-        itag: {
-            type: Boolean, default: false
+        e: {
+            c13: { type: Boolean, default: false },
+            c14: { type: Boolean, default: false },
+            c15: { type: Boolean, default: false }
+        },
+        i: {
+            c16: { type: Boolean, default: false },
+            c17: { type: Boolean, default: false },
+            c18: { type: Boolean, default: false }
         }
     },
     responsive_statement: String,
