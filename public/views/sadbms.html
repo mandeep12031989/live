@@ -1469,6 +1469,25 @@
 								<input type="text" ng-model="mr.linked_competency" style="text-align:center; color: #FF0000; width: 100%"
 								 placeholder="C__">
 							</div>
+							<div class="col-md-2" style="text-align: right; font-weight: bold;">Linked Keyword(s): </div>
+							<div class="col-md-5" ng-repeat="ids in mr.linked_keywords" style="margin: auto 0;">
+								<div class="col-md-11" style="margin: auto 0;">
+
+									<select class="form-control" ng-model="ids.mini_id">
+										<optgroup ng-repeat="key in keywordSet | filter:filterSec3()" label="{{key.keyword}} ({{key.keyword_id}})">
+											<option ng-repeat="mini in key.mini_descriptions" value="{{mini.mini_description_id}}">{{mini.mini_description}}
+												({{mini.mini_description_id}})</option>
+										</optgroup>
+									</select>
+									<!-- <input type="text" ng-model="ids.mini_id" style="text-align:center; color: #FF0000; width: 100%" placeholder="P__S__K__M__"> -->
+								</div>
+								<div class="col-md-1">
+									<button class="btn btn-danger" ng-click="removeMiniFromSet(mr, $index)">X</button>
+								</div>
+							</div>
+							<div class="col-md-2" style="margin: 0 auto; text-align: center;">
+								<button class="btn btn-warning" ng-click="addMiniToSet(mr)">+ Add Linking</button>
+							</div>
 						</div>
 
 						<button type="button" class="btn btn-success" ng-click="updateGrowthRecommendAssessor(rec_num2, mr.sID[4], mr.sID[5], $index)"

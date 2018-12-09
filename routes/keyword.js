@@ -79,6 +79,19 @@ router.route('/tag')
             });
     });
 
+router.route('/getLess/:profile_num')
+    .get(Verify.verifyOrdinaryUser, function (req, res, next) {
+        var profile_num = 'P' + sanitize(req.params.profile_num);     // NoSQL injection prevention
+
+        Keyword.find({ keyword_id: { $regex: profile_num } }, { '_id': false, 'keyword_id': true, 'keyword': true, 'mini_descriptions.mini_description_id': true, 'mini_descriptions.mini_description': true }).sort('keyword_id')
+            .exec(function (err, keyword) {
+                if (err)
+                    return next(err);
+
+                return res.status(200).json(keyword);
+            });
+    });
+
 router.route('/:profile_num')
     .get(Verify.verifyOrdinaryUser, function (req, res, next) {
         var profile_num = 'P' + sanitize(req.params.profile_num);     // NoSQL injection prevention

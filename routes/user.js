@@ -456,9 +456,9 @@ router.route('/specific/:id')
 		User.findOne({ _id: id }, { 'peer_reviews': false, 'peer_reviewers': false })
 			.exec(function (err, user) {
 				if (err)
-					next(err);
+					return next(err);
 
-				res.status(200).json(user);
+				return res.status(200).json(user);
 			});
 	})
 	.put(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function (req, res, next) {
