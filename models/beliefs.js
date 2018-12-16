@@ -8,7 +8,8 @@ var beliefSchema = new Schema({
         type: String,
         default: "P__N__"
     },
-	statement: String
+    statement: String,
+    linked_ln: { type: Array, default: [] }
 });
 
 module.exports = mongoose.model('beliefSchema', beliefSchema);

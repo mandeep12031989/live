@@ -14,7 +14,8 @@ var recommendSchema = new Schema({
         type: String,
         default: "C__"
     },
-    recommendation_by_assessor: { type: Boolean, default: false }
+    recommendation_by_assessor: { type: Boolean, default: false },
+    linked_keywords: [new Schema({ mini_id: String })]
 });
 
 module.exports = mongoose.model('recommendSchema', recommendSchema);

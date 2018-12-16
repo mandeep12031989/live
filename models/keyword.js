@@ -74,7 +74,8 @@ var descriptionSchema = new Schema({
     },
     responsive_statement: String,
     mini_by_assessor: { type: Boolean, default: false },
-    relate_percentage: { type: Number, default: 0 }
+    relate_percentage: { type: Number, default: 0 },
+    linked_ln: { type: Array, default: [] }
 });
 
 var keywordSchema = new Schema({

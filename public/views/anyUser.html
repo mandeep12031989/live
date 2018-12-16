@@ -4018,9 +4018,9 @@
 																			<div class="col-sm-12" ng-show="section_num == 6" style="margin-bottom: 20px; font-size: 16px;">
 																				<div class="row" ng-repeat="rc in user.assessor.recommendations_for_manager">
 																					<span class="col-sm-1" style="text-align: center;">
-																						<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;" ng-click="submitGrowthRecAssessor()">
+																						<input type="checkbox" ng-model="rc.selected" style="height: 16px; width: 16px;" ng-click="submitRecForManager()">
 																					</span>
-																					<span class="col-sm-11" style="margin-bottom: 10px;" ng-click="rc.selected = !rc.selected; submitGrowthRecAssessor()">
+																					<span class="col-sm-11" style="margin-bottom: 10px;" ng-click="rc.selected = !rc.selected; submitRecForManager()">
 
 																						<span ng-if="rc.recommendation_by_assessor && !rc.added_to_assessor_library" title="Click to add in Assessor Library"
 																						 ng-click="sendToAssessorLibrary('recommendations_for_manager', rc, $index)">
@@ -4281,8 +4281,24 @@
 									</div>
 								</div>
 
-								<textarea class="form-control" ng-model="user.assessor.description" ng-show="switchView == 1"></textarea>
-								<h4 ng-show="switchView == 2" style="padding: 15px;" ng-bind-html="user.assessor.description | linebreaks"></h4>
+								<!-- <textarea class="form-control" ng-model="user.assessor.description" ng-show="switchView == 1"></textarea> -->
+
+								<header class="navbar-fixed-top well" style="padding: 5px;" ng-show="switchView == 1">
+									<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+										<span class="btn btn-mini" ng-class="formats.bold" ng-mousedown="doFormat('bold', null)">
+											<i class="material-icons" style="margin: auto 0; cursor: pointer;"> format_bold </i>
+										</span>
+										<span class="btn btn-mini" ng-class="formats.italic" ng-mousedown="doFormat('italic', null)">
+											<i class="material-icons" style="margin: auto 0; cursor: pointer;"> format_italic </i>
+										</span>
+										<!-- <span class="btn btn-mini" ng-class="formats.underline" ng-mousedown="doFormat('underline', null)">
+											<i class="material-icons"> format_underlined </i>
+										</span> -->
+									</div>
+								</header>
+								<div class="editor" contenteditable data-directive ng-model="user.assessor.description" style="text-align: center; padding: 10px;"></div>
+
+								<!-- <h4 ng-show="switchView == 2" style="padding: 15px;" ng-bind-html="user.assessor.description | linebreaks"></h4> -->
 
 								<div class="row col-sm-12" style="margin-top: 25px; margin-bottom: 25px; text-align: center;">
 

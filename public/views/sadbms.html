@@ -163,6 +163,16 @@
 					</li>
 
 					<li class="header">
+						<span>Internal Linking</span>
+					</li>
+					<li ng-click="tab_num = 23">
+						<a href="" ng-class="tab_num == 23 ? 'bg-tab':''">
+							<i class="glyph-icon icon-cog"></i>
+							<span>View / Edit</span>
+						</a>
+					</li>
+
+					<li class="header">
 						<span>Role Fitment</span>
 					</li>
 					<li ng-click="tab_num = 22">
@@ -648,7 +658,7 @@
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-success" ng-click="updateThatProfile(profile_num, section_num, pk.keyword_id[8], $index)"
+						<button type="button" class="btn btn-success" ng-click="updateThatProfile(profile_num, section_num, pk.keyword_id[8], $index, 1)"
 						 style="width:100%;">UPDATE</button>
 
 					</div>
@@ -875,6 +885,23 @@
 							<div class="col-md-10">
 								<input type="text" ng-model="mr.linked_competency" style="text-align:center; color: #FF0000; width: 100%"
 								 placeholder="C__">
+							</div>
+							<div class="col-md-2" style="text-align: right; font-weight: bold;">Linked Keyword(s): </div>
+							<div class="col-md-5" ng-repeat="ids in mr.linked_keywords" style="margin: auto 0;">
+								<div class="col-md-11" style="margin: auto 0;">
+									<select class="form-control" ng-model="ids.mini_id">
+										<optgroup ng-repeat="key in keywordSet" label="{{key.keyword}} ({{key.keyword_id}})">
+											<option ng-repeat="mini in key.mini_descriptions" value="{{mini.mini_description_id}}">{{mini.mini_description}}
+												({{mini.mini_description_id}})</option>
+										</optgroup>
+									</select>
+								</div>
+								<div class="col-md-1">
+									<button class="btn btn-danger" ng-click="removeMiniFromSetRecommend(mr, $index)">X</button>
+								</div>
+							</div>
+							<div class="col-md-2" style="margin: 0 auto; text-align: center;">
+								<button class="btn btn-warning" ng-click="addMiniToSetRecommend(mr)">+ Add Linking</button>
 							</div>
 						</div>
 
@@ -1470,16 +1497,31 @@
 								 placeholder="C__">
 							</div>
 							<div class="col-md-2" style="text-align: right; font-weight: bold;">Linked Keyword(s): </div>
-							<div class="col-md-5" ng-repeat="ids in mr.linked_keywords" style="margin: auto 0;">
-								<div class="col-md-11" style="margin: auto 0;">
 
-									<select class="form-control" ng-model="ids.mini_id">
+							<!-- <div class="col-md-10">
+								<div class="col-md-12">
+									<span class="btn btn-warning" style="margin: 5px;" ng-repeat="mini_id in mr.linked_keywords">{{getMiniNameFromId(mini_id)}}
+										({{mini_id}})</span>
+								</div>
+								<br>
+								<div class="col-md-12">
+									<select class="form-control" ng-model="mr.linked_keywords" multiple>
 										<optgroup ng-repeat="key in keywordSet | filter:filterSec3()" label="{{key.keyword}} ({{key.keyword_id}})">
 											<option ng-repeat="mini in key.mini_descriptions" value="{{mini.mini_description_id}}">{{mini.mini_description}}
 												({{mini.mini_description_id}})</option>
 										</optgroup>
 									</select>
-									<!-- <input type="text" ng-model="ids.mini_id" style="text-align:center; color: #FF0000; width: 100%" placeholder="P__S__K__M__"> -->
+								</div>
+								<div class="col-md-12" style="color: red;">*Kindly press & hold CTRL to select multiple entries from dropdown</div>
+							</div> -->
+							<div class="col-md-5" ng-repeat="ids in mr.linked_keywords" style="margin: auto 0;">
+								<div class="col-md-11" style="margin: auto 0;">
+									<select class="form-control" ng-model="ids.mini_id">
+										<optgroup ng-repeat="key in keywordSet" label="{{key.keyword}} ({{key.keyword_id}})">
+											<option ng-repeat="mini in key.mini_descriptions" value="{{mini.mini_description_id}}">{{mini.mini_description}}
+												({{mini.mini_description_id}})</option>
+										</optgroup>
+									</select>
 								</div>
 								<div class="col-md-1">
 									<button class="btn btn-danger" ng-click="removeMiniFromSet(mr, $index)">X</button>
@@ -1570,6 +1612,87 @@
 					</div>
 					<br>
 					<button type="button" class="btn btn-danger" ng-click="addRoleFitment('D')">+ Add Difficult Work Setting</button>
+				</div>
+
+				<!--                        TAB 23                           -->
+				<div class="container" ng-show="tab_num == 23">
+					<div style="padding: 5px; text-align: center;">
+						Internal Linking With Learning Needs
+					</div>
+					<div style="padding: 5px; text-align: center;">
+						<span class="btn" ng-class="internal_tab==1 ? 'btn-danger' : 'btn-default'" ng-click="internal_tab=1">Beliefs</span>
+						&nbsp;&nbsp;
+						<span class="btn" ng-class="internal_tab==2 ? 'btn-danger' : 'btn-default'" ng-click="internal_tab=2">Strengths</span>
+					</div>
+					<div>
+						Profile:
+						<input type="number" ng-model="rec_num2" min="1" max="9">
+						<br>
+						<br>
+						<button type="button" class="btn btn-danger" ng-click="getBeliefs(rec_num2);getThatProfile(rec_num2)" ng-disabled="!(rec_num2)">GET</button>
+					</div>
+					<br>
+					<div class="panel" ng-repeat="mr in beliefs" ng-if="internal_tab==1">
+						<div class="panel-heading row" style="background-color: #f0f0f0">
+							<div class="col-md-2" style="text-align: center;">
+								{{mr.sID}}
+							</div>
+							<div class="col-md-10" style="text-align: center;">
+								{{mr.statement}}
+							</div>
+						</div>
+						<div class="panel-body" style="margin-bottom: 15px;">
+							<div class="col-md-2" style="text-align: center; margin: auto 0;">
+								Linked Learning Need
+							</div>
+							<div class="col-md-10" style="text-align: center;">
+								<span ng-repeat="keys in master | filter: filterSec3()" style="padding: 5px; margin: 5px;" class="btn" ng-class="existsOrNot(mr.linked_ln, keys.keyword_id) ? 'btn-info' : 'btn-default'"
+								 ng-click="addKeyToKeySet(mr.linked_ln, keys.keyword_id)">{{keys.keyword}}</span>
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-success" ng-click="updateBeliefs(rec_num2, mr.sID[5], $index)" style="width:100%;">UPDATE</button>
+
+					</div>
+					<div class="panel" ng-repeat="pk in master | filter: filterSec2()" ng-if="internal_tab==2">
+						<div class="panel-heading row" style="background-color: #f0f0f0">
+							<div class="col-md-4" style="text-align: center;">
+								{{pk.keyword_id}}
+							</div>
+							<div class="col-md-4" style="text-align: center;">
+								{{pk.keyword}}
+							</div>
+							<div class="col-md-4" style="text-align: center;">
+								{{pk.keyword_h}}
+							</div>
+						</div>
+						<div class="panel-body">
+							<div class="example-box-wrapper">
+								<div class="row" ng-repeat="md in pk.mini_descriptions" style="border: 1px dotted #eee; padding: 8px;">
+									<div class="col-md-4" style="text-align: center;">
+										{{md.mini_description_id}}
+									</div>
+									<div class="col-md-4" style="text-align: center;">
+										{{md.mini_description}}
+									</div>
+									<div class="col-md-4" style="text-align: center;">
+										{{md.mini_description_h}}
+									</div>
+									<div class="col-md-2" style="text-align: center; margin: auto 0;">
+										Linked Learning Need
+									</div>
+									<div class="col-md-10" style="text-align: center;">
+										<span ng-repeat="keys in master | filter: filterSec3()" style="padding: 5px; margin: 5px;" class="btn"
+										 ng-class="existsOrNot(md.linked_ln, keys.keyword_id) ? 'btn-info' : 'btn-default'" ng-click="addKeyToKeySet(md.linked_ln, keys.keyword_id)">{{keys.keyword}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-success" ng-click="updateThatProfile(rec_num2, 2, pk.keyword_id[8], pk, 2)"
+						 style="width:100%;">UPDATE</button>
+
+					</div>
 				</div>
 				<!--                        TABS END                           -->
 			</div>

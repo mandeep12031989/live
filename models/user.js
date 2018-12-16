@@ -96,7 +96,8 @@ var descriptionSchema = new Schema({
     questions: {
         strength: { type: Array },
         learning: { type: Array }
-    }
+    },
+    linked_ln: { type: Array, default: [] }
 });
 
 var profileSchema = new Schema({
@@ -211,7 +212,7 @@ var userSchema = new Schema({
         growth_recommendations: [new Schema({ sID: String, statement: String, linked_keyword: String, selected: Boolean })],
         growth_recommendations_assessor: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, growth_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false }, linked_keywords: [new Schema({ mini_id: String })] })],
         old_growth_recommendations: [new Schema({ gr: Array, pro_num: Number })],
-        beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String })],
+        beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String, linked_ln: { type: Array, default: [] } })],
         old_beliefs: [new Schema({ bel: Array, pro_num: Number })],
         eachSectionRelate: Array,
         eachSectionShareMore: Array,
@@ -277,14 +278,11 @@ var userSchema = new Schema({
         profile_content: [profileSchema],
         description: {
             type: String,
-            default: '<name>\'s enneagram assessment results are <positive/negative>. <He/She> is at Moderate moving to higher personal mastery levels. <He/She> is enneagram type <type>.'
+            default: '<b>--name--</b>\'s enneagram assessment results are <b>--positive/negative--</b>. <b>--He/She--</b> is at Moderate moving to higher personal mastery levels. <b>--He/She--</b> is enneagram type <b>--type--</b>.'
         },
         recommend: [new Schema({ title: String, desc: String, page: { type: Number, default: 1 } })],
-        rubric: {
-            type: Array,
-            default: []
-        },
-        recommendations_for_manager: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: true }, recommendation_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
+        rubric: { type: Array, default: [] },
+        recommendations_for_manager: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, recommendation_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
         role_fitment: {
             suitable_work: [new Schema({
                 sID: { type: String, required: true, unique: true, trim: true },          //S _ _
@@ -342,7 +340,8 @@ var userSchema = new Schema({
             paei: { type: Boolean, default: true },
             extras: { type: Boolean, default: true }
         },
-        growth_recommendations_assessor_initialized: { type: Boolean, default: false }
+        growth_recommendations_assessor_initialized: { type: Boolean, default: false },
+        recommendations_for_manager_assessor_initialized: { type: Boolean, default: false }
     },
     language: {
         type: String,
