@@ -102,31 +102,91 @@ router.route('/mailToFac')
 			});
 	});
 
+function fetchFacilitatorFromName(facilitator_name, cb) {
+	User.aggregate([
+		{ $match: { firstname: new RegExp(facilitator_name.split(' ')[0]) } },
+		{ $project: { "name": { $concat: ["$firstname", " ", "$lastname"] }, username: 1 } },
+		{ $match: { "name": facilitator_name } },
+		{ $project: { username: 1 } }
+	]).exec(function (err, results) {
+		cb(results[0].username || '');
+	});
+}
+
+function sendMailFinally(mailData, cb) {
+	mailer.custom_mail(mailData, function (ret) {
+		cb(ret);
+	});
+}
+
 router.route('/mailToOwn')
 	.post(Verify.verifyOrdinaryUser, function (req, res, next) {
 		var mailData = sanitize(req.body);
 		//console.log(mailData);
-		User.findOne({ _id: req.decoded._id }, { username: true })
+		User.findOne({ _id: req.decoded._id }, { username: 1, firstname: 1, lastname: 1, facilitator_name: 1 })
 			.exec(function (e, user) {
 				if (e)
 					return next(e);
 				//console.log(f);
 
-				mailData.to = user.username;
+				if (!mailData.to) {
+					if ('bcc' in mailData && mailData.bcc == 'facilitator') {
+						fetchFacilitatorFromName(user.facilitator_name, function (email) {
+							mailData.to = [user.username, email];
 
-				mailer.custom_mail(mailData, function (ret) {
-					var res_from_mailer = ret;
-					//console.log(res_from_mailer);
+							sendMailFinally(mailData, function (res_from_mailer) {
+								if (res_from_mailer == false) {
+									return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+								}
+								else if (res_from_mailer == true) {
+									res.status(200).json({ success: true, message: "Mail Sent Successfully !" });
+								}
+							});
+						});
+					}
+					else {
+						sendMailFinally(mailData, function (res_from_mailer) {
+							if (res_from_mailer == false) {
+								return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+							}
+							else if (res_from_mailer == true) {
+								res.status(200).json({ success: true, message: "Mail Sent Successfully !" });
+							}
+						});
+					}
+				}
+				else {
+					fetchFacilitatorFromName(user.facilitator_name, function (email) {
+						mailData.to = email;
+						mailData.subject += (' | ' + user.firstname + ' ' + user.lastname);
+						mailData.html = 'Dear ' + user.facilitator_name + ',<br>' + user.firstname + ' ' + user.lastname + ' ' + mailData.html;
 
-					if (res_from_mailer == false) {
-						//console.log('Updated error!');
-						return res.status(501).json({ success: false, message: 'Some Error Occured !' });
-					}
-					else if (res_from_mailer == true) {
-						//console.log('Updated token!');
-						res.status(200).json({ success: true, message: "Mail Sent to Reviewers Successfully !" });
-					}
-				});
+						// console.log(mailData);
+
+						sendMailFinally(mailData, function (res_from_mailer) {
+							if (res_from_mailer == false) {
+								return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+							}
+							else if (res_from_mailer == true) {
+								res.status(200).json({ success: true, message: "Mail Sent to Facilitator Successfully !" });
+							}
+						});
+					});
+				}
+
+				// mailer.custom_mail(mailData, function (ret) {
+				// 	var res_from_mailer = ret;
+				// 	//console.log(res_from_mailer);
+
+				// 	if (res_from_mailer == false) {
+				// 		//console.log('Updated error!');
+				// 		return res.status(501).json({ success: false, message: 'Some Error Occured !' });
+				// 	}
+				// 	else if (res_from_mailer == true) {
+				// 		//console.log('Updated token!');
+				// 		res.status(200).json({ success: true, message: "Mail Sent to Reviewers Successfully !" });
+				// 	}
+				// });
 			});
 	});
 

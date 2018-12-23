@@ -81,18 +81,10 @@ var descriptionSchema = new Schema({
     assessor_relate: {
         type: String, default: ""
     },
-    assessor_report_mini_check: {
-        type: Boolean, default: false
-    },
-    mini_by_assessor: {
-        type: Boolean, default: false
-    },
-    added_to_assessor_library: {
-        type: Boolean, default: false
-    },
-    relate_percentage: {
-        type: Number, default: 0
-    },
+    assessor_report_mini_check: { type: Boolean, default: true },
+    mini_by_assessor: { type: Boolean, default: false },
+    added_to_assessor_library: { type: Boolean, default: false },
+    relate_percentage: { type: Number, default: 0 },
     questions: {
         strength: { type: Array },
         learning: { type: Array }
@@ -135,27 +127,18 @@ var profileSchema = new Schema({
     comment_placeholder: [new Schema({ question: String })],
     dummy_keyword: String,
     key_version: String,
-    key_rating: {
-        type: Number, default: 0
-    },
+    key_rating: { type: Number, default: 0 },
     comment: {                              //comment to specific parent keyword
         type: String, default: ""
     },
-    assessor_checkbox: {
-        type: Boolean, default: false
-    },
-    assessor_key_rating: {
-        type: Number, default: 0
-    },
+    assessor_checkbox: { type: Boolean, default: false },
+    assessor_key_rating: { type: Number, default: 0 },
     assessor_comment: {                              //comment to specific parent keyword
         type: String, default: ""
     },
-    assessor_bal_in_report: {
-        type: Boolean, default: true
-    },
-    assessor_report_keyword: {
-        type: String, default: ""
-    }
+    assessor_bal_in_report: { type: Boolean, default: true },
+    assessor_report_keyword: { type: String, default: "" },
+    bsl_score: { type: Number, default: 0 }
 });
 
 var userSchema = new Schema({
@@ -341,7 +324,10 @@ var userSchema = new Schema({
             extras: { type: Boolean, default: true }
         },
         growth_recommendations_assessor_initialized: { type: Boolean, default: false },
-        recommendations_for_manager_assessor_initialized: { type: Boolean, default: false }
+        recommendations_for_manager_assessor_initialized: { type: Boolean, default: false },
+        first_person_word_count: {
+            learning: { type: Number, default: 0 }
+        }
     },
     language: {
         type: String,

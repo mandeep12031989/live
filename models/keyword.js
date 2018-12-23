@@ -75,7 +75,8 @@ var descriptionSchema = new Schema({
     responsive_statement: String,
     mini_by_assessor: { type: Boolean, default: false },
     relate_percentage: { type: Number, default: 0 },
-    linked_ln: { type: Array, default: [] }
+    linked_ln: { type: Array, default: [] },
+    assessor_report_mini_check: { type: Boolean, default: true }
 });
 
 var keywordSchema = new Schema({
@@ -98,7 +99,7 @@ var keywordSchema = new Schema({
     balancing_description: [new Schema({ desc: String })],
     comment_placeholder: [new Schema({ question: String })],
     dummy_keyword: String,
-    key_version: { type: String, default: 'v1.2' },
+    key_version: { type: String, default: 'v1.4' },
     new_keyword: { type: Boolean, default: false }
 }, { usePushEach: true });
 

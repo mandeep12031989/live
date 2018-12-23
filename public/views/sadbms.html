@@ -576,11 +576,15 @@
 										<br>
 										<div class="col-md-12 row panel-layout" ng-repeat="md in pk.mini_descriptions">
 											<div class="col-md-12 row panel-box">
-												<div class="col-md-2" style="background: #efefef;">
+												<div class="col-md-3" style="background: #efefef;">
 													Hide Mini from Users:
 													<input type="checkbox" ng-model="md.mini_by_assessor">
 												</div>
-												<div class="col-md-offset-9 col-md-1">
+												<div class="col-md-3" style="background: #efefef;">
+													Show Mini in Report:
+													<input type="checkbox" ng-model="md.assessor_report_mini_check">
+												</div>
+												<div class="col-md-offset-5 col-md-1">
 													<i class="material-icons" style="float: right;" ng-click="removeMD($parent.$index, $index)">clear</i>
 												</div>
 

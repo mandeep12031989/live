@@ -3390,6 +3390,18 @@
 																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatestrongly']}}</div>
 																</div>
 															</div>
+															<div class="col-xs-12" ng-show="section_num == 3" style="margin: 15px auto; text-align: center;">
+																<div class="row">
+																	<h4 style="margin: 0 auto 10px auto; color: black;">
+																		First Person Words Count<br>(I,ME,MYSELF,MINE)
+																	</h4>
+																</div>
+																<div class="row">
+																	<div class="col-xs-12">
+																		Learning Needs: {{user.assessor.first_person_word_count.learning}}
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
 													<div class="col-xs-12 col-md-9">
@@ -3653,6 +3665,9 @@
 																							<input id="{{keys.keyword_id}}" type="checkbox" name="{{keys.keyword_id}}" ng-model="user.assessor.profile_content[$index].assessor_checkbox" />
 																							<label for="{{keys.keyword_id}}" class="label-success"></label>
 																						</span>
+																					</div>
+																					<div class="panel-heading" style="text-align: center;" ng-if="keys.keyword_id[5]=='3'">
+																						(BSL Score: {{keys.bsl_score}})
 																					</div>
 																					<div id="collapseOne" class="panel-collapse collapse in">
 																						<div class="panel-body pad0B col-sm-12">
@@ -4282,21 +4297,28 @@
 								</div>
 
 								<!-- <textarea class="form-control" ng-model="user.assessor.description" ng-show="switchView == 1"></textarea> -->
-
-								<header class="navbar-fixed-top well" style="padding: 5px;" ng-show="switchView == 1">
-									<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
-										<span class="btn btn-mini" ng-class="formats.bold" ng-mousedown="doFormat('bold', null)">
-											<i class="material-icons" style="margin: auto 0; cursor: pointer;"> format_bold </i>
-										</span>
-										<span class="btn btn-mini" ng-class="formats.italic" ng-mousedown="doFormat('italic', null)">
-											<i class="material-icons" style="margin: auto 0; cursor: pointer;"> format_italic </i>
-										</span>
-										<!-- <span class="btn btn-mini" ng-class="formats.underline" ng-mousedown="doFormat('underline', null)">
-											<i class="material-icons"> format_underlined </i>
-										</span> -->
+								<div class="row" style="padding: 15px;">
+									<div class="col-md-12">
+										<h4 style="text-align: center; font-weight: bold;">Summary for Management</h4>
 									</div>
-								</header>
-								<div class="editor" contenteditable data-directive ng-model="user.assessor.description" style="text-align: center; padding: 10px;"></div>
+									<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+										<header class="navbar-fixed-top well">
+											<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+												<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+													<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+												</span>
+												<!-- <span class="btn btn-mini" ng-mousedown="doFormat('italic', null)">
+													<i class="material-icons" style="margin: auto 0; cursor: pointer;"> format_italic </i>
+												</span> -->
+											</div>
+										</header>
+									</div>
+									<div class="col-md-12" style="padding: 5px;">
+										<div class="editor" contenteditable data-directive ng-model="user.assessor.description" style="border: 2px dotted #ddd; padding: 10px;"></div>
+									</div>
+								</div>
+
+
 
 								<!-- <h4 ng-show="switchView == 2" style="padding: 15px;" ng-bind-html="user.assessor.description | linebreaks"></h4> -->
 
