@@ -270,7 +270,8 @@ router.route('/details')
 	})
 	.post(Verify.verifyOrdinaryUser, function (req, res, next) {
 		var id = req.decoded._id;
-		//console.log(req.body);
+		// console.log(id);
+		// console.log(req.body);
 		User.findOneAndUpdate({ _id: id }, { $set: sanitize(req.body) }, { new: true })
 			.exec(function (err, user) {
 				if (err)
@@ -963,7 +964,7 @@ router.route('/analysis')
 				to_send.variant_profile_num = r;
 				//console.log(sending);
 				var d = new Date();
-				d.setMonth(d.getMonth() - 12);
+				d.setMonth(d.getMonth() - 11);
 				d.setDate(0);
 				d.setHours(23);
 				d.setMinutes(59);

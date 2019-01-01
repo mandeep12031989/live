@@ -166,6 +166,10 @@
 		margin-bottom: auto;
 		top: -15px;
 	}
+
+	.editor{
+		border: 2px dotted #ddd; padding: 10px;
+	}
 </style>
 
 <span ng-show="loading">
@@ -446,6 +450,44 @@
 										<span class="col-xs-7 col-sm-7 col-md-7" style="text-align: left;">{{user.device_details.os_version}}</span>
 										<br>
 										<br>
+									</div>
+									<hr>
+									<b>Upload Section</b>
+									<br>
+									<div class="row col-xs-12 col-md-12" style="padding-bottom: 10px;" ngf-drop="uploadFiles($files)" ng-model="files"
+									 ng-multiple="true">
+										<div style="border: 2px dotted #ccc; padding: 50px; text-align: center; cursor: pointer; margin: 0 auto;"
+										 class="" ngf-select="uploadFiles($files)" multiple title="Drag and drop files here" resetOnClick="true">
+											Upload
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 col-md-12" ng-repeat="file in files">
+											<h5>{{file.name}} {{f.$error}} {{f.$errorParam}}</h5>
+											<div class="status">{{file.status}}</div>
+											<div class="progress-bar">
+												<div class="progress" style="width: {{file.progress}}%" ng-init="progress=0"></div>
+											</div>
+											<!-- <div class="form_line">
+												<div class="form_controls">
+													<div class="preview">
+														<img ngf-src="file.result.url || file">
+													</div>
+												</div>
+											</div> -->
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 col-md-12" style="margin: 5px auto; padding: auto 10px;">
+											<table class="table">
+												<tr class="col-xs-12 col-md-12" ng-repeat="attach in user.attachments">
+													<td class="col-xs-9 col-md-9" style="text-align: center;"> {{attach.filename}} </td>
+													<td class="col-xs-3 col-md-3" style="text-align: center;"> <a href="{{attach.url}}" target="_blank">Open</a>
+													</td>
+												</tr>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1052,54 +1094,17 @@
 										</div>
 									</div>
 
-									<div class="col-sm-12" style="padding: 10px;">
+									<div class="col-sm-12" style="padding: 10px;" ng-repeat="value in [1,2,3,4]">
 										<div class="col-sm-8" style="display: inline-block;">
-											Beliefs
+											<span ng-show="$index == 0">Beliefs</span>
+											<span ng-show="$index == 1">Professional Values and Work
+												<br>Culture Preferences</span>
+											<span ng-show="$index == 2">Professional Strengths</span>
+											<span ng-show="$index == 3">Learning Needs</span>
 										</div>
 										<div class="col-sm-4">
-											<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[0]" ng-click="user.profile.eachSectionEditable[0] = false; updateUserSection();">Blocked</button>
-											<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[0]" ng-click="user.profile.eachSectionEditable[0] = true; updateUserSection();">Allowed</button>
-										</div>
-									</div>
-
-									<div class="col-sm-12" style="padding: 10px;">
-										<div class="col-sm-8" style="display: inline-block;">
-											Professional Values and Work
-											<br>Culture Preferences
-										</div>
-										<div class="col-sm-4">
-											<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[1]" ng-click="user.profile.eachSectionEditable[1] = false; updateUserSection();">Blocked</button>
-											<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[1]" ng-click="user.profile.eachSectionEditable[1] = true; updateUserSection();">Allowed</button>
-										</div>
-									</div>
-
-									<div class="col-sm-12" style="padding: 10px;">
-										<div class="col-sm-8" style="display: inline-block;">
-											Professional Strengths
-										</div>
-										<div class="col-sm-4">
-											<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[2]" ng-click="user.profile.eachSectionEditable[2] = false; updateUserSection();">Blocked</button>
-											<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[2]" ng-click="user.profile.eachSectionEditable[2] = true; updateUserSection();">Allowed</button>
-										</div>
-									</div>
-
-									<div class="col-sm-12" style="padding: 10px;">
-										<div class="col-sm-8" style="display: inline-block;">
-											Learning Needs
-										</div>
-										<div class="col-sm-4">
-											<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[3]" ng-click="user.profile.eachSectionEditable[3] = false; updateUserSection();">Blocked</button>
-											<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[3]" ng-click="user.profile.eachSectionEditable[3] = true; updateUserSection();">Allowed</button>
-										</div>
-									</div>
-
-									<div class="col-sm-12" style="padding: 10px;">
-										<div class="col-sm-8" style="display: inline-block;">
-											Growth Recommendations
-										</div>
-										<div class="col-sm-4">
-											<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[4]" ng-click="user.profile.eachSectionEditable[4] = false; updateUserSection();">Blocked</button>
-											<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[4]" ng-click="user.profile.eachSectionEditable[4] = true; updateUserSection();">Allowed</button>
+											<button class="btn btn-danger" ng-show="user.profile.eachSectionEditable[$index]" ng-click="user.profile.eachSectionEditable[$index] = false; updateUserSection();">Blocked</button>
+											<button class="btn btn-success" ng-show="!user.profile.eachSectionEditable[$index]" ng-click="user.profile.eachSectionEditable[$index] = true; updateUserSection();">Allowed</button>
 										</div>
 									</div>
 								</div>
@@ -2244,6 +2249,9 @@
 										<!-- <li ng-class="assessor_tab == 0 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 0">Assessor Library</a>
 										</li> -->
+										<li ng-class="assessor_tab == 6 ? 'active_tab' : '' ">
+											<a href="" ng-click="assessor_tab = 6">Profile Synthesis</a>
+										</li>
 										<li ng-class="assessor_tab == 5 ? 'active_tab' : '' ">
 											<a href="" ng-click="assessor_tab = 5">Review Profile</a>
 										</li>
@@ -3079,9 +3087,121 @@
 
 							<!--		TAB 5		-->
 
-							<div class="container" ng-show="assessor_tab == 5 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
+							<div class="container" ng-show="(assessor_tab == 5 || assessor_tab == 6) && user.profile.profile_number == 0"
+							 style="text-align: center; margin-top: 50px;">
 								<b>Profile Not Selected Yet !</b>
 							</div>
+
+							<div class="container" ng-show="assessor_tab == 6 && user.profile.profile_number != 0" style="text-align: center;">
+								<style>
+									.tree_left {
+											float: left; font-weight: bold;
+											color: black; margin: auto 0;
+										}
+
+									.mybox {
+										position: relative;
+									}
+
+									.mybox:after {
+										content: '';
+										position: absolute;
+										bottom: 50%;
+										left: 0px;
+										top: 0px;
+										width: 50%;
+										border-left: 2px solid black;
+										width: 1.5%;
+										border-bottom: 2px solid black;
+									}
+
+									.stat_box {
+										padding: 10px 5px; border: 1px solid red; border-radius: 10px;
+									}
+
+									.color_code_logic_both {
+										background: #c5e1a5;
+										font-weight: bold;
+										
+										border-color: #9ccc65;
+									}
+
+									.color_code_logic_system {
+										background: #ffcdd2;
+										font-weight: bold;
+										
+										border-color: #e57373;
+									}
+
+									.color_code_logic_user {
+										background: #90caf9;
+										font-weight: bold;
+										
+										border-color: #42a5f5;
+									}
+
+									.color_code_logic_none {
+										background: #eee;
+										font-weight: bold;
+										border-color: #ccc;
+									}
+								</style>
+
+								<div class="panel" style="width: 70%; margin-left: 15%;">
+									<div class="panel-body" style="text-align: center;">
+										<div class="row col-xs-12" style="margin: 10px 5px;">
+											<div class="col-xs-3 color_code_logic_both">
+												Suggested by logic; Selected by candidate
+											</div>
+											<div class="col-xs-3 color_code_logic_system">
+												Suggested by logic; Not selected by candidate
+											</div>
+											<div class="col-xs-3 color_code_logic_user">
+												Not suggested by logic, Selected by candidate
+											</div>
+											<div class="col-xs-3 color_code_logic_none">
+												Not suggested by logic, Not selected by candidate
+											</div>
+										</div>
+										<div class="col-xs-12" style="margin: 20px auto;">
+											<hr>
+										</div>
+
+										<div class="col-xs-12" ng-repeat-start="x in syns | filter: {root_node: true}" style="margin: 10px 5px;">
+											<div class="stat_box" ng-class="x.logic_user && x.logic_system ? 'color_code_logic_both':(x.logic_user ? 'color_code_logic_user':(x.logic_system ? 'color_code_logic_system': 'color_code_logic_none'))">
+												<span class="tree_left">1</span>
+												{{x.statement}}<br>
+												<span style="font-size: 11px;">({{x.sub_statement}})</span>
+											</div>
+										</div>
+										<div class="col-xs-12 mybox" ng-repeat-start="y in x.child_nodes" style="margin: 10px 10%; padding-right: 20%;">
+											<div class="stat_box" ng-class="getChilds(y.child_node).logic_user && getChilds(y.child_node).logic_system ? 'color_code_logic_both':(getChilds(y.child_node).logic_user ? 'color_code_logic_user':(getChilds(y.child_node).logic_system ? 'color_code_logic_system': 'color_code_logic_none'))">
+												<span class="tree_left">2</span>
+												{{getChilds(y.child_node).statement}}<br>
+												<span style="font-size: 11px;">({{getChilds(y.child_node).sub_statement}})</span>
+											</div>
+										</div>
+										<div class="col-xs-12 mybox" ng-repeat-start="z in getChilds(y.child_node).child_nodes" style="margin: 10px 20%; padding-right: 40%;">
+											<div class="stat_box" ng-class="getChilds(z.child_node).logic_user && getChilds(z.child_node).logic_system ? 'color_code_logic_both':(getChilds(z.child_node).logic_user ? 'color_code_logic_user':(getChilds(z.child_node).logic_system ? 'color_code_logic_system': 'color_code_logic_none'))">
+												<span class="tree_left">3</span>
+												{{getChilds(z.child_node).statement}}<br>
+												<span style="font-size: 11px;">({{getChilds(z.child_node).sub_statement}})</span>
+											</div>
+										</div>
+										<div class="col-xs-12 mybox" ng-repeat-end ng-repeat="w in getChilds(z.child_node).child_nodes" style="margin: 10px 30%; padding-right: 60%;">
+											<div class="stat_box" ng-class="getChilds(w.child_node).logic_user && getChilds(w.child_node).logic_system ? 'color_code_logic_both':(getChilds(w.child_node).logic_user ? 'color_code_logic_user':(getChilds(w.child_node).logic_system ? 'color_code_logic_system': 'color_code_logic_none'))">
+												<span class="tree_left">4</span>
+												{{getChilds(w.child_node).statement}}<br>
+												<span style="font-size: 11px;">({{getChilds(w.child_node).sub_statement}})</span>
+											</div>
+										</div>
+										<div ng-repeat-end></div>
+										<div ng-repeat-end></div>
+
+									</div>
+								</div>
+							</div>
+
 							<div id="sb-site" ng-show="assessor_tab == 5 && user.profile.profile_number != 0">
 
 								<style>
@@ -3102,7 +3222,7 @@
 
 									#radios {
 										text-align: center;
-										margin 0 auto;
+										margin: 0 auto;
 									}
 
 									#radios label+label {
@@ -4314,7 +4434,7 @@
 										</header>
 									</div>
 									<div class="col-md-12" style="padding: 5px;">
-										<div class="editor" contenteditable data-directive ng-model="user.assessor.description" style="border: 2px dotted #ddd; padding: 10px;"></div>
+										<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="user.assessor.description"></div>
 									</div>
 								</div>
 
@@ -4608,76 +4728,65 @@
 											<!--	section 3	-->
 											<div class="row" style="padding: 20px;">
 												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;">
-													<h4>
-														<b>Learning Needs</b>
-													</h4>
+													<h4><b>Learning Needs</b></h4>
 													<br>
 												</div>
-												<ul ng-show="switchView == 1">
-													<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_checkbox"
-													 ng-style="keys.assessor_key_rating != 0 ? '' : {'background': '#fff3e0', 'padding':'5px 10px'}">
-														<!-- <input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%"> -->
-														<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" rows="1" cols="50"></textarea>
-														<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;">
-															<i class="material-icons">clear</i>
-														</span>
+												<div class="col-md-12" ng-show="switchView == 1">
+													<div class="col-md-12">
 														<ul>
-															<li>
-																<!--														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.mini_descriptions[firstMD($index)].mini_description" size="50%">-->
-																<!-- <input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.assessor_report_keyword" size="50%"> -->
-																<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.assessor_report_keyword" rows="1"
+															<li ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | orderBy:'bsl_score':true | filter: {assessor_checkbox: true}">
+																<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;">
+																	<i class="material-icons">clear</i>
+																</span>
+																<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" placeholder="Keyword" rows="1"
 																 cols="80"></textarea>
+
+																<ul>
+																	<li ng-if="keys.report_descriptions.length>0">
+																		<span class="btn" style="color: red;" ng-click="removeReportMini(keys,0)">
+																			<i class="material-icons">clear</i>
+																		</span>
+																		<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.report_descriptions[0].mini_description"
+																		 placeholder="Mini-description" rows="1" cols="80"></textarea>
+																	</li>
+																	<li style="margin-left: 50px;" ng-repeat="rd in keys.report_descriptions | limitTo:keys.report_descriptions.length-1:1">
+																		<span class="btn" style="color: red;" ng-click="removeReportMini(keys,$index+1)">
+																			<i class="material-icons">clear</i>
+																		</span>
+																		<textarea type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="rd.mini_description"
+																		 placeholder="Mini-description" rows="1" cols="80"></textarea>
+																	</li>
+																	<li style="margin: 10px auto;">
+																		<button class="btn btn-warning" ng-click="pushNewReportMini(keys)">+ Add</button>
+																	</li>
+																</ul>
 															</li>
 														</ul>
-													</li>
-												</ul>
-												<div class="col-md-4" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 3 && keys.assessor_key_rating != 0 && keys.assessor_checkbox"
-												 style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="switchView == 2">
-
-													<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
-
-														<div class="col-md-3" style="margin: auto 0;">
-															<div class="c1002 small">
-																<div class="c100 small" ng-class="(keys.assessor_key_rating >= 0 && keys.assessor_key_rating <= 0.5) ? 'p33 grey' : ((keys.assessor_key_rating > 0.5 && keys.assessor_key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
-																	<div class="slice">
-																		<div class="bar"></div>
-																		<div class="fill"></div>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="col-md-9" style="margin: auto 0;">
-															<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
-															<!--													<div class="col-md-12">{{keys.mini_descriptions[firstMD($index)].mini_description}}</div>-->
-															<div class="col-md-12">{{keys.assessor_report_keyword}}</div>
-														</div>
-
 													</div>
 
-												</div>
-												<div class="col-md-12 row" style="text-align: center;" ng-show="switchView == 1">
-													<div class="col-xs-12 col-sm-12 col-md-12">
-														<button class="btn btn-info" ng-click="pushNewKey(3); keyAdded[3-1]=true;" ng-if="!keyAdded[3-1]">
-															<span>+ Add more learning needs</span>
+													<div class="col-md-12" style="text-align: center;">
+														<button class="btn btn-info" ng-click="pushNewKey(3);">
+															<span>+ Add more Learning Needs</span>
 														</button>
 													</div>
-
-													<div class="col-xs-12 col-sm-12 col-md-12" ng-if="keyAdded[3-1]">
-														<div class="col-xs-5 col-sm-5 col-md-5" style="margin-bottom: 15px;">
-															<input type="text" class="form-control" size="100%" placeholder="Add Learning Need" style="text-align: center;"
-															 ng-model="pk.keyword" required>
+												</div>
+												<div class="col-md-12" ng-show="switchView == 2">
+													<div class="row" ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | orderBy:'bsl_score':true"
+													 style="margin: 20px auto;">
+														<div class="col-md-10">
+															<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
 														</div>
-														<div class="col-xs-5 col-sm-5 col-md-5">
-															<input type="text" class="form-control" size="100%" placeholder="Add Description" style="text-align: center;"
-															 ng-model="pk.mini_descriptions[0].mini_description" required>
+														<div class="col-md-2" style="text-align: center;">
+															BSL Score: {{keys.bsl_score}}
 														</div>
-														<div class="col-xs-2 col-sm-2 col-md-2">
-															<button class="btn btn-danger" ng-click="addNewKey(3);">Done</button>
+														<div class="col-md-offset-1 col-md-11">
+															<span ng-if="keys.report_descriptions.length>0">{{keys.report_descriptions[0].mini_description}}</span>
+														</div>
+														<div class="col-md-offset-2 col-md-10" ng-repeat="rd in keys.report_descriptions | limitTo:keys.report_descriptions.length-1:1">
+															<span>{{rd.mini_description}}</span>
 														</div>
 													</div>
 												</div>
-												<div class="col-md-12" style="color: red;" ng-show="switchView == 1">* NOTE: highlighted area will not be
-													visible in non-editable view as RATING = 0, OR say nothing related.</div>
 											</div>
 											<hr>
 
@@ -4999,8 +5108,8 @@
 											</div>
 
 											<hr>
-											<div class="row" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 1">
-												<div style="margin: 0px auto;">
+											<div class="row" ng-repeat="r in user.assessor.recommend">
+												<div class="col-md-offset-4 col-md-4" style="margin: 5px auto; text-align: center;" ng-show="switchView == 1">
 													<ul class="tab-slider--tabs">
 														<li class="tab-slider--trigger" ng-class="r.page == 1 ? 'active-profile' : ''" ng-click="r.page = 1">Page
 															1</li>
@@ -5010,15 +5119,42 @@
 															3</li>
 													</ul>
 												</div>
-												<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												<div class="col-md-12" style="text-align: center;" ng-show="switchView == 1">
+													<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												</div>
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"
+												 ng-show="switchView == 2">
+													<h4> <b>{{r.title}}</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+														<header class="navbar-fixed-top well">
+															<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+																<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+																</span>
+																<!-- <span class="btn btn-mini" ng-mousedown="doFormat('italic', null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> format_italic </i>
+																</span> -->
+															</div>
+														</header>
+													</div>
+													<div class="col-md-12" style="padding: 5px;">
+														<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="r.desc"></div>
+													</div>
+												</div>
+												<!-- 
 												<br>
 												<textarea class="form-control" ng-model="r.desc" placeholder="Description"></textarea>
-												<br>
+												<br> -->
 												<!--<button class="btn btn-danger" style="margin-bottom: 40px;" ng-click="addNewLine($index)">+ Add Line-break</button>-->
-												<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="remove_to_recommend($index)">Remove</button>
+												<div class="col-md-12" ng-show="switchView == 1">
+													<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="remove_to_recommend($index)">Remove</button>
+												</div>
 												<br>
 											</div>
-											<div class="row col-md-12" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 2" style="padding: 10px;">
+											<!-- <div class="row col-md-12" ng-repeat="r in user.assessor.recommend" ng-show="switchView == 2" style="padding: 10px;">
 												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;">
 													<h4>
 														<b>{{r.title}}</b>
@@ -5029,7 +5165,7 @@
 													<p ng-bind-html="r.desc | linebreaks"></p>
 												</div>
 												<br>
-											</div>
+											</div> -->
 											<button class="btn btn-info" ng-click="add_to_recommend()" ng-show="switchView == 1">+ Add Section</button>
 											<hr>
 											<!--	section Recommendations		-->
@@ -5043,10 +5179,9 @@
 												<ul>
 													<li ng-repeat="mr in user.assessor.recommendations_for_manager" ng-if="mr.selected">
 														<span ng-show="switchView == 2">
+															<b style="font-size: 12px;">Competency - {{getProfileCompetencyMapping(mr.linked_competency)}}</b><br>
 															{{mr.brief}}<br>
-															{{mr.statement}}<br>
-															<i style="font-size: 12px;">Linked Competency -
-																{{getProfileCompetencyMapping(mr.linked_competency)}}</i>
+															{{mr.statement}}
 														</span>
 														<span ng-show="switchView == 1">
 															<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="mr.brief" size="100%"><br>

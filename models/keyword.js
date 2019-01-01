@@ -79,6 +79,14 @@ var descriptionSchema = new Schema({
     assessor_report_mini_check: { type: Boolean, default: true }
 });
 
+var descriptionReportSchema = new Schema({
+    mini_description_id: {                           //tells you the parent keyword and helps to distinguish mini-descriptions
+        type: String, default: "P__S__K__M__"
+    },
+    mini_description: String,
+    mini_description_h: String
+});
+
 var keywordSchema = new Schema({
     section_id: {                           //tell you the parent section of a keyword
         type: String, default: "P__S__"
@@ -100,7 +108,8 @@ var keywordSchema = new Schema({
     comment_placeholder: [new Schema({ question: String })],
     dummy_keyword: String,
     key_version: { type: String, default: 'v1.4' },
-    new_keyword: { type: Boolean, default: false }
+    new_keyword: { type: Boolean, default: false },
+    report_descriptions: [descriptionReportSchema]
 }, { usePushEach: true });
 
 module.exports = mongoose.model('keywordSchema', keywordSchema);

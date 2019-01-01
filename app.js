@@ -76,6 +76,7 @@ var team = require('./routes/team');
 var competency = require('./routes/competency');
 var growth_rec_assessor = require('./routes/growth_rec_assessor');
 var role_fitment = require('./routes/role_fitment');
+var profile_synthesis = require('./routes/profile_synthesis');
 
 // linking callback function to route
 app.use('/', routes);
@@ -97,6 +98,7 @@ app.use('/team', team);
 app.use('/competency', competency);
 app.use('/growth_rec_assessor', growth_rec_assessor);
 app.use('/role_fitment', role_fitment);
+app.use('/profile_synthesis', profile_synthesis);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

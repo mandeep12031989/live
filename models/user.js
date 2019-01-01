@@ -92,6 +92,15 @@ var descriptionSchema = new Schema({
     linked_ln: { type: Array, default: [] }
 });
 
+var descriptionReportSchema = new Schema({
+    mini_description_id: {                           //tells you the parent keyword and helps to distinguish mini-descriptions
+        type: String, default: "P__S__K__M__"
+    },
+    mini_description: String,
+    mini_description_h: String,
+    mini_by_assessor: { type: Boolean, default: false }
+});
+
 var profileSchema = new Schema({
     section_id: {                           //tell you the parent section of a keyword
         type: String,
@@ -138,7 +147,8 @@ var profileSchema = new Schema({
     },
     assessor_bal_in_report: { type: Boolean, default: true },
     assessor_report_keyword: { type: String, default: "" },
-    bsl_score: { type: Number, default: 0 }
+    bsl_score: { type: Number, default: 0 },
+    report_descriptions: [descriptionReportSchema]
 });
 
 var userSchema = new Schema({
@@ -354,7 +364,8 @@ var userSchema = new Schema({
             what_better: String,
             manager_review: String
         })]
-    }
+    },
+    attachments: { type: Array, default: [] }
 }, { usePushEach: true });
 
 // Methods

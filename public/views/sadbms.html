@@ -2,6 +2,26 @@
 	.bg-tab {
 		background-color: white;
 	}
+
+	.tree_left {
+		float: left; font-weight: bold;
+	}
+
+	.mybox {
+		position: relative;
+	}
+
+	.mybox:after {
+		content: '';
+		position: absolute;
+		bottom: 50%;
+		left: 0px;
+		top: 0px;
+		width: 50%;
+		border-left: 2px solid black;
+		width: 1.5%;
+		border-bottom: 2px solid black;
+	}
 </style>
 
 <span ng-show="loading">
@@ -79,6 +99,22 @@
 						<a href="" ng-class="tab_num == 4 ? 'bg-tab':''">
 							<i class="glyph-icon icon-upload"></i>
 							<span>Add NEW</span>
+						</a>
+					</li>
+					<li ng-click="tab_num = 24">
+						<a href="" ng-class="tab_num == 24 ? 'bg-tab':''">
+							<i class="glyph-icon icon-cog"></i>
+							<span>Report Descriptions</span>
+						</a>
+					</li>
+
+					<li class="header">
+						<span>Profile Synthesis</span>
+					</li>
+					<li ng-click="tab_num = 25">
+						<a href="" ng-class="tab_num == 25 ? 'bg-tab':''">
+							<i class="glyph-icon icon-cog"></i>
+							<span>Add / View / Edit</span>
 						</a>
 					</li>
 
@@ -428,49 +464,6 @@
 					</div>
 
 				</div>
-				<!--                        TAB 6                           -->
-				<div class="container" ng-show="tab_num == 6">
-					<div class="panel">
-						<div class="panel-body">
-							<h1 style="text-align:center; font-weight:bold;" class="title-hero">
-								Questionnaire
-							</h1>
-							<div class="example-box-wrapper">
-								<div id="form-wizard-3" class="form-wizard">
-
-									<div class="tab-content">
-
-										<div class="content-box" ng-repeat="q in questions">
-											<h4 class="content-box-header bg-blue">
-												{{q.num}}.
-												<input type="text" ng-model="q.desc" size="100%">
-											</h4>
-											<br>
-											<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
-												1.
-												<input type="text" ng-model="q.keywords[0].keyword" size="100%">
-												<br>
-												<br> Linking:
-												<input type="text" ng-model="q.keywords[0].linking">&nbsp;&nbsp;&nbsp; Profile:
-												<input type="text" ng-model="q.keywords[0].from_profile">
-												<br>
-												<br> 2.
-												<input type="text" ng-model="q.keywords[1].keyword" size="100%">
-												<br>
-												<br> Linking:
-												<input type="text" ng-model="q.keywords[1].linking">&nbsp;&nbsp;&nbsp; Profile:
-												<input type="text" ng-model="q.keywords[1].from_profile">
-											</div>
-											<button class="btn btn-success" ng-click="updateQues(q._id, q)" style="color: white; width: 100%;">Update</button>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 				<!--                        TAB 3                           -->
 				<div class="container" ng-show="tab_num == 3">
 					<div>
@@ -662,9 +655,53 @@
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-success" ng-click="updateThatProfile(profile_num, section_num, pk.keyword_id[8], $index, 1)"
+						<button type="button" class="btn btn-success" ng-click="updateThatProfile(profile_num, section_num, pk.keyword_id, $index, 1)"
 						 style="width:100%;">UPDATE</button>
 
+					</div>
+				</div>
+
+				<!--                        TAB 6                           -->
+				<div class="container" ng-show="tab_num == 6">
+					<div class="panel">
+						<div class="panel-body">
+							<h1 style="text-align:center; font-weight:bold;" class="title-hero">
+								Questionnaire
+							</h1>
+							<div class="example-box-wrapper">
+								<div id="form-wizard-3" class="form-wizard">
+
+									<div class="tab-content">
+
+										<div class="content-box" ng-repeat="q in questions">
+											<h4 class="content-box-header bg-blue">
+												{{q.num}}.
+												<input type="text" ng-model="q.desc" size="100%">
+											</h4>
+											<br>
+											<div class="content-box-wrapper" style="font-size: 15px; margin: 0 5px;">
+												1.
+												<input type="text" ng-model="q.keywords[0].keyword" size="100%">
+												<br>
+												<br> Linking:
+												<input type="text" ng-model="q.keywords[0].linking">&nbsp;&nbsp;&nbsp; Profile:
+												<input type="text" ng-model="q.keywords[0].from_profile">
+												<br>
+												<br> 2.
+												<input type="text" ng-model="q.keywords[1].keyword" size="100%">
+												<br>
+												<br> Linking:
+												<input type="text" ng-model="q.keywords[1].linking">&nbsp;&nbsp;&nbsp; Profile:
+												<input type="text" ng-model="q.keywords[1].from_profile">
+											</div>
+											<button class="btn btn-success" ng-click="updateQues(q._id, q)" style="color: white; width: 100%;">Update</button>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -1693,9 +1730,166 @@
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-success" ng-click="updateThatProfile(rec_num2, 2, pk.keyword_id[8], pk, 2)"
+						<button type="button" class="btn btn-success" ng-click="updateThatProfile(rec_num2, 2, pk.keyword_id, pk, 2)"
 						 style="width:100%;">UPDATE</button>
 
+					</div>
+				</div>
+				<!--                        TAB 24                           -->
+				<div class="container" ng-show="tab_num == 24" ng-init="profile_num=1; section_num=3">
+					<div>
+						Profile:
+						<input type="number" ng-model="profile_num" min="1" max="9">
+						<br>
+						<br> Section:
+						<input type="number" ng-model="section_num" min="1" max="4">
+						<br>
+						<br>
+						<button type="button" class="btn btn-danger" ng-click="getThatProfile(profile_num)" ng-disabled="!(profile_num && section_num)">GET</button>
+					</div>
+					<br>
+					<div class="panel" ng-repeat="pk in master" ng-show="pk.keyword_id[5] == section_num">
+						<div class="panel-body">
+							<div class="panel-heading row" style="background-color: #f0f0f0">
+								<div class="col-md-4" style="text-align: center;">
+									{{pk.keyword_id}}
+								</div>
+								<div class="col-md-4" style="text-align: center;">
+									{{pk.keyword}}
+								</div>
+								<div class="col-md-4" style="text-align: center;">
+									{{pk.keyword_h}}
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" ng-repeat="md in pk.report_descriptions" style="margin: 10px auto;">
+									<div class="col-md-3">
+										<input type="text" class="form-control" ng-model="md.mini_description_id" style="text-align:center; color: #FF0000;"
+										 placeholder="ID">
+									</div>
+									<div class="col-md-4">
+										<input type="text" class="form-control" ng-model="md.mini_description" style="text-align:center; color: #FF0000;"
+										 placeholder="Description">
+									</div>
+									<div class="col-md-4">
+										<input type="text" class="form-control" ng-model="md.mini_description_h" style="text-align:center; color: #FF0000;"
+										 placeholder="Hindi Description">
+									</div>
+									<div class="col-md-1">
+										<i class="material-icons" style="float: right; cursor: pointer;" ng-click="removeReportMD($parent.$index, $index)">clear</i>
+									</div>
+								</div>
+								<div class="col-md-12" style="text-align: center;">
+									<button class="btn btn-info pull-right" ng-click="addMoreReportMini(pk.keyword_id, $index)">+ Add Mini</button>
+								</div>
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-success" ng-click="updateThatProfile(profile_num, section_num, pk.keyword_id, $index, 1)"
+						 style="width:100%;">UPDATE</button>
+
+					</div>
+				</div>
+
+				<!--                        TAB 25                           -->
+				<div class="container" ng-show="tab_num == 25">
+					<div class="row" ng-init="profile_num=0">
+						<div class="col-xs-12">
+							Profile:<br>
+							<input type="number" ng-model="profile_num" min="1" max="9">
+						</div>
+						<div class="col-xs-12" style="margin: 20px auto;">
+							<button type="button" class="btn btn-danger" ng-click="fetchProfileSynthesis(profile_num)" ng-disabled="!profile_num">GET</button>
+						</div>
+					</div>
+					<div class="row" ng-if="syns && syns.length">
+						<div class="col-xs-12 panel" ng-repeat="mr in syns">
+							<div class="panel-body" style="margin-bottom: 15px;">
+								<div class="row" style="margin: 5px auto;">
+									<div class="col-md-12">
+										Root Node: <input type="checkbox" ng-model="mr.root_node">
+									</div>
+									<div class="col-md-2">
+										<input type="text" class="form-control" ng-model="mr.sID" style="text-align:center; color: #FF0000;"
+										 placeholder="ID">
+									</div>
+									<div class="col-md-10">
+										<input type="text" class="form-control" ng-model="mr.statement" style="text-align:center; color: #FF0000;"
+										 placeholder="Statement" ng-change="mr.custom_statement=true">
+									</div>
+									<div class="col-md-12" style="margin-top: 5px;">
+										<select class="form-control" ng-options="pk.keyword as pk.keyword for pk in master | filter: filterSec3()"
+										 ng-change="copyThisToSynthesis(mr, tempV)" ng-model="tempV"></select>
+									</div>
+									<div class="col-md-12" style="margin-top: 5px;">
+										<input type="text" class="form-control" ng-model="mr.sub_statement" style="text-align:center; color: #FF0000;"
+										 placeholder="Sub-Statement">
+									</div>
+								</div>
+								<div class="row" style="margin: 5px auto;">
+									<div class="col-md-3" style="margin: 2px auto; padding: 10px; border: 1px dotted #FF8800;" ng-repeat="cn in mr.child_nodes">
+										<div class="col-md-10">
+											<!-- <input type="text" class="form-control" ng-model="cn.child_node" style="text-align:center; color: #FF0000;"
+											 placeholder="Child Node ID"> -->
+											<select class="form-control" ng-options="pk.sID as pk.sID for pk in syns | filter: {root_node: false}"
+											 ng-model="cn.child_node"></select>
+										</div>
+										<div class="col-md-2">
+											<i class="material-icons" style="cursor: pointer;" ng-click="removeChild(mr.child_nodes, $index)">clear</i>
+										</div>
+									</div>
+									<div class="col-md-3" style="text-align: center; margin: auto 0;">
+										<button type="button" class="btn btn-warning" ng-click="addChild(mr)">+ Add Child</button>
+									</div>
+								</div>
+							</div>
+
+							<button type="button" class="btn btn-success" ng-click="updateSynthesis(mr)" style="width:100%;">UPDATE</button>
+
+						</div>
+						<div class="col-xs-offset-2 col-xs-8 panel" style="margin: 0 auto 15px auto;">
+							<div class="panel-heading" style="text-align: center;">
+								Tree View
+							</div>
+							<div class="panel-body" style="text-align: center;">
+								<div class="col-xs-12" ng-repeat-start="x in syns | filter: {root_node: true}" style="margin: 10px 5px;">
+									<div style="padding: 10px 5px; border: 1px solid red; border-radius: 10px;">
+										<span class="tree_left" style="color: red; margin: auto 0;">1</span>
+										{{x.statement}}<br>
+										<span style="font-size: 11px;">({{x.sub_statement}})</span>
+									</div>
+								</div>
+								<div class="col-xs-12 mybox" ng-repeat-start="y in x.child_nodes" style="margin: 10px 10%; padding-right: 20%;">
+									<div style="padding: 10px 5px; border: 1px solid grey; border-radius: 10px;">
+										<span class="tree_left" style="color: grey; margin: auto 0;">2</span>
+										{{getChilds(y.child_node).statement}}<br>
+										<span style="font-size: 11px;">({{getChilds(y.child_node).sub_statement}})</span>
+									</div>
+								</div>
+								<div class="col-xs-12 mybox" ng-repeat-start="z in getChilds(y.child_node).child_nodes" style="margin: 10px 20%; padding-right: 40%;">
+									<div style="padding: 10px 5px; border: 1px solid orange; border-radius: 10px;">
+										<span class="tree_left" style="color: orange; margin: auto 0;">3</span>
+										{{getChilds(z.child_node).statement}}<br>
+										<span style="font-size: 11px;">({{getChilds(z.child_node).sub_statement}})</span>
+									</div>
+								</div>
+								<div class="col-xs-12 mybox" ng-repeat-end ng-repeat="w in getChilds(z.child_node).child_nodes" style="margin: 10px 30%; padding-right: 60%;">
+									<div style="padding: 10px 5px; border: 1px solid green; border-radius: 10px;">
+										<span class="tree_left" style="color: green; margin: auto 0;">4</span>
+										{{getChilds(w.child_node).statement}}<br>
+										<span style="font-size: 11px;">({{getChilds(w.child_node).sub_statement}})</span>
+									</div>
+								</div>
+								<div ng-repeat-end></div>
+								<div ng-repeat-end></div>
+
+							</div>
+						</div>
+					</div>
+					<div class="row" ng-if="profile_num != 0">
+						<div class="col-xs-12" style="text-align: center;">
+							<button type="button" class="btn btn-danger" ng-click="addSynthesis()">+ Add</button>
+						</div>
 					</div>
 				</div>
 				<!--                        TABS END                           -->
