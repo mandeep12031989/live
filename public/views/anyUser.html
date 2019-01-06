@@ -225,6 +225,9 @@
 								<li ng-class="menu == 0 ? 'active_tab' : '' ">
 									<a href="" ng-click="menu = 0">Candidate Details</a>
 								</li>
+								<li ng-class="menu == 5 ? 'active_tab' : '' ">
+									<a href="" ng-click="menu = 5">Previous Round's Feedback</a>
+								</li>
 								<li ng-class="menu == 1 ? 'active_tab' : '' ">
 									<a href="" ng-click="menu = 1">RQs | Questionnaire</a>
 								</li>
@@ -497,320 +500,411 @@
 							</div>
 						</div>
 
+						<!--		TAB 5		-->
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="menu == 5">
+							<div class="panel panel-body">
+								<div class="col-xs-12">
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											Feedback from company HR on previous rounds
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="4" ng-model="user.rounds_feedback.q1"></textarea>
+										</div>
+									</div>
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											Feedback from iDiscover co-ordinator
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="4" ng-model="user.rounds_feedback.q2"></textarea>
+										</div>
+									</div>
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											Likely Profile Number(s)
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="2" ng-model="user.rounds_feedback.q3"></textarea>
+										</div>
+									</div>
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											Questions from CV/ LinkedIn
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="3" ng-model="user.rounds_feedback.q4"></textarea>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12" style="text-align: center; margin-top: 20px;">
+									<button type="button" class="btn btn-danger" ng-click="updateRoundFeedback()">Update</button>
+								</div>
+							</div>
+						</div>
+
 						<!--		TAB 1		-->
 
 						<div class="container panel panel-body" ng-show="menu == 1">
-							<h1 style="text-align:center; font-weight:bold;" class="title-hero">
-								Reflective Questions
-							</h1>
-							<div class="example-box-wrapper">
-								<div id="form-wizard-3" class="form-wizard">
+							<div class="row">
+								<div class="col-md-12">
+									<h1 style="text-align:center; font-weight:bold;" class="title-hero">
+										Reflective Questions
+									</h1>
+								</div>
+								<div class="col-md-6 example-box-wrapper">
+									<div id="form-wizard-3" class="form-wizard">
 
-									<div class="tab-content">
+										<div class="tab-content">
 
-										<div class="content-box">
-											<h4 class="content-box-header bg-blue">
-												Q1. What kind of people you like? What qualities you like in them?
-												<br>
-												<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपको किस तरह के लोग पसंद हैं? आप उनमें कौन से गुण पसंद करते
-												हैं ?
-											</h4>
-											<div class="content-box-wrapper" ng-if="user.question.RQ1">
-												<span>{{user.question.RQ1}}</span>
-												<br>
-												<br>
-												<span>
-													<b>Status:</b>
-													<button class="btn btn-danger" ng-show="user.question.RQeditable[0]" ng-click="user.question.RQeditable[0] = false; updateUserProfile();">Blocked</button>
-													<button class="btn btn-success" ng-show="!user.question.RQeditable[0]" ng-click="user.question.RQeditable[0] = true; updateUserProfile();">Allowed</button>
-												</span>
+											<div class="content-box">
+												<h4 class="content-box-header bg-blue">
+													Q1. What kind of people you like? What qualities you like in them?
+													<br>
+													<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपको किस तरह के लोग पसंद हैं? आप उनमें कौन से गुण पसंद करते
+													हैं ?
+												</h4>
+												<div class="content-box-wrapper" ng-if="user.question.RQ1">
+													<span>{{user.question.RQ1}}</span>
+													<br>
+													<br>
+													<span>
+														<b>Status:</b>
+														<button class="btn btn-danger" ng-show="user.question.RQeditable[0]" ng-click="user.question.RQeditable[0] = false; updateUserProfile();">Blocked</button>
+														<button class="btn btn-success" ng-show="!user.question.RQeditable[0]" ng-click="user.question.RQeditable[0] = true; updateUserProfile();">Allowed</button>
+													</span>
+												</div>
+												<div class="content-box-wrapper" ng-if="!user.question.RQ1">
+													<span>Not Answered Yet !</span>
+												</div>
 											</div>
-											<div class="content-box-wrapper" ng-if="!user.question.RQ1">
-												<span>Not Answered Yet !</span>
+
+											<div class="content-box">
+												<h4 class="content-box-header bg-blue">
+													Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.
+													<br>
+													<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपके करीबी दोस्त या रिश्तेदार आपका किस प्रकार का चित्रित
+													बतातें हैं
+													? कृपया सकारात्मक और नकारात्मक दोनों गुणों का उल्लेख करें ।
+												</h4>
+												<div class="content-box-wrapper" ng-if="user.question.RQ2">
+													<span>{{user.question.RQ2}}</span>
+													<br>
+													<br>
+													<span>
+														<b>Status:</b>
+														<button class="btn btn-danger" ng-show="user.question.RQeditable[1]" ng-click="user.question.RQeditable[1] = false; updateUserProfile();">Blocked</button>
+														<button class="btn btn-success" ng-show="!user.question.RQeditable[1]" ng-click="user.question.RQeditable[1] = true; updateUserProfile();">Allowed</button>
+													</span>
+												</div>
+												<div class="content-box-wrapper" ng-if="!user.question.RQ2">
+													<span>Not Answered Yet !</span>
+												</div>
 											</div>
+
+											<div class="content-box">
+												<h4 class="content-box-header bg-blue">
+													Q3. Mention positive and negative qualities about yourself that are not covered in question 2.
+													<br>
+													<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अपने बारे में सकारात्मक और नकारात्मक गुण बताएं जो सवाल 2
+													में
+													शामिल
+													नहीं किए गए हैं ?
+												</h4>
+												<div class="content-box-wrapper" ng-if="user.question.RQ3">
+													<span>{{user.question.RQ3}}</span>
+													<br>
+													<br>
+													<span>
+														<b>Status:</b>
+														<button class="btn btn-danger" ng-show="user.question.RQeditable[2]" ng-click="user.question.RQeditable[2] = false; updateUserProfile();">Blocked</button>
+														<button class="btn btn-success" ng-show="!user.question.RQeditable[2]" ng-click="user.question.RQeditable[2] = true; updateUserProfile();">Allowed</button>
+													</span>
+												</div>
+												<div class="content-box-wrapper" ng-if="!user.question.RQ3">
+													<span>Not Answered Yet !</span>
+												</div>
+											</div>
+
+											<div class="content-box">
+												<h4 class="content-box-header bg-blue">
+													Q4. Please mention negatives qualities that you have improved in last few years.
+													<br>
+													<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;कृपया उन नकारात्मक गुणों का उल्लेख करें जिन्हें आपने समय के
+													साथ सुधार
+													लिया है ?
+												</h4>
+												<div class="content-box-wrapper" ng-if="user.question.RQ4">
+													<span>{{user.question.RQ4}}</span>
+													<br>
+													<br>
+													<span>
+														<b>Status:</b>
+														<button class="btn btn-danger" ng-show="user.question.RQeditable[3]" ng-click="user.question.RQeditable[3] = false; updateUserProfile();">Blocked</button>
+														<button class="btn btn-success" ng-show="!user.question.RQeditable[3]" ng-click="user.question.RQeditable[3] = true; updateUserProfile();">Allowed</button>
+													</span>
+												</div>
+												<div class="content-box-wrapper" ng-if="!user.question.RQ4">
+													<span>Not Answered Yet !</span>
+												</div>
+											</div>
+
 										</div>
-
-										<div class="content-box">
-											<h4 class="content-box-header bg-blue">
-												Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.
-												<br>
-												<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपके करीबी दोस्त या रिश्तेदार आपका किस प्रकार का चित्रित
-												बतातें हैं
-												? कृपया सकारात्मक और नकारात्मक दोनों गुणों का उल्लेख करें ।
-											</h4>
-											<div class="content-box-wrapper" ng-if="user.question.RQ2">
-												<span>{{user.question.RQ2}}</span>
-												<br>
-												<br>
-												<span>
-													<b>Status:</b>
-													<button class="btn btn-danger" ng-show="user.question.RQeditable[1]" ng-click="user.question.RQeditable[1] = false; updateUserProfile();">Blocked</button>
-													<button class="btn btn-success" ng-show="!user.question.RQeditable[1]" ng-click="user.question.RQeditable[1] = true; updateUserProfile();">Allowed</button>
-												</span>
-											</div>
-											<div class="content-box-wrapper" ng-if="!user.question.RQ2">
-												<span>Not Answered Yet !</span>
-											</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											RQ statements to probe
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="6" ng-model="user.question.RQ_notes.q1"></textarea>
 										</div>
-
-										<div class="content-box">
-											<h4 class="content-box-header bg-blue">
-												Q3. Mention positive and negative qualities about yourself that are not covered in question 2.
-												<br>
-												<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अपने बारे में सकारात्मक और नकारात्मक गुण बताएं जो सवाल 2 में
-												शामिल
-												नहीं किए गए हैं ?
-											</h4>
-											<div class="content-box-wrapper" ng-if="user.question.RQ3">
-												<span>{{user.question.RQ3}}</span>
-												<br>
-												<br>
-												<span>
-													<b>Status:</b>
-													<button class="btn btn-danger" ng-show="user.question.RQeditable[2]" ng-click="user.question.RQeditable[2] = false; updateUserProfile();">Blocked</button>
-													<button class="btn btn-success" ng-show="!user.question.RQeditable[2]" ng-click="user.question.RQeditable[2] = true; updateUserProfile();">Allowed</button>
-												</span>
-											</div>
-											<div class="content-box-wrapper" ng-if="!user.question.RQ3">
-												<span>Not Answered Yet !</span>
-											</div>
+									</div>
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											Additional notes/ questions to probe
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="2" ng-model="user.question.RQ_notes.q2"></textarea>
 										</div>
-
-										<div class="content-box">
-											<h4 class="content-box-header bg-blue">
-												Q4. Please mention negatives qualities that you have improved in last few years.
-												<br>
-												<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;कृपया उन नकारात्मक गुणों का उल्लेख करें जिन्हें आपने समय के
-												साथ सुधार
-												लिया है ?
-											</h4>
-											<div class="content-box-wrapper" ng-if="user.question.RQ4">
-												<span>{{user.question.RQ4}}</span>
-												<br>
-												<br>
-												<span>
-													<b>Status:</b>
-													<button class="btn btn-danger" ng-show="user.question.RQeditable[3]" ng-click="user.question.RQeditable[3] = false; updateUserProfile();">Blocked</button>
-													<button class="btn btn-success" ng-show="!user.question.RQeditable[3]" ng-click="user.question.RQeditable[3] = true; updateUserProfile();">Allowed</button>
-												</span>
-											</div>
-											<div class="content-box-wrapper" ng-if="!user.question.RQ4">
-												<span>Not Answered Yet !</span>
-											</div>
+									</div>
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											Likely Profile Number(s)
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="2" ng-model="user.question.RQ_notes.q3"></textarea>
 										</div>
-
+									</div>
+									<div class="content-box">
+										<h5 class="content-box-header bg-blue">
+											Scores from RQs
+										</h5>
+										<div class="content-box-wrapper">
+											<textarea class="form-control" rows="3" ng-model="user.question.RQ_notes.q4"></textarea>
+										</div>
+									</div>
+									<div class="content-box" style="text-align: center;">
+										<button type="button" class="btn btn-danger" ng-click="updateRQnotes()">Update</button>
 									</div>
 								</div>
 							</div>
-							<hr style="border-width: 5px;">
-							<h1 style="text-align:center; font-weight:bold; margin-top: 25px;" class="title-hero">
-								Personality Test | Questionnaire
-							</h1>
-							<div class="row" ng-if="!showQuesAnalysis">
-								<button class="btn btn-warning" ng-click="showQuestionnaire();">Show Questionnaire Analysis</button>
+							<div class="row">
+								<hr style="border-width: 5px;">
 							</div>
-							<div class="row" ng-if="showQuesAnalysis">
+							<div class="row">
+								<div class="col-md-12">
+									<h1 style="text-align:center; font-weight:bold; margin-top: 25px;" class="title-hero">
+										Personality Test | Questionnaire
+									</h1>
+								</div>
+								<div class="col-md-12" ng-if="!showQuesAnalysis" style="text-align: center;">
+									<button class="btn btn-warning" ng-click="showQuestionnaire();">Show Questionnaire Analysis</button>
+								</div>
+								<div class="col-md-12" ng-if="showQuesAnalysis">
 
-								<div class="col-md-offset-2 col-md-8" style="margin-bottom: 25px;">
-									<table width="50%">
+									<div class="col-md-offset-2 col-md-8" style="margin-bottom: 25px;">
+										<table width="50%">
+											<tr>
+												<th>Profile</th>
+												<td>1</td>
+												<td>2</td>
+												<td>3</td>
+												<td>4</td>
+												<td>5</td>
+												<td>6</td>
+												<td>7</td>
+												<td>8</td>
+												<td>9</td>
+											</tr>
+											<tr>
+												<th>Scores</th>
+												<td>{{sumQues[0]}}</td>
+												<td>{{sumQues[1]}}</td>
+												<td>{{sumQues[2]}}</td>
+												<td>{{sumQues[3]}}</td>
+												<td>{{sumQues[4]}}</td>
+												<td>{{sumQues[5]}}</td>
+												<td>{{sumQues[6]}}</td>
+												<td>{{sumQues[7]}}</td>
+												<td>{{sumQues[8]}}</td>
+											</tr>
+										</table>
+									</div>
+									<div class="col-sm-offset-2 col-sm-8">
+										<div class="progress">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+											 aria-valuemax="5" style="width: {{sumQues[0]*12.5}}%" title="{{sumQues[0]}}">
+												Profile 1
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[1]*12.5}}%" title="{{sumQues[1]}}">
+												Profile 2
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[2]*12.5}}%" title="{{sumQues[2]}}">
+												Profile 3
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[3]*12.5}}%" title="{{sumQues[3]}}">
+												Profile 4
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[4]*12.5}}%" title="{{sumQues[4]}}">
+												Profile 5
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[5]*12.5}}%" title="{{sumQues[5]}}">
+												Profile 6
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[6]*12.5}}%" title="{{sumQues[6]}}">
+												Profile 7
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[7]*12.5}}%" title="{{sumQues[7]}}">
+												Profile 8
+											</div>
+										</div>
+										<div class="progress">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{sumQues[8]*12.5}}%" title="{{sumQues[8]}}">
+												Profile 9
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12" ng-if="showQuesAnalysis">
+									<style>
+										.btn_back_false {
+													border: 3px solid #E5E5E5;
+													font-weight: bold;
+													color: grey;
+												}
+			
+												.btn_back_true {
+													border: 3px solid #00C851;
+													font-weight: bold;
+													background: #F4FFFF;
+												}
+											</style>
+									<table style="width:100%; font-size: 10px; text-align: center;">
 										<tr>
-											<th>Profile</th>
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-											<td>5</td>
-											<td>6</td>
-											<td>7</td>
-											<td>8</td>
-											<td>9</td>
+											<td style="padding: 20px 0px;">
+												<b>Profile 1</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="1 == checkQues($index+1, 1) || 1 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="1 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="1 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
 										</tr>
 										<tr>
-											<th>Scores</th>
-											<td>{{sumQues[0]}}</td>
-											<td>{{sumQues[1]}}</td>
-											<td>{{sumQues[2]}}</td>
-											<td>{{sumQues[3]}}</td>
-											<td>{{sumQues[4]}}</td>
-											<td>{{sumQues[5]}}</td>
-											<td>{{sumQues[6]}}</td>
-											<td>{{sumQues[7]}}</td>
-											<td>{{sumQues[8]}}</td>
+											<td style="padding: 20px 0px;">
+												<b>Profile 2</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="2 == checkQues($index+1, 1) || 2 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="2 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="2 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 20px 0px;">
+												<b>Profile 3</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="3 == checkQues($index+1, 1) || 3 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="3 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="3 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 20px 0px;">
+												<b>Profile 4</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="4 == checkQues($index+1, 1) || 4 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="4 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="4 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 20px 0px;">
+												<b>Profile 5</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="5 == checkQues($index+1, 1) || 5 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="5 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="5 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 20px 0px;">
+												<b>Profile 6</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="6 == checkQues($index+1, 1) || 6 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="6 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="6 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 20px 0px;">
+												<b>Profile 7</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="7 == checkQues($index+1, 1) || 7 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="7 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="7 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 20px 0px;">
+												<b>Profile 8</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="8 == checkQues($index+1, 1) || 8 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="8 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="8 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="padding: 20px 0px;">
+												<b>Profile 9</b>
+											</td>
+											<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="9 == checkQues($index+1, 1) || 9 == checkQues($index+1, 2)">
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="9 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
+												<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
+												 ng-if="9 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
+											</td>
 										</tr>
 									</table>
 								</div>
-								<div class="col-sm-offset-2 col-sm-8">
-									<div class="progress">
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0"
-										 aria-valuemax="5" style="width: {{sumQues[0]*12.5}}%" title="{{sumQues[0]}}">
-											Profile 1
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[1]*12.5}}%" title="{{sumQues[1]}}">
-											Profile 2
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[2]*12.5}}%" title="{{sumQues[2]}}">
-											Profile 3
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[3]*12.5}}%" title="{{sumQues[3]}}">
-											Profile 4
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[4]*12.5}}%" title="{{sumQues[4]}}">
-											Profile 5
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[5]*12.5}}%" title="{{sumQues[5]}}">
-											Profile 6
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[6]*12.5}}%" title="{{sumQues[6]}}">
-											Profile 7
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[7]*12.5}}%" title="{{sumQues[7]}}">
-											Profile 8
-										</div>
-									</div>
-									<div class="progress">
-										<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										 aria-valuemax="100" style="width: {{sumQues[8]*12.5}}%" title="{{sumQues[8]}}">
-											Profile 9
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row" ng-if="showQuesAnalysis">
-								<style>
-									.btn_back_false {
-										border: 3px solid #E5E5E5;
-										font-weight: bold;
-										color: grey;
-									}
-
-									.btn_back_true {
-										border: 3px solid #00C851;
-										font-weight: bold;
-										background: #F4FFFF;
-									}
-								</style>
-								<table style="width:100%; font-size: 10px; text-align: center;">
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 1</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="1 == checkQues($index+1, 1) || 1 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="1 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="1 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 2</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="2 == checkQues($index+1, 1) || 2 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="2 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="2 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 3</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="3 == checkQues($index+1, 1) || 3 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="3 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="3 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 4</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="4 == checkQues($index+1, 1) || 4 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="4 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="4 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 5</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="5 == checkQues($index+1, 1) || 5 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="5 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="5 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 6</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="6 == checkQues($index+1, 1) || 6 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="6 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="6 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 7</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="7 == checkQues($index+1, 1) || 7 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="7 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="7 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 8</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="8 == checkQues($index+1, 1) || 8 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="8 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="8 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-									<tr>
-										<td style="padding: 20px 0px;">
-											<b>Profile 9</b>
-										</td>
-										<td style="padding: 20px 0px;" ng-repeat="_ in ((_ = []) && (_.length=36) && _) track by $index" ng-show="9 == checkQues($index+1, 1) || 9 == checkQues($index+1, 2)">
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 1 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="9 == checkQues($index+1, 1)" title="{{'Q'+($index+1)+'-S'+1}}">{{questionnaire[$index].keywords[0].linking}}</span>
-											<span class="btn" style="border-radius: 25px; font-size: 11px;" ng-class="user.question.questionnaire[$index] == 2 ? 'btn_back_true' : 'btn_back_false'"
-											 ng-if="9 == checkQues($index+1, 2)" title="{{'Q'+($index+1)+'-S'+2}}">{{questionnaire[$index].keywords[1].linking}}</span>
-										</td>
-									</tr>
-								</table>
 							</div>
 						</div>
 
@@ -2236,7 +2330,7 @@
 						<div class="container" ng-show="menu == 4 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
 							<b>Profile Not Selected Yet !</b>
 						</div>
-						<div class="container" ng-show="menu == 4 && user.profile.profile_number != 0">
+						<div class="container" ng-show="menu == 4 && user.profile.profile_number != 0">/
 
 							<div class="row">
 								<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="assessor_tab = 5">
@@ -3587,12 +3681,12 @@
 																						<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #f3f3f3; font-size: 14px;">
 																							<b>{{user.profile.eachSectionStopReflect[section_num-1]}}</b>
 																						</div>
-																						<div class="row" ng-show="section_num == 1" style="margin: 10px auto; font-size: 14px; font-weight: bold;">
+																						<!-- <div class="row" ng-show="section_num == 1" style="margin: 10px auto; font-size: 14px; font-weight: bold;">
 																							<span>"Could you tell us about a time when you did not find any of the above values in your
 																								environment?"</span>
 																							<br>
 																							<div class="col-md-12" style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #f3f3f3; font-size: 14px;">{{user.profile.eachSectionStopReflectElse.value.ques2}}</div>
-																						</div>
+																						</div> -->
 																						<div class="row" ng-show="section_num == 2">
 																							<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 15px; font-size: 14px; margin-bottom: 10px; font-weight: bold;">
 																								<span class="col-sm-12">
@@ -3738,7 +3832,11 @@
 																		<div class="row" style="width: 98%; margin: auto;">
 
 																			<div class="col-md-12" ng-show="section_num == 0" style="margin-bottom: 20px; font-size: 14px;">
-																				<div class="col-md-12 row" ng-repeat="rc in user.profile.beliefs" style="padding: 4px;">
+																				<div class="col-md-12" style="font-size: 13px; padding: 10px 0; font-weight: bold; text-align: center;">
+																					Score > 7 indicates limiting worldview (reactiveness)<br>Reactive candidates tend to relate
+																					strongly (> 7) with more than 2 learning needs
+																				</div>
+																				<div class="col-md-12 row" ng-repeat="rc in user.profile.beliefs" style="padding: 15px 4px; border-bottom: 2px solid #eee; margin: 0 auto;">
 																					<div class="col-md-6">{{rc.statement}}</div>
 																					<div class="col-md-6" style="text-align: center; padding: 0 5px; margin: 0 auto;">
 																						<div class="input-prepend input-group col-md-12">
@@ -3756,13 +3854,27 @@
 																					</div>
 																					<div class="col-md-6" style="padding: 5px; text-align: center;">
 																						<span style="font-size: 11px; font-weight: bold; color:#999;">(Why did you selected this rating?
-																							Why not less
-																							or why not more?)</span><br>
-																						<textarea rows="4" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you selected this rating? Why not less or why not more?
-"
+																							Why not less or why not more?)</span><br>
+																						<textarea rows="4" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you selected this rating? Why not less or why not more?"
 																						 ng-model="rc.comment" disabled ng-show="rc.comment"></textarea>
 																					</div>
-																					<div class="col-md-6" style="margin-bottom: 10px;"></div>
+																					<div class="col-md-6" style="text-align: center; padding: 5px; margin: 5px auto; background: #fee">
+																						<span style="font-size: 12px;">Assessor Notes</span><br>
+																						<select class="form-control" ng-model="rc.assessor_option">
+																							<option value="Belief is limiting (Reactive)">
+																								Belief is limiting (Reactive)
+																							</option>
+																							<option value="Belief is in balance">
+																								Belief is in balance
+																							</option>
+																							<option value="Belief not understood">
+																								Belief not understood
+																							</option>
+																						</select>
+																						<br>
+																						<textarea rows="3" class="form-control" placeholder="Add probing questions from belief or comment"
+																						 ng-model="rc.assessor_notes"></textarea>
+																					</div>
 																				</div>
 																			</div>
 
@@ -3774,7 +3886,7 @@
 																							<i class="material-icons" ng-if="keys.new_keyword" style="float: left; margin-top: auto; cursor: pointer;"
 																							 title="Keyword is hidden from user !">visibility_off</i>&nbsp;
 																							<i class="material-icons" ng-if="keys.new_keyword && !keys.key_added_to_assessor_library" style="float: left; margin-top: auto; cursor:pointer;"
-																							 ng-click="sendToAssessorLibrary('key', keys, null)" title="Click to Add in Assessor Library">person</i>
+																							 ng-click="sendToAssessorLibrary('key', keys, null)" title="Click to Add in Assessor Library">person</i>&nbsp;
 																							<i class="material-icons" ng-if="keys.new_keyword && keys.key_added_to_assessor_library" style="float: left; margin-top: auto; cursor:pointer;color:#4285F4;"
 																							 title="Already Added in Assessor Library">how_to_reg</i>
 																							<b>{{keys.keyword}}
@@ -3827,6 +3939,9 @@
 																									</span>
 																									<span ng-if="mini.mini_by_assessor && mini.added_to_assessor_library" title="Already added in Assessor Library">
 																										<i class="material-icons" style="float: left; margin-top: auto; color: #4285F4;">how_to_reg</i>&nbsp;
+																									</span>
+																									<span ng-if="mini.linked_ln.length" title="{{parseMiniIdsToString(mini.linked_ln)}}">
+																										<i class="material-icons" style="float: left; margin-top: auto; cursor: pointer;">ballot</i>&nbsp;
 																									</span>
 																									<h5 ng-class="mini.assessor_report_mini_check ? 'selected-mini' : ''" title="Click to append it in Assessor Report"
 																									 ng-click="mini.assessor_report_mini_check=!mini.assessor_report_mini_check; makeAssessorKeyword($parent.$index)"
@@ -3907,9 +4022,15 @@
 																									</div>
 																								</div>
 																							</div>
-																							<div class="col-sm-6">
+																							<!-- <div class="col-sm-6" ng-if="section_num==3">
 																								<textarea contenteditable="true" rows="5" class="form-control" ng-model="user.assessor.profile_content[$index].assessor_comment"
 																								 placeholder="Comment" style="text-align: center;">Comment</textarea>
+																							</div> -->
+																							<div class="col-sm-6" style="background: #fee" ng-if="section_num>=2 && section_num<=3">
+																								<span style="font-size: 12px;">Assessor Notes</span><br>
+																								<textarea rows="4" class="form-control" placeholder="{{section_num==2 ? 'Which learning need would you like to understand in more detail?
+																								(partially related/ excess strength fully related)' : 'Which learning need would you like to understand in more detail?'}}"
+																								 ng-model="user.assessor.profile_content[$index].assessor_comment"></textarea>
 																							</div>
 
 																						</div>
@@ -3950,7 +4071,7 @@
 																					</div>
 																				</div>
 																				<br>
-																				<div class="col-xs-12 col-sm-12 col-md-12 row" style="padding-bottom: 10px;">
+																				<div class="col-xs-12 col-sm-12 col-md-12 row" style="padding-bottom: 10px; margin: 0 auto;">
 																					<div class="col-xs-12 col-sm-12 col-md-12">
 																						<b>
 																							<span ng-show="section_num == 1">What is the most important value to you? Why is this important?</span>
@@ -3967,6 +4088,15 @@
 																						<textarea class="form-control" style="text-align: center;" ng-model="user.profile.eachSectionCombineComment.learning[1]"
 																						 ng-show="section_num==3" disabled></textarea>
 																					</div>
+																					<br>
+																					<div class="col-xs-12 col-sm-12 col-md-12" style="padding: 20px; background:#fee; margin-top: 10px;"
+																					 ng-show="section_num==1">
+																						<b>Assessor notes from values & work culture preferences<br>Can the organization/ manager meet
+																							this person’s preferences and expectations?</b>
+																						<br>
+																						<textarea class="form-control" ng-model="user.profile.eachSectionCombineComment.assessor_belief_note"
+																						 placeholder="Probe on any limiting preferences selected or written by candidate" rows="5"></textarea>
+																					</div>
 																				</div>
 																			</div>
 
@@ -3980,7 +4110,8 @@
 																					prior? &nbsp;&nbsp;
 																					<b>{{user.profile.eachSectionRelate[section_num-1]}}</b>
 																				</div>
-																				<div class="row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;"
+																				<div class="
+																								 row" style="font-size: 13px; color: grey; text-align: center; padding: 10px 50px;"
 																				 ng-show="user.profile.eachSectionRelate[section_num-1] != 'Above 90%' && user.profile.eachSectionRelate[section_num-1] != ''">
 																					<div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 6px;" ng-show="user.profile.eachSectionShareMore[section_num-1]">
 																						<b>Please share your
@@ -3997,7 +4128,8 @@
 
 																			<div class="col-xs-12 col-sm-12 col-md-12 row" style="margin: 0 auto;" ng-show="section_num == 2">
 																				<div class="col-md-12" style="margin: 15px auto;">
-																					<h4>You related with the following Strengths as 'Partially'. Please answer the question associated
+																					<h4>You related with the following Strengths as 'Partially'. Please answer the question
+																						associated
 																						with
 																						it.</h4>
 																				</div>
@@ -4291,6 +4423,8 @@
 																	<button type="button" class="btn btn-success" style="float: right;" ng-click="(section_num == 3)?section_num = section_num+2:section_num = section_num+1"
 																	 ng-disabled="section_num == 6">Next</button>
 																	<span style="display: block; text-align: center; margin-top: -35px; margin-left: 55px;">
+																		<button type="button" class="btn btn-warning" ng-click="updateAssessorBeliefs()" ng-if="section_num == 0">Update
+																			Beliefs</button>
 																		<!-- <button type="button" class="btn btn-warning" ng-click="submitAssessor(1)">Save</button> -->
 																		<br>
 																		<br>
@@ -4574,9 +4708,9 @@
 													<div class="col-md-8" style="text-align: left;">{{user.assessor.per_mast_lvl}}</div>
 												</div>
 											</div>
-											<hr>
+											<hr ng-if="false">
 											<!--	section 1	-->
-											<div class="row" style="padding: 20px;">
+											<div class="row" style="padding: 20px;" ng-if="false">
 												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;">
 													<h4>
 														<b>Professional Values and Work Culture Preferences</b>
@@ -4785,6 +4919,94 @@
 														<div class="col-md-offset-2 col-md-10" ng-repeat="rd in keys.report_descriptions | limitTo:keys.report_descriptions.length-1:1">
 															<span>{{rd.mini_description}}</span>
 														</div>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<!--	section 1	-->
+											<div class="row" style="padding: 20px;">
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;">
+													<h4><b>Professional Values and Work Culture Preferences</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" ng-show="switchView == 1">
+													<div class="col-md-12">
+														<ul>
+															<li ng-repeat="keys in user.assessor.profile_content | filter: filterSec1() | filter: {assessor_checkbox: true}"
+															 ng-show="keyHasStronglyRelate(keys)">
+																<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;">
+																	<i class="material-icons">clear</i>
+																</span>
+																<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" placeholder="Keyword" rows="1"
+																 cols="80"></textarea>
+
+																<ul>
+																	<li ng-if="keys.mini_descriptions.length>0 && firstUserStronglyRelate(keys)!=-1">
+																		<span class="btn" style="color: red;" ng-click="removeMiniDesc(keys,0)">
+																			<i class="material-icons">clear</i>
+																		</span>
+																		<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.mini_descriptions[firstUserStronglyRelate(keys)].mini_description"
+																		 placeholder="Mini-description" rows="1" cols="80"></textarea>
+																	</li>
+																	<li style="margin-left: 50px;" ng-repeat="rd in keys.mini_descriptions | filter: {relate: 'relatestrongly'} | limitTo:keys.mini_descriptions.length-1:1">
+																		<span class="btn" style="color: red;" ng-click="removeMiniDesc(keys,$index+1)">
+																			<i class="material-icons">clear</i>
+																		</span>
+																		<textarea type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="rd.mini_description"
+																		 placeholder="Mini-description" rows="1" cols="80"></textarea>
+																	</li>
+																	<li style="margin: 10px auto;">
+																		<button class="btn btn-warning" ng-click="pushNewMiniDesc(keys)">+ Add</button>
+																	</li>
+																</ul>
+															</li>
+														</ul>
+													</div>
+
+													<div class="col-md-12" style="text-align: center;">
+														<div class="col-xs-12 col-sm-12 col-md-12">
+															<button class="btn btn-info" ng-click="pushNewKey(1); keyAdded[1-1]=true;" ng-if="!keyAdded[1-1]">
+																<span>+ Add more values</span>
+															</button>
+														</div>
+
+														<div class="col-xs-12 col-sm-12 col-md-12" ng-if="keyAdded[1-1]">
+															<div class="col-xs-5 col-sm-5 col-md-5" style="margin-bottom: 15px;">
+																<input type="text" class="form-control" size="100%" placeholder="Add Value" style="text-align: center;"
+																 ng-model="pk.keyword" required>
+															</div>
+															<div class="col-xs-5 col-sm-5 col-md-5">
+																<input type="text" class="form-control" size="100%" placeholder="Add Description" style="text-align: center;"
+																 ng-model="pk.mini_descriptions[0].mini_description" required>
+															</div>
+															<div class="col-xs-2 col-sm-2 col-md-2">
+																<button class="btn btn-danger" ng-click="addNewKey(1);">Done</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-12" ng-show="switchView == 2">
+													<div class="row" ng-repeat="keys in user.assessor.profile_content | filter: filterSec1() | filter: {assessor_checkbox: true}"
+													 style="margin: 20px auto;" ng-show="keyHasStronglyRelate(keys)">
+														<div class="col-md-12">
+															<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
+														</div>
+														<div class="col-md-offset-1 col-md-11">
+															<span ng-if="keys.mini_descriptions.length>0">{{keys.mini_descriptions[firstUserStronglyRelate(keys)].mini_description}}</span>
+														</div>
+														<div class="col-md-offset-2 col-md-10" ng-repeat="rd in keys.mini_descriptions | filter: {relate: 'relatestrongly'} | limitTo:keys.mini_descriptions.length-1:1">
+															<span>{{rd.mini_description}}</span>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-12" style="padding: 15px 10%;">
+													<div class="col-xs-12 col-sm-12 col-md-12">
+														"What kind of work culture and work environment do you prefer?"
+													</div>
+													<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #f3f3f3; font-size: 14px;">
+														<b>{{user.profile.eachSectionStopReflect[0]}}</b>
 													</div>
 												</div>
 											</div>
@@ -5069,7 +5291,8 @@
 																		<b>(I)ntegrating</b>
 																		<br>
 																		<br>
-																		<span>[Giving and taking feedback;<br> Team player; Mentoring and<br> coaching; Conflict management]</span>
+																		<span>[Giving and taking feedback;<br> Team player; Mentoring and<br> coaching; Conflict
+																			management]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[1][2] >= -0.5 && countCompetenciesA2[1][2] < 0) || (countCompetenciesA2[1][2] > 1)">High</th>
 																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[1][2] >= -1 && countCompetenciesA2[1][2] < -0.5) || (countCompetenciesA2[1][2] > 0.5 && countCompetenciesA2[1][2] <= 1)">Medium</th>

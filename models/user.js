@@ -205,7 +205,10 @@ var userSchema = new Schema({
         growth_recommendations: [new Schema({ sID: String, statement: String, linked_keyword: String, selected: Boolean })],
         growth_recommendations_assessor: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, growth_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false }, linked_keywords: [new Schema({ mini_id: String })] })],
         old_growth_recommendations: [new Schema({ gr: Array, pro_num: Number })],
-        beliefs: [new Schema({ sID: String, statement: String, how_much: Number, comment: String, linked_ln: { type: Array, default: [] } })],
+        beliefs: [new Schema({
+            sID: String, statement: String, how_much: Number, comment: String, linked_ln: { type: Array, default: [] },
+            assessor_option: String, assessor_notes: String
+        })],
         old_beliefs: [new Schema({ bel: Array, pro_num: Number })],
         eachSectionRelate: Array,
         eachSectionShareMore: Array,
@@ -227,7 +230,7 @@ var userSchema = new Schema({
             }
         },
         eachSectionCombineComment: {
-            value: Array, strength: Array, learning: Array
+            assessor_belief_note: String, value: Array, strength: Array, learning: Array
         },
         sectionFillDone: {
             strength: { type: Boolean, default: false },
@@ -243,7 +246,13 @@ var userSchema = new Schema({
         RQ1: String, RQ2: String, RQ3: String, RQ4: String,
         RQeditable: Array, questionnaire: Array,
         RQtrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],				// in seconds
-        Questrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })]				// in seconds
+        Questrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],				// in seconds
+        RQ_notes: {
+            q1: String,
+            q2: String,
+            q3: String,
+            q4: String
+        }
     },
     last_modification: {
         type: Date, default: ''
@@ -365,7 +374,13 @@ var userSchema = new Schema({
             manager_review: String
         })]
     },
-    attachments: { type: Array, default: [] }
+    attachments: { type: Array, default: [] },
+    rounds_feedback: {
+        q1: String,
+        q2: String,
+        q3: String,
+        q4: String
+    }
 }, { usePushEach: true });
 
 // Methods
