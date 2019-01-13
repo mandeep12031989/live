@@ -251,7 +251,9 @@ var userSchema = new Schema({
             q1: String,
             q2: String,
             q3: String,
-            q4: String
+            q41: String,
+            q42: String,
+            q43: String
         }
     },
     last_modification: {
@@ -277,11 +279,13 @@ var userSchema = new Schema({
     assessor: {
         result: String, position: String, per_mast_lvl: String,
         slf_aware: Number, openness: Number, per_mast: Number,
+        specific_competency: [],
         profile_content: [profileSchema],
-        description: {
-            type: String,
-            default: '<b>--name--</b>\'s enneagram assessment results are <b>--positive/negative--</b>. <b>--He/She--</b> is at Moderate moving to higher personal mastery levels. <b>--He/She--</b> is enneagram type <b>--type--</b>.'
-        },
+        description: { type: String, default: '<b>--name--</b>\'s enneagram assessment results are <b>--positive/negative--</b>. <b>--He/She--</b> is at Moderate moving to higher personal mastery levels. <b>--He/She--</b> is enneagram type <b>--type--</b>.' },
+        role_fitment_title: { type: String, default: 'Role Fitment' },
+        role_fitment_description: String,
+        reason_for_change_title: { type: String, default: 'Reason for Change' },
+        reason_for_change_description: String,
         recommend: [new Schema({ title: String, desc: String, page: { type: Number, default: 1 } })],
         rubric: { type: Array, default: [] },
         recommendations_for_manager: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, recommendation_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
@@ -332,6 +336,8 @@ var userSchema = new Schema({
         },
         pdf_pages: {
             scores: { type: Boolean, default: true },
+            descriptions: { role_fitment: { type: Boolean, default: true }, reason: { type: Boolean, default: true } },
+            specific_competency: { type: Boolean, default: true },
             values_strengths: { type: Boolean, default: true },
             learning_need: { type: Boolean, default: true },
             values_role_fitment: { type: Boolean, default: true },

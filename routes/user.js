@@ -109,7 +109,7 @@ function fetchFacilitatorFromName(facilitator_name, cb) {
 		{ $match: { "name": facilitator_name } },
 		{ $project: { username: 1 } }
 	]).exec(function (err, results) {
-		cb(results[0].username || '');
+		cb((results && results.length && results[0]['username']) || '');
 	});
 }
 
