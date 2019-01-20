@@ -3136,7 +3136,7 @@
 									}
 								</style>
 
-								<div class="panel panel-body" style="width: 100%; margin-left: auto; margin-right: auto;">
+								<div class="panel panel-body" style="margin-left: auto; margin-right: auto;">
 									<div class="row col-sm-12">
 										<div class="col-sm-2">
 											<label class="control-label">Self-awareness and Clarity</label>
@@ -3286,6 +3286,38 @@
 										<div ng-repeat-end></div>
 
 									</div> -->
+								</div>
+
+								<div class="panel panel-body" style="margin-left: auto; margin-right: auto; text-align: center;">
+									<div class="row col-xs-12" style="margin: 10px 5px;">
+										<div class="col-xs-3 color_code_logic_both">
+											Suggested by logic; Selected by candidate
+										</div>
+										<div class="col-xs-3 color_code_logic_system">
+											Suggested by logic; Not selected by candidate
+										</div>
+										<div class="col-xs-3 color_code_logic_user">
+											Not suggested by logic, Selected by candidate
+										</div>
+										<div class="col-xs-3 color_code_logic_none">
+											Not suggested by logic, Not selected by candidate
+										</div>
+									</div>
+									<div class="col-xs-12" style="margin: 20px auto;">
+										<hr>
+									</div>
+									<div class="row">
+										<div class="col-md-offset-3 col-md-6" ng-repeat="keys in user.assessor.profile_content | filter: filterSec3()"
+										 style="margin: 10px auto;">
+											<div class="stat_box" ng-class="((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':(((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))">
+												<span class="tree_left">{{calculateBsScore(keys.keyword_id)}}</span>
+												{{keys.keyword}}
+											</div>
+										</div>
+										<div class="col-xs-12" style="color:red; font-size: 12px; margin-top: 20px;">
+											*Note - BS score is on left with corresponding learning need.
+										</div>
+									</div>
 								</div>
 							</div>
 

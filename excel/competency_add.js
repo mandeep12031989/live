@@ -24,7 +24,7 @@ function xyz() {
 		// we're connected!
 		console.log("Connected correctly to server");
 
-		var workbook = xlsx.readFile('competency_data.xlsx');
+		var workbook = xlsx.readFile('Competency format_online_V1.2.xlsx');
 		// workbook.SheetNames.forEach(function (sheetName) {
 		// 	// Get headers.
 		// 	var headers = [];
@@ -59,7 +59,7 @@ function xyz() {
 		// 	}
 		// });
 
-		var rows = xlsx.utils.sheet_to_json(workbook.Sheets['Sheet 1'])
+		var rows = xlsx.utils.sheet_to_json(workbook.Sheets['Sheet1'])
 		console.log(rows);
 
 		Competency.insertMany(rows, function (err) {

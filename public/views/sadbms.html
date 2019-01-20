@@ -1449,29 +1449,33 @@
 					<span>Domains: PM / P / A / E / I</span>
 					<div class="panel" ng-repeat="mr in compList">
 						<div class="panel-body" style="margin-bottom: 15px;">
-							<div class="col-md-1">
-								Domain:<br>
-								<input type="text" ng-model="mr.domain" style="text-align:center; color: #FF0000; width: 100%">
+							<div class="row">
+								<div class="col-md-1">
+									Domain:<br>
+									<input type="text" ng-model="mr.domain" style="text-align:center; color: #FF0000; width: 100%">
+								</div>
+								<div class="col-md-2">
+									ID:<br>
+									<input type="text" ng-model="mr.competency_id" style="text-align:center; color: #FF0000; width: 100%">
+								</div>
+								<div class="col-md-9">
+									Competency:<br>
+									<input type="text" ng-model="mr.competency" style="text-align:center; color: #FF0000; width: 100%">
+								</div>
 							</div>
-							<div class="col-md-2">
-								ID:<br>
-								<input type="text" ng-model="mr.competency_id" style="text-align:center; color: #FF0000; width: 100%">
-							</div>
-							<div class="col-md-9">
-								Competency:<br>
-								<input type="text" ng-model="mr.competency" style="text-align:center; color: #FF0000; width: 100%">
-							</div>
-							<div class="col-md-12" style="margin-top: 10px;">
-								Description:<br>
-								<input type="text" ng-model="mr.description" style="text-align:center; color: #FF0000; width: 100%">
-							</div>
-							<!-- <div class="col-md-2" style="margin-top: 10px;">
+							<div class="row">
+								<div class="col-md-12" style="margin-top: 10px;">
+									Description:<br>
+									<input type="text" ng-model="mr.description" style="text-align:center; color: #FF0000; width: 100%">
+								</div>
+								<!-- <div class="col-md-2" style="margin-top: 10px;">
 								Linked Growth Rec:<br>
 								<input type="text" ng-model="mr.growth_id" style="text-align:center; color: #FF0000; width: 100%">
 							</div> -->
+							</div>
 						</div>
 
-						<button type="button" class="btn btn-success" ng-click="updateGrowthRecommendAssessor($index)" style="width:100%; margin-top: 10px;">UPDATE</button>
+						<!-- <button type="button" class="btn btn-success" ng-click="updateGrowthRecommendAssessor($index)" style="width:100%; margin-top: 10px;">UPDATE</button> -->
 
 					</div>
 				</div>
