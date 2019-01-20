@@ -89,7 +89,8 @@ var descriptionSchema = new Schema({
         strength: { type: Array },
         learning: { type: Array }
     },
-    linked_ln: { type: Array, default: [] }
+    linked_ln: { type: Array, default: [] },
+    assessor_selection: String
 });
 
 var descriptionReportSchema = new Schema({
@@ -207,7 +208,7 @@ var userSchema = new Schema({
         old_growth_recommendations: [new Schema({ gr: Array, pro_num: Number })],
         beliefs: [new Schema({
             sID: String, statement: String, how_much: Number, comment: String, linked_ln: { type: Array, default: [] },
-            assessor_option: String, assessor_notes: String
+            assessor_option: String, assessor_notes: String, assessor_selection: String
         })],
         old_beliefs: [new Schema({ bel: Array, pro_num: Number })],
         eachSectionRelate: Array,
@@ -277,6 +278,7 @@ var userSchema = new Schema({
     peer_reviewers: [new Schema({ name: String, emailid: String, relationship: String, date: Date })],
     peer_reviews: [new Schema({ emailid: String, reviews: [profileSchema], last_modified: Date })],
     assessor: {
+        automation_slf_aware: Number, automation_openness: Number, automation_per_mast: Number,
         result: String, position: String, per_mast_lvl: String,
         slf_aware: Number, openness: Number, per_mast: Number,
         specific_competency: [],

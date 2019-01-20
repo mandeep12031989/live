@@ -2223,8 +2223,7 @@
 						<div class="container" ng-show="menu == 4 && user.profile.profile_number == 0" style="text-align: center; margin-top: 50px;">
 							<b>Profile Not Selected Yet !</b>
 						</div>
-						<div class="container" ng-show="menu == 4 && user.profile.profile_number != 0">/
-
+						<div class="container" ng-show="menu == 4 && user.profile.profile_number != 0">
 							<div class="row">
 								<div id="page-title" style="margin: 0px auto 0px auto;" ng-init="assessor_tab = 5">
 									<ul class="nav">
@@ -3137,8 +3136,106 @@
 									}
 								</style>
 
-								<div class="panel" style="width: 70%; margin-left: 15%;">
-									<div class="panel-body" style="text-align: center;">
+								<div class="panel panel-body" style="width: 100%; margin-left: auto; margin-right: auto;">
+									<div class="row col-sm-12">
+										<div class="col-sm-2">
+											<label class="control-label">Self-awareness and Clarity</label>
+										</div>
+										<div class="col-sm-10" style="text-align: center;">
+											<div class="col-sm-2">
+												<b>{{user.assessor.automation_slf_aware}}</b>
+											</div>
+											<div class="col-sm-10" style="margin-top: 7px; text-align: center;">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.automation_slf_aware*33.3}}%"
+													 ng-class="(user.assessor.automation_slf_aware>=0 && user.assessor.automation_slf_aware<=1)?'progress-bar-danger':(user.assessor.automation_slf_aware<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.automation_slf_aware}}
+														/ 3.0
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px; text-align: center;">
+												<span ng-show="user.assessor.automation_slf_aware>=0 && user.assessor.automation_slf_aware<=1">
+													{{user.assessor.rubric[0][0]}}
+												</span>
+												<span ng-show="user.assessor.automation_slf_aware>1 && user.assessor.automation_slf_aware<=2">
+													{{user.assessor.rubric[0][1]}}
+												</span>
+												<span ng-show="user.assessor.automation_slf_aware>2">
+													{{user.assessor.rubric[0][2]}}
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="row col-sm-12">
+										<div class="col-sm-2">
+											<label class="control-label">Openness and Self-disclosure</label>
+										</div>
+										<div class="col-sm-10" style="text-align: center;">
+											<div class="col-sm-2">
+												<b>{{user.assessor.automation_openness}}</b>
+											</div>
+											<div class="col-sm-10" style="margin-top: 7px;">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.automation_openness*33.3}}%"
+													 ng-class="(user.assessor.automation_openness>=0 && user.assessor.automation_openness<=1)?'progress-bar-danger':(user.assessor.automation_openness<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.automation_openness}}
+														/ 3.0
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px; text-align: center;">
+												<span ng-show="user.assessor.automation_openness>=0 && user.assessor.automation_openness<=1">
+													{{user.assessor.rubric[1][0]}}
+												</span>
+												<span ng-show="user.assessor.automation_openness>1 && user.assessor.automation_openness<=2">
+													{{user.assessor.rubric[1][1]}}
+												</span>
+												<span ng-show="user.assessor.automation_openness>2">
+													{{user.assessor.rubric[1][2]}}
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="row col-sm-12">
+										<div class="col-sm-2">
+											<label class="control-label">Personal Masterly and Ability to learn</label>
+										</div>
+										<div class="col-sm-10" style="text-align: center;">
+											<div class="col-sm-2">
+												<b>{{user.assessor.automation_per_mast}}</b>
+											</div>
+											<div class="col-sm-10" style="margin-top: 7px;">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.automation_per_mast*33.3}}%"
+													 ng-class="(user.assessor.automation_per_mast>=0 && user.assessor.automation_per_mast<=1)?'progress-bar-danger':(user.assessor.automation_per_mast<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.automation_per_mast}}
+														/ 3.0
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20px; text-align: center;">
+												<span ng-show="user.assessor.automation_per_mast>=0 && user.assessor.automation_per_mast<=1">
+													{{user.assessor.rubric[2][0]}}
+												</span>
+												<span ng-show="user.assessor.automation_per_mast>1 && user.assessor.automation_per_mast<=2">
+													{{user.assessor.rubric[2][1]}}
+												</span>
+												<span ng-show="user.assessor.automation_per_mast>2">
+													{{user.assessor.rubric[2][2]}}
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="row col-sm-12" style="margin-bottom: 20px; font-size: 16px; font-weight: bold;">
+										<div class="col-sm-2" style="text-align: right;">Total Scores: </div>
+										<div class="col-sm-10">
+											<div class="col-sm-2">
+												{{user.assessor.automation_slf_aware+user.assessor.automation_openness+user.assessor.automation_per_mast}}
+												/ 9.0
+											</div>
+											<div class="col-sm-10" style="text-align: left;">{{user.assessor.per_mast_lvl}}</div>
+										</div>
+									</div>
+
+									<!-- <div class="panel-body" style="text-align: center;">
 										<div class="row col-xs-12" style="margin: 10px 5px;">
 											<div class="col-xs-3 color_code_logic_both">
 												Suggested by logic; Selected by candidate
@@ -3188,7 +3285,7 @@
 										<div ng-repeat-end></div>
 										<div ng-repeat-end></div>
 
-									</div>
+									</div> -->
 								</div>
 							</div>
 
@@ -3621,6 +3718,40 @@
 																	</div>
 																</div>
 															</div>
+															<div class="col-xs-12" ng-show="section_num == 3" style="margin: 15px auto;">
+																<div class="row">
+																	<div class="col-xs-2" style="text-align: center;">
+																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_both"></span>
+																	</div>
+																	<div class="col-xs-10">
+																		Suggested by logic; Selected by candidate
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-2" style="text-align: center;">
+																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_system"></span>
+																	</div>
+																	<div class="col-xs-10">
+																		Suggested by logic; Not selected by candidate
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-2" style="text-align: center;">
+																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_user"></span>
+																	</div>
+																	<div class="col-xs-10">
+																		Not suggested by logic, Selected by candidate
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-xs-2" style="text-align: center;">
+																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_none"></span>
+																	</div>
+																	<div class="col-xs-10">
+																		Not suggested by logic, Not selected by candidate
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
 													<div class="col-xs-12 col-md-9">
@@ -3861,8 +3992,18 @@
 																					<div class="col-md-6" style="padding: 5px; text-align: center;">
 																						<span style="font-size: 11px; font-weight: bold; color:#999;">(Why did you select this rating?
 																							Why not less or why not more?)</span><br>
-																						<textarea rows="4" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you selected this rating? Why not less or why not more?"
-																						 ng-model="rc.comment" disabled ng-show="rc.comment"></textarea>
+																						<textarea rows="4" class="form-control" style="width: 100%; text-align: center;" placeholder="Why did you select this rating? Why not less or why not more?"
+																						 ng-model="rc.comment" disabled ng-show="rc.comment"></textarea><br>
+																						<ul class="tab-slider--tabs">
+																							<li class="tab-slider--trigger" ng-class="rc.assessor_selection=='worked' ? 'active-profile' : ''"
+																							 ng-click="rc.assessor_selection='worked'">Worked</li>
+																							<li class="tab-slider--trigger" ng-class="rc.assessor_selection=='not_worked' ? 'active-profile' : ''"
+																							 ng-click="rc.assessor_selection='not_worked'">Not Worked</li>
+																							<li class="tab-slider--trigger" ng-class="rc.assessor_selection=='not_understood' ? 'active-profile' : ''"
+																							 ng-click="rc.assessor_selection='not_understood'">Not Understood</li>
+																							<li class="tab-slider--trigger" ng-class="!rc.assessor_selection ? 'active-profile' : ''"
+																							 ng-click="rc.assessor_selection=''">None</li>
+																						</ul>
 																					</div>
 																					<div class="col-md-6" style="text-align: center; padding: 5px; margin: 5px auto; background: #fee">
 																						<span style="font-size: 12px;">Assessor Notes</span><br>
@@ -3905,7 +4046,8 @@
 																						</span>
 																					</div>
 																					<div class="panel-heading" style="text-align: center;" ng-if="keys.keyword_id[5]=='3'">
-																						(BSL Score: {{keys.bsl_score}})
+																						<span style="padding:2px 10px; border-radius:100%;" ng-class="((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':(((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))"></span>&nbsp;&nbsp;
+																						(BS Score: {{calculateBsScore(keys.keyword_id)}})
 																					</div>
 																					<div id="collapseOne" class="panel-collapse collapse in">
 																						<div class="panel-body pad0B col-sm-12">
@@ -3953,7 +4095,19 @@
 																									 ng-click="mini.assessor_report_mini_check=!mini.assessor_report_mini_check; makeAssessorKeyword($parent.$index)"
 																									 style="cursor: pointer;">
 																										<b>{{mini.mini_description}}</b>
-																									</h5>
+																									</h5><br ng-if="mini.linked_ln.length">
+																									<ul class="tab-slider--tabs" style="margin: 2px auto; text-align: center;" ng-if="mini.linked_ln.length">
+																										<li class="tab-slider--trigger" ng-class="mini.assessor_selection=='worked' ? 'active-profile' : ''"
+																										 ng-click="mini.assessor_selection='worked'" style="font-size:8px; padding:3px;">Worked</li>
+																										<li class="tab-slider--trigger" ng-class="mini.assessor_selection=='not_worked' ? 'active-profile' : ''"
+																										 ng-click="mini.assessor_selection='not_worked'" style="font-size:8px; padding:3px;">Not
+																											Worked</li>
+																										<li class="tab-slider--trigger" ng-class="mini.assessor_selection=='not_understood' ? 'active-profile' : ''"
+																										 ng-click="mini.assessor_selection='not_understood'" style="font-size:8px; padding:3px;">Not
+																											Understood</li>
+																										<li class="tab-slider--trigger" ng-class="!mini.assessor_selection ? 'active-profile' : ''"
+																										 ng-click="mini.assessor_selection=''" style="font-size:8px; padding:3px;">None</li>
+																									</ul>
 																								</div>
 
 

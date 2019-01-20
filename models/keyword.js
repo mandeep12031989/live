@@ -107,7 +107,7 @@ var keywordSchema = new Schema({
     balancing_description: [new Schema({ desc: String })],
     comment_placeholder: [new Schema({ question: String })],
     dummy_keyword: String,
-    key_version: { type: String, default: 'v1.4' },
+    key_version: { type: String, default: 'v2.13' },
     new_keyword: { type: Boolean, default: false },
     report_descriptions: [descriptionReportSchema]
 }, { usePushEach: true });
