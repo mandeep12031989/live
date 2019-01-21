@@ -3084,9 +3084,14 @@
 							<div class="container" ng-show="assessor_tab == 6 && user.profile.profile_number != 0" style="text-align: center;">
 								<style>
 									.tree_left {
-											float: left; font-weight: bold;
-											color: black; margin: auto 0;
-										}
+										float: left; font-weight: bold;
+										color: black; margin: auto 0;
+									}
+
+									.tree_right {
+										float: right; font-weight: bold;
+										color: black; margin: auto 0;
+									}
 
 									.mybox {
 										position: relative;
@@ -3309,13 +3314,14 @@
 									<div class="row">
 										<div class="col-md-offset-3 col-md-6" ng-repeat="keys in user.assessor.profile_content | filter: filterSec3()"
 										 style="margin: 10px auto;">
-											<div class="stat_box" ng-class="((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':(((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))">
+											<div class="stat_box" ng-class="(keys.key_rating>=0.5) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':((keys.key_rating>=0.5) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))">
 												<span class="tree_left">{{calculateBsScore(keys.keyword_id)}}</span>
+												<span class="tree_right">{{keys.key_rating | number:1}}</span>
 												{{keys.keyword}}
 											</div>
 										</div>
 										<div class="col-xs-12" style="color:red; font-size: 12px; margin-top: 20px;">
-											*Note - BS score is on left with corresponding learning need.
+											*Note - BS score is on left & LN score on right with corresponding learning need.
 										</div>
 									</div>
 								</div>
@@ -4078,7 +4084,7 @@
 																						</span>
 																					</div>
 																					<div class="panel-heading" style="text-align: center;" ng-if="keys.keyword_id[5]=='3'">
-																						<span style="padding:2px 10px; border-radius:100%;" ng-class="((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':(((keys.bsl_score-calculateBsScore(keys.keyword_id))>=2) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))"></span>&nbsp;&nbsp;
+																						<span style="padding:2px 10px; border-radius:100%;" ng-class="(keys.key_rating>=0.5) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':((keys.key_rating>=0.5) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))"></span>&nbsp;&nbsp;
 																						(BS Score: {{calculateBsScore(keys.keyword_id)}})
 																					</div>
 																					<div id="collapseOne" class="panel-collapse collapse in">
