@@ -29,47 +29,38 @@ var descriptionSchema = new Schema({
         }
     },
     paei_tag: {
-        //old
-        // ptag: {
-        //     type: Boolean, default: false
-        // },
-        // atag: {
-        //     type: Boolean, default: false
-        // },
-        // etag: {
-        //     type: Boolean, default: false
-        // },
-        // itag: {
-        //     type: Boolean, default: false
-        // },
-        //new
         pm: {
-            c01: { type: Boolean, default: false },
-            c02: { type: Boolean, default: false }
+
         },
         p: {
-            c03: { type: Boolean, default: false },
-            c04: { type: Boolean, default: false },
-            c05: { type: Boolean, default: false }
+            c19: { type: Boolean, default: false },
+            c20: { type: Boolean, default: false },
+            c21: { type: Boolean, default: false },
+            c22: { type: Boolean, default: false },
+            c23: { type: Boolean, default: false }
         },
         a: {
-            c06: { type: Boolean, default: false },
-            c07: { type: Boolean, default: false },
-            c08: { type: Boolean, default: false },
-            c09: { type: Boolean, default: false },
-            c10: { type: Boolean, default: false },
-            c11: { type: Boolean, default: false },
-            c12: { type: Boolean, default: false }
+            c24: { type: Boolean, default: false },
+            c25: { type: Boolean, default: false },
+            c26: { type: Boolean, default: false },
+            c27: { type: Boolean, default: false },
+            c28: { type: Boolean, default: false },
+            c29: { type: Boolean, default: false },
+            c30: { type: Boolean, default: false }
         },
         e: {
-            c13: { type: Boolean, default: false },
-            c14: { type: Boolean, default: false },
-            c15: { type: Boolean, default: false }
+            c31: { type: Boolean, default: false },
+            c32: { type: Boolean, default: false },
+            c33: { type: Boolean, default: false },
+            c34: { type: Boolean, default: false },
+            c35: { type: Boolean, default: false }
         },
         i: {
-            c16: { type: Boolean, default: false },
-            c17: { type: Boolean, default: false },
-            c18: { type: Boolean, default: false }
+            c36: { type: Boolean, default: false },
+            c37: { type: Boolean, default: false },
+            c38: { type: Boolean, default: false },
+            c39: { type: Boolean, default: false },
+            c40: { type: Boolean, default: false }
         }
     },
     responsive_statement: String,

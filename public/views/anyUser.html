@@ -3307,6 +3307,21 @@
 										<div class="col-xs-3 color_code_logic_none">
 											Not suggested by logic, Not selected by candidate
 										</div>
+										<div class="col-xs-12">
+											<hr>
+										</div>
+										<div class="col-xs-3 color_code_logic_both">
+											Count: {{calculateTotalBsScore()['both']}}
+										</div>
+										<div class="col-xs-3 color_code_logic_system">
+											Count: {{calculateTotalBsScore()['system']}}
+										</div>
+										<div class="col-xs-3 color_code_logic_user">
+											Count: {{calculateTotalBsScore()['user']}}
+										</div>
+										<div class="col-xs-3 color_code_logic_none">
+											Count: {{calculateTotalBsScore()['none']}}
+										</div>
 									</div>
 									<div class="col-xs-12" style="margin: 20px auto;">
 										<hr>
@@ -3314,8 +3329,8 @@
 									<div class="row">
 										<div class="col-md-offset-3 col-md-6" ng-repeat="keys in user.assessor.profile_content | filter: filterSec3()"
 										 style="margin: 10px auto;">
-											<div class="stat_box" ng-class="(keys.key_rating>=0.5) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':((keys.key_rating>=0.5) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))">
-												<span class="tree_left">{{calculateBsScore(keys.keyword_id)}}</span>
+											<div class="stat_box" ng-class="(keys.key_rating>=0.5) && (calculateBsScore(keys.keyword_id)['bs']>=1) ? 'color_code_logic_both':((keys.key_rating>=0.5) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)['bs']>=1) ? 'color_code_logic_system': 'color_code_logic_none'))">
+												<span class="tree_left">{{calculateBsScore(keys.keyword_id)['bs']}}/{{calculateBsScore(keys.keyword_id)['total']}}</span>
 												<span class="tree_right">{{keys.key_rating | number:1}}</span>
 												{{keys.keyword}}
 											</div>
@@ -3385,7 +3400,7 @@
 														<span style="margin-left: 14px; color: red;" ng-if="!(user.feedback.q3.a1 || user.feedback.q3.a2 || user.feedback.q3.a3 || user.feedback.q3.a5 || user.feedback.q3.a4)">
 															<br>- Not Filled -</span>
 													</div>
-													<div style="margin-top: 30px;">
+													<!-- <div style="margin-top: 30px;">
 														<label for="q4">4. Any new learning for yourself that you possibly had an idea about earlier but it got
 															deeper through this
 															exercise?
@@ -3393,9 +3408,9 @@
 														<br>
 														<span style="margin-left: 14px;" ng-if="user.feedback.q4">{{user.feedback.q4}}</span>
 														<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q4">- Not Filled | Deprecated -</span>
-													</div>
+													</div> -->
 													<div style="margin-top: 30px;">
-														<label for="q5">5. How likely are you to recommend this assessment to your friends and colleagues?</label>
+														<label for="q5">4. How likely are you to recommend this assessment to your friends and colleagues?</label>
 														<div class="input-prepend input-group col-md-12" style="margin-left: 0px;" ng-if="user.feedback.q5">
 															<span class="material-icons" ng-class="(user.feedback.q5>=1)?'checked':''" title="1">grade</span>
 															<span class="material-icons" ng-class="(user.feedback.q5>=2)?'checked':''" title="2">grade</span>
@@ -3412,14 +3427,14 @@
 															<br>- Not Filled -</span>
 													</div>
 													<div style="margin-top: 30px;">
-														<label for="q6">6. What is it that you liked most in this exercise? What is it that can be improved
+														<label for="q6">5. What is it that you liked most in this exercise? What is it that can be improved
 															further?</label>
 														<br>
 														<span style="margin-left: 14px;" ng-if="user.feedback.q6">{{user.feedback.q6}}</span>
 														<span style="margin-left: 14px; color: red;" ng-if="!user.feedback.q6">- Not Filled -</span>
 													</div>
 													<div style="margin-top: 30px;">
-														<label for="q7">7. Did you face any difficulty in finding any of the Step(s) on the Portal?</label>
+														<label for="q7">6. Did you face any difficulty in finding any of the Step(s) on the Portal?</label>
 														<div class="input-prepend input-group col-md-12" style="margin-left: 3px;" ng-if="user.feedback.q7">
 															<span class="material-icons" ng-class="(user.feedback.q7==1)?'checked':''" title="everytime" style="margin-right: 80px;">thumb_down</span>
 															<span class="material-icons" ng-class="(user.feedback.q7==2)?'checked':''" title="sometime">thumbs_up_down</span>
@@ -3671,8 +3686,8 @@
 																			<span class="allRating checked_rating">6</span>
 																		</label>
 																	</div>
-																	<div class="col-xs-4">{{dividedObj['s0']['6']/(dividedObj['s0']['6'] + dividedObj['s0']['7']) * 100 |
-																		number:2}} %</div>
+																	<div class="col-xs-4">{{(dividedObj['s0']['6']/(dividedObj['s0']['6'] + dividedObj['s0']['7']) * 100 |
+																		number:2) || 0}} %</div>
 																	<div class="col-xs-4">{{dividedObj['s0']['6']}}</div>
 																</div>
 																<div class="row">
@@ -3682,8 +3697,8 @@
 																			<span class="allRating checked_rating">7</span>
 																		</label>
 																	</div>
-																	<div class="col-xs-4">{{dividedObj['s0']['7']/(dividedObj['s0']['6'] + dividedObj['s0']['7']) * 100 |
-																		number:2}} %</div>
+																	<div class="col-xs-4">{{(dividedObj['s0']['7']/(dividedObj['s0']['6'] + dividedObj['s0']['7']) * 100 |
+																		number:2) || 0}} %</div>
 																	<div class="col-xs-4">{{dividedObj['s0']['7']}}</div>
 																</div>
 															</div>
@@ -3698,10 +3713,10 @@
 																			<span>&#xE15D;</span>
 																		</label>
 																	</div>
-																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotexhibitanymore']/(dividedObj['s'+section_num]['donotexhibitanymore']
+																	<div class="col-xs-4">{{(dividedObj['s'+section_num]['donotexhibitanymore']/(dividedObj['s'+section_num]['donotexhibitanymore']
 																		+ dividedObj['s'+section_num]['donotrelate'] + dividedObj['s'+section_num]['relatepartially'] +
 																		dividedObj['s'+section_num]['relatestrongly'])
-																		* 100 | number:2}} %</div>
+																		* 100 | number:2) || 0}} %</div>
 																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotexhibitanymore']}}</div>
 																</div>
 																<div class="row">
@@ -3710,11 +3725,11 @@
 																			<span>&#xE612;</span>
 																		</label>
 																	</div>
-																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotrelate']/(dividedObj['s'+section_num]['donotexhibitanymore']
+																	<div class="col-xs-4">{{(dividedObj['s'+section_num]['donotrelate']/(dividedObj['s'+section_num]['donotexhibitanymore']
 																		+ dividedObj['s'+section_num]['donotrelate']
 																		+ dividedObj['s'+section_num]['relatepartially'] + dividedObj['s'+section_num]['relatestrongly']) *
 																		100
-																		| number:2}} %</div>
+																		| number:2) || 0}} %</div>
 																	<div class="col-xs-4">{{dividedObj['s'+section_num]['donotrelate']}}</div>
 																</div>
 																<div class="row">
@@ -3723,11 +3738,11 @@
 																			<span>&#xE427;</span>
 																		</label>
 																	</div>
-																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatepartially']/(dividedObj['s'+section_num]['donotexhibitanymore']
+																	<div class="col-xs-4">{{(dividedObj['s'+section_num]['relatepartially']/(dividedObj['s'+section_num]['donotexhibitanymore']
 																		+ dividedObj['s'+section_num]['donotrelate']
 																		+ dividedObj['s'+section_num]['relatepartially'] + dividedObj['s'+section_num]['relatestrongly']) *
 																		100
-																		| number:2}} %</div>
+																		| number:2) || 0}} %</div>
 																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatepartially']}}</div>
 																</div>
 																<div class="row">
@@ -3736,11 +3751,11 @@
 																			<span>&#xE3A6;</span>
 																		</label>
 																	</div>
-																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatestrongly']/(dividedObj['s'+section_num]['donotexhibitanymore']
+																	<div class="col-xs-4">{{(dividedObj['s'+section_num]['relatestrongly']/(dividedObj['s'+section_num]['donotexhibitanymore']
 																		+ dividedObj['s'+section_num]['donotrelate']
 																		+ dividedObj['s'+section_num]['relatepartially'] + dividedObj['s'+section_num]['relatestrongly']) *
 																		100
-																		| number:2}} %</div>
+																		| number:2) || 0}} %</div>
 																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatestrongly']}}</div>
 																</div>
 															</div>
@@ -3762,7 +3777,7 @@
 																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_both"></span>
 																	</div>
 																	<div class="col-xs-10">
-																		Suggested by logic; Selected by candidate
+																		Suggested by logic; Selected by candidate (Count: {{calculateTotalBsScore()['both']}})
 																	</div>
 																</div>
 																<div class="row">
@@ -3770,7 +3785,7 @@
 																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_system"></span>
 																	</div>
 																	<div class="col-xs-10">
-																		Suggested by logic; Not selected by candidate
+																		Suggested by logic; Not selected by candidate (Count: {{calculateTotalBsScore()['system']}})
 																	</div>
 																</div>
 																<div class="row">
@@ -3778,7 +3793,7 @@
 																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_user"></span>
 																	</div>
 																	<div class="col-xs-10">
-																		Not suggested by logic, Selected by candidate
+																		Not suggested by logic, Selected by candidate (Count: {{calculateTotalBsScore()['user']}})
 																	</div>
 																</div>
 																<div class="row">
@@ -3786,7 +3801,7 @@
 																		<span style="padding:2px 10px; border-radius:100%;" class="color_code_logic_none"></span>
 																	</div>
 																	<div class="col-xs-10">
-																		Not suggested by logic, Not selected by candidate
+																		Not suggested by logic, Not selected by candidate (Count: {{calculateTotalBsScore()['none']}})
 																	</div>
 																</div>
 															</div>
@@ -4012,7 +4027,12 @@
 																					strongly (> 7) with more than 2 learning needs
 																				</div>
 																				<div class="col-md-12 row" ng-repeat="rc in user.profile.beliefs" style="padding: 15px 4px; border-bottom: 2px solid #eee; margin: 0 auto;">
-																					<div class="col-md-6">{{rc.statement}}</div>
+																					<div class="col-md-6">
+																						<span ng-if="rc.linked_ln.length" title="{{parseMiniIdsToString(rc.linked_ln)}}">
+																							<i class="material-icons" style="float: left; margin-top: auto; cursor: pointer;">ballot</i>&nbsp;
+																						</span>
+																						{{rc.statement}}
+																					</div>
 																					<div class="col-md-6" style="text-align: center; padding: 0 5px; margin: 0 auto;">
 																						<div class="input-prepend input-group col-md-12">
 																							<span ng-class="(rc.how_much>=1)?'checked_rating':''" title="1" class="allRating">1</span>
@@ -4084,8 +4104,9 @@
 																						</span>
 																					</div>
 																					<div class="panel-heading" style="text-align: center;" ng-if="keys.keyword_id[5]=='3'">
-																						<span style="padding:2px 10px; border-radius:100%;" ng-class="(keys.key_rating>=0.5) && (calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_both':((keys.key_rating>=0.5) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)>=1) ? 'color_code_logic_system': 'color_code_logic_none'))"></span>&nbsp;&nbsp;
-																						(BS Score: {{calculateBsScore(keys.keyword_id)}})
+																						<span style="padding:2px 10px; border-radius:100%;" ng-class="(keys.key_rating>=0.5) && (calculateBsScore(keys.keyword_id)['bs']>=1) ? 'color_code_logic_both':((keys.key_rating>=0.5) ? 'color_code_logic_user':((calculateBsScore(keys.keyword_id)['bs']>=1) ? 'color_code_logic_system': 'color_code_logic_none'))"></span>&nbsp;&nbsp;
+																						(BS Score:
+																						{{calculateBsScore(keys.keyword_id)['bs']}}/{{calculateBsScore(keys.keyword_id)['total']}})
 																					</div>
 																					<div id="collapseOne" class="panel-collapse collapse in">
 																						<div class="panel-body pad0B col-sm-12">
@@ -5012,76 +5033,68 @@
 											<!--	section 2	-->
 											<div class="row" style="padding: 20px;">
 												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;">
-													<h4>
-														<b>Professional Strengths</b>
-													</h4>
+													<h4><b>Strengths</b></h4>
 													<br>
 												</div>
-												<ul ng-show="switchView == 1">
-													<li ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_checkbox"
-													 ng-style="keys.assessor_key_rating != 0 ? '' : {'background': '#fff3e0', 'padding':'5px 10px'}">
-														<!-- <input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" size="56%"> -->
-														<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" rows="1" cols="50"></textarea>
-														<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;">
-															<i class="material-icons">clear</i>
-														</span>
+												<div class="col-md-12" ng-show="switchView == 1">
+													<div class="col-md-12">
 														<ul>
-															<li>
-																<!--														<input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.mini_descriptions[firstMD($index)].mini_description" size="50%">-->
-																<!-- <input type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="keys.assessor_report_keyword" size="50%"> -->
-																<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.assessor_report_keyword" rows="1"
+															<li ng-repeat="keys in user.assessor.profile_content | filter: filterSec2() | filter: {assessor_checkbox: true}">
+																<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;">
+																	<i class="material-icons">clear</i>
+																</span>
+																<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" placeholder="Keyword" rows="1"
 																 cols="80"></textarea>
+
+																<ul>
+																	<li style="margin-left: 50px;" ng-repeat="rd in keys.mini_descriptions" ng-show="rd.relate == 'relatestrongly' && rd.assessor_report_mini_check">
+																		<span class="btn" style="color: red;" ng-click="removeMiniDesc(keys,$index)">
+																			<i class="material-icons">clear</i>
+																		</span>
+																		<textarea type="text" style="padding: 5px; margin-bottom: 5px;" ng-model="rd.mini_description"
+																		 placeholder="Mini-description" rows="1" cols="80"></textarea>
+																	</li>
+																	<li style="margin: 10px auto;">
+																		<button class="btn btn-warning" ng-click="pushNewMiniDesc(keys)">+ Add</button>
+																	</li>
+																</ul>
 															</li>
 														</ul>
-													</li>
-												</ul>
-												<div class="col-md-4" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == 2 && keys.assessor_key_rating != 0 && keys.assessor_checkbox"
-												 style="margin: 10px auto; padding: 10px; display: inline-block;" ng-show="switchView == 2">
+													</div>
 
-													<div class="col-md-12 row" style="margin: 0 auto; border: 1px solid #ddd; border-radius: 25px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.05); padding: 10px;">
+													<div class="col-md-12" style="text-align: center;">
+														<div class="col-xs-12 col-sm-12 col-md-12">
+															<button class="btn btn-info" ng-click="pushNewKey(2); keyAdded[2-1]=true;" ng-if="!keyAdded[2-1]">
+																<span>+ Add more strengths</span>
+															</button>
+														</div>
 
-														<div class="col-md-3" style="margin: auto 0;">
-															<div class="c1002 small">
-																<div class="c100 small" ng-class="(keys.assessor_key_rating >= 0 && keys.assessor_key_rating <= 0.5) ? 'p33 grey' : ((keys.assessor_key_rating > 0.5 && keys.assessor_key_rating <= 1) ? 'p66 orange' : 'p100 blue')">
-																	<div class="slice">
-																		<div class="bar"></div>
-																		<div class="fill"></div>
-																	</div>
-																</div>
+														<div class="col-xs-12 col-sm-12 col-md-12" ng-if="keyAdded[2-1]">
+															<div class="col-xs-5 col-sm-5 col-md-5" style="margin-bottom: 15px;">
+																<input type="text" class="form-control" size="100%" placeholder="Add Strength" style="text-align: center;"
+																 ng-model="pk.keyword" required>
+															</div>
+															<div class="col-xs-5 col-sm-5 col-md-5">
+																<input type="text" class="form-control" size="100%" placeholder="Add Description" style="text-align: center;"
+																 ng-model="pk.mini_descriptions[0].mini_description" required>
+															</div>
+															<div class="col-xs-2 col-sm-2 col-md-2">
+																<button class="btn btn-danger" ng-click="addNewKey(2);">Done</button>
 															</div>
 														</div>
-														<div class="col-md-9" style="margin: auto 0;">
-															<div class="col-md-12" style="font-size: 18px; font-weight: bold;">{{keys.keyword}}</div>
-															<!--													<div class="col-md-12">{{keys.mini_descriptions[firstMD($index)].mini_description}}</div>-->
-															<div class="col-md-12">{{keys.assessor_report_keyword}}</div>
-														</div>
-
 													</div>
-
 												</div>
-												<div class="col-md-12 row" style="text-align: center;" ng-show="switchView == 1">
-													<div class="col-xs-12 col-sm-12 col-md-12">
-														<button class="btn btn-info" ng-click="pushNewKey(2); keyAdded[2-1]=true;" ng-if="!keyAdded[2-1]">
-															<span>+ Add more strengths</span>
-														</button>
-													</div>
-
-													<div class="col-xs-12 col-sm-12 col-md-12" ng-if="keyAdded[2-1]">
-														<div class="col-xs-5 col-sm-5 col-md-5" style="margin-bottom: 15px;">
-															<input type="text" class="form-control" size="100%" placeholder="Add Strength" style="text-align: center;"
-															 ng-model="pk.keyword" required>
+												<div class="col-md-12" ng-show="switchView == 2">
+													<div class="row" ng-repeat="keys in user.assessor.profile_content | filter: filterSec2() | filter: {assessor_checkbox: true}"
+													 style="margin: 20px auto;">
+														<div class="col-md-12">
+															<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
 														</div>
-														<div class="col-xs-5 col-sm-5 col-md-5">
-															<input type="text" class="form-control" size="100%" placeholder="Add Description" style="text-align: center;"
-															 ng-model="pk.mini_descriptions[0].mini_description" required>
-														</div>
-														<div class="col-xs-2 col-sm-2 col-md-2">
-															<button class="btn btn-danger" ng-click="addNewKey(2);">Done</button>
+														<div class="col-md-offset-2 col-md-10" ng-repeat="rd in keys.mini_descriptions | filter: {relate: 'relatestrongly', assessor_report_mini_check: true}">
+															<span>{{rd.mini_description}}</span>
 														</div>
 													</div>
 												</div>
-												<div class="col-md-12" style="color: red;" ng-show="switchView == 1">* NOTE: highlighted area will not be
-													visible in non-editable view as RATING = 0, OR say nothing related.</div>
 											</div>
 											<hr>
 											<!--	section 3	-->
