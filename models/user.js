@@ -72,7 +72,7 @@ var descriptionSchema = new Schema({
     assessor_relate: {
         type: String, default: ""
     },
-    assessor_report_mini_check: { type: Boolean, default: true },
+    assessor_report_mini_check: { type: Boolean, default: false },
     mini_by_assessor: { type: Boolean, default: false },
     added_to_assessor_library: { type: Boolean, default: false },
     relate_percentage: { type: Number, default: 0 },
@@ -223,6 +223,11 @@ var userSchema = new Schema({
         },
         eachSectionCombineComment: {
             assessor_belief_note: String, value: Array, strength: Array, learning: Array
+        },
+        eachSectionRelateCombineComment: {
+            learning: {
+                ques1: String
+            }
         },
         sectionFillDone: {
             strength: { type: Boolean, default: false },

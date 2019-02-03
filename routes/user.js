@@ -351,7 +351,7 @@ router.route('/report/:id')
 	.get(function (req, res, next) {
 		var id = sanitize(req.params.id);
 
-		User.findOne({ _id: id }, { 'profile.profile_content': true, 'profile.eachSectionStopReflect': true, 'profile.growth_recommendations': true, 'firstname': true, 'lastname': true })
+		User.findOne({ _id: id }, { 'profile.profile_content': true, 'profile.eachSectionStopReflect': true, 'profile.growth_recommendations': true, 'firstname': true, 'lastname': true, 'profile.beliefs': true, 'profile.profile_number': true })
 			.exec(function (err, user) {
 				if (err)
 					return next(err);
@@ -797,7 +797,7 @@ router.route('/profile/getProfile')
 		User.findOne({ _id: id },
 			{
 				'firstname': true, 'lastname': true, 'feedback': true, 'language': true,
-				'profile.profile_content': true, 'profile.profile_number': true, 'profile.track': true, 'profile.eachSectionTrack': true, 'profile.growth_recommendations': true, 'profile.beliefs': true, 'profile.eachSectionRelate': true, 'profile.eachSectionShareMore': true, 'profile.eachSectionEditable': true, 'profile.eachSectionStopReflect': true, 'profile.eachSectionStopReflectElse': true, 'profile.eachSectionStopReflectDone': true, 'profile.eachSectionStopReflectPAEI': true, 'profile.StopReflectPAEIDropdown': true, 'profile.eachSectionCombineComment': true, 'profile.growth_recommendations_assessor': true
+				'profile.profile_content': true, 'profile.profile_number': true, 'profile.track': true, 'profile.eachSectionTrack': true, 'profile.growth_recommendations': true, 'profile.beliefs': true, 'profile.eachSectionRelate': true, 'profile.eachSectionShareMore': true, 'profile.eachSectionEditable': true, 'profile.eachSectionStopReflect': true, 'profile.eachSectionStopReflectElse': true, 'profile.eachSectionStopReflectDone': true, 'profile.eachSectionStopReflectPAEI': true, 'profile.StopReflectPAEIDropdown': true, 'profile.eachSectionCombineComment': true, 'profile.growth_recommendations_assessor': true, 'profile.eachSectionRelateCombineComment': true
 			})
 			.exec(function (err, user) {
 				if (err)

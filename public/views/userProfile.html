@@ -764,7 +764,7 @@ In administrating:
 																<!-- <textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Does an excess use of this strength turn into a weakness (learning need) for you? If yes, how?"
 																 ng-if="section_num == 2" style="text-align: center;" ng-class="(!keys.comment) && (checkRel[section_num])?'bg_uncomp':''"></textarea> -->
 																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="In what ways is this learning need affecting you?"
-																 ng-if="section_num == 3" style="text-align: center;" ng-class="(!keys.comment) && (checkRel[section_num])?'bg_uncomp':''"></textarea>
+																 ng-if="section_num == 3" style="text-align: center;" ng-class="validateComment(keys.keyword_id) && (checkRel[section_num])?'bg_uncomp':''"></textarea>
 															</div>
 															<br>
 														</div>
@@ -874,39 +874,20 @@ In administrating:
 
 											<div class="col-xs-12 col-sm-12 col-md-12 row" style="margin: 0 auto;" ng-show="section_num == 3 && profile_content.profile.sectionFillDone.learning">
 												<div class="col-md-12" style="margin: -15px auto 15px auto;">
-													<h4>You related with the following Learning Needs as 'Improved Over Time'. Please answer the questions
+													<h4>You related with the following Learning Needs as 'Improved Over Time'. Please answer the question
 														associated with it.</h4>
 												</div>
-												<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content | filter: {new_keyword:false}"
-												 ng-if="keys.keyword_id[5] == '3'">
-													<div class="col-md-12" ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}"
-													 style="padding: 5px 10px 10px 10px;">
-														<span style="font-size: 15px;">{{mini.mini_description}}</span>
-														<br><br>
-														<!-- <span>How much would you rate yourself earlier on this learning need on a scale of 1-5 ?</span><br>
-														<select class="form-control" ng-model="mini.questions.learning[0]" ng-class="!mini.questions.learning[0]?'bg_uncomp':''">
-															<option default disabled>-- SELECT --</option>
-															<option value="1">1 (Not present at all)</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5 (Affected me strongly)</option>
-														</select>
-														<span>How much would you rate yourself now ?</span><br>
-														<select class="form-control" ng-model="mini.questions.learning[1]" ng-class="!mini.questions.learning[1]?'bg_uncomp':''">
-															<option default disabled>-- SELECT --</option>
-															<option value="1">1 (Not present at all)</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-															<option value="4">4</option>
-															<option value="5">5 (Affected me strongly)</option>
-														</select>
-														<br> -->
-														<textarea class="form-control" ng-model="mini.questions.learning[2]" placeholder="How did it affect you in the past? And how did you overcome it?"
-														 ng-class="!mini.questions.learning[2]?'bg_uncomp':''"></textarea>
-														<br><br>
-														<hr style="border: 1px solid #ddd;">
-													</div>
+												<div class="col-md-12">
+													<ul ng-repeat="keys in profile_content.profile.profile_content | filter: {new_keyword:false} | filter: filterSec3()"
+													 style="margin: 0 auto;">
+														<li ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}" style="margin: 5px 10px; font-size:14px;">{{mini.mini_description}}</li>
+													</ul>
+												</div>
+												<div class="col-md-12" style="padding: 5px 10px; text-align: center;">
+													<span style="font-size:12px; font-weight: bold;">How did these affect you in the past? And how did you
+														overcome them?</span>
+													<textarea class="form-control" rows="4" ng-model="profile_content.profile.eachSectionRelateCombineComment.learning.ques1"
+													 placeholder="How did these affect you in the past? And how did you overcome them?" ng-class="!profile_content.profile.eachSectionRelateCombineComment.learning.ques1?'bg_uncomp':''"></textarea>
 												</div>
 											</div>
 

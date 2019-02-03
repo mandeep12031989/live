@@ -24,6 +24,11 @@ var mailOptions, link, token;
 
 exports.custom_mail = function (data, callback) {
 	// console.log(data.to)
+	if (Array.isArray(data.to))
+		data.to.push('info@idiscover.me');
+	else
+		data.to = [data.to, 'info@idiscover.me'];
+
 	mailOptions = {
 		from: '"iDiscover.me" info@idiscover.me',
 		bcc: data.to,

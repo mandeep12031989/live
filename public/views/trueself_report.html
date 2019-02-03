@@ -1259,6 +1259,32 @@
 					</div>
 				</div>
 
+				<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
+					<div class="row">
+						<div class="col-md-12">
+							<h2 style="text-align:center" id="page-title">
+								<b>Growth Recommendations</b>
+							</h2>
+						</div>
+						<div class="col-md-12" style="padding: 0px 50px;">
+							<h5 style="text-align:center" id="page-title">
+								<b>The following growth tips are selected keeping in mind your identified learning needs, to assist you in
+									managing
+									yourself, working with others more effectively. We recommend to adopt a couple of them as a daily practice.</b>
+							</h5>
+						</div>
+						<div class="col-md-12" style="padding: 0 50px;">
+							<ul class="row" style="font-size: 16px;">
+								<li class="col-md-12" ng-repeat="rc in profile_content.profile.growth_recommendations" ng-if="checkToShow(rc.linked_keyword)"
+								 style="padding: 10px 30px;">
+									{{rc.statement}}
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
 				<div class="panel panel-body" style="margin: 0 65px 20px 65px; font-size: 15px;">
 					<div class="row container">
 						<div class="col-md-12">
@@ -1344,31 +1370,6 @@
 					</div>
 				</div>
 
-				<div class="panel panel-body" style="margin: 0 65px 20px 65px;">
-					<div class="row">
-						<div class="col-md-12">
-							<h2 style="text-align:center" id="page-title">
-								<b>Growth Recommendations</b>
-							</h2>
-						</div>
-						<div class="col-md-12" style="padding: 0px 50px;">
-							<h5 style="text-align:center" id="page-title">
-								<b>The following growth tips are selected keeping in mind your identified learning needs, to assist you in
-									managing
-									yourself, working with others more effectively. We recommend to adopt a couple of them as a daily practice.</b>
-							</h5>
-						</div>
-						<div class="col-md-12" style="padding: 0 50px;">
-							<ul class="row" style="font-size: 16px;">
-								<li class="col-md-12" ng-repeat="rc in profile_content.profile.growth_recommendations" ng-if="checkToShow(rc.linked_keyword)"
-								 style="padding: 10px 30px;">
-									{{rc.statement}}
-								</li>
-							</ul>
-						</div>
-
-					</div>
-				</div>
 				<div style="padding: 5px 40px;">
 					<button class="btn btn-info" ng-click="printSD()">Download Short Description</button>
 					<button class="btn btn-success pull-right" ui-sref="dashboard">Back to Dashboard</button>
