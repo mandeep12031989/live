@@ -3556,7 +3556,7 @@
 														</div>
 														<br>
 														<hr>
-														<div class="row" style="background: #ffffdf; border: 1px dotted #ffec5c;" ng-show="section_num >= 0 && section_num <= 3">
+														<div class="row sticky-top" style="background: #ffffdf; border: 1px dotted #ffec5c;" ng-show="section_num >= 0 && section_num <= 3">
 															<div class="col-xs-12" ng-show="section_num == 0" style="margin: 15px auto; text-align: center;">
 																<div class="row">
 																	<h4 style="text-align: center; margin: 0 auto 10px auto; color: black;">Belief's Analysis</h4>
@@ -3586,8 +3586,8 @@
 															</div>
 															<div class="col-xs-12" ng-show="section_num >= 1 && section_num <= 3" style="margin: 15px auto; text-align: center;">
 																<div class="row">
-																	<h4 style="text-align: center; margin: 0 auto 10px auto; color: black;">{{section_num ==
-																		1?'Value':(section_num==2?'Strength':'Learning Need')}}'s Analysis</h4>
+																	<h4 style="text-align: center; margin: 0 auto 10px auto; color: black;">{{section_num==1 ? 'Value' :
+																		(section_num==2 ? 'Strength' : 'Learning Need')}}'s Analysis</h4>
 																</div>
 																<div class="row" ng-show="section_num == 3">
 																	<div class="col-xs-4">
@@ -3639,6 +3639,14 @@
 																		100
 																		| number:2) || 0}} %</div>
 																	<div class="col-xs-4">{{dividedObj['s'+section_num]['relatestrongly']}}</div>
+																</div>
+															</div>
+															<div class="col-xs-12" ng-show="section_num == 3" style="margin: 15px auto; text-align: center;">
+																<div class="row">
+																	<div class="col-xs-12">
+																		Learning Needs (BS >= 0): <b>{{totalSumPM}}</b><br>
+																		Learning Needs (BS > 0) : <b>{{totalSumO}}</b>
+																	</div>
 																</div>
 															</div>
 															<div class="col-xs-12" ng-show="section_num == 3" style="margin: 15px auto; text-align: center;">
@@ -4803,7 +4811,7 @@
 												</div>
 											</div>
 
-											<div class="row" style="padding: 15px;">
+											<!-- <div class="row" style="padding: 15px;">
 												<div class="col-md-offset-5 col-md-2" style="text-align: center;">
 													<ul class="tab-slider--tabs">
 														<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.descriptions.role_fitment ? 'active-profile' : ''"
@@ -4828,9 +4836,9 @@
 												<div class="col-md-12" style="padding: 5px;">
 													<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="user.assessor.role_fitment_description"></div>
 												</div>
-											</div>
+											</div> -->
 
-											<div class="row" style="padding: 15px;">
+											<!-- <div class="row" style="padding: 15px;">
 												<div class="col-md-offset-5 col-md-2" style="text-align: center;">
 													<ul class="tab-slider--tabs">
 														<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.descriptions.reason ? 'active-profile' : ''"
@@ -4855,8 +4863,39 @@
 												<div class="col-md-12" style="padding: 5px;">
 													<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="user.assessor.reason_for_change_description"></div>
 												</div>
+											</div> -->
+
+											<div class="row" ng-repeat="r in user.assessor.addOnSectionsPDF.scores">
+												<div class="col-md-12" style="text-align: center;" ng-show="switchView == 1">
+													<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												</div>
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"
+												 ng-show="switchView == 2">
+													<h4> <b>{{r.title}}</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+														<header class="navbar-fixed-top well">
+															<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+																<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+																</span>
+															</div>
+														</header>
+													</div>
+													<div class="col-md-12" style="padding: 5px;">
+														<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="r.desc"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12" ng-show="switchView == 1">
+													<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="removeSection('scores', $index)">Remove</button>
+												</div>
+												<br>
 											</div>
 
+											<button class="btn btn-info" ng-click="addSection('scores')" ng-show="switchView == 1">+ Add Section</button>
 											<hr>
 
 											<!--	specific competencies	-->
@@ -4902,6 +4941,39 @@
 													<button type="button" class="btn btn-info" ng-click="addRowSpecificCompetency()">+ Add</button>
 												</div>
 											</div>
+
+											<div class="row" ng-repeat="r in user.assessor.addOnSectionsPDF.specific_competency">
+												<div class="col-md-12" style="text-align: center;" ng-show="switchView == 1">
+													<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												</div>
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"
+												 ng-show="switchView == 2">
+													<h4> <b>{{r.title}}</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+														<header class="navbar-fixed-top well">
+															<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+																<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+																</span>
+															</div>
+														</header>
+													</div>
+													<div class="col-md-12" style="padding: 5px;">
+														<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="r.desc"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12" ng-show="switchView == 1">
+													<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="removeSection('specific_competency', $index)">Remove</button>
+												</div>
+												<br>
+											</div>
+
+											<button class="btn btn-info" ng-click="addSection('specific_competency')" ng-show="switchView == 1">+ Add
+												Section</button>
 											<hr>
 
 											<!--	section 2	-->
@@ -4970,7 +5042,41 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="row" ng-repeat="r in user.assessor.addOnSectionsPDF.values_strengths">
+												<div class="col-md-12" style="text-align: center;" ng-show="switchView == 1">
+													<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												</div>
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"
+												 ng-show="switchView == 2">
+													<h4> <b>{{r.title}}</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+														<header class="navbar-fixed-top well">
+															<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+																<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+																</span>
+															</div>
+														</header>
+													</div>
+													<div class="col-md-12" style="padding: 5px;">
+														<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="r.desc"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12" ng-show="switchView == 1">
+													<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="removeSection('values_strengths', $index)">Remove</button>
+												</div>
+												<br>
+											</div>
+
+											<button class="btn btn-info" ng-click="addSection('values_strengths')" ng-show="switchView == 1">+ Add
+												Section</button>
 											<hr>
+
 											<!--	section 3	-->
 											<div class="row" style="padding: 20px;">
 												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;">
@@ -4986,7 +5092,9 @@
 																</span>
 																<textarea style="padding: 5px; margin-bottom: 5px;" ng-model="keys.keyword" placeholder="Keyword" rows="1"
 																 cols="80"></textarea>
-
+																<span style="float: right;">
+																	BSL Score: {{keys.bsl_score}}
+																</span>
 																<ul>
 																	<li ng-if="keys.report_descriptions.length>0">
 																		<span class="btn" style="color: red;" ng-click="removeReportMini(keys,0)">
@@ -5034,7 +5142,40 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="row" ng-repeat="r in user.assessor.addOnSectionsPDF.learning_need">
+												<div class="col-md-12" style="text-align: center;" ng-show="switchView == 1">
+													<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												</div>
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"
+												 ng-show="switchView == 2">
+													<h4> <b>{{r.title}}</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+														<header class="navbar-fixed-top well">
+															<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+																<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+																</span>
+															</div>
+														</header>
+													</div>
+													<div class="col-md-12" style="padding: 5px;">
+														<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="r.desc"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12" ng-show="switchView == 1">
+													<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="removeSection('learning_need', $index)">Remove</button>
+												</div>
+												<br>
+											</div>
+
+											<button class="btn btn-info" ng-click="addSection('learning_need')" ng-show="switchView == 1">+ Add Section</button>
 											<hr>
+
 											<!--	section 1	-->
 											<div class="row" style="padding: 20px;">
 												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;">
@@ -5122,8 +5263,42 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="row" ng-repeat="r in user.assessor.addOnSectionsPDF.values_role_fitment">
+												<div class="col-md-12" style="text-align: center;" ng-show="switchView == 1">
+													<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												</div>
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"
+												 ng-show="switchView == 2">
+													<h4> <b>{{r.title}}</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+														<header class="navbar-fixed-top well">
+															<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+																<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+																</span>
+															</div>
+														</header>
+													</div>
+													<div class="col-md-12" style="padding: 5px;">
+														<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="r.desc"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12" ng-show="switchView == 1">
+													<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="removeSection('values_role_fitment', $index)">Remove</button>
+												</div>
+												<br>
+											</div>
+
+											<button class="btn btn-info" ng-click="addSection('values_role_fitment')" ng-show="switchView == 1">+ Add
+												Section</button>
 											<hr>
 
+											<!-- PAEI -->
 											<div class="panel panel-body" style="margin: 0 auto 20px auto;">
 												<div class="row">
 													<div class="col-md-12">
@@ -5147,124 +5322,31 @@
 															<div class="col-md-2">Low</div>
 														</div>
 													</div>
-													<!--
-											<div class="col-md-6">
-												<h4 style="text-align:center" id="page-title">
-													<b>Assessor - Profile Analysis</b>
-												</h4>
-											</div>
--->
-													<div class="col-md-12">
-														<h4 style="text-align:center" id="page-title">
-															<b>Assessor - Editable Analysis</b>
-														</h4>
-													</div>
-													<!--
-											<div class="col-md-offset-2 col-md-4" style="padding-bottom: 30px; margin-top: 20px; margin-left: auto; margin-right: auto;">
-												<img src="./images/paei/q1s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[0][2] < -1) || (countCompetenciesA[0][2] >= 0 && countCompetenciesA[0][2] <= 0.5)">
-												<img src="./images/paei/q1s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[0][2] >= -1 && countCompetenciesA[0][2] < -0.5) || (countCompetenciesA[0][2] > 0.5 && countCompetenciesA[0][2] <= 1)">
-												<img src="./images/paei/q1s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[0][2] >= -0.5 && countCompetenciesA[0][2] < 0) || (countCompetenciesA[0][2] > 1)">
-
-												<img src="./images/paei/q1s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[1][2] < -1) || (countCompetenciesA[1][2] >= 0 && countCompetenciesA[1][2] <= 0.5)">
-												<img src="./images/paei/q1s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[1][2] >= -1 && countCompetenciesA[1][2] < -0.5) || (countCompetenciesA[1][2] > 0.5 && countCompetenciesA[1][2] <= 1)">
-												<img src="./images/paei/q1s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[1][2] >= -0.5 && countCompetenciesA[1][2] < 0) || (countCompetenciesA[1][2] > 1)">
-
-												<img src="./images/paei/q2s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[2][2] < -1) || (countCompetenciesA[2][2] >= 0 && countCompetenciesA[2][2] <= 0.5)">
-												<img src="./images/paei/q2s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[2][2] >= -1 && countCompetenciesA[2][2] < -0.5) || (countCompetenciesA[2][2] > 0.5 && countCompetenciesA[2][2] <= 1)">
-												<img src="./images/paei/q2s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[2][2] >= -0.5 && countCompetenciesA[2][2] < 0) || (countCompetenciesA[2][2] > 1)">
-
-												<img src="./images/paei/q2s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[3][2] < -1) || (countCompetenciesA[3][2] >= 0 && countCompetenciesA[3][2] <= 0.5)">
-												<img src="./images/paei/q2s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[3][2] >= -1 && countCompetenciesA[3][2] < -0.5) || (countCompetenciesA[3][2] > 0.5 && countCompetenciesA[3][2] <= 1)">
-												<img src="./images/paei/q2s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[3][2] >= -0.5 && countCompetenciesA[3][2] < 0) || (countCompetenciesA[3][2] > 1)">
-
-												<img src="./images/paei/q3s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[4][2] < -1) || (countCompetenciesA[4][2] >= 0 && countCompetenciesA[4][2] <= 0.5)">
-												<img src="./images/paei/q3s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[4][2] >= -1 && countCompetenciesA[4][2] < -0.5) || (countCompetenciesA[4][2] > 0.5 && countCompetenciesA[4][2] <= 1)">
-												<img src="./images/paei/q3s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[4][2] >= -0.5 && countCompetenciesA[4][2] < 0) || (countCompetenciesA[4][2] > 1)">
-
-												<img src="./images/paei/q3s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[5][2] < -1) || (countCompetenciesA[5][2] >= 0 && countCompetenciesA[5][2] <= 0.5)">
-												<img src="./images/paei/q3s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[5][2] >= -1 && countCompetenciesA[5][2] < -0.5) || (countCompetenciesA[5][2] > 0.5 && countCompetenciesA[5][2] <= 1)">
-												<img src="./images/paei/q3s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[5][2] >= -0.5 && countCompetenciesA[5][2] < 0) || (countCompetenciesA[5][2] > 1)">
-
-												<img src="./images/paei/q4s1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[6][2] < -1) || (countCompetenciesA[6][2] >= 0 && countCompetenciesA[6][2] <= 0.5)">
-												<img src="./images/paei/q4s1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[6][2] >= -1 && countCompetenciesA[6][2] < -0.5) || (countCompetenciesA[6][2] > 0.5 && countCompetenciesA[6][2] <= 1)">
-												<img src="./images/paei/q4s1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[6][2] >= -0.5 && countCompetenciesA[6][2] < 0) || (countCompetenciesA[6][2] > 1)">
-
-												<img src="./images/paei/q4s2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[7][2] < -1) || (countCompetenciesA[7][2] >= 0 && countCompetenciesA[7][2] <= 0.5)">
-												<img src="./images/paei/q4s2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[7][2] >= -1 && countCompetenciesA[7][2] < -0.5) || (countCompetenciesA[7][2] > 0.5 && countCompetenciesA[7][2] <= 1)">
-												<img src="./images/paei/q4s2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);" ng-show="(countCompetenciesA[7][2] >= -0.5 && countCompetenciesA[7][2] < 0) || (countCompetenciesA[7][2] > 1)">
-
-												<img src="./images/paei/circle.png" class="img-responsive" style="position: absolute; left: 0px;">
-												<img src="./images/paei/circle.png" class="img-responsive" style="opacity: 0;">
-											</div>
--->
 
 													<div class="col-md-offset-4 col-md-4" style="padding-bottom: 30px; margin: 20px auto; text-align: center;">
-														<img src="./images/paei/q1l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[0][2] < -1) || (countCompetenciesA2[0][2] >= 0 && countCompetenciesA2[0][2] <= 0.5)">
-														<img src="./images/paei/q1m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[0][2] >= -1 && countCompetenciesA2[0][2] < -0.5) || (countCompetenciesA2[0][2] > 0.5 && countCompetenciesA2[0][2] <= 1)">
-														<img src="./images/paei/q1h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[0][2] >= -0.5 && countCompetenciesA2[0][2] < 0) || (countCompetenciesA2[0][2] > 1)">
+														<span ng-repeat="quarter in ['Administering', 'Integrating', 'Enterpreneuring', 'Producing']">
+															<span ng-repeat="img_q in ['l','ml','m','hm', 'h'] track by $index">
+																<!-- {{'./images/paei/q1'+($parent.$index+1)+img_q+'.png'}} -->
+																<img src="{{'./images/paei/q'+($parent.$index+1)+img_q+'.png'}}" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
+																 ng-show="user.assessor.score_competencies[$parent.$index] == img_q">
+															</span>
+														</span>
 
-														<img src="./images/paei/q2l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[1][2] < -1) || (countCompetenciesA2[1][2] >= 0 && countCompetenciesA2[1][2] <= 0.5)">
-														<img src="./images/paei/q2m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[1][2] >= -1 && countCompetenciesA2[1][2] < -0.5) || (countCompetenciesA2[1][2] > 0.5 && countCompetenciesA2[1][2] <= 1)">
-														<img src="./images/paei/q2h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[1][2] >= -0.5 && countCompetenciesA2[1][2] < 0) || (countCompetenciesA2[1][2] > 1)">
-
-														<img src="./images/paei/q3l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[2][2] < -1) || (countCompetenciesA2[2][2] >= 0 && countCompetenciesA2[2][2] <= 0.5)">
-														<img src="./images/paei/q3m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[2][2] >= -1 && countCompetenciesA2[2][2] < -0.5) || (countCompetenciesA2[2][2] > 0.5 && countCompetenciesA2[2][2] <= 1)">
-														<img src="./images/paei/q3h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[2][2] >= -0.5 && countCompetenciesA2[2][2] < 0) || (countCompetenciesA2[2][2] > 1)">
-
-														<img src="./images/paei/q4l.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[3][2] < -1) || (countCompetenciesA2[3][2] >= 0 && countCompetenciesA2[3][2] <= 0.5)">
-														<img src="./images/paei/q4m.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[3][2] >= -1 && countCompetenciesA2[3][2] < -0.5) || (countCompetenciesA2[3][2] > 0.5 && countCompetenciesA2[3][2] <= 1)">
-														<img src="./images/paei/q4h.png" class="img-responsive" style="position: absolute; left: 0px; filter: brightness(115%);"
-														 ng-show="(countCompetenciesA2[3][2] >= -0.5 && countCompetenciesA2[3][2] < 0) || (countCompetenciesA2[3][2] > 1)">
-
-														<img src="./images/paei/circlev4.png" class="img-responsive" style="position: absolute; left: 0px;">
-														<img src="./images/paei/circlev4.png" class="img-responsive" style="opacity: 0;">
+														<img src="./images/paei/circlev5.png" class="img-responsive" style="position: absolute; left: 0px;">
+														<img src="./images/paei/circlev5.png" class="img-responsive" style="opacity: 0;">
 													</div>
 
 													<div class="col-md-12" style="color: white; font-weight: bold; margin: 0 auto;">
 
-														<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[3][2]}}">
-															<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[3][2] |
-																number:2}}</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[3][2]=countCompetenciesA2[3][2]-0.1">+</div>
-															<div class="col-md-8" style="text-align: center; background: #9933CC;">Producing</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[3][2]=countCompetenciesA2[3][2]+0.1">+</div>
-														</div>
-
-														<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[0][2]}}">
-															<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[0][2] |
-																number:2}}</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[0][2]=countCompetenciesA2[0][2]-0.1">-</div>
-															<div class="col-md-8" style="text-align: center; background: #9933CC;">Administering</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[0][2]=countCompetenciesA2[0][2]+0.1">+</div>
-														</div>
-
-														<div class="col-md-12"></div>
-
-														<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[2][2]}}">
-															<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[2][2] |
-																number:2}}</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[2][2]=countCompetenciesA2[2][2]-0.1">+</div>
-															<div class="col-md-8" style="text-align: center; background: #9933CC;">Enterpreneuring</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[2][2]=countCompetenciesA2[2][2]+0.1">+</div>
-														</div>
-
-														<div class="col-md-6" style="margin: 0 auto;" title="{{countCompetenciesA2[1][2]}}">
-															<div class="col-md-12" style="text-align: center; color: black;">{{countCompetenciesA2[1][2] |
-																number:2}}</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[1][2]=countCompetenciesA2[1][2]-0.1">-</div>
-															<div class="col-md-8" style="text-align: center; background: #9933CC;">Integrating</div>
-															<div class="col-md-2" style="text-align: center; cursor: pointer; background: #aa66cc;" ng-click="countCompetenciesA2[1][2]=countCompetenciesA2[1][2]+0.1">+</div>
+														<div class="col-md-6" style="margin: 0 auto;" ng-repeat="quarter in ['Administering', 'Integrating', 'Enterpreneuring', 'Producing'] track by $index">
+															<label>{{quarter}}:</label><br>
+															<select class="form-control" ng-model="user.assessor.score_competencies[$index]">
+																<option value="l">Low</option>
+																<option value="ml">Low to Medium</option>
+																<option value="m">Medium</option>
+																<option value="hm">Medium to High</option>
+																<option value="h">High</option>
+															</select>
 														</div>
 													</div>
 
@@ -5442,7 +5524,40 @@
 												</div>
 											</div>
 
+											<div class="row" ng-repeat="r in user.assessor.addOnSectionsPDF.paei">
+												<div class="col-md-12" style="text-align: center;" ng-show="switchView == 1">
+													<input class="form-control" type="text" ng-model="r.title" placeholder="Title">
+												</div>
+												<div class="col-md-12" style="background: #eee; text-align: center; padding: 15px 0 0 0; margin-bottom: 15px;"
+												 ng-show="switchView == 2">
+													<h4> <b>{{r.title}}</b></h4>
+													<br>
+												</div>
+												<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12" style="padding: 5px;" ng-show="switchView == 1">
+														<header class="navbar-fixed-top well">
+															<div class="btn-group" style="background: #f0f0f0; padding: 5px auto; text-align: center;">
+																<span class="btn btn-mini" ng-repeat="(key, value) in editorStatus" ng-mousedown="doFormat(key, null)">
+																	<i class="material-icons" style="margin: auto 0; cursor: pointer;"> {{value}} </i>
+																</span>
+															</div>
+														</header>
+													</div>
+													<div class="col-md-12" style="padding: 5px;">
+														<div ng-class="switchView == 1 ? 'editor':''" contenteditable data-directive ng-model="r.desc"></div>
+													</div>
+												</div>
+
+												<div class="col-md-12" ng-show="switchView == 1">
+													<button class="btn btn-default" style="margin-bottom: 40px;" ng-click="removeSection('paei', $index)">Remove</button>
+												</div>
+												<br>
+											</div>
+
+											<button class="btn btn-info" ng-click="addSection('paei')" ng-show="switchView == 1">+ Add Section</button>
 											<hr>
+
+
 											<div class="row" ng-repeat="r in user.assessor.recommend">
 												<div class="col-md-offset-4 col-md-4" style="margin: 5px auto; text-align: center;" ng-show="switchView == 1">
 													<ul class="tab-slider--tabs">
@@ -5581,7 +5696,7 @@
 											<span ng-show="switchView == 1">Printable View</span>
 											<span ng-show="switchView == 2">Editable View</span>
 										</button>
-										<button class="btn btn-danger" style="float:right; margin-bottom: 30px;" ng-click="submitAssessor(2)">Save</button>
+										<button class="btn btn-danger" style="float:right; margin-bottom: 30px;" ng-click="submitAssessor(1)">Save</button>
 									</div>
 									<!--											END TABS												-->
 								</div>

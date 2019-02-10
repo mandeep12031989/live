@@ -9,6 +9,7 @@ var passport = require('passport');
 var session = require('express-session');
 //var fs = require('fs');
 var logger = require('morgan');                     //HTTP request logger - will show requests in Command Prompt
+var cors = require('cors');
 
 var config = require('./config');
 
@@ -36,7 +37,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // passport config
@@ -45,16 +46,17 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //CORS middleware
-var allowCrossDomain = function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', '*');
+app.use(cors());
+// var allowCrossDomain = function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+//   res.header('Access-Control-Allow-Headers', '*');
 
-  // fs.appendFile(__dirname + '/logs.txt', new Date() + '\r\n' + req.url + '\r\n' + JSON.stringify(req.body) + '\r\n\r\n');
+//   // fs.appendFile(__dirname + '/logs.txt', new Date() + '\r\n' + req.url + '\r\n' + JSON.stringify(req.body) + '\r\n\r\n');
 
-  next();
-}
-app.use(allowCrossDomain);
+//   next();
+// }
+// app.use(allowCrossDomain);
 
 // Importing Routing files
 var routes = require('./routes/index');

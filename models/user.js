@@ -280,10 +280,10 @@ var userSchema = new Schema({
         specific_competency: [],
         profile_content: [profileSchema],
         description: { type: String, default: '<b>--name--</b>\'s enneagram assessment results are <b>--positive/negative--</b>. <b>--He/She--</b> is at Moderate moving to higher personal mastery levels. <b>--He/She--</b> is enneagram type <b>--type--</b>.' },
-        role_fitment_title: { type: String, default: 'Role Fitment' },
-        role_fitment_description: String,
-        reason_for_change_title: { type: String, default: 'Reason for Change' },
-        reason_for_change_description: String,
+        // role_fitment_title: { type: String, default: 'Role Fitment' },
+        // role_fitment_description: String,
+        // reason_for_change_title: { type: String, default: 'Reason for Change' },
+        // reason_for_change_description: String,
         recommend: [new Schema({ title: String, desc: String, page: { type: Number, default: 1 } })],
         rubric: { type: Array, default: [] },
         recommendations_for_manager: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, recommendation_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
@@ -313,7 +313,7 @@ var userSchema = new Schema({
             moderate: [new Schema({ statement: String })],
             reactive: [new Schema({ statement: String })]
         },
-        score_competencies: Array,
+        score_competencies: { type: [String], default: ['l', 'l', 'l', 'l'] },
         paei_desc: {
             p: {
                 type: Array,
@@ -350,6 +350,14 @@ var userSchema = new Schema({
         recommendations_for_manager_assessor_initialized: { type: Boolean, default: false },
         first_person_word_count: {
             learning: { type: Number, default: 0 }
+        },
+        addOnSectionsPDF: {
+            scores: [new Schema({ title: String, desc: String })],
+            specific_competency: [new Schema({ title: String, desc: String })],
+            values_strengths: [new Schema({ title: String, desc: String })],
+            learning_need: [new Schema({ title: String, desc: String })],
+            values_role_fitment: [new Schema({ title: String, desc: String })],
+            paei: [new Schema({ title: String, desc: String })]
         }
     },
     language: {
