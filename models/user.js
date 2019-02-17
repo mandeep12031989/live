@@ -140,7 +140,9 @@ var profileSchema = new Schema({
     assessor_bal_in_report: { type: Boolean, default: true },
     assessor_report_keyword: { type: String, default: "" },
     bsl_score: { type: Number, default: 0 },
-    report_descriptions: [descriptionReportSchema]
+    report_descriptions: [descriptionReportSchema],
+    do_ask_comment: { type: String, default: "" },
+    relate_combine_comment: String
 });
 
 var userSchema = new Schema({
@@ -224,11 +226,11 @@ var userSchema = new Schema({
         eachSectionCombineComment: {
             assessor_belief_note: String, value: Array, strength: Array, learning: Array
         },
-        eachSectionRelateCombineComment: {
-            learning: {
-                ques1: String
-            }
-        },
+        // eachSectionRelateCombineComment: {
+        //     learning: {
+        //         ques1: String
+        //     }
+        // },
         sectionFillDone: {
             strength: { type: Boolean, default: false },
             learning: { type: Boolean, default: false }

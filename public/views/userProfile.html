@@ -763,8 +763,17 @@ In administrating:
 																<br ng-if="section_num == 2 || section_num == 3">
 																<!-- <textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="Does an excess use of this strength turn into a weakness (learning need) for you? If yes, how?"
 																 ng-if="section_num == 2" style="text-align: center;" ng-class="(!keys.comment) && (checkRel[section_num])?'bg_uncomp':''"></textarea> -->
-																<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="In what ways is this learning need affecting you?"
-																 ng-if="section_num == 3" style="text-align: center;" ng-class="validateComment(keys.keyword_id) && (checkRel[section_num])?'bg_uncomp':''"></textarea>
+																<div style="margin:0 auto;" ng-if="section_num == 3">
+																	<span style="font-size:12px; font-weight: bold;">Is this learning need affecting you?</span>
+																	<select class="form-control" ng-model="keys.do_ask_comment" style="text-align: center;" ng-class="validateComment(keys.keyword_id) && (checkRel[section_num])?'bg_uncomp':''">
+																		<option disabled value="">--Select--</option>
+																		<option value="Yes">Yes</option>
+																		<option value="No">No</option>
+																	</select>
+																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="In what ways is this learning need affecting you?"
+																	 ng-if="keys.do_ask_comment=='Yes'" style="text-align: center;" ng-class="validateComment(keys.keyword_id) && (checkRel[section_num])?'bg_uncomp':''"></textarea>
+																</div>
+
 															</div>
 															<br>
 														</div>
@@ -879,16 +888,26 @@ In administrating:
 												</div>
 												<div class="col-md-12">
 													<ul ng-repeat="keys in profile_content.profile.profile_content | filter: {new_keyword:false} | filter: filterSec3()"
-													 style="margin: 0 auto;">
+													 style="margin: 20px auto;">
 														<li ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}" style="margin: 5px 10px; font-size:14px;">{{mini.mini_description}}</li>
+														<li style="padding: 5px 10px; text-align: center; list-style: none;" ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}"
+														 ng-if="!$index">
+															<!-- <span style="font-size:12px; font-weight: bold;">How did these affect you in the past? And how did you
+																overcome them?</span> -->
+															<textarea class="form-control" rows="3" ng-model="keys.relate_combine_comment" placeholder="How did these affect you in the past? And how did you overcome them?"
+															 ng-class="!keys.relate_combine_comment?'bg_uncomp':''"></textarea>
+														</li>
+														<li ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}" ng-if="!$index"
+														 style="list-style: none;">
+															<hr style="border: 1px solid #ddd;">
+														</li>
 													</ul>
 												</div>
-												<div class="col-md-12" style="padding: 5px 10px; text-align: center;">
-													<span style="font-size:12px; font-weight: bold;">How did these affect you in the past? And how did you
-														overcome them?</span>
+												<!-- <div class="col-md-12" style="padding: 5px 10px; text-align: center;">
+													<span style="font-size:12px; font-weight: bold;">How did these affect you in the past? And how did you overcome them?</span>
 													<textarea class="form-control" rows="4" ng-model="profile_content.profile.eachSectionRelateCombineComment.learning.ques1"
 													 placeholder="How did these affect you in the past? And how did you overcome them?" ng-class="!profile_content.profile.eachSectionRelateCombineComment.learning.ques1?'bg_uncomp':''"></textarea>
-												</div>
+												</div> -->
 											</div>
 
 											<!--

@@ -4113,6 +4113,11 @@
 																										(Does an excess use of this strength turn into a weakness (learning need) for you? If yes,
 																										how?)
 																									</span><br>
+																									<span style="font-size: 11px; font-weight: bold; color:#999;" ng-if="section_num==3 && keys.do_ask_comment">
+																										(Is this learning need affecting you?)
+																									</span><br>
+																									<input class="form-control" ng-if="section_num==3 && keys.do_ask_comment" disabled ng-model="keys.do_ask_comment"
+																									 style="text-align: center;"><br>
 																									<span style="font-size: 11px; font-weight: bold; color:#999;" ng-if="section_num==3 && keys.comment">
 																										(In what ways is this learning need affecting you?)
 																									</span><br>
@@ -4260,28 +4265,20 @@
 																					<h4>You related with the following Learning Needs as 'Improved Over Time'. Please answer the
 																						questions associated with it.</h4>
 																				</div>
-																				<div class="col-md-12" ng-if="!user.profile.eachSectionRelateCombineComment.learning.ques1"
-																				 ng-repeat="keys in user.profile.profile_content | filter: {new_keyword:false}" ng-if="keys.keyword_id[5] == '3'">
-																					<div class="col-md-12" ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}"
-																					 style="padding: 5px 10px 10px 10px;">
-																						<span style="font-size: 15px;">{{mini.mini_description}}</span>
-																						<br><br>
-																						<textarea class="form-control" ng-bind="mini.questions.learning[2]" disabled></textarea>
-																						<br><br>
-																						<hr style="border: 1px solid #ddd;">
-																					</div>
-																				</div>
-																				<div class="col-md-12" ng-if="user.profile.eachSectionRelateCombineComment.learning.ques1">
+																				<div class="col-md-12">
 																					<ul ng-repeat="keys in user.profile.profile_content | filter: {new_keyword:false} | filter: filterSec3()"
-																					 style="margin: 0 auto;">
+																					 style="margin: 20px auto;">
 																						<li ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}" style="margin: 5px 10px; font-size:14px;">{{mini.mini_description}}</li>
+																						<li style="padding: 5px 10px; text-align: center; list-style: none;" ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}"
+																						 ng-if="!$index">
+																							<textarea class="form-control" rows="3" ng-model="keys.relate_combine_comment" placeholder="How did these affect you in the past? And how did you overcome them?"
+																							 ng-class="!keys.relate_combine_comment?'bg_uncomp':''" disabled></textarea>
+																						</li>
+																						<li ng-repeat="mini in keys.mini_descriptions | filter: {relate: 'donotexhibitanymore'}" ng-if="!$index"
+																						 style="list-style: none;">
+																							<hr style="border: 1px solid #ddd;">
+																						</li>
 																					</ul>
-																				</div>
-																				<div class="col-md-12" style="padding: 5px 10px; text-align: center;" ng-if="user.profile.eachSectionRelateCombineComment.learning.ques1">
-																					<span style="font-size:12px; font-weight: bold;">How did these affect you in the past? And how did
-																						you overcome them?</span>
-																					<textarea class="form-control" rows="4" ng-model="user.profile.eachSectionRelateCombineComment.learning.ques1"
-																					 placeholder="How did these affect you in the past? And how did you overcome them?" disabled></textarea>
 																				</div>
 																			</div>
 
