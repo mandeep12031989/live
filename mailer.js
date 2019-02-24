@@ -24,10 +24,12 @@ var mailOptions, link, token;
 
 exports.custom_mail = function (data, callback) {
 	// console.log(data.to)
-	if (Array.isArray(data.to))
-		data.to.push('info@idiscover.me');
-	else
-		data.to = [data.to, 'info@idiscover.me'];
+	if (Array.isArray(data.to)) {
+		if (data.to.indexOf('mandeep@idiscover.me') != -1)
+			data.to.push('pranam@idiscover.me');
+	}
+	else if (data.to == 'mandeep@idiscover.me')
+		data.to = [data.to, 'pranam@idiscover.me'];
 
 	mailOptions = {
 		from: '"iDiscover.me" info@idiscover.me',
@@ -35,16 +37,16 @@ exports.custom_mail = function (data, callback) {
 		subject: data.subject,
 		html: data.html
 	};
-	//console.log(mailOptions);
+	console.log(mailOptions);
 
 	smtpTransport.sendMail(mailOptions, function (error, response) {
 		if (error) {
-			//console.log(error);
+			console.log(error);
 			callback(false);
 		}
 		else {
 			//console.log("Message sent: ");
-			//console.log(response);
+			console.log(response);
 			callback(true);
 		}
 	});

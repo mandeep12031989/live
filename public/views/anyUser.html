@@ -1141,7 +1141,7 @@
 
 							<div class="row">
 								<div style="display: inline-block; margin: 0 auto 20px auto; text-align: center;">
-									<button class="btn btn-info" ng-click="printSD()">Download Short Description</button>
+									<button class="btn btn-info" ng-click="printSD()">Download Leadership Profile</button>
 								</div>
 							</div>
 
@@ -2912,6 +2912,10 @@
 										<h3><b>Questions to be Probed from Profile</b></h3>
 									</div>
 									<div class="col-md-12" style="margin: 20px auto;">
+										<textarea class="form-control" ng-model="user.assessor.assessor_notes_combined" placeholder="Additional questions you want to probe?"
+										 rows="4"></textarea>
+									</div>
+									<div class="col-md-12" style="margin: 20px auto;">
 										<div class="col-md-12" style="text-align: center;">
 											<span style="border: 2px solid #3F729B; font-weight: bold; padding: 6px 10px; border-radius: 5px;">Beliefs</span>
 										</div>
@@ -2930,8 +2934,8 @@
 									</div>
 									<div class="col-md-12" style="margin: 20px auto;" ng-repeat="section in [1,2,3]">
 										<div class="col-md-12" style="text-align: center;">
-											<span style="border: 2px solid #3F729B; font-weight: bold; padding: 6px 10px; border-radius: 5px;">{{section
-												== 1 ? 'Values & Work Culture Preferences' : (section == 2 ? 'Professional Strengths' :
+											<span style="border: 2px solid #3F729B; font-weight: bold; padding: 6px 10px; border-radius: 5px;">{{section==1
+												? 'Values & Work Culture Preferences' : (section==2 ? 'Professional Strengths' :
 												'Learning Needs')}}</span>
 										</div>
 										<div class="col-md-12" style="margin: 20px auto;" ng-repeat="keys in user.assessor.profile_content" ng-if="keys.keyword_id[5] == section && toShowEmptyKeyword(keys.keyword_id)">
@@ -3644,8 +3648,8 @@
 															<div class="col-xs-12" ng-show="section_num == 3" style="margin: 15px auto; text-align: center;">
 																<div class="row">
 																	<div class="col-xs-12">
-																		Learning Needs (BS >= 0): <b>{{totalSumPM}}</b><br>
-																		Learning Needs (BS > 0) : <b>{{totalSumO}}</b>
+																		<!-- Learning Needs (BS >= 0): <b>{{totalSumPM}}</b><br> -->
+																		% Never Exhibited (BS > 0) : <b>{{foundSumO/(totalSumO||1)*100 | number:2}} %</b>
 																	</div>
 																</div>
 															</div>
@@ -3949,6 +3953,8 @@
 																							 ng-click="rc.assessor_selection='not_worked'">Not Worked</li>
 																							<li class="tab-slider--trigger" ng-class="rc.assessor_selection=='not_understood' ? 'active-profile' : ''"
 																							 ng-click="rc.assessor_selection='not_understood'">Not Understood</li>
+																							<li class="tab-slider--trigger" ng-class="rc.assessor_selection=='by_mistake' ? 'active-profile' : ''"
+																							 ng-click="rc.assessor_selection='by_mistake'">By Mistake</li>
 																							<li class="tab-slider--trigger" ng-class="!rc.assessor_selection ? 'active-profile' : ''"
 																							 ng-click="rc.assessor_selection=''">None</li>
 																						</ul>
@@ -4116,7 +4122,7 @@
 																									<span style="font-size: 11px; font-weight: bold; color:#999;" ng-if="section_num==3 && keys.do_ask_comment">
 																										(Is this learning need affecting you?)
 																									</span><br>
-																									<input class="form-control" ng-if="section_num==3 && keys.do_ask_comment" disabled ng-model="keys.do_ask_comment"
+																									<input class="form-control" ng-if="section_num==3 && keys.do_ask_comment" disabled value="{{keys.do_ask_comment=='Yes'?'Yes, I need to improve on this aspect':'No, it does not need much improvement'}}"
 																									 style="text-align: center;"><br>
 																									<span style="font-size: 11px; font-weight: bold; color:#999;" ng-if="section_num==3 && keys.comment">
 																										(In what ways is this learning need affecting you?)
@@ -4142,7 +4148,7 @@
 																							</div> -->
 																							<div class="col-sm-6" style="background: #fee" ng-if="section_num>=1 && section_num<=3">
 																								<span style="font-size: 12px;">Assessor Notes</span><br>
-																								<textarea rows="4" class="form-control" placeholder="{{section_num==1?'Can the organization/ manager meet this person’s preferences and expectations?': (section_num==2 ? 'Which learning need would you like to understand in more detail?
+																								<textarea rows="4" class="form-control" placeholder="{{section_num==1?'Can the organization/ manager meet this person’s preferences and expectations?': (section_num==2 ? 'Which strength would you like to understand in more detail?
 																								(partially related/ excess strength fully related)' : 'Which learning need would you like to understand in more detail?')}}"
 																								 ng-model="user.assessor.profile_content[$index].assessor_comment"></textarea>
 																							</div>
@@ -5348,7 +5354,7 @@
 													</div>
 
 													<div class="col-md-12 table" style="margin: 20px auto;">
-														<table style="margin: 10px auto; color: black; border: 1px solid #eee;">
+														<table style="width:100%; margin: 10px auto; color: black; border: 1px solid #eee;">
 															<thead>
 																<tr>
 																	<th>
@@ -5371,14 +5377,15 @@
 																		<span>[Action orientation; Result orientation;<br> Domain/ functional understanding;<br> Problem
 																			solving; Independent<br> decision making]</span>
 																	</th>
-																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[3][2] >= -0.5 && countCompetenciesA2[3][2] < 0) || (countCompetenciesA2[3][2] > 1)">High</th>
-																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[3][2] >= -1 && countCompetenciesA2[3][2] < -0.5) || (countCompetenciesA2[3][2] > 0.5 && countCompetenciesA2[3][2] <= 1)">Medium</th>
-																	<th style="text-align: center; background: #fec772;" ng-show="(countCompetenciesA2[3][2] < -1) || (countCompetenciesA2[3][2] >= 0 && countCompetenciesA2[3][2] <= 0.5)">LOW</th>
+																	<th style="text-align: center; background: #a6e74f;" ng-show="user.assessor.score_competencies[3] == 'h' || user.assessor.score_competencies[3] == 'hm'">High</th>
+																	<th style="text-align: center; background: #fff33b;" ng-show="user.assessor.score_competencies[3] == 'm' || user.assessor.score_competencies[3] == 'ml'"">Medium</th>
+																	<th style="
+																	 text-align: center; background: #fec772;" ng-show="user.assessor.score_competencies[3] == 'l'">LOW</th>
 																	<th>
 																		<ul>
 																			<li ng-repeat="s in user.assessor.paei_desc.p">
 																				<span ng-show="switchView == 1">
-																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
+																					<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{ptag: true}}"
 																					 ng-change="copyThis('P', $index, Pdata)" ng-model="Pdata"></select> -->
 
@@ -5410,14 +5417,15 @@
 																		<span>[Time management/ Prioritization;<br> Process-orientation; Planning;<br> Delegating;
 																			Monitoring;<br> Attention to details;<br> Data orientation]</span>
 																	</th>
-																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[0][2] >= -0.5 && countCompetenciesA2[0][2] < 0) || (countCompetenciesA2[0][2] > 1)">High</th>
-																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[0][2] >= -1 && countCompetenciesA2[0][2] < -0.5) || (countCompetenciesA2[0][2] > 0.5 && countCompetenciesA2[0][2] <= 1)">Medium</th>
-																	<th style="text-align: center; background: #fec772;" ng-show="(countCompetenciesA2[0][2] < -1) || (countCompetenciesA2[0][2] >= 0 && countCompetenciesA2[0][2] <= 0.5)">LOW</th>
+																	<th style="text-align: center; background: #a6e74f;" ng-show="user.assessor.score_competencies[0] == 'h' || user.assessor.score_competencies[0] == 'hm'">High</th>
+																	<th style="text-align: center; background: #fff33b;" ng-show="user.assessor.score_competencies[0] == 'm' || user.assessor.score_competencies[0] == 'ml'"">Medium</th>
+																	<th style="
+																	 text-align: center; background: #fec772;" ng-show="user.assessor.score_competencies[0] == 'l'">LOW</th>
 																	<th>
 																		<ul>
 																			<li ng-repeat="s in user.assessor.paei_desc.a">
 																				<span ng-show="switchView == 1">
-																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
+																						<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{atag: true}}"
 																					 ng-change="copyThis('A', $index, Adata)" ng-model="Adata"></select> -->
 																					<select class="form-control" ng-change="copyThis('A', $index, Adata)" ng-model="Adata">
@@ -5447,14 +5455,15 @@
 																		<br>
 																		<span>[Strategy; Big picture thinking;<br> Creativity/ Innovation;<br> Risk taking; Optimism]</span>
 																	</th>
-																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[2][2] >= -0.5 && countCompetenciesA2[2][2] < 0) || (countCompetenciesA2[2][2] > 1)">High</th>
-																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[2][2] >= -1 && countCompetenciesA2[2][2] < -0.5) || (countCompetenciesA2[2][2] > 0.5 && countCompetenciesA2[2][2] <= 1)">Medium</th>
-																	<th style="text-align: center; background: #fec772;" ng-show="(countCompetenciesA2[2][2] < -1) || (countCompetenciesA2[2][2] >= 0 && countCompetenciesA2[2][2] <= 0.5)">LOW</th>
+																	<th style="text-align: center; background: #a6e74f;" ng-show="user.assessor.score_competencies[2] == 'h' || user.assessor.score_competencies[2] == 'hm'">High</th>
+																	<th style="text-align: center; background: #fff33b;" ng-show="user.assessor.score_competencies[2] == 'm' || user.assessor.score_competencies[2] == 'ml'"">Medium</th>
+																	<th style="
+																	 text-align: center; background: #fec772;" ng-show="user.assessor.score_competencies[2] == 'l'">LOW</th>
 																	<th>
 																		<ul>
 																			<li ng-repeat="s in user.assessor.paei_desc.e">
 																				<span ng-show="switchView == 1">
-																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
+																						<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{etag: true}}"
 																					 ng-change="copyThis('E', $index, Edata)" ng-model="Edata"></select> -->
 																					<select class="form-control" ng-change="copyThis('E', $index, Edata)" ng-model="Edata">
@@ -5485,14 +5494,15 @@
 																		<span>[Giving and taking feedback;<br> Team player; Mentoring and<br> coaching; Conflict
 																			management]</span>
 																	</th>
-																	<th style="text-align: center; background: #a6e74f;" ng-show="(countCompetenciesA2[1][2] >= -0.5 && countCompetenciesA2[1][2] < 0) || (countCompetenciesA2[1][2] > 1)">High</th>
-																	<th style="text-align: center; background: #fff33b;" ng-show="(countCompetenciesA2[1][2] >= -1 && countCompetenciesA2[1][2] < -0.5) || (countCompetenciesA2[1][2] > 0.5 && countCompetenciesA2[1][2] <= 1)">Medium</th>
-																	<th style="text-align: center; background: #fec772;" ng-show="(countCompetenciesA2[1][2] < -1) || (countCompetenciesA2[1][2] >= 0 && countCompetenciesA2[1][2] <= 0.5)">LOW</th>
+																	<th style="text-align: center; background: #a6e74f;" ng-show="user.assessor.score_competencies[1] == 'h' || user.assessor.score_competencies[1] == 'hm'">High</th>
+																	<th style="text-align: center; background: #fff33b;" ng-show="user.assessor.score_competencies[1] == 'm' || user.assessor.score_competencies[1] == 'ml'"">Medium</th>
+																	<th style="
+																	 text-align: center; background: #fec772;" ng-show="user.assessor.score_competencies[1] == 'l'">LOW</th>
 																	<th>
 																		<ul>
 																			<li ng-repeat="s in user.assessor.paei_desc.i">
 																				<span ng-show="switchView == 1">
-																					<input type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here">
+																						<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{itag: true}}"
 																					 ng-change="copyThis('I', $index, Idata)" ng-model="Idata"></select> -->
 																					<select class="form-control" ng-change="copyThis('I', $index, Idata)" ng-model="Idata">
@@ -5693,7 +5703,8 @@
 											<span ng-show="switchView == 1">Printable View</span>
 											<span ng-show="switchView == 2">Editable View</span>
 										</button>
-										<button class="btn btn-danger" style="float:right; margin-bottom: 30px;" ng-click="submitAssessor(1)">Save</button>
+										<button class="btn btn-danger" style="position: fixed; bottom:30px; right:5%;" ng-click="submitAssessor(1)"
+										 ng-show="assessor_tab!=5 || (assessor_tab==5 && section_num!=0)">Save</button>
 									</div>
 									<!--											END TABS												-->
 								</div>

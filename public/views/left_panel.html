@@ -1,15 +1,15 @@
 <style>
-	.bg-tab {
-		background-color: white;
-	}
+    .bg-tab {
+        background-color: white;
+    }
 </style>
 <div id="page-sidebar" ng-show="show">
-			
-	<div class="scroll-sidebar">
 
-		<ul id="sidebar-menu">
+    <div class="scroll-sidebar">
+
+        <ul id="sidebar-menu">
             <li class="header"><span>Instructions</span></li>
-            <li >
+            <li>
                 <a ui-sref="process-steps" ng-class="current_state == 'process-steps' ? 'bg-tab':''">
                     <i class="glyph-icon icon-align-justify"></i>
                     <span>Process Steps</span>
@@ -26,19 +26,33 @@
             <li class="header"><span>Step 1: Reflective Questions</span></li>
             <li>
                 <a ui-sref="reflective-questions" ng-class="current_state == 'reflective-questions' ? 'bg-tab':''">
-                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.reflective_filled"><i class="material-icons">check_circle</i></span>
-					<i class="glyph-icon icon-file" ng-if="!percent.reflective_filled"></i>
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.reflective_filled"><i
+                            class="material-icons">check_circle</i></span>
+                    <i class="glyph-icon icon-file" ng-if="!percent.reflective_filled"></i>
                     <span>4 Reflective Questions</span>
                 </a>
             </li>
             <li>
-                <a ui-sref="questionnaire" ng-class="current_state == 'questionnaire' ? 'bg-tab':''" ng-if="percent.reflective_filled">
-                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.questionnaire_filled"><i class="material-icons">check_circle</i></span>
-					<i class="glyph-icon icon-th" ng-if="!percent.questionnaire_filled"></i>
+                <a ui-sref="dragQ" ng-class="current_state == 'dragQ' ? 'bg-tab':''" ng-if="percent.reflective_filled">
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.drag_filled"><i
+                            class="material-icons">check_circle</i></span>
+                    <i class="glyph-icon icon-reorder" ng-if="!percent.drag_filled"></i>
+                    <span>Rank Your Strengths</span>
+                </a>
+                <a style="color: #949494;" ng-class="current_state == 'dragQ' ? 'bg-tab':''" ng-if="!percent.reflective_filled">
+                    <i class="glyph-icon icon-reorder"></i>
+                    <span>Rank Your Strengths</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="questionnaire" ng-class="current_state == 'questionnaire' ? 'bg-tab':''" ng-if="percent.reflective_filled && percent.drag_filled">
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.questionnaire_filled"><i
+                            class="material-icons">check_circle</i></span>
+                    <i class="glyph-icon icon-th" ng-if="!percent.questionnaire_filled"></i>
                     <span>Online Questionnaire</span>
                 </a>
-                <a style="color: #949494;" ng-class="current_state == 'questionnaire' ? 'bg-tab':''" ng-if="!percent.reflective_filled">
-					<i class="glyph-icon icon-th"></i>
+                <a style="color: #949494;" ng-class="current_state == 'questionnaire' ? 'bg-tab':''" ng-if="!(percent.reflective_filled && percent.drag_filled)">
+                    <i class="glyph-icon icon-th"></i>
                     <span>Online Questionnaire</span>
                 </a>
             </li>
@@ -47,78 +61,80 @@
 
             <li class="header"><span>Step 2: Interaction with Facilitator</span></li>
             <li>
-                <a data-toggle="modal" data-target="#myModal" href="" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
-					<i class="glyph-icon icon-arrow-right"></i>
+                <a data-toggle="modal" data-target="#myModal" href="" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && !percent.selected_profile">
+                    <i class="glyph-icon icon-arrow-right"></i>
                     <span>Select TrueSelf Profile</span>
                 </a>
-                <a style="color: #949494;" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+                <a style="color: #949494;" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile">
                     <span style="color: #00C851; margin-left: 8px; margin-right: 4px;"><i class="material-icons">check_circle</i></span>
                     <span>Select TrueSelf Profile</span>
                 </a>
-                <a style="color: #949494;" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
-					<i class="glyph-icon icon-arrow-right"></i>
+                <a style="color: #949494;" ng-if="!(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled)">
+                    <i class="glyph-icon icon-arrow-right"></i>
                     <span>Select TrueSelf Profile</span>
                 </a>
             </li>
-            
+
             <li class="divider"></li>
-				
-			<li class="header">Step 3: Building TrueSelf Profile </li>
-            
+
+            <li class="header">Step 3: Building TrueSelf Profile </li>
+
             <li>
-                <a data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
-					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i class="material-icons">check_circle</i></span>
-					<i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
+                <a data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i
+                            class="material-icons">check_circle</i></span>
+                    <i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
                     <span>Create/Update</span>
                 </a>
-                <a ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
-					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i class="material-icons">check_circle</i></span>
-					<i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
+                <a ui-sref="userProfile" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;" ng-if="percent.profile_filled"><i
+                            class="material-icons">check_circle</i></span>
+                    <i class="glyph-icon icon-linecons-doc" ng-if="!percent.profile_filled"></i>
                     <span>Create/Update</span>
                 </a>
-                <a style="color: #949494;" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile)">
+                <a style="color: #949494;" ng-if="!(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile)">
                     <i class="glyph-icon icon-linecons-doc"></i>
                     <span>Create/Update</span>
                 </a>
             </li>
-            
+
             <li>
-                <a ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
-					<span style="color: #00C851; margin-left: 8px; margin-right: 4px;"><i class="material-icons">check_circle</i></span>
+                <a ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+                    <span style="color: #00C851; margin-left: 8px; margin-right: 4px;"><i class="material-icons">check_circle</i></span>
                     <span>Trueself Report</span>
                 </a>
-                <a style="color: #949494;" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
+                <a style="color: #949494;" ng-if="!(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
                     <i class="glyph-icon icon-linecons-doc"></i>
                     <span>Trueself Report</span>
                 </a>
             </li>
-			
-			<!--	ONLY FOR FAC	-->
+
+            <!--	ONLY FOR FAC	-->
 
             <li class="divider" ng-if="percent.you_are_fac"></li>
-			
+
             <li ng-if="percent.you_are_fac">
                 <a ui-sref="facPanel">
-					<i class="glyph-icon icon-arrow-right"></i>
+                    <i class="glyph-icon icon-arrow-right"></i>
                     <span>Go to Facilitator Panel</span>
                 </a>
             </li>
-			
-			<!--	ONLY FOR MANAGER	-->
+
+            <!--	ONLY FOR MANAGER	-->
 
             <li class="divider" ng-if="percent.you_are_man"></li>
-			
+
             <li ng-if="percent.you_are_man">
                 <a ui-sref="manPanel">
-					<i class="glyph-icon icon-arrow-right"></i>
+                    <i class="glyph-icon icon-arrow-right"></i>
                     <span>Go to Manager Panel</span>
                 </a>
             </li>
-			
-			<!--		END FAC		-->
-		
-		</ul><!-- #sidebar-menu -->
+
+            <!--		END FAC		-->
+
+        </ul><!-- #sidebar-menu -->
 
 
-	</div>
+    </div>
 </div>

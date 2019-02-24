@@ -253,7 +253,8 @@ var userSchema = new Schema({
             q41: String,
             q42: String,
             q43: String
-        }
+        },
+        dragArray: Array
     },
     last_modification: {
         type: Date, default: ''
@@ -360,7 +361,8 @@ var userSchema = new Schema({
             learning_need: [new Schema({ title: String, desc: String })],
             values_role_fitment: [new Schema({ title: String, desc: String })],
             paei: [new Schema({ title: String, desc: String })]
-        }
+        },
+        assessor_notes_combined: String
     },
     language: {
         type: String,

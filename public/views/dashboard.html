@@ -96,7 +96,7 @@
 						<ul>
 							<li>
 								<a>
-									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled) ?'bg_progress_completed':'bg_progress_active'">1</label>
+									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled) ?'bg_progress_completed':'bg_progress_active'">1</label>
 									<span class="wizard-description">
 										<small>Step 1</small>
 										Reflective Questions
@@ -105,7 +105,7 @@
 							</li>
 							<li>
 								<a>
-									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile) ?'bg_progress_completed':((percent.reflective_filled && percent.questionnaire_filled)?'bg_progress_active':'bg_progress')">2</label>
+									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile) ?'bg_progress_completed':((percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled)?'bg_progress_active':'bg_progress')">2</label>
 									<span class="wizard-description">
 										<small>Step 2</small>
 										Interaction with Facilitator
@@ -114,7 +114,7 @@
 							</li>
 							<li>
 								<a>
-									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled) ?'bg_progress_completed':((percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile)?'bg_progress_active':'bg_progress')">3</label>
+									<label class="wizard-step" ng-class="(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled) ?'bg_progress_completed':((percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile)?'bg_progress_active':'bg_progress')">3</label>
 									<span class="wizard-description">
 										<small>Step 3</small>
 										Building TrueSelf Profile
@@ -130,22 +130,28 @@
 						<span style="margin: 3px auto;">Kindly proceed with Step 1.</span>
 					</div>
 
-					<div class="row info_box" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
+					<div class="row info_box" ng-if="percent.reflective_filled && !percent.drag_filled">
+						<i class="material-icons">info</i>
+						<span style="margin: 3px auto;">Kindly proceed to fill Rank Your Strengths in Step 1.</span>
+					</div>
+
+					<div class="row info_box" ng-if="percent.reflective_filled && percent.drag_filled && !percent.questionnaire_filled">
 						<i class="material-icons">info</i>
 						<span style="margin: 3px auto;">Kindly proceed to fill Questionnaire in Step 1.</span>
 					</div>
 
-					<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
+					<div class="row info_box" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && !percent.selected_profile">
 						<i class="material-icons">info</i>
-						<span style="margin: 3px auto;">Thank You for completing Step 1. Please consult your facilitator for further process.</span>
+						<span style="margin: 3px auto;">Thank You for completing Step 1. Please consult your facilitator for further
+							process.</span>
 					</div>
 
-					<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_filled">
+					<div class="row info_box" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_filled">
 						<i class="material-icons">info</i>
 						<span style="margin: 3px auto;">Thank You for completing Step 2. Kindly proceed building your Trueself profile.</span>
 					</div>
 
-					<div class="row info_box" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+					<div class="row info_box" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
 						<i class="material-icons">info</i>
 						<span style="margin: 3px auto;">Thank You for completing all 3 steps. You can now check your Trueself Profile.</span>
 					</div>
@@ -170,18 +176,29 @@
 
 						<div class="col-sm-8">
 							<div class="col-sm-6">
-								<div class="card card-stats" ui-sref="reflective-questions" ng-if="!percent.reflective_filled || percent.questionnaire_filled">
-									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">Step 1</div>
-									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.reflective_filled">Step 1</div>
+								<div class="card card-stats" ui-sref="reflective-questions" ng-if="!percent.reflective_filled || (percent.drag_filled && percent.questionnaire_filled)">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.reflective_filled">Step
+										1</div>
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.reflective_filled">Step
+										1</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Reflective Questions</p>
 										<h3 class="title">
-											<small style="font-size: 14px" ng-if="percent.questionnaire_filled && percent.reflective_filled">COMPLETED</small>
-											<small style="font-size: 14px" ng-if="!percent.questionnaire_filled || !percent.reflective_filled">PROCEED</small>
+											<small style="font-size: 14px" ng-if="percent.questionnaire_filled && percent.reflective_filled && percent.drag_filled">COMPLETED</small>
+											<small style="font-size: 14px" ng-if="!percent.questionnaire_filled || !percent.reflective_filled || !percent.drag_filled">PROCEED</small>
 										</h3>
 									</div>
 								</div>
-								<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled && !percent.questionnaire_filled">
+								<div class="card card-stats" ui-sref="dragQ" ng-if="percent.reflective_filled && !percent.drag_filled">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 1</div>
+									<div class="card-content">
+										<p class="category" style="font-size: 16px;">Rank Your Strengths</p>
+										<h3 class="title">
+											<small style="font-size: 14px">PROCEED WITH RANKING STRENGTHS</small>
+										</h3>
+									</div>
+								</div>
+								<div class="card card-stats" ui-sref="questionnaire" ng-if="percent.reflective_filled && percent.drag_filled && !percent.questionnaire_filled">
 									<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 1</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Reflective Questions</p>
@@ -192,7 +209,7 @@
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<div class="card card-stats" data-toggle="modal" data-target="#myModal" ng-if="percent.reflective_filled && percent.questionnaire_filled && !percent.selected_profile">
+								<div class="card card-stats" data-toggle="modal" data-target="#myModal" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && !percent.selected_profile">
 									<div class="card-header" data-background-color="blue" style="font-weight: bold;">Step 2</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
@@ -201,7 +218,7 @@
 										</h3>
 									</div>
 								</div>
-								<div class="card card-stats" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile">
+								<div class="card card-stats" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile">
 									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Step 2</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
@@ -210,7 +227,7 @@
 										</h3>
 									</div>
 								</div>
-								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled)">
+								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled)">
 									<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 2</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Interaction with Facilitator</p>
@@ -221,9 +238,11 @@
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<div class="card card-stats" data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
-									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
-									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
+								<div class="card card-stats" data-toggle="modal" data-target="#myModal2" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_blocked">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step
+										3</div>
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step
+										3</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
 										<h3 class="title">
@@ -232,9 +251,11 @@
 										</h3>
 									</div>
 								</div>
-								<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
-									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step 3</div>
-									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step 3</div>
+								<div class="card card-stats" ui-sref="userProfile" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && !percent.profile_blocked">
+									<div class="card-header" data-background-color="blue" style="font-weight: bold;" ng-if="!percent.profile_filled">Step
+										3</div>
+									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;" ng-if="percent.profile_filled">Step
+										3</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
 										<h3 class="title">
@@ -243,7 +264,7 @@
 										</h3>
 									</div>
 								</div>
-								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.selected_profile)">
+								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.selected_profile)">
 									<div class="card-header" data-background-color="grey" style="font-weight: bold;">Step 3</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Building Trueself Profile</p>
@@ -254,7 +275,7 @@
 								</div>
 							</div>
 							<div class="col-sm-6">
-								<div class="card card-stats" ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+								<div class="card card-stats" ui-sref="trueself-report" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
 									<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Trueself Profile</p>
@@ -263,7 +284,7 @@
 										</h3>
 									</div>
 								</div>
-								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
+								<div class="card card-stats" ng-if="!(percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled)">
 									<div class="card-header" data-background-color="grey" style="font-weight: bold;">Locked</div>
 									<div class="card-content">
 										<p class="category" style="font-size: 16px;">Trueself Profile</p>
@@ -281,7 +302,7 @@
 							Add-on tools
 						</h1>
 
-						<div class="col-sm-4" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+						<div class="col-sm-4" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
 							<div class="card card-stats" ui-sref="feedback">
 								<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">View</div>
 								<div class="card-content">
@@ -293,7 +314,7 @@
 							</div>
 						</div>
 
-						<div class="col-sm-4" ng-if="percent.reflective_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
+						<div class="col-sm-4" ng-if="percent.reflective_filled && percent.drag_filled && percent.questionnaire_filled && percent.selected_profile && percent.profile_filled">
 							<div class="card card-stats" ng-click="changeView()">
 								<div class="card-header" data-background-color="bluish_green" style="font-weight: bold;">Explore</div>
 								<div class="card-content">
@@ -360,7 +381,8 @@
 							</div>
 
 							<div class="col-md-12" style="text-align: center; margin-top: 30px;">
-								<button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add to List</button>
+								<button class="btn btn-success" ng-click="addReviewer()" ng-disabled="!(reviewer.name && reviewer.relationship && reviewer.emailid)">Add
+									to List</button>
 							</div>
 						</div>
 					</div>

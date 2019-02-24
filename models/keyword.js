@@ -67,7 +67,7 @@ var descriptionSchema = new Schema({
     mini_by_assessor: { type: Boolean, default: false },
     relate_percentage: { type: Number, default: 0 },
     linked_ln: { type: Array, default: [] },
-    assessor_report_mini_check: { type: Boolean, default: true }
+    assessor_report_mini_check: { type: Boolean, default: false }
 });
 
 var descriptionReportSchema = new Schema({

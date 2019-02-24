@@ -767,8 +767,8 @@ In administrating:
 																	<span style="font-size:12px; font-weight: bold;">Is this learning need affecting you?</span>
 																	<select class="form-control" ng-model="keys.do_ask_comment" style="text-align: center;" ng-class="validateComment(keys.keyword_id) && (checkRel[section_num])?'bg_uncomp':''">
 																		<option disabled value="">--Select--</option>
-																		<option value="Yes">Yes</option>
-																		<option value="No">No</option>
+																		<option value="Yes">Yes, I need to improve on this aspect</option>
+																		<option value="No">No, it does not need much improvement</option>
 																	</select>
 																	<textarea contenteditable="true" rows="2" class="form-control" ng-model="keys.comment" placeholder="In what ways is this learning need affecting you?"
 																	 ng-if="keys.do_ask_comment=='Yes'" style="text-align: center;" ng-class="validateComment(keys.keyword_id) && (checkRel[section_num])?'bg_uncomp':''"></textarea>

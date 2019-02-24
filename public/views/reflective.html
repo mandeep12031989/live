@@ -1,25 +1,25 @@
 <span ng-show="loading">
-    <div class="spinner">
-        <div class="bounce1"></div>
-        <div class="bounce2"></div>
-        <div class="bounce3"></div>
-    </div>    
+	<div class="spinner">
+		<div class="bounce1"></div>
+		<div class="bounce2"></div>
+		<div class="bounce3"></div>
+	</div>
 </span>
 
 <div id="sb-site" ng-show="!loading" ng-init="load_questions()">
-	
+
 	<div style="display: block; width: 22%; margin: 0 auto; z-index: 10000;" ng-show="success.message == 'Done'" class="w3-animate-top">
 		<div class="alert alert-success alert-with-icon" data-notify="container" style="position: fixed; margin-top: 20px; width: 300px; text-align: center;">
 			<i data-notify="icon" class="material-icons">check_circle</i>
 			<span data-notify="message">Progress Saved !</span>
 		</div>
 	</div>
-	
-    <div id="page-wrapper">
-        <div id="page-content-wrapper">
-			
-            <div id="page-content-margin">
-				
+
+	<div id="page-wrapper">
+		<div id="page-content-wrapper">
+
+			<div id="page-content-margin">
+
 				<!--<div class="row col-sm-offset-2">
 					<div class="col-sm-8 box" style="border: 1px solid #efefef; border-radius: 5px; padding: 10px; color:black;">
 						<h3>Instructions for attempting below questions</h3>
@@ -30,78 +30,80 @@
 						</ol>
 					</div>             
 				</div><br><br>-->
-				
-                    <div class="container">
-						<div class="panel">
-							<div class="panel-body">
-								<h1 style="text-align:center; font-weight:bold;" class="title-hero">
-								   <span style="font-size: 18px;">4 </span> Reflective Questions
-								</h1>
-								<div class="example-box-wrapper">
-									<div id="form-wizard-3" class="form-wizard">
-										<ul>
-											<li ng-click="RQ_num = 1;" ng-class="RQ_num == 1 ? 'active':''">
-												<a data-toggle="tab">
-													<label class="wizard-step bg_progress">1</label>
-											  <span class="wizard-description">
-												 Question 1
-												 <small>Qualities You Like in People</small>
-											  </span>
-												</a>
-											</li>
-											<li ng-click="RQ_num = 2;" ng-class="RQ_num == 2 ? 'active':''">
-												<a data-toggle="tab">
-													<label class="wizard-step bg_progress">2</label>
-											  <span class="wizard-description">
-												 Question 2
-												 <small>How Close Friends Describe You</small>
-											  </span>
-												</a>
-											</li>
-											<li ng-click="RQ_num = 3;" ng-class="RQ_num == 3 ? 'active':''">
-												<a data-toggle="tab">
-													<label class="wizard-step bg_progress">3</label>
-											  <span class="wizard-description">
-												 Question 3
-												 <small>Describe Yourself</small>
-											  </span>
-												</a>
-											</li>
-											<li ng-click="RQ_num = 4;" ng-class="RQ_num == 4 ? 'active':''">
-												<a data-toggle="tab">
-													<label class="wizard-step bg_progress">4</label>
-											  <span class="wizard-description">
-												 Question 4
-												 <small>Growth Over Time</small>
-											  </span>
-												</a>
-											</li>
-										</ul>
-										
-										<div class="tab-content">
 
-												<div class="content-box" ng-show="RQ_num == 1">
-													<h4 class="content-box-header bg-blue">
-													   Q1. What kind of people you like? What qualities you like in them?<br><br>
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपको किस तरह के लोग पसंद हैं? आप उनमें कौन से गुण पसंद करते हैं ?
-													</h4>
-													<div class="content-box-wrapper">
-														<textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ1" placeholder="Please write in adjectives, keyword or one-liner sentence
+				<div class="container">
+					<div class="panel">
+						<div class="panel-body">
+							<h1 style="text-align:center; font-weight:bold;" class="title-hero">
+								<span style="font-size: 18px;">4 </span> Reflective Questions
+							</h1>
+							<div class="example-box-wrapper">
+								<div id="form-wizard-3" class="form-wizard">
+									<ul>
+										<li ng-click="RQ_num = 1;" ng-class="RQ_num == 1 ? 'active':''">
+											<a data-toggle="tab">
+												<label class="wizard-step bg_progress">1</label>
+												<span class="wizard-description">
+													Question 1
+													<small>Qualities You Like in People</small>
+												</span>
+											</a>
+										</li>
+										<li ng-click="RQ_num = 2;" ng-class="RQ_num == 2 ? 'active':''">
+											<a data-toggle="tab">
+												<label class="wizard-step bg_progress">2</label>
+												<span class="wizard-description">
+													Question 2
+													<small>How Close Friends Describe You</small>
+												</span>
+											</a>
+										</li>
+										<li ng-click="RQ_num = 3;" ng-class="RQ_num == 3 ? 'active':''">
+											<a data-toggle="tab">
+												<label class="wizard-step bg_progress">3</label>
+												<span class="wizard-description">
+													Question 3
+													<small>Describe Yourself</small>
+												</span>
+											</a>
+										</li>
+										<li ng-click="RQ_num = 4;" ng-class="RQ_num == 4 ? 'active':''">
+											<a data-toggle="tab">
+												<label class="wizard-step bg_progress">4</label>
+												<span class="wizard-description">
+													Question 4
+													<small>Growth Over Time</small>
+												</span>
+											</a>
+										</li>
+									</ul>
+
+									<div class="tab-content">
+
+										<div class="content-box" ng-show="RQ_num == 1">
+											<h4 class="content-box-header bg-blue">
+												Q1. What kind of people you like? What qualities you like in them?<br><br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपको किस तरह के लोग पसंद हैं? आप उनमें कौन से गुण पसंद करते हैं ?
+											</h4>
+											<div class="content-box-wrapper">
+												<textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ1" placeholder="Please write in adjectives, keyword or one-liner sentence
 1.
 2.
 3.
 4.
-5." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
-													</div>
-												</div>
+5."
+												 ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
+											</div>
+										</div>
 
-												<div class="content-box" ng-show="RQ_num == 2">
-													<h4 class="content-box-header bg-blue">
-														Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.<br><br>
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपके करीबी दोस्त या रिश्तेदार आपका किस प्रकार का चित्रित बतातें हैं ? कृपया सकारात्मक और नकारात्मक दोनों गुणों का उल्लेख करें ।
-													</h4>
-													<div class="content-box-wrapper">
-													   <textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ2" placeholder="Please write both positive and negative qualities
+										<div class="content-box" ng-show="RQ_num == 2">
+											<h4 class="content-box-header bg-blue">
+												Q2. How would a close friend of yours describe you? Please mention both positive and negative qualities.<br><br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;आपके करीबी दोस्त या रिश्तेदार आपका किस प्रकार का चित्रित बतातें
+												हैं ? कृपया सकारात्मक और नकारात्मक दोनों गुणों का उल्लेख करें ।
+											</h4>
+											<div class="content-box-wrapper">
+												<textarea rows="6" required class="form-control" ng-model="quesDetails.question.RQ2" placeholder="Please write both positive and negative qualities
 Positives
 1.
 2.
@@ -113,42 +115,47 @@ Negatives
 2.
 3.
 4.
-5." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
-													</div>
-												</div>
+5."
+												 ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
+											</div>
+										</div>
 
-												<div class="content-box" ng-show="RQ_num == 3">
-													<h4 class="content-box-header bg-blue">
-														Q3. Mention positive and negative qualities about yourself that are not covered in Question 2.<br><br>
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अपने बारे में सकारात्मक और नकारात्मक गुण बताएं जो	सवाल 2 में शामिल नहीं किए गए हैं ?
-													</h4>
-													<div class="content-box-wrapper">
-														<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ3" placeholder="Positives
+										<div class="content-box" ng-show="RQ_num == 3">
+											<h4 class="content-box-header bg-blue">
+												Q3. Mention positive and negative qualities about yourself that are not covered in Question 2.<br><br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;अपने बारे में सकारात्मक और नकारात्मक गुण बताएं जो सवाल 2 में
+												शामिल नहीं किए गए हैं ?
+											</h4>
+											<div class="content-box-wrapper">
+												<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ3" placeholder="Positives
 1.
 2.
 Negatives
 1.
-2." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
-													</div>
-												</div>
+2."
+												 ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
+											</div>
+										</div>
 
-												<div class="content-box" ng-show="RQ_num == 4">
-													<h4 class="content-box-header bg-blue">
-														Q4. Please mention negative qualities that you have improved in last few years.<br><br>
-														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;कृपया उन नकारात्मक गुणों का उल्लेख करें जिन्हें आपने समय के साथ सुधार लिया है ?
-													</h4>
-													<div class="content-box-wrapper">
-														<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ4" placeholder="Qualitites improved over time
+										<div class="content-box" ng-show="RQ_num == 4">
+											<h4 class="content-box-header bg-blue">
+												Q4. Please mention negative qualities that you have improved in last few years.<br><br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;कृपया उन नकारात्मक गुणों का उल्लेख करें जिन्हें आपने समय के साथ
+												सुधार लिया है ?
+											</h4>
+											<div class="content-box-wrapper">
+												<textarea rows="5" required class="form-control" ng-model="quesDetails.question.RQ4" placeholder="Qualitites improved over time
 1.
 2.
 3.
-4." ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
-													</div>
-												</div>
-										
+4."
+												 ng-disabled="quesDetails.question.RQeditable[RQ_num - 1]"></textarea>
+											</div>
+										</div>
+
 										<div class="tab-content" style="margin-bottom: 20px;" ng-show="RQ_num >= 1 && RQ_num <= 4">
 											<h4 style="font-weight:bold; margin-bottom: 20px;">
-											   For your reference, see a sample answer below:
+												For your reference, see a sample answer below:
 											</h4>
 											<img src="./images/q1.svg" ng-show="RQ_num == 1">
 											<img src="./images/q2.svg" ng-show="RQ_num == 2">
@@ -156,21 +163,23 @@ Negatives
 											<img src="./images/q4.svg" ng-show="RQ_num == 4">
 										</div>
 
-												<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Previous</a>
-												<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 4" style="color: white;">Next</a>
-												<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 4" style="color: white;">Save</a>
-												<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 4" style="color: white;" ng-disabled="!(quesDetails.question.RQ1 && quesDetails.question.RQ2 && quesDetails.question.RQ3 && quesDetails.question.RQ4)">Proceed to Questionnaire</a>
+										<a class="btn btn-primary" ng-click="RQ_num=RQ_num-1;" ng-show="RQ_num != 1" style="color: white;">Previous</a>
+										<a class="btn btn-primary pull-right" ng-click="RQ_num=RQ_num+1;" ng-show="RQ_num != 4" style="color: white;">Next</a>
+										<a class="btn btn-primary" ng-click="save_ques(1)" ng-show="RQ_num != 4" style="color: white;">Save</a>
+										<a class="btn btn-primary pull-right" ng-click="save_ques(2)" ng-show="RQ_num == 4" style="color: white;"
+										 ng-disabled="!(quesDetails.question.RQ1 && quesDetails.question.RQ2 && quesDetails.question.RQ3 && quesDetails.question.RQ4)">Proceed
+											to Ranking Strengths</a>
 
-										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-                    </div>
+					</div>
+				</div>
 
-                
 
-            </div>
-        </div>
-    </div>
+
+			</div>
+		</div>
+	</div>
 </div>

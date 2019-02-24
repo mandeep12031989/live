@@ -145,6 +145,8 @@ router.route('/mailToOwn')
 						});
 					}
 					else {
+						mailData.to = user.username;
+
 						sendMailFinally(mailData, function (res_from_mailer) {
 							if (res_from_mailer == false) {
 								return res.status(501).json({ success: false, message: 'Some Error Occured !' });
@@ -994,6 +996,18 @@ router.route('/analysis')
 
 	});
 
+router.route('/drag-drop')
+	.get(Verify.verifyOrdinaryUser, function (req, res, next) {
+		var id = req.decoded._id;
+
+		User.findOne({ _id: id }, { 'question.dragArray': 1 })
+			.exec(function (err, user) {
+				if (err)
+					next(err);
+				res.status(200).json(user);
+			});
+	});
+
 router.route('/all_profile_analysis')
 	.get(async function (req, res, next) {
 		// var allUsers = await User.find({ 'profile.profile_number': { $ne: 0 }, 'profile.profile_content': { $ne: [] } }, { 'profile.profile_number': 1, 'profile.profile_content.keyword_id': 1, 'profile.profile_content.mini_descriptions.relate': 1, 'profile.profile_content.mini_descriptions.mini_description_id': 1 });
@@ -1228,29 +1242,37 @@ router.route('/completion')
 					return res.status(200).send({ success: false, message: 'Not Found !' });
 
 				var per = 0;
+				//10 %
 				if (user.question.RQ1 != '' && user.question.RQ1 != undefined)
-					per += 3;
+					per += 2;
 				if (user.question.RQ2 != '' && user.question.RQ2 != undefined)
-					per += 4;
-				if (user.question.RQ3 != '' && user.question.RQ3 != undefined)
-					per += 4;
-				if (user.question.RQ4 != '' && user.question.RQ4 != undefined)
 					per += 3;
+				if (user.question.RQ3 != '' && user.question.RQ3 != undefined)
+					per += 3;
+				if (user.question.RQ4 != '' && user.question.RQ4 != undefined)
+					per += 2;
 
 				//console.log(user.question.RQ1 + ' | ' + user.question.RQ2 + ' | ' + user.question.RQ3 + ' | ' + user.feedback.submitted + ' = ' + per);
 
-				// 14 % for questionnaire
+				// 9 %
 				var que_filled = false;
 				if (user.question.questionnaire.length != 0) {
 					for (var q = 0; q < 36; q++) {
 						//console.log(q);
 						if (parseInt(user.question.questionnaire[q]) != 0) {
-							per += 14;
+							per += 9;
 							que_filled = true;
 							break;
 						}
 					}
 				}
+
+				var drag_filled = false;
+				if (user.question['dragArray'] && user.question['dragArray'].length != 0) {
+					per += 9;
+					drag_filled = true;
+				}
+
 				//console.log(user.profile.beliefs);
 				if (user.profile.beliefs.length) {
 					var sec0 = true;
@@ -1324,6 +1346,7 @@ router.route('/completion')
 				var final_obj = {
 					percentage: per,
 					reflective_filled: user.question.RQ1 != '' && user.question.RQ1 != undefined && user.question.RQ2 != '' && user.question.RQ2 != undefined && user.question.RQ3 != '' && user.question.RQ3 != undefined && user.question.RQ4 != '' && user.question.RQ4 != undefined,
+					drag_filled: drag_filled,
 					questionnaire_filled: que_filled,
 					selected_profile: user.profile.profile_number,
 					profile_filled: sec1 && sec2 && sec3,// && sec4,
