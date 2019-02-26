@@ -4700,7 +4700,7 @@
 											<div class="col-sm-8" style="margin-top: 7px; text-align: center;">
 												<div class="progress">
 													<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.slf_aware*33.3}}%"
-													 ng-class="(user.assessor.slf_aware>=0 && user.assessor.slf_aware<=1)?'progress-bar-danger':(user.assessor.slf_aware<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.slf_aware}}
+													 ng-class="(user.assessor.slf_aware>=0 && user.assessor.slf_aware<=1)?'progress-bar-danger':(user.assessor.slf_aware<2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.slf_aware}}
 														/ 3.0
 													</div>
 												</div>
@@ -4711,12 +4711,12 @@
 													 ng-show="switchView == 1">
 													<span ng-show="switchView == 2">{{user.assessor.rubric[0][0]}}</span>
 												</span>
-												<span ng-show="user.assessor.slf_aware>1 && user.assessor.slf_aware<=2">
+												<span ng-show="user.assessor.slf_aware>1 && user.assessor.slf_aware<2">
 													<input type="text" ng-model="user.assessor.rubric[0][1]" class="form-control" style="text-align: center;"
 													 ng-show="switchView == 1">
 													<span ng-show="switchView == 2">{{user.assessor.rubric[0][1]}}</span>
 												</span>
-												<span ng-show="user.assessor.slf_aware>2">
+												<span ng-show="user.assessor.slf_aware>=2">
 													<input type="text" ng-model="user.assessor.rubric[0][2]" class="form-control" style="text-align: center;"
 													 ng-show="switchView == 1">
 													<span ng-show="switchView == 2">{{user.assessor.rubric[0][2]}}</span>
@@ -4741,7 +4741,7 @@
 												<div class="col-sm-8" style="margin-top: 7px;">
 													<div class="progress">
 														<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.openness*33.3}}%"
-														 ng-class="(user.assessor.openness>=0 && user.assessor.openness<=1)?'progress-bar-danger':(user.assessor.openness<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.openness}}
+														 ng-class="(user.assessor.openness>=0 && user.assessor.openness<=1)?'progress-bar-danger':(user.assessor.openness<2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.openness}}
 															/ 3.0
 														</div>
 													</div>
@@ -4752,12 +4752,12 @@
 														 ng-show="switchView == 1">
 														<span ng-show="switchView == 2">{{user.assessor.rubric[1][0]}}</span>
 													</span>
-													<span ng-show="user.assessor.openness>1 && user.assessor.openness<=2">
+													<span ng-show="user.assessor.openness>1 && user.assessor.openness<2">
 														<input type="text" ng-model="user.assessor.rubric[1][1]" class="form-control" style="text-align: center;"
 														 ng-show="switchView == 1">
 														<span ng-show="switchView == 2">{{user.assessor.rubric[1][1]}}</span>
 													</span>
-													<span ng-show="user.assessor.openness>2">
+													<span ng-show="user.assessor.openness>=2">
 														<input type="text" ng-model="user.assessor.rubric[1][2]" class="form-control" style="text-align: center;"
 														 ng-show="switchView == 1">
 														<span ng-show="switchView == 2">{{user.assessor.rubric[1][2]}}</span>
@@ -4782,7 +4782,7 @@
 													<div class="col-sm-8" style="margin-top: 7px;">
 														<div class="progress">
 															<div class="progress-bar" role="progressbar" aria-valuenow="40" style="width:{{user.assessor.per_mast*33.3}}%"
-															 ng-class="(user.assessor.per_mast>=0 && user.assessor.per_mast<=1)?'progress-bar-danger':(user.assessor.per_mast<=2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.per_mast}}
+															 ng-class="(user.assessor.per_mast>=0 && user.assessor.per_mast<=1)?'progress-bar-danger':(user.assessor.per_mast<2 ? 'progress-bar-warning':'progress-bar-success')">{{user.assessor.per_mast}}
 																/ 3.0
 															</div>
 														</div>
@@ -4793,12 +4793,12 @@
 															 ng-show="switchView == 1">
 															<span ng-show="switchView == 2">{{user.assessor.rubric[2][0]}}</span>
 														</span>
-														<span ng-show="user.assessor.per_mast>1 && user.assessor.per_mast<=2">
+														<span ng-show="user.assessor.per_mast>1 && user.assessor.per_mast<2">
 															<input type="text" ng-model="user.assessor.rubric[2][1]" class="form-control" style="text-align: center;"
 															 ng-show="switchView == 1">
 															<span ng-show="switchView == 2">{{user.assessor.rubric[2][1]}}</span>
 														</span>
-														<span ng-show="user.assessor.per_mast>2">
+														<span ng-show="user.assessor.per_mast>=2">
 															<input type="text" ng-model="user.assessor.rubric[2][2]" class="form-control" style="text-align: center;"
 															 ng-show="switchView == 1">
 															<span ng-show="switchView == 2">{{user.assessor.rubric[2][2]}}</span>
@@ -5425,7 +5425,7 @@
 																		<ul>
 																			<li ng-repeat="s in user.assessor.paei_desc.a">
 																				<span ng-show="switchView == 1">
-																						<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
+																					<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{atag: true}}"
 																					 ng-change="copyThis('A', $index, Adata)" ng-model="Adata"></select> -->
 																					<select class="form-control" ng-change="copyThis('A', $index, Adata)" ng-model="Adata">
@@ -5463,7 +5463,7 @@
 																		<ul>
 																			<li ng-repeat="s in user.assessor.paei_desc.e">
 																				<span ng-show="switchView == 1">
-																						<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
+																					<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{etag: true}}"
 																					 ng-change="copyThis('E', $index, Edata)" ng-model="Edata"></select> -->
 																					<select class="form-control" ng-change="copyThis('E', $index, Edata)" ng-model="Edata">
@@ -5502,7 +5502,7 @@
 																		<ul>
 																			<li ng-repeat="s in user.assessor.paei_desc.i">
 																				<span ng-show="switchView == 1">
-																						<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
+																					<textarea type="text" class="form-control" ng-model="s.statement" placeholder="Enter Here"></textarea>
 																					<!-- <select class="form-control" ng-options="j.mini_description as j.mini_description for j in allMD | filter: {paei_tag:{itag: true}}"
 																					 ng-change="copyThis('I', $index, Idata)" ng-model="Idata"></select> -->
 																					<select class="form-control" ng-change="copyThis('I', $index, Idata)" ng-model="Idata">
