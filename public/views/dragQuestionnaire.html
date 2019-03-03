@@ -1,16 +1,16 @@
 <style>
 	.tab_bg {
 		background: #ede7f6;
-		padding: 5px 0px;
-		border: 5px dotted #dcd6e5;
+		padding: 0.5px 0px;
+		border: 3px dotted #dcd6e5;
 		border-radius: 5px;
-		margin: 5px auto;
+		margin: 2px auto;
 		font-family: "Courier New", Courier, monospace;
 		font-weight: bold;
 		text-transform: uppercase;
 		text-align: center;
 		cursor: move;
-		font-size: 16px;
+		font-size: 15px;
 	}
 
 	.active {
@@ -68,7 +68,7 @@
 							<div class="row">
 								<div class="col-sm-offset-3 col-sm-6" dnd-list="item" dnd-drop="dropCallback(index, item, dragArray)">
 									<div class="row col-sm-12" ng-repeat="item in dragArray" dnd-draggable="item" dnd-effect-allowed="move">
-										<div class="col-sm-1" style="margin-top: 8px; text-align:right;">{{$index+1}}</div>
+										<div class="col-sm-1" style="margin-top: 2px; text-align:right;">{{$index+1}}</div>
 										<div class="col-sm-10 tab_bg" ng-class="info_statement && globalI!=-1 && globalI==$index ? 'active':''">
 											{{item}}
 										</div>
