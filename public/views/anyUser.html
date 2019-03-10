@@ -4560,18 +4560,18 @@
 									<div style="margin: 0px auto;">
 										<ul class="tab-slider--tabs">
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.scores ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.scores = !user.assessor.pdf_pages.scores">Scores</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.paei ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.paei = !user.assessor.pdf_pages.paei">PAEI</li>
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.specific_competency ? 'active-profile' : ''"
 											 ng-click="user.assessor.pdf_pages.specific_competency = !user.assessor.pdf_pages.specific_competency">Specifc
 												Competency</li>
-											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.learning_need ? 'active-profile' : ''"
-											 ng-click="user.assessor.pdf_pages.learning_need = !user.assessor.pdf_pages.learning_need">Learning Needs</li>
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.values_strengths ? 'active-profile' : ''"
 											 ng-click="user.assessor.pdf_pages.values_strengths = !user.assessor.pdf_pages.values_strengths">Strengths</li>
+											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.learning_need ? 'active-profile' : ''"
+											 ng-click="user.assessor.pdf_pages.learning_need = !user.assessor.pdf_pages.learning_need">Learning Needs</li>
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.values_role_fitment ? 'active-profile' : ''"
 											 ng-click="user.assessor.pdf_pages.values_role_fitment = !user.assessor.pdf_pages.values_role_fitment">Values
 												&
 												Role Fitment</li>
-											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.paei ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.paei = !user.assessor.pdf_pages.paei">PAEI</li>
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.pm_m1 ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.pm_m1 = !user.assessor.pdf_pages.pm_m1">PM:
 												M1</li>
 											<li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.pm_m2 ? 'active-profile' : ''" ng-click="user.assessor.pdf_pages.pm_m2 = !user.assessor.pdf_pages.pm_m2">PM:
@@ -4922,7 +4922,15 @@
 														<tbody>
 															<tr ng-repeat="row in user.assessor.specific_competency" ng-if="switchView == 1">
 																<td><input type="text" class="form-control" ng-model="row.competency"></td>
-																<td><input type="text" class="form-control" ng-model="row.score"></td>
+																<td>
+																	<select class="form-control" ng-model="row.score">
+																		<option value="l">Low</option>
+																		<option value="ml">Low to Medium</option>
+																		<option value="m">Medium</option>
+																		<option value="hm">Medium to High</option>
+																		<option value="h">High</option>
+																	</select>
+																</td>
 																<td>
 																	<textarea class="form-control" ng-model="row.description" rows="2"></textarea>
 																</td>
@@ -4934,7 +4942,13 @@
 															</tr>
 															<tr ng-repeat="row in user.assessor.specific_competency" ng-if="switchView == 2">
 																<td>{{row.competency}}</td>
-																<td>{{row.score}}</td>
+																<td ng-switch="row.score">
+																	<span ng-switch-when="l">Low</span>
+																	<span ng-switch-when="ml">Low to Medium</span>
+																	<span ng-switch-when="m">Medium</span>
+																	<span ng-switch-when="hm">Medium to High</span>
+																	<span ng-switch-when="h">High</span>
+																</td>
 																<td>{{row.description}}</td>
 															</tr>
 														</tbody>
@@ -5089,7 +5103,7 @@
 												<div class="col-md-12" ng-show="switchView == 1">
 													<div class="col-md-12">
 														<ul>
-															<li ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | orderBy:'bsl_score':true | filter: {assessor_checkbox: true}">
+															<li ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | filter: {assessor_checkbox: true}">
 																<span class="btn" style="color: red;" ng-click="keys.assessor_checkbox = false;">
 																	<i class="material-icons">clear</i>
 																</span>
@@ -5128,7 +5142,7 @@
 													</div>
 												</div>
 												<div class="col-md-12" ng-show="switchView == 2">
-													<div class="row" ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | orderBy:'bsl_score':true"
+													<div class="row" ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | filter: {assessor_checkbox: true}"
 													 style="margin: 20px auto;">
 														<div class="col-md-10">
 															<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
