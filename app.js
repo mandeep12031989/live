@@ -21,13 +21,11 @@ config = config[_ENV_NAME];
 
 // Mongoose Connection
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoUrl);
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  // we're connected!
-  console.log("Connected correctly to server");
+mongoose.connect(config.mongoUrl, { useCreateIndex: true, useNewUrlParser: true }, (err) => {
+  if (err)
+    console.log(err);
+  else
+    console.log('Connected to mLab !');
 });
 
 var app = express();
@@ -79,6 +77,7 @@ var competency = require('./routes/competency');
 var growth_rec_assessor = require('./routes/growth_rec_assessor');
 var role_fitment = require('./routes/role_fitment');
 var profile_synthesis = require('./routes/profile_synthesis');
+var rank_strengths = require('./routes/rank_strengths');
 
 // linking callback function to route
 app.use('/', routes);
@@ -101,6 +100,7 @@ app.use('/competency', competency);
 app.use('/growth_rec_assessor', growth_rec_assessor);
 app.use('/role_fitment', role_fitment);
 app.use('/profile_synthesis', profile_synthesis);
+app.use('/rank_strengths', rank_strengths);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

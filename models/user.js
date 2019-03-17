@@ -254,7 +254,8 @@ var userSchema = new Schema({
             q42: String,
             q43: String
         },
-        dragArray: Array
+        dragArray: Array,
+        dragTrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })]				// in seconds
     },
     last_modification: {
         type: Date, default: ''

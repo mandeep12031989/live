@@ -1000,7 +1000,7 @@ router.route('/drag-drop')
 	.get(Verify.verifyOrdinaryUser, function (req, res, next) {
 		var id = req.decoded._id;
 
-		User.findOne({ _id: id }, { 'question.dragArray': 1 })
+		User.findOne({ _id: id }, { 'question.dragArray': 1, 'question.dragTrack': 1, last_modification: 1 })
 			.exec(function (err, user) {
 				if (err)
 					next(err);
