@@ -90,7 +90,8 @@ var descriptionReportSchema = new Schema({
     },
     mini_description: String,
     mini_description_h: String,
-    mini_by_assessor: { type: Boolean, default: false }
+    mini_by_assessor: { type: Boolean, default: false },
+    assessor_mini_checkbox: { type: Boolean, default: true }
 });
 
 var profileSchema = new Schema({
@@ -142,7 +143,9 @@ var profileSchema = new Schema({
     bsl_score: { type: Number, default: 0 },
     report_descriptions: [descriptionReportSchema],
     do_ask_comment: { type: String, default: "" },
-    relate_combine_comment: String
+    relate_combine_comment: String,
+    is_report_keyword: { type: Boolean, default: false },
+    report_keyword: String
 });
 
 var userSchema = new Schema({

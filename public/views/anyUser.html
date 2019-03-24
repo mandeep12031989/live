@@ -5110,7 +5110,7 @@
 																			</div>
 
 																			<div class="col-sm-12"
-																				ng-repeat="keys in user.assessor.profile_content"
+																				ng-repeat="keys in user.assessor.profile_content | filter: {is_report_keyword: false}"
 																				ng-show="section_num == keys.keyword_id[5]"
 																				style="margin-bottom: 20px;">
 																				<div class="panel panel-primary">
@@ -6693,15 +6693,14 @@
 																	<i class="material-icons">clear</i>
 																</span>
 																<textarea style="padding: 5px; margin-bottom: 5px;"
-																	ng-model="keys.keyword" placeholder="Keyword"
+																	ng-model="keys.report_keyword" placeholder="Keyword"
 																	rows="1" cols="80"></textarea>
 
 																<ul>
 																	<li style="margin-left: 50px;"
-																		ng-repeat="rd in keys.mini_descriptions"
-																		ng-show="rd.relate == 'relatestrongly'">
+																		ng-repeat="rd in keys.report_descriptions | filter: {assessor_mini_checkbox: true, relate: 'relatestrongly'}">
 																		<span class="btn" style="color: red;"
-																			ng-click="removeMiniDesc(keys,$index)">
+																			ng-click="rd.assessor_mini_checkbox = false">
 																			<i class="material-icons">clear</i>
 																		</span>
 																		<textarea type="text"
@@ -6712,7 +6711,7 @@
 																	</li>
 																	<li style="margin: 10px auto;">
 																		<button class="btn btn-warning"
-																			ng-click="pushNewMiniDesc(keys)">+
+																			ng-click="pushNewReportMini(keys)">+
 																			Add</button>
 																	</li>
 																</ul>
@@ -6723,32 +6722,9 @@
 													<div class="col-md-12" style="text-align: center;">
 														<div class="col-xs-12 col-sm-12 col-md-12">
 															<button class="btn btn-info"
-																ng-click="pushNewKey(2); keyAdded[2-1]=true;"
-																ng-if="!keyAdded[2-1]">
+																ng-click="pushNewKey(2, true);">
 																<span>+ Add more strengths</span>
 															</button>
-														</div>
-
-														<div class="col-xs-12 col-sm-12 col-md-12"
-															ng-if="keyAdded[2-1]">
-															<div class="col-xs-5 col-sm-5 col-md-5"
-																style="margin-bottom: 15px;">
-																<input type="text" class="form-control" size="100%"
-																	placeholder="Add Strength"
-																	style="text-align: center;" ng-model="pk.keyword"
-																	required>
-															</div>
-															<div class="col-xs-5 col-sm-5 col-md-5">
-																<input type="text" class="form-control" size="100%"
-																	placeholder="Add Description"
-																	style="text-align: center;"
-																	ng-model="pk.mini_descriptions[0].mini_description"
-																	required>
-															</div>
-															<div class="col-xs-2 col-sm-2 col-md-2">
-																<button class="btn btn-danger"
-																	ng-click="addNewKey(2);">Done</button>
-															</div>
 														</div>
 													</div>
 												</div>
@@ -6757,10 +6733,10 @@
 														ng-repeat="keys in user.assessor.profile_content | filter: filterSec2() | filter: {assessor_checkbox: true}"
 														style="margin: 20px auto;">
 														<div class="col-md-12">
-															<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
+															<h4 style="font-weight: bold;">{{keys.report_keyword}}</h4>
 														</div>
 														<div class="col-md-offset-2 col-md-10"
-															ng-repeat="rd in keys.mini_descriptions | filter: {relate: 'relatestrongly'}">
+															ng-repeat="rd in keys.report_descriptions | filter: {assessor_mini_checkbox: true, relate: 'relatestrongly'}">
 															<span>{{rd.mini_description}}</span>
 														</div>
 													</div>
@@ -6831,7 +6807,7 @@
 																	<i class="material-icons">clear</i>
 																</span>
 																<textarea style="padding: 5px; margin-bottom: 5px;"
-																	ng-model="keys.keyword" placeholder="Keyword"
+																	ng-model="keys.report_keyword" placeholder="Keyword"
 																	rows="1" cols="80"></textarea>
 																<span style="float: right;">
 																	BSL Score: {{keys.bsl_score}}
@@ -6871,7 +6847,7 @@
 													</div>
 
 													<div class="col-md-12" style="text-align: center;">
-														<button class="btn btn-info" ng-click="pushNewKey(3);">
+														<button class="btn btn-info" ng-click="pushNewKey(3, true);">
 															<span>+ Add more Learning Needs</span>
 														</button>
 													</div>
@@ -6881,7 +6857,7 @@
 														ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | filter: {assessor_checkbox: true}"
 														style="margin: 20px auto;">
 														<div class="col-md-10">
-															<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
+															<h4 style="font-weight: bold;">{{keys.report_keyword}}</h4>
 														</div>
 														<div class="col-md-2" style="text-align: center;">
 															BSL Score: {{keys.bsl_score}}
@@ -6954,33 +6930,31 @@
 												<div class="col-md-12" ng-show="switchView == 1">
 													<div class="col-md-12">
 														<ul>
-															<li ng-repeat="keys in user.assessor.profile_content | filter: filterSec1() | filter: {assessor_checkbox: true}"
-																ng-show="keyHasStronglyRelate(keys)">
+															<li
+																ng-repeat="keys in user.assessor.profile_content | filter: filterSec1() | filter: {assessor_checkbox: true}">
 																<span class="btn" style="color: red;"
 																	ng-click="keys.assessor_checkbox = false;">
 																	<i class="material-icons">clear</i>
 																</span>
 																<textarea style="padding: 5px; margin-bottom: 5px;"
-																	ng-model="keys.keyword" placeholder="Keyword"
+																	ng-model="keys.report_keyword" placeholder="Keyword"
 																	rows="1" cols="80"></textarea>
-
 																<ul>
-																	<li
-																		ng-if="keys.mini_descriptions.length>0 && firstUserStronglyRelate(keys)!=-1">
+																	<li ng-if="keys.report_descriptions.length>0">
 																		<span class="btn" style="color: red;"
-																			ng-click="removeMiniDesc(keys,0)">
+																			ng-click="removeReportMini(keys,0)">
 																			<i class="material-icons">clear</i>
 																		</span>
 																		<textarea
 																			style="padding: 5px; margin-bottom: 5px;"
-																			ng-model="keys.mini_descriptions[firstUserStronglyRelate(keys)].mini_description"
+																			ng-model="keys.report_descriptions[0].mini_description"
 																			placeholder="Mini-description" rows="1"
 																			cols="80"></textarea>
 																	</li>
 																	<li style="margin-left: 50px;"
-																		ng-repeat="rd in keys.mini_descriptions | filter: {relate: 'relatestrongly'} | limitTo:keys.mini_descriptions.length-1:1">
+																		ng-repeat="rd in keys.report_descriptions | limitTo:keys.report_descriptions.length-1:1">
 																		<span class="btn" style="color: red;"
-																			ng-click="removeMiniDesc(keys,$index+1)">
+																			ng-click="removeReportMini(keys,$index+1)">
 																			<i class="material-icons">clear</i>
 																		</span>
 																		<textarea type="text"
@@ -6991,7 +6965,7 @@
 																	</li>
 																	<li style="margin: 10px auto;">
 																		<button class="btn btn-warning"
-																			ng-click="pushNewMiniDesc(keys)">+
+																			ng-click="pushNewReportMini(keys)">+
 																			Add</button>
 																	</li>
 																</ul>
@@ -7000,62 +6974,26 @@
 													</div>
 
 													<div class="col-md-12" style="text-align: center;">
-														<div class="col-xs-12 col-sm-12 col-md-12">
-															<button class="btn btn-info"
-																ng-click="pushNewKey(1); keyAdded[1-1]=true;"
-																ng-if="!keyAdded[1-1]">
-																<span>+ Add more values</span>
-															</button>
-														</div>
-
-														<div class="col-xs-12 col-sm-12 col-md-12"
-															ng-if="keyAdded[1-1]">
-															<div class="col-xs-5 col-sm-5 col-md-5"
-																style="margin-bottom: 15px;">
-																<input type="text" class="form-control" size="100%"
-																	placeholder="Add Value" style="text-align: center;"
-																	ng-model="pk.keyword" required>
-															</div>
-															<div class="col-xs-5 col-sm-5 col-md-5">
-																<input type="text" class="form-control" size="100%"
-																	placeholder="Add Description"
-																	style="text-align: center;"
-																	ng-model="pk.mini_descriptions[0].mini_description"
-																	required>
-															</div>
-															<div class="col-xs-2 col-sm-2 col-md-2">
-																<button class="btn btn-danger"
-																	ng-click="addNewKey(1);">Done</button>
-															</div>
-														</div>
+														<button class="btn btn-info" ng-click="pushNewKey(1, true);">
+															<span>+ Add more Values</span>
+														</button>
 													</div>
 												</div>
-
 												<div class="col-md-12" ng-show="switchView == 2">
 													<div class="row"
-														ng-repeat="keys in user.assessor.profile_content | filter: filterSec1() | filter: {assessor_checkbox: true}"
-														style="margin: 20px auto;" ng-show="keyHasStronglyRelate(keys)">
+														ng-repeat="keys in user.assessor.profile_content | filter: filterSec3() | filter: {assessor_checkbox: true}"
+														style="margin: 20px auto;">
 														<div class="col-md-12">
-															<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
+															<h4 style="font-weight: bold;">{{keys.report_keyword}}</h4>
 														</div>
 														<div class="col-md-offset-1 col-md-11">
 															<span
-																ng-if="keys.mini_descriptions.length>0">{{keys.mini_descriptions[firstUserStronglyRelate(keys)].mini_description}}</span>
+																ng-if="keys.report_descriptions.length>0">{{keys.report_descriptions[0].mini_description}}</span>
 														</div>
 														<div class="col-md-offset-2 col-md-10"
-															ng-repeat="rd in keys.mini_descriptions | filter: {relate: 'relatestrongly'} | limitTo:keys.mini_descriptions.length-1:1">
+															ng-repeat="rd in keys.report_descriptions | limitTo:keys.report_descriptions.length-1:1">
 															<span>{{rd.mini_description}}</span>
 														</div>
-													</div>
-												</div>
-
-												<div class="col-md-12" style="padding: 15px 10%;">
-													<div class="col-xs-12 col-sm-12 col-md-12">
-														"What kind of work culture and work environment do you prefer?"
-													</div>
-													<div class="col-xs-12 col-sm-12 col-md-12"
-														style="text-align: center; border: 1px solid lightgrey; padding: 15px; background: #f3f3f3; font-size: 14px;">
-														<b>{{user.profile.eachSectionStopReflect[0]}}</b>
 													</div>
 												</div>
 											</div>
