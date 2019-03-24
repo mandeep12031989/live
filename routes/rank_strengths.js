@@ -54,7 +54,7 @@ router.route('/')
     });
 
 router.route('/fetchKeywordsOnly')
-    .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {                  // Give all recommends in ascending order
+    .get(Verify.verifyOrdinaryUser, function (req, res, next) {                  // Give all recommends in ascending order
 
         Ranks.find({}, { _id: 0, keyword: 1 }).sort({ "sID": 1 })
             .exec(function (err, statements) {

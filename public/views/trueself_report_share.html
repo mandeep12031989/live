@@ -127,7 +127,7 @@
 
 				<div id="page-title">
 					<h2>
-						<b>{{profile_content.firstname}}'s Trueself Profile</b>
+						<b>{{profile_content.firstname}}'s Leadership Profile</b>
 					</h2>
 				</div>
 
@@ -145,7 +145,8 @@
 				<div class="panel panel-body" style="margin: 0 65px 20px 65px; font-size: 15px;">
 					<div class="row container">
 						<div class="col-md-12">
-							<h4 style="font-weight: bold;">{{sub_heading[profile_content.profile.profile_number-1]}}</h4>
+							<h4 style="font-weight: bold;">{{sub_heading[profile_content.profile.profile_number-1]}}
+							</h4>
 						</div>
 						<div class="col-md-12" style="margin-top: 15px;">
 							<h4 style="font-weight: bold;">Basic Fear:</h4>
@@ -167,20 +168,59 @@
 						</div>
 						<div class="col-md-12" style="padding: 0px 50px;">
 							<h5 style="text-align:center" id="page-title">
-								<b>The following growth tips are selected keeping in mind your identified learning needs, to assist you in
+								<b>The following growth tips are selected keeping in mind your identified learning
+									needs, to assist you in
 									managing
-									yourself, working with others more effectively. We recommend to adopt a couple of them as a daily practice.</b>
+									yourself, working with others more effectively. We recommend to adopt a couple of
+									them as a daily practice.</b>
 							</h5>
 						</div>
 						<div class="col-md-12" style="padding: 0 50px;">
 							<ul class="row" style="font-size: 16px;">
-								<li class="col-md-12" ng-repeat="rc in profile_content.profile.growth_recommendations" ng-if="checkToShow(rc.linked_keyword)"
-								 style="padding: 10px 30px;">
+								<li class="col-md-12" ng-repeat="rc in profile_content.profile.growth_recommendations"
+									ng-if="checkToShow(rc.linked_keyword)" style="padding: 10px 30px;">
 									{{rc.statement}}
 								</li>
 							</ul>
 						</div>
 
+					</div>
+				</div>
+
+				<div class="panel panel-body" style="margin: 0 65px 20px 65px; font-size: 15px;">
+					<div class="row container">
+						<div class="col-md-12">
+							<h2 style="text-align:center" id="page-title">
+								<b>Core Values & Work Culture Preferences</b>
+							</h2>
+						</div>
+						<div class="panel panel-body col-md-12" style="text-align: center; padding-bottom: 30px;">
+							<div class="col-md-4">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Relate Strongly/Partially
+							</div>
+							<div class="col-md-4 mini_color_donotexhibitanymore">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Improved Over Time
+							</div>
+							<div class="col-md-4 mini_color_donotrelate">
+								<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+								Never Exhibited
+							</div>
+						</div>
+						<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content"
+							ng-if="keys.keyword_id[5] == 1" style="padding: 20px 0;">
+							<div class="col-md-3">
+								<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
+							</div>
+							<div class="col-md-9">
+								<span ng-repeat="mini in keys.mini_descriptions"
+									ng-class="mini.relate=='donotexhibitanymore' ? 'mini_color_donotexhibitanymore':(mini.relate=='donotrelate'?'mini_color_donotrelate':'')">
+									<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+									{{mini.mini_description}}&nbsp;&nbsp;&nbsp;&nbsp;
+								</span>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -205,13 +245,14 @@
 								Never Exhibited
 							</div>
 						</div>
-						<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 2"
-						 style="padding: 20px 0;">
+						<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content"
+							ng-if="keys.keyword_id[5] == 2" style="padding: 20px 0;">
 							<div class="col-md-3">
 								<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
 							</div>
 							<div class="col-md-9">
-								<span ng-repeat="mini in keys.mini_descriptions" ng-class="mini.relate=='donotexhibitanymore' ? 'mini_color_donotexhibitanymore':(mini.relate=='donotrelate'?'mini_color_donotrelate':'')">
+								<span ng-repeat="mini in keys.mini_descriptions"
+									ng-class="mini.relate=='donotexhibitanymore' ? 'mini_color_donotexhibitanymore':(mini.relate=='donotrelate'?'mini_color_donotrelate':'')">
 									<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
 									{{mini.mini_description}}&nbsp;&nbsp;&nbsp;&nbsp;
 								</span>
@@ -227,8 +268,10 @@
 								<b>Core Beliefs</b>
 							</h2>
 						</div>
-						<div class="col-md-6" ng-repeat="stat in profile_content.profile.beliefs" style="padding: 5px 0;">
-							<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i> {{stat.statement}}
+						<div class="col-md-6" ng-repeat="stat in profile_content.profile.beliefs"
+							style="padding: 5px 0;">
+							<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
+							{{stat.statement}}
 						</div>
 					</div>
 				</div>
@@ -254,13 +297,14 @@
 								Never Exhibited
 							</div>
 						</div>
-						<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content" ng-if="keys.keyword_id[5] == 3"
-						 style="padding: 20px 0;">
+						<div class="col-md-12" ng-repeat="keys in profile_content.profile.profile_content"
+							ng-if="keys.keyword_id[5] == 3" style="padding: 20px 0;">
 							<div class="col-md-3">
 								<h4 style="font-weight: bold;">{{keys.keyword}}</h4>
 							</div>
 							<div class="col-md-9">
-								<span ng-repeat="mini in keys.mini_descriptions" ng-class="mini.relate=='donotexhibitanymore' ? 'mini_color_donotexhibitanymore':(mini.relate=='donotrelate'?'mini_color_donotrelate':'')">
+								<span ng-repeat="mini in keys.mini_descriptions"
+									ng-class="mini.relate=='donotexhibitanymore' ? 'mini_color_donotexhibitanymore':(mini.relate=='donotrelate'?'mini_color_donotrelate':'')">
 									<i class="material-icons" style="font-size: 11px;">fiber_manual_record</i>
 									{{mini.mini_description}}&nbsp;&nbsp;&nbsp;&nbsp;
 								</span>

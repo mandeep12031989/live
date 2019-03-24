@@ -37,7 +37,7 @@ exports.custom_mail = function (data, callback) {
 		subject: data.subject,
 		html: data.html
 	};
-	console.log(mailOptions);
+	// console.log(mailOptions);
 
 	smtpTransport.sendMail(mailOptions, function (error, response) {
 		if (error) {
