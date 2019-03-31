@@ -32,7 +32,7 @@ router.route('/list/:pg')
 			pglm = 100 * (page - 1);
 		}
 
-		User.find({}, { username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true })
+		User.find({}, { username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true, 'question.reliableRq': 1 })
 			.sort('-important_date.registration')
 			.limit(lm)
 			.skip(pglm)
@@ -47,7 +47,7 @@ router.route('/fac_list')
 	.get(Verify.verifyOrdinaryUser, Verify.verifyFacilitator, function (req, res, next) {
 		User.findOne({ _id: req.decoded._id }, { firstname: true, lastname: true })
 			.exec(function (e, f) {
-				User.find({ facilitator_name: f.firstname + ' ' + f.lastname }, { username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true }).sort('-important_date.registration')
+				User.find({ facilitator_name: f.firstname + ' ' + f.lastname }, { username: true, firstname: true, lastname: true, important_date: true, are_you: true, 'profile.profile_number': true, 'work_details.current_company': true, 'work_details.department': true, 'question.reliableRq': 1 }).sort('-important_date.registration')
 					.exec(function (err, user) {
 						if (err)
 							next(err);

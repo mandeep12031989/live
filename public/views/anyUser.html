@@ -3909,6 +3909,26 @@
 											need.
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-12" style="margin-top: 30px;">
+											<h4 style="font-weight: bold;">Additional Synthesis</h4>
+										</div>
+										<div class="col-md-offset-3 col-md-6"
+											ng-repeat="keys in user.assessor.profile_content | filter: filterSec3()"
+											style="margin: 10px auto;">
+											<div class="stat_box"
+												ng-class="(keys.key_rating>=0.5) && (calculateBsScore(keys.keyword_id)['bs']>=1) ? (keys.do_ask_comment=='No'? 'color_code_logic_system' : 'color_code_logic_both'):((keys.key_rating>=0.5) ? 'color_code_logic_user' : ((calculateBsScore(keys.keyword_id)['bs']>=1) ? 'color_code_logic_system': 'color_code_logic_none'))">
+												<span
+													class="tree_left">{{calculateBsScore(keys.keyword_id)['bs']}}/{{calculateBsScore(keys.keyword_id)['total']}}</span>
+												<span class="tree_right">{{keys.key_rating | number:1}}</span>
+												{{keys.keyword}}
+											</div>
+										</div>
+										<div class="col-xs-12" style="color:red; font-size: 12px; margin-top: 20px;">
+											*Note - BS score is on left & LN score on right with corresponding learning
+											need.
+										</div>
+									</div>
 								</div>
 							</div>
 
@@ -6683,7 +6703,7 @@
 													<h4><b>Strengths</b></h4>
 													<br>
 												</div>
-												<div class="col-md-12" ng-show="switchView == 1">
+												<div class="row" ng-show="switchView == 1">
 													<div class="col-md-12">
 														<ul>
 															<li
@@ -6698,7 +6718,7 @@
 
 																<ul>
 																	<li style="margin-left: 50px;"
-																		ng-repeat="rd in keys.report_descriptions | filter: {assessor_mini_checkbox: true, relate: 'relatestrongly'}">
+																		ng-repeat="rd in keys.report_descriptions | filter: {assessor_mini_checkbox: true}">
 																		<span class="btn" style="color: red;"
 																			ng-click="rd.assessor_mini_checkbox = false">
 																			<i class="material-icons">clear</i>
@@ -6713,8 +6733,19 @@
 																		<button class="btn btn-warning"
 																			ng-click="pushNewReportMini(keys)">+
 																			Add</button>
+
+																		<!-- <button class="btn btn-success"
+																			ng-click="upKeyword(user.assessor.profile_content, $index, 2)"
+																			ng-show="!$first">+
+																			Up</button>
+
+																		<button class="btn btn-success"
+																			ng-click="downKeyword(user.assessor.profile_content, $index)"
+																			ng-show="!$last">+
+																			Down</button> -->
 																	</li>
 																</ul>
+
 															</li>
 														</ul>
 													</div>
@@ -7140,14 +7171,20 @@
 																			making]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;"
-																		ng-show="user.assessor.score_competencies[3] == 'h' || user.assessor.score_competencies[3] == 'hm'">
+																		ng-show="user.assessor.score_competencies[3] == 'h'">
 																		High</th>
+																	<th style="text-align: center; background: #a6e74f;"
+																		ng-show="user.assessor.score_competencies[3] == 'hm'">
+																		Medium to High</th>
 																	<th style="text-align: center; background: #fff33b;"
 																		ng-show="user.assessor.score_competencies[3] == 'm'">
 																		Medium</th>
 																	<th style=" text-align: center; background: #fec772;"
-																		ng-show="user.assessor.score_competencies[3] == 'l' || user.assessor.score_competencies[3] == 'ml'">
-																		LOW</th>
+																		ng-show="user.assessor.score_competencies[3] == 'ml'">
+																		Low to Medium</th>
+																	<th style=" text-align: center; background: #fec772;"
+																		ng-show="user.assessor.score_competencies[3] == 'l'">
+																		Low</th>
 																	<th>
 																		<ul>
 																			<li
@@ -7208,14 +7245,20 @@
 																			Data orientation]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;"
-																		ng-show="user.assessor.score_competencies[0] == 'h' || user.assessor.score_competencies[0] == 'hm'">
+																		ng-show="user.assessor.score_competencies[0] == 'h'">
 																		High</th>
+																	<th style="text-align: center; background: #a6e74f;"
+																		ng-show="user.assessor.score_competencies[0] == 'hm'">
+																		Medium to High</th>
 																	<th style="text-align: center; background: #fff33b;"
 																		ng-show="user.assessor.score_competencies[0] == 'm'">
 																		Medium</th>
 																	<th style=" text-align: center; background: #fec772;"
-																		ng-show="user.assessor.score_competencies[0] == 'l' || user.assessor.score_competencies[0] == 'ml'">
-																		LOW</th>
+																		ng-show="user.assessor.score_competencies[0] == 'ml'">
+																		Low to Medium</th>
+																	<th style=" text-align: center; background: #fec772;"
+																		ng-show="user.assessor.score_competencies[0] == 'l'">
+																		Low</th>
 																	<th>
 																		<ul>
 																			<li
@@ -7273,14 +7316,20 @@
 																			Optimism]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;"
-																		ng-show="user.assessor.score_competencies[2] == 'h' || user.assessor.score_competencies[2] == 'hm'">
+																		ng-show="user.assessor.score_competencies[2] == 'h'">
 																		High</th>
+																	<th style="text-align: center; background: #a6e74f;"
+																		ng-show="user.assessor.score_competencies[2] == 'hm'">
+																		Medium to High</th>
 																	<th style="text-align: center; background: #fff33b;"
 																		ng-show="user.assessor.score_competencies[2] == 'm'">
 																		Medium</th>
 																	<th style=" text-align: center; background: #fec772;"
-																		ng-show="user.assessor.score_competencies[2] == 'l' || user.assessor.score_competencies[2] == 'ml'">
-																		LOW</th>
+																		ng-show="user.assessor.score_competencies[2] == 'ml'">
+																		Low to Medium</th>
+																	<th style=" text-align: center; background: #fec772;"
+																		ng-show="user.assessor.score_competencies[2] == 'l'">
+																		Low</th>
 																	<th>
 																		<ul>
 																			<li
@@ -7338,14 +7387,20 @@
 																			management]</span>
 																	</th>
 																	<th style="text-align: center; background: #a6e74f;"
-																		ng-show="user.assessor.score_competencies[1] == 'h' || user.assessor.score_competencies[1] == 'hm'">
+																		ng-show="user.assessor.score_competencies[1] == 'h'">
 																		High</th>
+																	<th style="text-align: center; background: #a6e74f;"
+																		ng-show="user.assessor.score_competencies[1] == 'hm'">
+																		Medium to High</th>
 																	<th style="text-align: center; background: #fff33b;"
 																		ng-show="user.assessor.score_competencies[1] == 'm'">
 																		Medium</th>
 																	<th style=" text-align: center; background: #fec772;"
-																		ng-show="user.assessor.score_competencies[1] == 'l' || user.assessor.score_competencies[1] == 'ml'">
-																		LOW</th>
+																		ng-show="user.assessor.score_competencies[1] == 'ml'">
+																		Low to Medium</th>
+																	<th style=" text-align: center; background: #fec772;"
+																		ng-show="user.assessor.score_competencies[1] == 'l'">
+																		Low</th>
 																	<th>
 																		<ul>
 																			<li

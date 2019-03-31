@@ -258,7 +258,8 @@ var userSchema = new Schema({
             q43: String
         },
         dragArray: Array,
-        dragTrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })]				// in seconds
+        dragTrack: [new Schema({ time_taken: Number, attempt: { type: Number, default: 0 }, when: Date })],				// in seconds
+        reliableRq: Boolean
     },
     last_modification: {
         type: Date, default: ''
