@@ -177,9 +177,11 @@
 						</div>
 						<div class="col-md-12" style="padding: 0 50px;">
 							<ul class="row" style="font-size: 16px;">
-								<li class="col-md-12" ng-repeat="rc in profile_content.profile.growth_recommendations"
-									ng-if="checkToShow(rc.linked_keyword)" style="padding: 10px 30px;">
-									{{rc.statement}}
+								<li class="col-md-12"
+									ng-repeat="rc in profile_content.profile.growth_recommendations_assessor"
+									ng-if="checkToShow(rc.linked_keywords)" style="padding: 10px 30px;">
+									<div style="font-weight: bold;">{{rc.brief}}</div>
+									<div ng-if="rc.statement && rc.statement!='-'">{{rc.statement}}</div>
 								</li>
 							</ul>
 						</div>

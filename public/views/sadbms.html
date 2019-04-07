@@ -1736,23 +1736,29 @@
 								</div>
 								<div class="col-md-12" style="color: red;">*Kindly press & hold CTRL to select multiple entries from dropdown</div>
 							</div> -->
-							<div class="col-md-5" ng-repeat="ids in mr.linked_keywords" style="margin: auto 0;">
+							<div class="col-md-5" ng-repeat="key_id in mr.linked_keywords" style="margin: auto 0;">
 								<div class="col-md-11" style="margin: auto 0;">
-									<select class="form-control" ng-model="ids.mini_id">
+									<!-- <select class="form-control" ng-model="ids.mini_id">
 										<optgroup ng-repeat="key in keywordSet"
 											label="{{key.keyword}} ({{key.keyword_id}})">
 											<option ng-repeat="mini in key.mini_descriptions"
 												value="{{mini.mini_description_id}}">{{mini.mini_description}}
 												({{mini.mini_description_id}})</option>
 										</optgroup>
+									</select> -->
+									<select class="form-control" ng-model="mr.linked_keywords[$index]">
+										<option ng-repeat="key in keywordSet" value="{{key.keyword_id}}">{{key.keyword}}
+											({{key.keyword_id}})</option>
 									</select>
 								</div>
 								<div class="col-md-1">
-									<button class="btn btn-danger" ng-click="removeMiniFromSet(mr, $index)">X</button>
+									<button class="btn btn-danger"
+										ng-click="removeMiniFromSet(mr.linked_keywords, $index)">X</button>
 								</div>
 							</div>
 							<div class="col-md-2" style="margin: 0 auto; text-align: center;">
-								<button class="btn btn-warning" ng-click="addMiniToSet(mr)">+ Add Linking</button>
+								<button class="btn btn-warning" ng-click="addMiniToSet(mr.linked_keywords)">+ Add
+									Linking</button>
 							</div>
 						</div>
 

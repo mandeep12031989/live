@@ -15,7 +15,7 @@ var growthRecommendSchema = new Schema({
         default: "C__"
     },
     growth_by_assessor: { type: Boolean, default: false },
-    linked_keywords: [new Schema({ mini_id: String })]
+    linked_keywords: { type: [String], default: [] }
 }, { collection: 'assessorGrowthRecommendSchema' });
 
 module.exports = mongoose.model('assessorGrowthRecommendSchema', growthRecommendSchema);

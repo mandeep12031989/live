@@ -5757,6 +5757,8 @@
 
 																						<span
 																							style="font-weight: bold;">{{rc.brief}}</span><br>{{rc.statement}}<br>
+																						<i style="font-size: 12px;">
+																							{{parseMiniIdsToString(rc.linked_keywords)}}</i><br>
 																						<i style="font-size: 12px;">Linked
 																							Competency -
 																							{{getProfileCompetencyMapping(rc.linked_competency)}}</i>
@@ -5776,13 +5778,25 @@
 																				<div ng-show="addingGrowthRecAssessor"
 																					class="row"
 																					style="background-color: #fee; padding: 5px 0 10px 0;">
-																					<div class="col-md-8">
+																					<div class="col-md-6">
 																						Brief:<br>
 																						<input type="text"
 																							class="form-control"
 																							ng-model="addingGrowthRecAssessorObj.brief">
 																					</div>
-																					<div class="col-md-4">
+																					<div class="col-md-3">
+																						Linked Keyword:<br>
+																						<select class="form-control"
+																							ng-model="addingGrowthRecAssessorObj.linked_keywords">
+																							<option
+																								ng-repeat="keys in user.assessor.profile_content | filter: filterSec3()"
+																								value="{{keys.keyword_id}}">
+																								{{keys.keyword}}
+																								({{keys.keyword_id}})
+																							</option>
+																						</select>
+																					</div>
+																					<div class="col-md-3">
 																						Linked Competency:<br>
 																						<!-- <input type="text" class="form-control" ng-model="addingGrowthRecAssessorObj.linked_competency"
 																						 placeholder="NA for nothing"> -->
@@ -6127,60 +6141,33 @@
 
 								<div class="col-md-1"></div>
 								<div class="col-md-10" style="text-align: center; margin-bottom: 30px;">
-									Below are the pages which must be shown in PDF report (by defalut, all are shown):
+									Below are the pages which will be shown in PDF report (by defalut, all are shown).
+									Arrange them according to requirement:
 									<br>
 									<div style="margin: 0px auto;">
 										<ul class="tab-slider--tabs">
 											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.scores ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.scores = !user.assessor.pdf_pages.scores">
-												Scores</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.paei ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.paei = !user.assessor.pdf_pages.paei">
-												PAEI</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.specific_competency ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.specific_competency = !user.assessor.pdf_pages.specific_competency">
-												Specifc
-												Competency</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.values_strengths ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.values_strengths = !user.assessor.pdf_pages.values_strengths">
-												Strengths</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.learning_need ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.learning_need = !user.assessor.pdf_pages.learning_need">
-												Learning Needs</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.values_role_fitment ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.values_role_fitment = !user.assessor.pdf_pages.values_role_fitment">
-												Values
-												&
-												Role Fitment</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.pm_m1 ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.pm_m1 = !user.assessor.pdf_pages.pm_m1">
-												PM:
-												M1</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.pm_m2 ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.pm_m2 = !user.assessor.pdf_pages.pm_m2">
-												PM:
-												M2</li>
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.pm_m3 ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.pm_m3 = !user.assessor.pdf_pages.pm_m3">
-												PM:
-												M3</li>
-											<!-- <li class="tab-slider--trigger" ng-class="user.assessor.pdf_pages.rec_for_manager ? 'active-profile' : ''"
-											 ng-click="user.assessor.pdf_pages.rec_for_manager = !user.assessor.pdf_pages.rec_for_manager">Recommendations
-												for Manager</li> -->
-											<li class="tab-slider--trigger"
-												ng-class="user.assessor.pdf_pages.extras ? 'active-profile' : ''"
-												ng-click="user.assessor.pdf_pages.extras = !user.assessor.pdf_pages.extras">
-												AddOns</li>
+												ng-repeat="title in user.assessor.pdf_pages_sequence"
+												ng-class="user.assessor.pdf_pages[title.split('|')[1]] ? 'active-profile' : ''"
+												ng-click="user.assessor.pdf_pages[title.split('|')[1]] = !user.assessor.pdf_pages[title.split('|')[1]]">
+												{{title.split('|')[0]}}</li>
 										</ul>
+									</div>
+									<br>
+									<button class="btn btn-danger" style="text-align: center;"
+										ng-click="arrange_pages=!arrange_pages">{{arrange_pages?'Hide':'Show'}}
+										Arrangement</button>
+									<br>
+									<div style="margin: 0px auto;" ng-show="arrange_pages" dnd-list="title"
+										dnd-drop="dropCallback(index, item, user.assessor.pdf_pages_sequence)">
+										<div class="row col-sm-12" ng-repeat="title in user.assessor.pdf_pages_sequence"
+											dnd-draggable="title" dnd-effect-allowed="move">
+											<div class="col-sm-1" style="margin-top: 2px; text-align:right;">
+												{{$index+1}}</div>
+											<div class="col-sm-10 tab_bg" style="cursor: move;">
+												{{title.split('|')[0]}}
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="col-md-1"></div>
@@ -6712,6 +6699,7 @@
 																	ng-click="keys.assessor_checkbox = false;">
 																	<i class="material-icons">clear</i>
 																</span>
+																
 																<textarea style="padding: 5px; margin-bottom: 5px;"
 																	ng-model="keys.report_keyword" placeholder="Keyword"
 																	rows="1" cols="80"></textarea>
@@ -6734,15 +6722,13 @@
 																			ng-click="pushNewReportMini(keys)">+
 																			Add</button>
 
-																		<!-- <button class="btn btn-success"
-																			ng-click="upKeyword(user.assessor.profile_content, $index, 2)"
-																			ng-show="!$first">+
-																			Up</button>
+																		<button class="btn btn-success"
+																			ng-click="upDownKeyword(user.assessor.profile_content, $index, -1, 2)"
+																			ng-show="!$first">+ Up</button>
 
 																		<button class="btn btn-success"
-																			ng-click="downKeyword(user.assessor.profile_content, $index)"
-																			ng-show="!$last">+
-																			Down</button> -->
+																		ng-click="upDownKeyword(user.assessor.profile_content, $index, 1, 2)"
+																			ng-show="!$last">+ Down</button>
 																	</li>
 																</ul>
 
@@ -6871,6 +6857,14 @@
 																		<button class="btn btn-warning"
 																			ng-click="pushNewReportMini(keys)">+
 																			Add</button>
+
+																			<button class="btn btn-success"
+																			ng-click="upDownKeyword(user.assessor.profile_content, $index, -1, 3)"
+																			ng-show="!$first">+ Up</button>
+
+																		<button class="btn btn-success"
+																		ng-click="upDownKeyword(user.assessor.profile_content, $index, 1, 3)"
+																			ng-show="!$last">+ Down</button>
 																	</li>
 																</ul>
 															</li>
@@ -6998,6 +6992,14 @@
 																		<button class="btn btn-warning"
 																			ng-click="pushNewReportMini(keys)">+
 																			Add</button>
+
+																			<button class="btn btn-success"
+																			ng-click="upDownKeyword(user.assessor.profile_content, $index, -1, 1)"
+																			ng-show="!$first">+ Up</button>
+
+																		<button class="btn btn-success"
+																		ng-click="upDownKeyword(user.assessor.profile_content, $index, 1, 1)"
+																			ng-show="!$last">+ Down</button>
 																	</li>
 																</ul>
 															</li>

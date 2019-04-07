@@ -353,7 +353,7 @@ router.route('/report/:id')
 	.get(function (req, res, next) {
 		var id = sanitize(req.params.id);
 
-		User.findOne({ _id: id }, { 'profile.profile_content': true, 'profile.eachSectionStopReflect': true, 'profile.growth_recommendations': true, 'firstname': true, 'lastname': true, 'profile.beliefs': true, 'profile.profile_number': true })
+		User.findOne({ _id: id }, { 'profile.profile_content': true, 'profile.eachSectionStopReflect': true, 'profile.growth_recommendations_assessor': true, 'firstname': true, 'lastname': true, 'profile.beliefs': true, 'profile.profile_number': true })
 			.exec(function (err, user) {
 				if (err)
 					return next(err);
@@ -669,27 +669,27 @@ router.route('/profile/insertProfileByFacilitator/:id')                         
 
 								user.profile.beliefs = rec;
 
-								GrRec.find({ sID: { $regex: body.profile_number } }).sort('sID')
-									.exec(function (err, gr) {
+								// GrRec.find({ sID: { $regex: body.profile_number } }).sort('sID')
+								// 	.exec(function (err, gr) {
+								// 		if (err)
+								// 			return next(err);
+
+								// 		user.profile.growth_recommendations = gr;
+
+								GrRecAss.find({ sID: { $regex: body.profile_number } }).sort('sID')
+									.exec(function (err, gra) {
 										if (err)
 											return next(err);
 
-										user.profile.growth_recommendations = gr;
+										user.profile.growth_recommendations_assessor = gra;
 
-										GrRecAss.find({ sID: { $regex: body.profile_number } }).sort('sID')
-											.exec(function (err, gra) {
-												if (err)
-													return next(err);
-
-												user.profile.growth_recommendations_assessor = gra;
-
-												user.save(function (e, us) {
-													if (e)
-														return next(e);
-													res.status(200).send({ message: "success !", success: true });
-												});
-											});
+										user.save(function (e, us) {
+											if (e)
+												return next(e);
+											res.status(200).send({ message: "success !", success: true });
+										});
 									});
+								// });
 
 							});
 

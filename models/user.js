@@ -200,7 +200,7 @@ var userSchema = new Schema({
         },
         old: [new Schema({ pro: [profileSchema], pro_num: Number })],
         growth_recommendations: [new Schema({ sID: String, statement: String, linked_keyword: String, selected: Boolean })],
-        growth_recommendations_assessor: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, growth_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false }, linked_keywords: [new Schema({ mini_id: String })] })],
+        growth_recommendations_assessor: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, growth_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false }, linked_keywords: { type: [String], default: [] } })],
         old_growth_recommendations: [new Schema({ gr: Array, pro_num: Number })],
         beliefs: [new Schema({
             sID: String, statement: String, how_much: Number, comment: String, linked_ln: { type: Array, default: [] },
@@ -354,6 +354,7 @@ var userSchema = new Schema({
             paei: { type: Boolean, default: true },
             extras: { type: Boolean, default: true }
         },
+        pdf_pages_sequence: { type: [String], default: ['Scores|scores', 'PAEI|paei', 'Specific Competency|specific_competency', 'Strengths|values_strengths', 'Learning Needs|learning_need', 'Values & Role Fitment|values_role_fitment', 'PM M1|pm_m1', 'PM M2|pm_m2', 'PM M3|pm_m3', 'AddOns|extras'] },
         growth_recommendations_assessor_initialized: { type: Boolean, default: false },
         recommendations_for_manager_assessor_initialized: { type: Boolean, default: false },
         first_person_word_count: {
