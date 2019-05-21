@@ -210,6 +210,16 @@
 		border-color: #42a5f5;
 		color: #3e4855;
 	}
+	.highlightRedText{
+		font-weight: bold;
+		color: #e50404;
+		align: center;
+	}
+	.highlightGreenText{
+		font-weight: bold;
+		color: #058c02;
+		align: center;
+	}
 </style>
 
 <span ng-show="loading">
@@ -3946,7 +3956,7 @@
 										</div>
 									</div>
 
-									<div class="row">
+									<div class="row" ng-init="personalMasteryOptions=[{text:'No',value:'0.0'}, {text:'Yes',value:'0.5'}]">
 										<div class="col-md-12" style="margin-top: 30px;">
 											<h4 style="font-weight: bold;">Assessment rubric new parameters</h4>
 											<table class="table table-bordered" style="margin-top: 10px;">
@@ -3975,13 +3985,12 @@
 													<td>0.5</td>
 													<td>Candidate is able to articulate impact/ effects of his strengths</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery1_1">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model=""></textarea>
+														<textarea class="form-control" ng-model="personalMastery1_1_text"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -3990,13 +3999,12 @@
 													<td>0.5</td>
 													<td>Basic articulation of feedback the candidate receives from others on his learning needs </td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery1_2">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model=""></textarea>
+														<textarea class="form-control" ng-model="personalMastery1_2_text"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4005,13 +4013,12 @@
 													<td>0.5</td>
 													<td>Candidate is able to articulate impact/ effects of his learning needs</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery1_3">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model=""></textarea>
+														<textarea class="form-control" ng-model="personalMastery1_3_text"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4020,13 +4027,12 @@
 													<td>0.5</td>
 													<td>A blindspot is a learning need of a candidate which he is unaware of that is impacting the role or work</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery1_4">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model=""></textarea>
+														<textarea class="form-control" ng-model="personalMastery1_4_text"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4035,13 +4041,12 @@
 													<td>0.5</td>
 													<td>If PM is more than equal to 1.5, then add 0.5 in Self awareness score; as candidate has worked on many of his challenges</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery1_5">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model=""></textarea>
+														<textarea class="form-control" ng-model="personalMastery1_5_text"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4050,22 +4055,21 @@
 													<td>0.5</td>
 													<td>If PM is more than equal to 2.5, then add another 0.5 in Self awareness score</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery1_6">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery1_6_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
 													<td>Total</td>
 													<td>3</td>
 													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
+													<td ng-init = "{{personalMasteryResult=((personalMastery1_1-0)+(personalMastery1_2-0)+(personalMastery1_3 - 0) + (personalMastery1_4 - 0) + (personalMastery1_5 - 0) + (personalMastery1_6 - 0))}}"></td>
+													<td ng-class="personalMasteryResult > 0 ? 'highlightGreenText' : 'highlightRedText'">{{personalMasteryResult}}</td>
+  												    <td></td>
 												  </tr>
 												  <tr>
 													<td class="colmHighlight">2</td>
@@ -4081,13 +4085,12 @@
 													<td>0.5</td>
 													<td>Not blaming others for his own patterns/ challenges/ learning needs.</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery2_1">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery2_1_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4096,13 +4099,12 @@
 													<td>0.5</td>
 													<td>0.5- if he shares learning needs after probing, </td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery2_2">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery2_2_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4111,13 +4113,12 @@
 													<td>0.5</td>
 													<td>0.5- if he shares learning needs without the need of being probed</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery2_3">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery2_3_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4126,13 +4127,12 @@
 													<td>0.5</td>
 													<td>Open to share how learning needs are impacting him, his work and others</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery2_4">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery2_4_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4141,13 +4141,12 @@
 													<td>0.5</td>
 													<td>Showed openness to work on learning need during interaction when given feedback</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery2_5">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery2_5_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4156,21 +4155,20 @@
 													<td>0.5</td>
 													<td>Shown tremendous improvement in Personal mastery; this 0.5 score will only be given if the candidate's PM score is more than equal to 2</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery2_6">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery2_6_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
 													<td>Total</td>
 													<td>3</td>
 													<td></td>
-													<td></td>
-													<td></td>
+													<td ng-init = "{{personalMastery_2_Result=((personalMastery2_1-0)+(personalMastery2_2-0)+(personalMastery2_3 - 0) + (personalMastery2_4 - 0) + (personalMastery2_5 - 0) + (personalMastery2_6 - 0))}}"></td>
+													<td ng-class="personalMastery_2_Result > 0 ? 'highlightGreenText' : 'highlightRedText'">{{personalMastery_2_Result}}</td>
 													<td></td>
 												  </tr>
 												  <tr>
@@ -4187,13 +4185,12 @@
 													<td>0.5</td>
 													<td>For eg communication, confidence (not profile specific)</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery3_1">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery3_1_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4202,13 +4199,12 @@
 													<td>0.5</td>
 													<td>Making conscious effort in the moment to do the uncomfortable but the right thing; for eg- a type 9 being assertive when required</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery3_2">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery3_2_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4217,13 +4213,12 @@
 													<td>0.5</td>
 													<td>Learning needs are visible but he has adppted regular practices such as- meditation, exercise, long term planning, consistent prioritization, etc which he is following on regular basis</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery3_3">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery3_3_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4232,13 +4227,12 @@
 													<td>0.5</td>
 													<td>Core patterns of the candidate have been resolved; has worked on most of the learning needs and have resolved them (visible in rare cases by he knows how to bounse back using the practices) </td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery3_4">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery3_4_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4247,13 +4241,12 @@
 													<td>0.5</td>
 													<td>All patterns have either been improved and are not visible even</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery3_5">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery3_5_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
@@ -4262,21 +4255,20 @@
 													<td>0.5</td>
 													<td>A higher state where the mind and the senses are completely silent, but consciousness is fully awake</td>
 													<td>
-														<select class="form-control" ng-model="">
-															<option value="n">No</option>
-															<option value="y">Yes</option>
+														<select name="repeatSelect" ng-model="personalMastery3_6">
+      														<option ng-repeat="option in personalMasteryOptions" value="{{option.value}}">{{option.text}}</option>
 														</select>
 													</td>
 													<td>
-														<textarea class="form-control" ng-model="" style="min-width:100px;"></textarea>
+														<textarea class="form-control" ng-model="personalMastery3_6_text" style="min-width:100px;"></textarea>
 													</td>
 												  </tr>
 												  <tr>
 													<td>Total</td>
 													<td></td>
 													<td>3</td>
-													<td></td>
-													<td></td>
+													<td ng-init = "{{personalMastery_3_Result=((personalMastery3_1-0)+(personalMastery3_2-0)+(personalMastery3_3 - 0) + (personalMastery3_4 - 0) + (personalMastery3_5 - 0) + (personalMastery3_6 - 0))}}"></td>
+													<td ng-class="personalMastery_3_Result > 0 ? 'highlightGreenText' : 'highlightRedText'">{{personalMastery_3_Result}}</td>
 													<td></td>
 												  </tr>
 												</tbody>
