@@ -133,7 +133,7 @@ var profileSchema = new Schema({
     comment: {                              //comment to specific parent keyword
         type: String, default: ""
     },
-    assessor_checkbox: { type: Boolean, default: false },
+    assessor_checkbox: { type: Boolean, default: true  },
     assessor_key_rating: { type: Number, default: 0 },
     assessor_comment: {                              //comment to specific parent keyword
         type: String, default: ""
@@ -294,7 +294,19 @@ var userSchema = new Schema({
         // reason_for_change_description: String,
         recommend: [new Schema({ title: String, desc: String, page: { type: Number, default: 1 } })],
         rubric: { type: Array, default: [] },
-        recommendations_for_manager: [new Schema({ sID: String, brief: String, statement: String, linked_competency: String, selected: { type: Boolean, default: false }, recommendation_by_assessor: { type: Boolean, default: false }, added_to_assessor_library: { type: Boolean, default: false } })],
+        recommendations_for_manager: [new Schema({ sID: String,
+         brief: String,
+          statement: String,
+          linked_competency: String,
+           selected: { type: Boolean, default: false }
+           , recommendation_by_assessor: { type: Boolean, default: true },
+            linked_keywords: [new Schema({ mini_id: String,
+                statements: Array
+             })],
+           added_to_assessor_library: { type: Boolean, default: false } })],
+        managerLearningNeedRecommendation: [new Schema({
+            sID: String, linked_keywords: [new Schema({ mini_id: String, statements: Array})]
+        })],
         role_fitment: {
             suitable_work: [new Schema({
                 sID: { type: String, required: true, unique: true, trim: true },          //S _ _
